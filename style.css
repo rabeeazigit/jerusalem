@@ -2,3 +2,230 @@
     Theme Name: SQLink
     Author: SQLink
 */
+
+:root {
+    --secondary: #174a75;
+    --secondary-hover: #1f659e;
+    --secondary-active: #0c263c;
+
+    --tertiary-border: #b2aea8;
+    --tertiary-border-hover: #bdab73;
+    --tertiary-bg-hover: #ebe8e3;
+
+    direction: rtl;
+}
+
+.sq-secondary-button {
+    background-color: var(--secondary);
+    color: #ffffff;
+    font-size: 18px;
+    border-radius: 26px;
+    padding: 10px 24px;
+    transition: all 150ms ease-in-out;
+}
+
+.sq-secondary-button::after {
+    transition: all 150ms ease-in-out;
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 18px;
+    background-image: url("./assets/images/btn-arrow.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.sq-secondary-button:hover {
+    background-color: var(--secondary-hover);
+}
+.sq-secondary-button:active {
+    background-color: var(--secondary-active);
+}
+
+.sq-secondary-button:hover::after {
+    width: 24px;
+}
+
+.sq-tertiary-button {
+    background-color: #ffffff;
+    border: 1px solid var(--tertiary-border);
+    color: #000000;
+    font-size: 18px;
+    border-radius: 26px;
+    padding: 10px 24px;
+    transition: all 150ms ease-in-out;
+}
+
+.sq-tertiary-button::after {
+    transition: all 150ms ease-in-out;
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 18px;
+    background-image: url("./assets/images/btn-arrow-black.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.sq-tertiary-button:hover {
+    background-color: var(--tertiary-bg-hover);
+    border-color: var(--tertiary-border-hover);
+}
+.sq-tertiary-button:active {
+    background-color: #ffffff;
+}
+
+.sq-tertiary-button:hover::after {
+    width: 24px;
+}
+
+.navbar_social_icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.navbar_owner_logo {
+    width: 32px;
+    height: 32px;
+}
+
+.navbar_contrast_icon {
+    width: 16px;
+    height: 16px;
+}
+
+#top-navbar {
+    border-bottom: 1px solid;
+}
+
+.about_managment_menu {
+    top: 10px !important;
+}
+
+.about_managment_menu:has(img) {
+    width: 350px;
+}
+
+.about_management_image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 24px;
+}
+
+.navbar_brand_logo {
+    width: 84px;
+    height: 84px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.brand_label_content p {
+    margin-bottom: 0;
+}
+
+.main_menu_card_image {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 18px;
+}
+
+.main_menu_wrapper {
+    height: 55px;
+}
+
+.main_menu_nav {
+    border: 1px solid #b2aea8;
+}
+
+.main_menu_dropdown {
+    width: 60dvw;
+    position: fixed;
+    top: 15px !important;
+    left: -239px !important;
+}
+
+.navbar_menu_arrow {
+    width: 16px;
+    height: 16px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.navbar_searchglass {
+    width: 15px;
+    height: 15px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.main_nav_item {
+    padding: 5px 10px;
+    border: none;
+    background: transparent;
+    border-radius: 100px;
+}
+
+.main_nav_item:hover {
+    background-color: #ebe8e3;
+}
+
+.mega_menu_toggle::after {
+    transition: all 150ms ease-in-out;
+    content: "";
+    display: inline-block;
+    border: none;
+    width: 24px;
+    height: 24px;
+    background-image: url(./assets/images/dropdown-arrow.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    vertical-align: bottom;
+}
+
+.searchbar_searchbox input {
+    border: none;
+    font-size: 18px;
+    outline: none;
+}
+
+.main_menu_nav input:focus {
+    width: 100%;
+}
+
+.main_menu_nav:has(input:focus) .dropdown-center,
+.main_menu_nav:has(input:focus) a,
+.main_menu_nav:has(input:focus) .vr {
+    display: none;
+}
+
+.management_dropdown_toggle {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.management_dropdown_toggle::after {
+    content: "";
+    display: inline-block;
+    border: none;
+    width: 16px;
+    height: 16px;
+    background-image: url(./assets/images/arrow-down.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    vertical-align: middle;
+}
+
+.top_nav_select {
+    border: none;
+    font-size: 18px;
+    outline: none;
+}
