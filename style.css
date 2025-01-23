@@ -4,6 +4,10 @@
 */
 
 :root {
+    --primary: #bdab73;
+    --primary-hover: #cec097;
+    --primary-active: #b19b59;
+
     --secondary: #174a75;
     --secondary-hover: #1f659e;
     --secondary-active: #0c263c;
@@ -13,6 +17,37 @@
     --tertiary-bg-hover: #ebe8e3;
 
     direction: rtl;
+}
+
+.sq-primary-button {
+    background-color: var(--primary);
+    color: #ffffff;
+    font-size: 18px;
+    border-radius: 26px;
+    padding: 10px 24px;
+    transition: all 150ms ease-in-out;
+}
+
+.sq-primary-button::after {
+    transition: all 150ms ease-in-out;
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 18px;
+    background-image: url("./assets/images/btn-arrow.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.sq-primary-button:hover {
+    background-color: var(--primary-hover);
+}
+.sq-primary-button:active {
+    background-color: var(--primary-active);
+}
+
+.sq-primary-button:hover::after {
+    width: 24px;
 }
 
 .sq-secondary-button {
@@ -228,4 +263,57 @@
     border: none;
     font-size: 18px;
     outline: none;
+}
+
+.carousel_media_container {
+    border-radius: 42px 42px 42px 200px;
+}
+
+.carousel_media_container img,
+.carousel_media_container video {
+    height: 606px;
+}
+
+.carousel_info_card {
+    height: 350px;
+
+    border-radius: 24px;
+    border: 1px solid #b2aea8;
+    background-color: #fcfbf9e5;
+}
+
+.carousel_play,
+.carousel_prev,
+.carousel_next {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-size: cover;
+}
+
+.carousel_next.slick-disabled,
+.carousel_prev.slick-disabled {
+    opacity: 0.5;
+}
+
+.carousel_play {
+    background-image: url("./assets/images/pause.png");
+}
+
+.carousel_play.carousel_paused {
+    background-image: url("./assets/images/play.png");
+}
+
+.carousel_prev {
+    background-image: url("./assets/images/carousel_arrow.png");
+}
+
+.carousel_next {
+    background-image: url("./assets/images/carousel_arrow.png");
+    transform: rotate(180deg);
+}
+
+.home_sbutitle {
+    padding-right: 8dvw;
 }
