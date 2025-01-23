@@ -275,6 +275,7 @@
 }
 
 .carousel_info_card {
+    z-index: 999;
     height: 350px;
 
     border-radius: 24px;
@@ -316,4 +317,8 @@
 
 .home_sbutitle {
     padding-right: 8dvw;
+}
+
+.home_header_wrapper {
+    background: linear-gradient(to bottom left, #bdaa7321 10%, #ffffff);
 }

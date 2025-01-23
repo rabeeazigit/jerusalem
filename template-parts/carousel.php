@@ -86,6 +86,7 @@ $carousel_items = $args["carousel_items"] ?? [];
             slidesToScroll: 1,
             infinite: false,
             arrows: true,
+            swipe: false,
             dots: false,
             rtl: true,
             prevArrow: $(".carousel_prev"),
