@@ -1,0 +1,50 @@
+<?php
+$main_topics_title = $args["main_topics_title"] ?? null;
+$main_topics = $args["main_topics_main_topics"] ?? null;
+?>
+
+<div class="py-5 main_topic_wrapper">
+    <?php if ($main_topics_title) : ?>
+        <div class="container-fluid mb-5">
+            <div class="fs-1 fw-bold text-light text-center">
+                <?= $main_topics_title; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($main_topics && is_array($main_topics)) : ?>
+        <div class="container">
+            <div class="row justify-content-center">
+                <?php foreach ($main_topics as $e) : ?>
+                    <?php
+                    $main_topic_title = $e["main_topic_title"] ?? null;
+                    $main_topic_link = $e["main_topic_link"] ?? "#";
+                    $main_topic_image = $e["main_topic_image"] ?? null;
+                    ?>
+
+                    <div class="rs-col-5">
+                        <a class="text-decoration-none text-reset vstack p-3 main_topic_card justify-content-between" href="<?= $main_topic_link; ?>">
+                            <div class="hstack align-items-start justify-content-between">
+                                <?php if ($main_topic_title) : ?>
+                                    <div class="fs-5 fw-bold">
+                                        <?= $main_topic_title; ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if ($main_topic_link) : ?>
+                                    <img src="<?= get_template_directory_uri() . "/assets/images/yellow-arrow-left.png;" ?>" class="object-fit-cover main_topic_link_icon">
+                                <?php endif; ?>
+                            </div>
+
+                            <div class="d-flex justify-content-center align-items-center">
+                                <?php if ($main_topic_image) : ?>
+                                    <img src="<?= $main_topic_image; ?>" class="object-fit-cover main_topic_image">
+                                <?php endif; ?>
+                            </div>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>

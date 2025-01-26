@@ -322,3 +322,29 @@
 .home_header_wrapper {
     background: linear-gradient(to bottom left, #bdaa7321 10%, #ffffff);
 }
+
+.main_topic_wrapper {
+    background-color: #174a75;
+}
+
+.main_topic_link_icon {
+    width: 24px;
+    height: 24px;
+}
+
+.rs-col-5 {
+    flex: 0 0 20%;
+    max-width: 20%;
+}
+
+.main_topic_card {
+    background-color: #ffffff;
+    border-radius: 18px;
+    height: 272px;
+    transition: transform 350ms ease-in-out;
+
+    &:hover {
+        background-color: #fffdf7;
+        transform: translateY(-20px) rotate(5deg);
+    }
+}

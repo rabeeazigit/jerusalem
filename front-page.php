@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div class="home_header_wrapper">
+<div class="container-fluid px-0 home_header_wrapper">
     <?php get_template_part("template-parts/navbar"); ?>
 
     <?php
@@ -29,6 +29,13 @@
     <div>
         <!-- IMPLEMENT CAROUSEL NEWS SLIDE -->
     </div>
+</div>
+
+<div class="container-fluid my-5 px-0">
+    <?php get_template_part("template-parts/main-topics", null, [
+        "main_topics_title" => get_field("main_topics_options")["main_topics_title"] ?? null,
+        "main_topics_main_topics" => get_field("main_topics_options")["main_topics"] ?? null
+    ]); ?>
 </div>
 
 <?php get_footer(); ?>
