@@ -20,3 +20,4 @@ add_action('admin_menu', 'hide_posts_and_comments', 999);
 
 
 new SQLinkEnqueue();
+
