@@ -10,12 +10,30 @@ class SQLinkEnqueue
             wp_enqueue_style("slick_css", "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css", [], "1.9.0", "all");
             wp_enqueue_style("slick_theme_css", "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css", [], "1.9.0", "all");
             wp_enqueue_style("main_css", get_template_directory_uri() . "/style.css", ["bs_css"], filemtime(get_template_directory() . "/style.css"), "all");
-
+$this->enqueue_styles();
             // Enqueue scripts
             wp_dequeue_script("jquery");
             wp_enqueue_script("jquery_cdn", "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js", [], "3.7.1");
             wp_enqueue_script("slick_js", "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js", ["jquery_cdn"], "1.9.0");
             wp_enqueue_script("bs_js", "https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js", ["jquery_cdn"], "5.3.3");
+
         });
+
+
     }
+
+//Wisam
+    public function enqueue_styles() {
+       
+        $handle = 'wstyle';
+        $src = get_template_directory_uri() . '/assets/css/wstyle.css';
+        $deps = array(); // No dependencies
+        $ver = '1.0.0'; // Version number
+        $media = 'all'; // Media type
+
+        // Enqueue the style
+        wp_enqueue_style($handle, $src, $deps, $ver, $media);
+    }
+
+
 }
