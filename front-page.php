@@ -38,4 +38,10 @@
     ]); ?>
 </div>
 
+<div class="container-fluid my-5 px-5">
+    <?php get_template_part("template-parts/information", null, [
+        "information_options" => get_field("information_options") ?? null,
+    ]); ?>
+</div>
+
 <?php get_footer(); ?>
