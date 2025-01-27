@@ -53,4 +53,13 @@
     ]); ?>
 </div>
 
+<div class="container-fluid pt-5 pb-3 my-5">
+    <?php get_template_part("template-parts/events-courses-slider", null, [
+        "events_courses_title" => get_field("events_courses_title") ?? null,
+        "events_and_courses_paragraph" => get_field("events_and_courses_paragraph") ?? null,
+        "events_and_courses_link" => get_field("events_and_courses_link") ?? null,
+        "events_and_courses_items" => get_field("events_and_courses_items") ?? null,
+    ]); ?>
+</div>
+
 <?php get_footer(); ?>
