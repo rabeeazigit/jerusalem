@@ -44,4 +44,13 @@
     ]); ?>
 </div>
 
+<div class="container-fluid pt-5 pb-3 my-5 project_slider_wrapper">
+    <?php get_template_part("template-parts/project-slider", null, [
+        "project_slider_title" => get_field("project_slider_title") ?? null,
+        "project_slider_paragraph" => get_field("project_slider_paragraph") ?? null,
+        "project_slider_link" => get_field("project_slider_link") ?? null,
+        "project_slider_items" => get_field("project_slider_items") ?? null,
+    ]); ?>
+</div>
+
 <?php get_footer(); ?>

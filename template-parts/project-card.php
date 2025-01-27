@@ -1,0 +1,51 @@
+<?php
+$project_name = $args["project_name"] ?? null;
+$project_neighborhood = $args["project_neighborhood"] ?? null;
+$project_status = $args["project_status"] ?? null;
+$project_card_image = $args["project_card_image"] ?? null;
+?>
+
+<div class="vstack px-3 gap-2">
+    <div class="d-flex align-items-start justify-content-start project_card_image" style="background-image: url(<?= $project_card_image; ?>);">
+        <?php if ($project_status && is_array($project_status) && !empty($project_status)) : ?>
+            <div class="hstack gap-2 align-items-start project_status_wrapper">
+                <?php
+                $status_color = get_field("project_status_color", $project_status[0]);
+                $status_name = $project_status[0]->name;
+                ?>
+
+                <?php if ($status_color) : ?>
+                    <div class="project_status_color" style="background-color: <?= $status_color; ?>;"></div>
+                <?php endif; ?>
+
+                <?php if ($status_name) : ?>
+                    <div class="fs-6">
+                        <?= $status_name; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <div class="vstack gap-1">
+        <?php if ($project_name) : ?>
+            <div class="fs-5 fw-bold">
+                <?= $project_name; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($project_neighborhood) : ?>
+            <div class="hstack px-2 align-items-center gap-3 opacity-75">
+                <div>
+                    שכונה
+                </div>
+
+                <div class="vr"></div>
+
+                <div>
+                    <?= $project_neighborhood->post_title; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

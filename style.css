@@ -387,3 +387,74 @@
     background-color: #fcfbf9e5;
     margin: 20px;
 }
+
+.project_slider_wrapper {
+    background-color: #ebe8e3;
+}
+
+.project_card_image {
+    background-position: center;
+    background-size: cover;
+    height: 280px;
+    border-radius: 18px;
+}
+
+.project_status_color {
+    border-radius: 100px;
+    border: 1px solid #000;
+    width: 24px;
+    height: 24px;
+}
+
+.project_status_wrapper {
+    background-color: #fcfbf9f2;
+    border-radius: 24px;
+    padding: 5px 10px;
+    height: fit-content;
+    margin: 10px;
+}
+
+.project_slider_control {
+    cursor: pointer;
+}
+
+.project_slider_control.slick-disabled {
+    opacity: 0.5;
+}
+
+.project_slider_next {
+    transform: rotate(180deg);
+}
+
+.project_slider_dots .slick-dots {
+    display: flex;
+    align-items: center;
+    position: static;
+}
+
+.project_slider_dots .slick-dots li {
+    width: 60px;
+    margin: 0;
+}
+
+.project_slider_dots .slick-dots li button {
+    width: 100%;
+    transition: all 250ms ease-in-out;
+}
+
+.project_slider_dots .slick-dots li button:before {
+    background-color: rgb(185, 181, 181);
+    content: "";
+    height: 5px;
+    width: 100%;
+}
+
+.project_slider_dots .slick-dots li.slick-active button:before {
+    background-color: var(--primary);
+    border-radius: 4px;
+    height: 8px;
+}
+
+.project_slider_dots .slick-dots li:not(.slick-active) {
+    top: 2px;
+}
