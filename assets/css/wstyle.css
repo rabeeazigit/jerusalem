@@ -1,4 +1,46 @@
-.about_text{
+.about_text {
     margin-right: 2rem;
     max-width: 744px;
+}
+
+.secssionBk {
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+
+.all_acts {
+    width: 172px;
+    background: #BDAB73;
+    border-radius: 30px;
+    border: solid 1px #BDAB73;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    padding: 12px;
+
+
+}
+
+.all_acts a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.apw {
+    max-width: 957px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.staff_photo {
+    max-width: auto;
+    border: solid 2px #f1e1c1;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 5px;
+    
+
+
 }

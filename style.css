@@ -479,6 +479,56 @@ body {
     filter: drop-shadow(2px 4px 6px #04040458);
 }
 
+.howcanwehelp{
+    color:#fff !important;
+}
+.hcwhy-h{
+    font-size: 45px;
+}
+.hcwhy-p{
+    max-width:619px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+
+
+.tertiary_button_trans {
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 18px;
+    border-radius: 26px;
+    padding: 10px 24px;
+    transition: all 150ms ease-in-out;
+    border: solid 1px #fff;
+   
+}
+
+.tertiary_button_trans::after {
+    transition: all 150ms ease-in-out;
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 18px;
+    background-image: url("./assets/images/btn-arrow.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.tertiary_button_trans:hover {
+    background-color: var(--primary-hover);
+}
+.tertiary_button_trans:active {
+    background-color: var(--primary-active);
+}
+
+.tertiary_button_trans:hover::after {
+    width: 24px;
+}
+
+
+
+
 .event_card_short_description {
     height: 77px;
     display: -webkit-box;

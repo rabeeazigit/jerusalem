@@ -1,6 +1,9 @@
 <?php
 $main_topics_title = $args["main_topics_title"] ?? null;
+$main_topics_content = $args["main_topics_content"] ?? null;
+$main_topics_link = $args["main_topics_link"] ?? null;
 $main_topics = $args["main_topics_main_topics"] ?? null;
+$main_topics_content_class =  $args["main_topics_content_class"] ?? null;
 ?>
 
 <div class="py-5 main_topic_wrapper">
@@ -8,6 +11,22 @@ $main_topics = $args["main_topics_main_topics"] ?? null;
         <div class="container-fluid mb-5">
             <div class="fs-1 fw-bold text-light text-center">
                 <?= $main_topics_title; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($main_topics_content) : ?>
+        <div class="container-fluid mb-5">
+            <div class="text-light text-center <?php echo $main_topics_content_class;?>">
+                <?= $main_topics_content; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($main_topics_link) : ?>
+        <div class="container-fluid mb-5">
+            <div class="text-light text-center all_acts">
+                <a href="<?= $main_topics_link['url']; ?>"><?= $main_topics_link['text']; ?></a>
             </div>
         </div>
     <?php endif; ?>
@@ -30,6 +49,8 @@ $main_topics = $args["main_topics_main_topics"] ?? null;
                                         <?= $main_topic_title; ?>
                                     </div>
                                 <?php endif; ?>
+
+                                
 
                                 <?php if ($main_topic_link) : ?>
                                     <img src="<?= get_template_directory_uri() . "/assets/images/yellow-arrow-left.png;" ?>" class="object-fit-cover main_topic_link_icon">
