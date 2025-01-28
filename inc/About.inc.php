@@ -118,15 +118,14 @@ class About
         foreach ($Staff as $Staff) {
             $html .= 
             '<div class="col-lg-3">
-                        <div class="staff_photo"><img src="
-                        '.$Staff['staff_member_photo'].'" loading="lazy"/>
+                        <div class="staff_photo"><img src="'.$Staff['staff_member_photo'].'" loading="lazy"/>
                         </div>
                         <div class="container cont_det">
-                        <div class="row m-2">
+                        <div class="row">
                         <div class="col-12 fs-5 fw-bold">'.$Staff['staff_member_name'].'</div>
                        
                         <div class="col-12">'.$Staff['staff_member_role'].'</div>
-                        <div class="col-12"><span><span><img src="'. get_template_directory_uri().'/assets   /images/about/email-icon.png" /></span>'.$Staff['staff_member_email'].'</span></div>
+                        <div class="col-12"><span><span><img src="'. get_template_directory_uri().'/assets/images/about/email-icon.png" /></span>'.$Staff['staff_member_email'].'</span></div>
                         </div>
                         </div>
 

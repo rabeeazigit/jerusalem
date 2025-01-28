@@ -25,5 +25,7 @@ echo $About->SexyNumber();
     <?php  echo $About->OurStaff();?>
 </section>
 
-
+<section id="howcanwehelp">
+<?php get_template_part('template-parts/howcanwehelp');?>
+</section>
 <?php get_footer();?>
