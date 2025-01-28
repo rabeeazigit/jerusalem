@@ -15,6 +15,15 @@ echo $About->SexyNumber();
 ?>
 </section>
 
-<section>
-    
+<section id="activities">
+    <?php  $About->AreaOfActivities();?>
 </section>
+
+
+
+<section id="staff">
+    <?php  echo $About->OurStaff();?>
+</section>
+
+
+<?php get_footer();?>
