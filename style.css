@@ -2,8 +2,8 @@
     Theme Name: SQLink
     Author: SQLink
 */
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-body{
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+body {
     font-family: "Rubik";
 }
 :root {
@@ -476,4 +476,13 @@ body{
 
 .project_card_wrapper:hover .project_card_image {
     filter: drop-shadow(2px 4px 6px #04040458);
+}
+
+.event_card_short_description {
+    height: 77px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

@@ -21,7 +21,7 @@ switch ($post_type) {
 }
 ?>
 
-<div class="vstack event_card_wrapper px-3 gap-2">
+<div class="vstack event_card_wrapper px-3 gap-2 h-100">
     <div class="d-flex align-items-start justify-content-start event_card_image" style="background-image: url(<?= $event_card_image; ?>);">
         <div class="hstack gap-2 align-items-start event_status_wrapper">
             <?php if ($post_type) : ?>
@@ -39,7 +39,7 @@ switch ($post_type) {
             </div>
         <?php endif; ?>
 
-        <div class="hstack px-2 align-items-center gap-3 opacity-75">
+        <div class="hstack px-2 align-items-center gap-3 opacity-75 mb-3">
             <?php if ($event_occurrence_date) : ?>
                 <div>
                     <?= $event_occurrence_date; ?>
@@ -56,7 +56,7 @@ switch ($post_type) {
         </div>
 
         <?php if ($event_card_short_description) : ?>
-            <div class="fs-6 opacity-75">
+            <div class="fs-6 opacity-75 mb-3 event_card_short_description">
                 <?= $event_card_short_description; ?>
             </div>
         <?php endif; ?>

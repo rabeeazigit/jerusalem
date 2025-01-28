@@ -103,9 +103,9 @@ $information_banner_link = $information_options["information_banner_link"] ?? nu
                         <?php endif; ?>
                     </div>
 
-                    <?php if ($information_link) : ?>
-                        <a href=" <?= $information_link["url"]; ?>" target="<?= $information_link["target"]; ?>" class="text-decoration-none sq-primary-button">
-                            <?= $information_link["title"]; ?>
+                    <?php if ($information_banner_link) : ?>
+                        <a href=" <?= $information_banner_link["url"]; ?>" target="<?= $information_banner_link["target"]; ?>" class="text-decoration-none sq-primary-button">
+                            <?= $information_banner_link["title"]; ?>
                         </a>
                     <?php endif; ?>
                 </div>
