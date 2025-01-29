@@ -19,5 +19,5 @@ function hide_posts_and_comments()
 add_action('admin_menu', 'hide_posts_and_comments', 999);
 
 
+new SQLinkSCF();
 new SQLinkEnqueue();
-
