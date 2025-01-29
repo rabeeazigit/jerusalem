@@ -62,10 +62,14 @@
     ]); ?>
 </div>
 
-<div class="container-fluid px-5 py-5 my-5 article_list_wrapper">
+<div class="container-fluid px-5 py-5 mt-5 article_list_wrapper">
     <?php get_template_part("template-parts/article-list", null, [
         "article_list_options" => get_field("article_list_options") ?? null
     ]); ?>
+</div>
+
+<div class="container-fluid px-0">
+    <?php get_template_part('template-parts/howcanwehelp'); ?>
 </div>
 
 <?php get_footer(); ?>
