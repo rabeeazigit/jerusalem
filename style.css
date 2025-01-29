@@ -479,19 +479,17 @@ body {
     filter: drop-shadow(2px 4px 6px #04040458);
 }
 
-.howcanwehelp{
-    color:#fff !important;
+.howcanwehelp {
+    color: #fff !important;
 }
-.hcwhy-h{
+.hcwhy-h {
     font-size: 45px;
 }
-.hcwhy-p{
-    max-width:619px;
+.hcwhy-p {
+    max-width: 619px;
     font-size: 20px;
     margin-bottom: 20px;
 }
-
-
 
 .tertiary_button_trans {
     background-color: transparent;
@@ -501,7 +499,6 @@ body {
     padding: 10px 24px;
     transition: all 150ms ease-in-out;
     border: solid 1px #fff;
-   
 }
 
 .tertiary_button_trans::after {
@@ -525,9 +522,6 @@ body {
 .tertiary_button_trans:hover::after {
     width: 24px;
 }
-
-
-
 
 .event_card_short_description {
     height: 77px;
@@ -586,4 +580,23 @@ body {
 
 .article_list_tile:hover .article_title_icon {
     opacity: 1;
+}
+
+.footer_gallery_logo {
+    height: 100px;
+    object-position: center;
+}
+
+.footer_brand_logo {
+    height: 85px;
+    width: 323px;
+    object-fit: contain;
+    object-position: right;
+}
+
+.footer_menu_item_logo {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    object-position: right;
 }
