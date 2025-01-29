@@ -600,3 +600,7 @@ body {
     object-fit: contain;
     object-position: right;
 }
+
+.main_topic_image {
+    height: 150px;
+}
