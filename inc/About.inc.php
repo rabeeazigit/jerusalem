@@ -34,6 +34,25 @@ class About
     }
 
 
+
+
+private function TagTheFucker($tags = []){
+$html = '';
+
+foreach($tags as $key=>$tag){
+//$tag[$key]['text'] =$val['tagd_links_text'];
+//$tag[$key]['link'] =$val['tagd_links_url'];
+$html .= "<div class='btn btn-outline-secondary rounded-pill hovertagabout m-2'>
+<a href='{$tag['tagd_links_url']}' target='_BLANK'>{$tag['tagd_links_text']}</a></div>";
+}
+
+return $html;
+
+}
+
+
+
+
     public function MainHeader()
     {
 
@@ -53,17 +72,18 @@ class About
     {
 
         $bk = $this->bk_sec_about ? $this->bk_sec_about : '';
-
+$tags = $this->TagTheFucker( $this->tagd_links  );
         $html = '
 
     <div class="container-fluid mt-5 secssionBk" style="background:url('.$bk.');">
             <div class="hero-section p-4">
                 <div class="row align-items-start">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 about_text ">
-                        <h1 class="aboutTitle">'.get_the_title(get_the_ID()).'</h1>
-                        <span>'.$this->about_content.'</span>
+                        <h1 class="aboutTitle display-4 fw-bold">'.get_the_title(get_the_ID()).'</h1>
+                        <span class="fs-5">'.$this->about_content.'</span><br>';
+                     
                         
-                    </div>
+                    $html .=$tags . '</div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <img src="'.$this->hero_image.'" alt="" class="img-fluid rounded">
                     </div>
@@ -117,7 +137,7 @@ class About
 ';
         foreach ($Staff as $Staff) {
             $html .= 
-            '<div class="col-lg-3">
+            '<div class="col-lg-3 mb-5">
                         <div class="staff_photo"><img src="'.$Staff['staff_member_photo'].'" loading="lazy"/>
                         </div>
                         <div class="container cont_det">

@@ -1001,7 +1001,7 @@ class SQLinkSCF
                         'label' => 'תוכן',
                         'name' => 'about_content',
                         'aria-label' => '',
-                        'type' => 'textarea',
+                        'type' => 'wysiwyg',
                         'instructions' => '',
                         'required' => 1,
                         'conditional_logic' => 0,
@@ -5016,4 +5016,8 @@ class SQLinkSCF
             ));
         });
     }
-}
+
+
+
+
+}//END CLASS====================================================================

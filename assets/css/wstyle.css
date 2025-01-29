@@ -1,6 +1,9 @@
-.about_text {
-    margin-right: 2rem;
-    max-width: 744px;
+
+.about_text span p{
+
+max-width: 744px;
+break-after: always;
+margin-top: 20px;
 }
 
 .secssionBk {
@@ -40,7 +43,28 @@
     border-radius: 20px;
     overflow: hidden;
     margin: 5px;
-    
+}
 
 
+.hero-section{
+    background:#cec0972e;
+}
+section{
+    margin-top: -4px !important;
+    margin-bottom: -4px !important;
+}
+.hovertagabout a{
+    color: #454242 !important;
+  text-decoration: none  !important;
+}
+.hovertagabout:hover{
+    background: #e7e4de;
+  color: #454242;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.staff_photo{
+    transition: all 0.5s ease-in-out;
+}
+.staff_photo:hover{
+    background: #EBE8E3;
 }
