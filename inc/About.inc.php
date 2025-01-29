@@ -34,6 +34,25 @@ class About
     }
 
 
+
+
+private function TagTheFucker($tags = []){
+$html = '';
+
+foreach($tags as $key=>$val){
+//$tag[$key]['text'] =$val['tagd_links_text'];
+//$tag[$key]['link'] =$val['tagd_links_url'];
+$html .= "<div class='btn btn-outline-secondary rounded-pill hovertagabout'>
+<a href='{$tag['link']}' target='_BLANK'>{$val['tagd_links_text']}</a></div>";
+}
+
+return $html;
+
+}
+
+
+
+
     public function MainHeader()
     {
 
@@ -60,10 +79,11 @@ class About
             <div class="hero-section p-4">
                 <div class="row align-items-start">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 about_text ">
-                        <h1 class="aboutTitle">'.get_the_title(get_the_ID()).'</h1>
-                        <span>'.$this->about_content.'</span>
+                        <h1 class="aboutTitle display-4 fw-bold">'.get_the_title(get_the_ID()).'</h1>
+                        <span class="fs-5">'.$this->about_content.'</span>';
+                        echo ($this->TagTheFucker( $this->tagd_links  ));
                         
-                    </div>
+                    $html .='</div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <img src="'.$this->hero_image.'" alt="" class="img-fluid rounded">
                     </div>
