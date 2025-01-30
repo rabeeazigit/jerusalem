@@ -10,12 +10,13 @@ class Areafields
     {
         $this->pid = get_the_ID() ;
         $this->bk_sec_about = get_field('bk_sec_about', $this->pid);
-
         $this->hero_section = get_field('area_fields_hero_section', $this->pid);
 
     }
 
-
+public function LeftSideCats(){
+    return  $this->hero_section['bk_sec_about'];
+}
 
     public function HeroSeccssion()
     {
@@ -73,7 +74,7 @@ class Areafields
     {
         $categories = get_terms([
             'taxonomy'   => 'category', // Default WordPress category taxonomy
-            'hide_empty' => false, // Show all categories, even if they have no posts
+            'hide_empty' => true, // Show all categories, even if they have no posts
             'object_ids' => get_posts([
                 'post_type'      => 'area-fields',
                 'posts_per_page' => -1,
@@ -82,6 +83,14 @@ class Areafields
         ]);
         return  $categories ;
     }
+
+
+
+public function GetPillsCategories(){
+
+}
+
+
 
 
 }//==========END CLASS

@@ -12,18 +12,16 @@ $AFcats = $Areafields->FetchAreaFiedlsCategories();
 <?php
 echo $Areafields->MainHeader();
  echo $Areafields->HeroSeccssion();
+ $rrr = $Areafields->LeftSideCats();
 // echo $About->SexyNumber();
 ?>
 </section>
 <section id="categories">
-
-
-
-
 <div class="container-fluid px-5 py-5 mt-5 article_list_wrapper">
-    <?php get_template_part("template-parts/article-list", null, [
-        "article_list_options" => get_field("area-activity-list") ?? null
-    ]); ?>
+    
+    <?php  get_template_part("template-parts/area-activity-list", null , [
+    'article_list_options'=>['article_list_side_image'=>$rrr]
+]); ?>
 </div>
 </section>
 

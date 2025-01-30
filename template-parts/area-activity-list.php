@@ -1,9 +1,11 @@
 <?php
-$article_list_options = $args["article_list_options"] ?? null;
-$article_list_title = $article_list_options["article_list_title"] ?? null;
-$article_list_items = $article_list_options["article_list_items"] ?? null;
-$article_list_link = $article_list_options["article_list_link"] ?? null;
-$article_list_side_image = $article_list_options["article_list_side_image"] ?? null;
+$args
+ //$article_list_options = $args["article_list_options"] ?? null;
+// $article_list_title = $article_list_options["article_list_title"] ?? null;
+// $article_list_items = $article_list_options["article_list_items"] ?? null;
+// $article_list_link = $article_list_options["article_list_link"] ?? null;
+// $article_list_side_image = $article_list_options["article_list_side_image"] ?? null;
+
 ?>
 
 <?php if ($article_list_items && is_array($article_list_items) && !empty($article_list_items)) : ?>
@@ -36,12 +38,5 @@ $article_list_side_image = $article_list_options["article_list_side_image"] ?? n
             </div>
         <?php endif; ?>
 
-        <?php if ($article_list_link) : ?>
-            <div class="col-md-12">
-                <a href="<?= $article_list_link["url"]; ?>" target="<?= $article_list_link["target"]; ?>" class="text-decoration-none sq-primary-button">
-                    <?= $article_list_link["title"]; ?>
-                </a>
-            </div>
-        <?php endif; ?>
     </div>
 <?php endif; ?>
