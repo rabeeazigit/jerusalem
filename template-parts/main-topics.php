@@ -17,7 +17,7 @@ $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
 
     <?php if ($main_topics_content) : ?>
         <div class="container-fluid mb-5">
-            <div class="text-light text-center <?php echo $main_topics_content_class;?>">
+            <div class="text-light text-center <?php echo $main_topics_content_class; ?>">
                 <?= $main_topics_content; ?>
             </div>
         </div>
@@ -33,7 +33,7 @@ $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
 
     <?php if ($main_topics && is_array($main_topics)) : ?>
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row justify-content-center main_topics_wrapper">
                 <?php foreach ($main_topics as $e) : ?>
                     <?php
                     $main_topic_title = $e["main_topic_title"] ?? null;
@@ -50,7 +50,7 @@ $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
                                     </div>
                                 <?php endif; ?>
 
-                                
+
 
                                 <?php if ($main_topic_link) : ?>
                                     <img src="<?= get_template_directory_uri() . "/assets/images/yellow-arrow-left.png;" ?>" class="object-fit-cover main_topic_link_icon">
@@ -69,3 +69,16 @@ $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
         </div>
     <?php endif; ?>
 </div>
+
+<?php if (wp_is_mobile()) : ?>
+    <script>
+        $(function() {
+            $(".main_topics_wrapper").slick({
+                slidesToShow: 1.5,
+                slidesToScroll: 1,
+                infinite: false,
+                rtl: true
+            })
+        });
+    </script>
+<?php endif; ?>

@@ -18,6 +18,19 @@ function hide_posts_and_comments()
 }
 add_action('admin_menu', 'hide_posts_and_comments', 999);
 
+// Slices a sentence to the limit provided
+// Returns the same string if it's length is less that the limit
+// Adds a afterfix ... to the string if not disabled
+function truncate_sentence($sentence, $limit = 10, $afterfix = true)
+{
+    if (mb_strlen($sentence, 'UTF-8') <= $limit) {
+        return $sentence;
+    }
+
+    $result = mb_substr($sentence, 0, $limit, 'UTF-8');
+    return $result . ($afterfix ? "..." : "");
+}
+
 
 new SQLinkSCF();
 new SQLinkEnqueue();

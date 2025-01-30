@@ -9,15 +9,15 @@ $project_slider_items = $args["project_slider_items"] ?? null;
     <div class="row">
         <div class="col-md-3">
             <div class="vstack h-100 justify-content-between align-items-start pt-0 p-4">
-                <div class="vstack align-items-start">
+                <div class="vstack align-items-md-start align-items-center">
                     <?php if ($project_slider_title) : ?>
-                        <div class="fs-1 fw-bold mb-3">
+                        <div class="fs-1 fw-bold mb-3 ">
                             <?= $project_slider_title; ?>
                         </div>
                     <?php endif; ?>
 
                     <?php if ($project_slider_paragraph) : ?>
-                        <div class="fs-6 mb-3">
+                        <div class="fs-6 mb-3 text_center_mb">
                             <?= $project_slider_paragraph; ?>
                         </div>
                     <?php endif; ?>
@@ -29,18 +29,20 @@ $project_slider_items = $args["project_slider_items"] ?? null;
                     <?php endif; ?>
                 </div>
 
-                <div class="vstack gap-1">
-                    <div class="project_slider_dots"></div>
+                <?php if (!wp_is_mobile()) : ?>
+                    <div class="vstack gap-1">
+                        <div class="project_slider_dots"></div>
 
-                    <div class="hstack gap-3">
-                        <img src="<?= get_template_directory_uri() . "/assets/images/carousel_arrow.png"; ?>" class="project_slider_control project_slider_prev">
-                        <img src="<?= get_template_directory_uri() . "/assets/images/carousel_arrow.png"; ?>" class="project_slider_control project_slider_next">
+                        <div class="hstack gap-3">
+                            <img src="<?= get_template_directory_uri() . "/assets/images/carousel_arrow.png"; ?>" class="project_slider_control project_slider_prev">
+                            <img src="<?= get_template_directory_uri() . "/assets/images/carousel_arrow.png"; ?>" class="project_slider_control project_slider_next">
+                        </div>
                     </div>
-                </div>
+                <?php endif; ?>
             </div>
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-9 px-md-3 px-0">
             <div>
                 <div class="project-slider">
                     <?php foreach ($project_slider_items as $e) : ?>
@@ -54,6 +56,19 @@ $project_slider_items = $args["project_slider_items"] ?? null;
                 </div>
             </div>
         </div>
+
+        <?php if (wp_is_mobile()) : ?>
+            <div class="col-12">
+                <div class="vstack justify-content-center align-items-center gap-1">
+                    <div class="project_slider_dots"></div>
+
+                    <div class="hstack justify-content-center gap-3">
+                        <img src="<?= get_template_directory_uri() . "/assets/images/carousel_arrow.png"; ?>" class="project_slider_control project_slider_prev">
+                        <img src="<?= get_template_directory_uri() . "/assets/images/carousel_arrow.png"; ?>" class="project_slider_control project_slider_next">
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
 
     <script>
@@ -69,6 +84,14 @@ $project_slider_items = $args["project_slider_items"] ?? null;
                 appendDots: $(".project_slider_dots"),
                 prevArrow: $(".project_slider_prev"),
                 nextArrow: $(".project_slider_next"),
+                responsive: [{
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1.2,
+                        slidesToScroll: 1,
+                        swipe: true
+                    }
+                }]
             });
         });
     </script>

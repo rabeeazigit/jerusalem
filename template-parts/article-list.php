@@ -28,7 +28,7 @@ $article_list_side_image = $article_list_options["article_list_side_image"] ?? n
             </div>
         </div>
 
-        <?php if ($article_list_side_image) : ?>
+        <?php if (!wp_is_mobile() && $article_list_side_image) : ?>
             <div class="col-md-5">
                 <div class="d-flex w-100 h-100 align-items-center justify-content-start">
                     <img src="<?= $article_list_side_image; ?>" class="article_list_side_image">

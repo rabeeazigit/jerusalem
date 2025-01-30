@@ -8,7 +8,7 @@
     $sub_title = get_field("sub_title") ?? null;
     ?>
 
-    <div class="vstack my-3 px-5">
+    <div class="vstack my-3 px-md-5 px-3">
         <?php if ($main_title) : ?>
             <div class="display-4 fw-semibold">
                 <?= $main_title; ?>
@@ -38,7 +38,7 @@
     ]); ?>
 </div>
 
-<div class="container-fluid my-5 px-5">
+<div class="container-fluid my-5 px-md-5 px-3">
     <?php get_template_part("template-parts/information", null, [
         "information_options" => get_field("information_options") ?? null,
     ]); ?>
@@ -62,7 +62,7 @@
     ]); ?>
 </div>
 
-<div class="container-fluid px-5 py-5 mt-5 article_list_wrapper">
+<div class="container-fluid px-md-5 px-3 py-5 mt-5 article_list_wrapper">
     <?php get_template_part("template-parts/article-list", null, [
         "article_list_options" => get_field("article_list_options") ?? null
     ]); ?>

@@ -71,7 +71,7 @@ switch ($post_type) {
             <?php endif; ?>
         </div>
 
-        <?php if ($event_card_short_description) : ?>
+        <?php if (!wp_is_mobile() && $event_card_short_description) : ?>
             <div class="fs-6 opacity-75 mb-3 event_card_short_description">
                 <?= $event_card_short_description; ?>
             </div>

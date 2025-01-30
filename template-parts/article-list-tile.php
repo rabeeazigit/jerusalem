@@ -39,9 +39,15 @@ $year_section = explode("/", explode(" | ", $article_date)[0])[2];
             <?php endif; ?>
 
             <?php if ($article_description) : ?>
-                <div class="fs-5">
-                    <?= $article_description; ?>
-                </div>
+                <?php if (wp_is_mobile()) : ?>
+                    <div class="fs-5">
+                        <?= truncate_sentence($article_description, 80); ?>
+                    </div>
+                <?php else : ?>
+                    <div class="fs-5">
+                        <?= $article_description; ?>
+                    </div>
+                <?php endif; ?>
             <?php endif; ?>
         </a>
     </div>

@@ -9,7 +9,7 @@ $events_and_courses_items = $args["events_and_courses_items"] ?? [];
     <div class="row">
         <div class="col-md-3">
             <div class="vstack h-100 justify-content-between align-items-start pt-0 p-4">
-                <div class="vstack align-items-start">
+                <div class="vstack align-items-md-start align-items-center">
                     <?php if ($events_courses_title) : ?>
                         <div class="fs-1 fw-bold mb-3">
                             <?= $events_courses_title; ?>
@@ -17,7 +17,7 @@ $events_and_courses_items = $args["events_and_courses_items"] ?? [];
                     <?php endif; ?>
 
                     <?php if ($events_and_courses_paragraph) : ?>
-                        <div class="fs-6 mb-3">
+                        <div class="fs-6 mb-3 text_center_mb">
                             <?= $events_and_courses_paragraph; ?>
                         </div>
                     <?php endif; ?>
@@ -29,14 +29,16 @@ $events_and_courses_items = $args["events_and_courses_items"] ?? [];
                     <?php endif; ?>
                 </div>
 
-                <div class="vstack gap-1">
-                    <div class="event_slider_dots"></div>
+                <?php if (!wp_is_mobile()) : ?>
+                    <div class="vstack gap-1">
+                        <div class="event_slider_dots"></div>
 
-                    <div class="hstack gap-3">
-                        <img src="<?= get_template_directory_uri() . "/assets/images/carousel_arrow.png"; ?>" class="event_slider_control event_slider_prev">
-                        <img src="<?= get_template_directory_uri() . "/assets/images/carousel_arrow.png"; ?>" class="event_slider_control event_slider_next">
+                        <div class="hstack gap-3">
+                            <img src="<?= get_template_directory_uri() . "/assets/images/carousel_arrow.png"; ?>" class="event_slider_control event_slider_prev">
+                            <img src="<?= get_template_directory_uri() . "/assets/images/carousel_arrow.png"; ?>" class="event_slider_control event_slider_next">
+                        </div>
                     </div>
-                </div>
+                <?php endif; ?>
             </div>
         </div>
 
@@ -60,6 +62,17 @@ $events_and_courses_items = $args["events_and_courses_items"] ?? [];
                 <?php endif; ?>
             </div>
         </div>
+
+        <?php if (wp_is_mobile()) : ?>
+            <div class="vstack justify-content-center align-items-center gap-1">
+                <div class="event_slider_dots"></div>
+
+                <div class="hstack justify-content-center gap-3">
+                    <img src="<?= get_template_directory_uri() . "/assets/images/carousel_arrow.png"; ?>" class="event_slider_control event_slider_prev">
+                    <img src="<?= get_template_directory_uri() . "/assets/images/carousel_arrow.png"; ?>" class="event_slider_control event_slider_next">
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
 
     <script>
@@ -75,6 +88,14 @@ $events_and_courses_items = $args["events_and_courses_items"] ?? [];
                 appendDots: $(".event_slider_dots"),
                 prevArrow: $(".event_slider_prev"),
                 nextArrow: $(".event_slider_next"),
+                responsive: [{
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1.2,
+                        slidesToScroll: 1,
+                        swipe: true
+                    }
+                }]
             });
         });
     </script>

@@ -22,18 +22,18 @@ $carousel_items = $args["carousel_items"] ?? [];
             $link = $e["link"] ?? null;
             ?>
 
-            <div class="row d-flex ps-5">
-                <div class="col-md-9">
+            <div class="row d-flex ps-md-5 carousel_row_wrapper">
+                <div class="col-md-10">
                     <div class="carousel_media_container overflow-hidden">
                         <?php if ($media_type == "video") : ?>
-                            <video class="img-fluid object-fit-cover" src="<?= $video; ?>" autoplay muted loop></video>
+                            <video class="img-fluid object-fit-cover w-100" src="<?= $video; ?>" autoplay muted loop></video>
                         <?php elseif ($media_type == "image") : ?>
-                            <img class="img-fluid object-fit-cover" src="<?= $image; ?>">
+                            <img class="img-fluid object-fit-cover w-100" src="<?= $image; ?>">
                         <?php endif; ?>
                     </div>
                 </div>
 
-                <div class="col-md-3" style="margin-right: -153px;">
+                <div class="col-md-3 carousel_weird_card_thing">
                     <div class="vstack h-100 justify-content-end">
                         <div class="rounded-4 p-3 carousel_info_card">
                             <div class="vstack h-100 align-items-start">
@@ -91,6 +91,16 @@ $carousel_items = $args["carousel_items"] ?? [];
             rtl: true,
             prevArrow: $(".carousel_prev"),
             nextArrow: $(".carousel_next"),
-        })
+            responsive: [{
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    swipe: true,
+                    centerMode: true,
+                    centerPadding: "0px"
+                }
+            }]
+        });
     })
 </script>
