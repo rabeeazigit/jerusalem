@@ -1,26 +1,28 @@
-<?php 
+<?php
 /**
  * Template Name: Area Fields
- * Description: About Page By Wisam.
+ * Description:  By Wisam Shomar.
  */
 get_header();
-$Areafields = new Areafields;
+$Areafields = new Areafields();
 $AFcats = $Areafields->FetchAreaFiedlsCategories();
+$GetPillsCategories = $Areafields->GetPillsCategories();
 ?>
 
 <section class="hero-section">
 <?php
 echo $Areafields->MainHeader();
- echo $Areafields->HeroSeccssion();
- $rrr = $Areafields->LeftSideCats();
+echo $Areafields->HeroSeccssion();
+$rightsideCats = $Areafields->LeftSideCats();
+
 // echo $About->SexyNumber();
 ?>
 </section>
 <section id="categories">
 <div class="container-fluid px-5 py-5 mt-5 article_list_wrapper">
     
-    <?php  get_template_part("template-parts/area-activity-list", null , [
-    'article_list_options'=>['article_list_side_image'=>$rrr]
+    <?php  get_template_part("template-parts/area-activity-list", null, [
+    'article_list_options' => ['article_list_side_image' => $rightsideCats, 'GetPillsCategories' => $GetPillsCategories]
 ]); ?>
 </div>
 </section>

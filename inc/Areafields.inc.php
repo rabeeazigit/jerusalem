@@ -87,6 +87,20 @@ public function LeftSideCats(){
 
 
 public function GetPillsCategories(){
+$cats = $this->FetchAreaFiedlsCategories();
+$html = '<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">';
+foreach($cats as $cat){
+    $html .= ' <li class="nav-item" 
+    role="presentation">
+    <button class="nav-link active  rounded-pill hovertagabout m-2"
+     id="pills-home-tab" 
+    data-bs-toggle="pill" data-bs-target="#pills-home" 
+    type="button" role="tab" aria-controls="pills-home" 
+    aria-selected="true">'.$cat->name.'</button>
+  </li>';
+}
+$html .='</ul>';
+return $html;
 
 }
 
