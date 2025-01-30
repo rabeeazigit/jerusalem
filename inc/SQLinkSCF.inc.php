@@ -33,7 +33,7 @@ class SQLinkSCF
         $this->course_cpt();
         $this->neightborhood_cpt();
         //Wisam
-        $this->PT_AreaFilds();
+        $this->AreaFilds_cpt();
 
         // taxonomies go here
         $this->project_status_taxonomy();
@@ -5639,7 +5639,7 @@ class SQLinkSCF
 
 
 
-    public function PT_AreaFilds()
+    public function AreaFilds_cpt()
     {
         add_action('init', function () {
             register_post_type('area-fields', array(
