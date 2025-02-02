@@ -6,7 +6,7 @@
 // $article_list_link = $article_list_options["article_list_link"] ?? null;
  $article_list_side_image = $article_list_options["article_list_side_image"] ?? null;
 $GetPillsCategories =  $article_list_options['GetPillsCategories'] ?? null;
-print_r($GetPillsCategories);
+
 ?>
 
 <div class="container-fluid">
