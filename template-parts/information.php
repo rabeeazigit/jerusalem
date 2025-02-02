@@ -129,7 +129,7 @@ $information_banner_link = $information_options["information_banner_link"] ?? nu
             </div>
         </div>
 
-        <div class="d-block d-md-block">
+        <div class="d-block d-md-none">
             <div class="row mt-5 row-gap-4">
                 <?php foreach ($information_numberical_data as $e) : ?>
                     <div class="col-6">
