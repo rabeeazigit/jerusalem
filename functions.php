@@ -33,5 +33,5 @@ function truncate_sentence($sentence, $limit = 10, $afterfix = true)
 
 
 // Will be enabled later on
-// new SQLinkSCF();
+new SQLinkSCF();
 new SQLinkEnqueue();
