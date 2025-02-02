@@ -72,7 +72,7 @@ return $html;
     {
 
         $bk = $this->bk_sec_about ? $this->bk_sec_about : '';
-$tags = $this->TagTheFucker( $this->tagd_links  );
+        $tags = $this->TagTheFucker( $this->tagd_links  );
         $html = '
 
     <div class="container-fluid mt-5 secssionBk" style="background:url('.$bk.');">
@@ -81,9 +81,7 @@ $tags = $this->TagTheFucker( $this->tagd_links  );
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 about_text ">
                         <h1 class="aboutTitle display-4 fw-bold">'.get_the_title(get_the_ID()).'</h1>
                         <span class="fs-5">'.$this->about_content.'</span><br>';
-                     
-                        
-                    $html .=$tags . '</div>
+                        $html .=$tags . '</div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <img src="'.$this->hero_image.'" alt="" class="img-fluid rounded">
                     </div>
