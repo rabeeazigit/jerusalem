@@ -38,6 +38,7 @@ class Navbar
     public $searchbar_placeholder;
 
     public $contact_us_label;
+    public $contact_us_label_mobile;
 
     public function __construct()
     {
@@ -77,5 +78,6 @@ class Navbar
         $this->searchbar_placeholder = get_field("searchbar_placeholder", "options") ?? null;
 
         $this->contact_us_label = get_field("contact_us_label", "options") ?? null;
+        $this->contact_us_label_mobile = get_field("contact_us_label_mobile", "options") ?? null;
     }
 }

@@ -138,11 +138,143 @@ $navbar = new Navbar();
         </div>
     </div>
 <?php else : ?>
-    <div class="vstack gap-3">
+    <div class="container-fluid px-0">
+        <div class="vstack gap-3">
+            <div class="hstack px-3 justify-content-between align-items-center py-2 top_navbar_wrapper_mobile">
+                <?php if ($navbar->owner_login_link && $navbar->owner_login_label) : ?>
+                    <a href="<?= $navbar->owner_login_link; ?>" target="_blank" class="fs-5 hstack gap-2 text-reset text-decoration-none">
+                        <?php if ($navbar->owner_login_logo) : ?>
+                            <img src="<?= $navbar->owner_login_logo; ?>" class="navbar_owner_logo">
+                        <?php endif; ?>
 
+                        <span><?= $navbar->owner_login_label; ?></span>
+                    </a>
+                <?php endif; ?>
 
-        <div class="hstack justify-content-between align-items-center">
+                <div class="vr"></div>
 
+                <div>
+                    <img src="<?= get_template_directory_uri() . "/assets/images/contrast.png"; ?>" class="navbar_contrast_icon">
+                </div>
+
+                <?php if ($navbar->accessibility_link && $navbar->accessibility_label) : ?>
+                    <a href="<?= $navbar->accessibility_link["url"]; ?>" target="<?= $navbar->accessibility_link["target"]; ?>" class="fs-5 text-reset text-decoration-none">
+                        <?= $navbar->accessibility_label; ?>
+                    </a>
+                <?php endif; ?>
+
+                <form action="#" method="get">
+                    <select name="language" id="language" class="top_nav_select">
+                        <option value="he">עברית</option>
+                        <option value="en">English</option>
+                    </select>
+                </form>
+            </div>
+
+            <div class="hstack px-3 justify-content-between align-items-center">
+                <button class="btn" data-bs-toggle="offcanvas" data-bs-target="#mobile-hamburger">
+                    <img src="<?= get_template_directory_uri() . "/assets/images/hamburger_icon.png"; ?>" alt="Open Nav Menu" class="img-fluid">
+                </button>
+
+                <a href="<?= home_url(); ?>" class="hstack gap-2 align-items-center text-reset text-decoration-none">
+                    <?php if ($navbar->brand_logo) : ?>
+                        <img src="<?= $navbar->brand_logo; ?>" class="navbar_brand_logo">
+                    <?php endif; ?>
+
+                    <?php if ($navbar->brand_label) : ?>
+                        <div class="brand_label_content fs-6">
+                            <?= $navbar->brand_label; ?>
+                        </div>
+                    <?php endif; ?>
+                </a>
+
+                <?php if ($navbar->contact_us_label_mobile) : ?>
+                    <a href="#contact-us" class="fs-6 sq-secondary-button text-decoration-none">
+                        <?= $navbar->contact_us_label_mobile; ?>
+                    </a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-top h-100" id="mobile-hamburger">
+        <div class="offcanvas-header">
+            <div class="vstack gap-3">
+                <div class="hstack justify-content-between align-items-center py-2 top_navbar_wrapper_mobile">
+                    <?php if ($navbar->owner_login_link && $navbar->owner_login_label) : ?>
+                        <a href="<?= $navbar->owner_login_link; ?>" target="_blank" class="fs-5 hstack gap-2 text-reset text-decoration-none">
+                            <?php if ($navbar->owner_login_logo) : ?>
+                                <img src="<?= $navbar->owner_login_logo; ?>" class="navbar_owner_logo">
+                            <?php endif; ?>
+
+                            <span><?= $navbar->owner_login_label; ?></span>
+                        </a>
+                    <?php endif; ?>
+
+                    <div class="vr"></div>
+
+                    <div>
+                        <img src="<?= get_template_directory_uri() . "/assets/images/contrast.png"; ?>" class="navbar_contrast_icon">
+                    </div>
+
+                    <?php if ($navbar->accessibility_link && $navbar->accessibility_label) : ?>
+                        <a href="<?= $navbar->accessibility_link["url"]; ?>" target="<?= $navbar->accessibility_link["target"]; ?>" class="fs-5 text-reset text-decoration-none">
+                            <?= $navbar->accessibility_label; ?>
+                        </a>
+                    <?php endif; ?>
+
+                    <form action="#" method="get">
+                        <select name="language" id="language" class="top_nav_select">
+                            <option value="he">עברית</option>
+                            <option value="en">English</option>
+                        </select>
+                    </form>
+                </div>
+
+                <div class="hstack px-3 justify-content-between align-items-center">
+                    <button class="btn-close mx-0" data-bs-dismiss="offcanvas">
+                    </button>
+
+                    <a href="<?= home_url(); ?>" class="hstack gap-2 align-items-center text-reset text-decoration-none">
+                        <?php if ($navbar->brand_logo) : ?>
+                            <img src="<?= $navbar->brand_logo; ?>" class="navbar_brand_logo">
+                        <?php endif; ?>
+
+                        <?php if ($navbar->brand_label) : ?>
+                            <div class="brand_label_content fs-6">
+                                <?= $navbar->brand_label; ?>
+                            </div>
+                        <?php endif; ?>
+                    </a>
+
+                    <?php if ($navbar->contact_us_label_mobile) : ?>
+                        <a href="#contact-us" class="fs-6 sq-secondary-button text-decoration-none">
+                            <?= $navbar->contact_us_label_mobile; ?>
+                        </a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="offcanvas-body">
+            <div class="vstack mx-3">
+                <div class="input-group px-2 border shadow rounded-pill">
+                    <span class="input-group-text mobile_searchbox">
+                        <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
+                    </span>
+                    <input type="text" class="mobile_searchbox_input py-3" placeholder="<?= $navbar->searchbar_placeholder ?? ""; ?>">
+                </div>
+            </div>
+
+            <?php if ($navbar->residents_menu_label) : ?>
+                <div class="hstack align-items-center my-4 justify-content-between">
+                    <div class="fs-5">
+                        <?= $navbar->residents_menu_label; ?>
+                    </div>
+
+                    <img src="<?= get_template_directory_uri() . "/assets/images/dropdown-arrow.png"; ?>">
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 <?php endif; ?>

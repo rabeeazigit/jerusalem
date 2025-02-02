@@ -170,6 +170,11 @@ body {
     height: 84px;
     object-fit: cover;
     object-position: center;
+
+    @media screen and (width <= 768px) {
+        width: 58px;
+        height: 58px;
+    }
 }
 
 .brand_label_content p {
@@ -211,6 +216,11 @@ body {
     height: 15px;
     object-fit: cover;
     object-position: center;
+
+    @media screen and (width <= 768px) {
+        width: 24px;
+        height: 24px;
+    }
 }
 
 .main_nav_item {
@@ -679,4 +689,22 @@ body {
     @media screen and (width <= 768px) {
         text-align: center;
     }
+}
+
+.top_navbar_wrapper_mobile {
+    border: 1px solid #b2aea8;
+    border-right: none;
+    border-left: none;
+}
+
+.mobile_searchbox {
+    background-color: transparent;
+    border: none;
+}
+
+.mobile_searchbox_input {
+    border: none;
+    font-size: 18px;
+    background-color: transparent;
+    outline: none;
 }
