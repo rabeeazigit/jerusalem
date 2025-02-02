@@ -137,4 +137,12 @@ $navbar = new Navbar();
             <?php endif; ?>
         </div>
     </div>
+<?php else : ?>
+    <div class="vstack gap-3">
+
+
+        <div class="hstack justify-content-between align-items-center">
+
+        </div>
+    </div>
 <?php endif; ?>
