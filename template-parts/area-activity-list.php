@@ -13,16 +13,15 @@ $GetPillsCategories =  $article_list_options['GetPillsCategories'] ?? null;
     <div class="row">
         <div class="col-6">
             <div class="vstack">
-                <?php //foreach ($article_list_items as $e) : ?>
-                  <?php //accordion?>
+                
                     <div class="fs-5 fw-bold"><?php echo $GetPillsCategories;?></div>
-                <?php// endforeach; ?>
+               
             </div>
         </div>
 
         <?php if ($article_list_options) : ?>
             <div class="col-6">
-                <div class="d-flex w-100 h-100 align-items-center justify-content-start">
+                <div class="d-flex w-100 h-100 align-items-center justify-content-end">
                     <img src="<?= $article_list_side_image; ?>" class="article_list_side_image">
                     <img src="<?= get_template_directory_uri() . "/assets/images/cube.png"; ?>" class="article_list_side_cube">
                 </div>

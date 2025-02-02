@@ -45,10 +45,6 @@ margin-top: 20px;
     margin: 5px;
 }
 
-
-.hero-section{
-    background:#cec0972e;
-}
 section{
     margin-top: -4px !important;
     margin-bottom: -4px !important;
@@ -67,4 +63,22 @@ section{
 }
 .staff_photo:hover{
     background: #EBE8E3;
+}
+
+.small-button {
+    font-size: 12px; /* Adjust text size */
+    font-weight: normal; /* Removes bold */
+    padding: 5px 10px; /* Adjust padding */
+    border:solid 1px #B2AEA8;
+    min-width: 149px;
+
+}
+.community_field_content{
+    max-width: 700px;
+    font-size: 18px !important;
+}
+
+.community_field_content p{
+    font-size: 17px !important;
+    text-align: justify;
 }
