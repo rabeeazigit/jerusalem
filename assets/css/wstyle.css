@@ -82,3 +82,24 @@ section{
     font-size: 17px !important;
     text-align: justify;
 }
+
+/*Accordion style As Figma Demands*/
+.accordion-button:not(.collapsed){
+    background-color:transparent !important;
+}
+.accordion-button{
+    background-color:transparent !important;
+}
+.accordion-item{
+    background-color:transparent !important;
+    margin-bottom: 20px;
+    border:solid 1px #B2AEA8 !important;
+border-radius: 10px;
+}
+.GroupContent {
+    font-weight: 300 !important;
+    font-size: 16px !important;
+}
+.accordion-body h1{
+    font-size:  24px !important;
+}

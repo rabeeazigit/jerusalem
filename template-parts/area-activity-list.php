@@ -11,7 +11,7 @@ $GetPillsCategories =  $article_list_options['GetPillsCategories'] ?? null;
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-6">
+        <div class="col-lg-6 col-sm-12 ">
             <div class="vstack">
                 
                     <div class="fs-5 fw-bold"><?php echo $GetPillsCategories;?></div>
@@ -19,7 +19,7 @@ $GetPillsCategories =  $article_list_options['GetPillsCategories'] ?? null;
             </div>
         </div>
 
-        <?php if ($article_list_options) : ?>
+        <?php if ($article_list_options && !wp_is_mobile()) : ?>
             <div class="col-6">
                 <div class="d-flex w-100 h-100 align-items-center justify-content-end">
                     <img src="<?= $article_list_side_image; ?>" class="article_list_side_image">

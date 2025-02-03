@@ -9,6 +9,7 @@ class Areafields
     private $arie_fields_connection ;
     private $community_field_title;
     private $community_field_content;
+    private $community_field_title_accotdion ;
 
     public function __construct()
     {
@@ -16,14 +17,17 @@ class Areafields
         $this->bk_sec_about = get_field('bk_sec_about', $this->pid);
         $this->hero_section = get_field('area_fields_hero_section', $this->pid);
         $this->main_area_fields = get_field('main_area_fields', $this->pid);
-         $this->community_field_title = get_field('community_field_title', $this->pid);
-         $this->community_field_content = get_field('community_field_content', $this->pid);
-         $this->arie_fields_connection =  get_field('arie_fields_connection', $this->pid);
+        $this->community_field_title = get_field('community_field_title', $this->pid);
+        $this->community_field_content = get_field('community_field_content', $this->pid);
+        $this->arie_fields_connection =  get_field('arie_fields_connection', $this->pid);
+        $this->community_field_title_accotdion =  get_field('community_field_title_accotdion', $this->pid);
+
     }
 
-public function LeftSideCats(){
-    return  $this->hero_section['bk_sec_about'];
-}
+    public function LeftSideCats()
+    {
+        return  $this->hero_section['bk_sec_about'];
+    }
 
 
 
@@ -97,82 +101,178 @@ public function LeftSideCats(){
     }
 
 
-public function Get_Pills_Content(){
+    public function Get_Pills_Content()
+    {
 
-$html =
-        '<div class="container px-0">
+        $html =
+                '<div class="container px-0">
            
                 <h2>'.  $this->community_field_title .'<h2>
                 
                 <div class="community_field_content">'.  $this->community_field_content .'</div>
                
            
-         </div>';
+         </div><p>'.$this->community_field_title_accotdion.'</p>';
 
-return $html;
-}
-
-
-private function GET_AreaFieldsTermsPosts($term_id){
+        return $html;
+    }
 
 
-    $args = array(
-        'post_type'      => 'area-fields',
-        'posts_per_page' => -1, // Fetch all posts
-        'tax_query'      => array(
-            array(
-                'taxonomy' => 'category', // Replace with your actual taxonomy name
-                'field'    => 'term_id',
-                'terms'    => $term_id,
+    private function GET_AreaFieldsTermsPosts($term_id)
+    {
+
+        $posts_raw = [];
+        $args = array(
+            'post_type'      => 'area-fields',
+            'posts_per_page' => -1, // Fetch all posts
+            'tax_query'      => array(
+                array(
+                    'taxonomy' => 'category', // Replace with your actual taxonomy name
+                    'field'    => 'term_id',
+                    'terms'    => $term_id,
+                ),
             ),
-        ),
-    );
-    
-    $posts = get_posts($args);
-return $posts;
-}
+        );
+
+        $posts = get_posts($args);
+        return $posts;
+    }
+
+
+
+    private function BootsrapAccordion($terms)
+    {
+        //$terms Needs to be an array....
+
+        $html = '<div class="accordion" id="accordionPanelsfields">';
+
+
+        foreach ($terms as $post) {
+            $GroupContent = $this->GetAccordionContent($post->ID);
+            //area_sticky_image
+            $sticky =  $GroupContent['area_sticky_image']  == 1 ? 'class="img-fluid position-sticky" style="top: 20px;" ' : 'style="width:100%;"';
+            $html .= ' 
+<div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#panelsStayOpen-collapse'.$post->ID.'" 
+                aria-expanded="true" 
+                aria-controls="panelsStayOpen-collapse'.$post->ID.'" >
+        '.$post->post_title.'
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapse'.$post->ID.'"  class="accordion-collapse collapse" data-bs-parent="#accordionPanelsfields">
+      <div class="accordion-body">
+       <h1>'. $GroupContent['area_title'] . '</h1>
+                <div class="container">
+                <div class="row">
+                <div class="col-lg-8 col-sm-12">
+                    <div class="GroupContent">'. $GroupContent['area_content'] . '</div>
+                </div>
+                <div class="col-lg-4 col-sm-12 position-relative"><img src="'. $GroupContent['area_image'] .' " loading="lazy" '.$sticky.'/>
+                </div>
+                
+                </div>
+                </div>
+
+        </div>
+    </div>
+  </div>
+  ';
+
+        }
+
+
+
+        $html .= '</div>' ; //Closer Accordion
+        return $html;
+    }
+
+
+
+    private function GetAccordionContent($pid)
+    {
+        $LayOut = [];
+        $content = get_field('main_area_fields', $pid);
+        $LayOut['area_title'] = $content[0]['area_title'];
+        $LayOut['area_content'] = $content[0]['area_content'];
+        $LayOut['area_image'] = $content[0]['area_image']['url'];
+        $LayOut['area_sticky_image'] = $content[0]['area_sticky_image'];
+
+        return $LayOut;
+    }
 
 
 
 
+    public function GetPillsCategories()
+    {
+        $cats = $this->FetchAreaFiedlsCategories();
+        $html = '<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">';
+        $terms = [];
+        $cnt = 0;
+        foreach ($cats as $cat) {
 
-public function GetPillsCategories(){
-$cats = $this->FetchAreaFiedlsCategories();
-$html = '<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">';
-$terms = [];
-foreach($cats as $cat){
-    $term_id = $cat->term_id;
-    
-    $html .= ' <li class="nav-item" 
+            if ($cnt == 0) {
+                $active_class = 'active';
+            } else {
+                $active_class = '';
+            }
+
+            $term_id = $cat->term_id;
+
+            $html .= ' <li class="nav-item" 
     role="presentation">
-    <button class="small-button rounded-pill  m-2" id="pills-'.$term_id.'-tab" 
+    <button class="small-button rounded-pill '.$active_class.'  m-2" id="pills-'.$term_id.'-tab" 
     data-bs-toggle="pill" data-bs-target="#pills-'.  $term_id . '" 
     type="button" role="tab" aria-controls="pills-'.  $term_id . '" 
     aria-selected="true">'.$cat->name.'</button>
   </li>';
 
-$terms[$term_id] = $this->GET_AreaFieldsTermsPosts($term_id);
+            $terms[$term_id] = $this->GET_AreaFieldsTermsPosts($term_id);
+            $cnt++;
 
-
-}
-$html .='</ul>';
-
-// $html .='<div class="tab-content" id="pills-tabContent">
-//   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">...</div>
-//   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">...</div>
-//   <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">...</div>
-//   <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">...</div>
-// </div>';
+        }
+        $html .= '</ul>';
 
 
 
-$html .= $this->Get_Pills_Content();
 
-print_r($terms);
+        $html .= $this->Get_Pills_Content();
+        //$html .=$this->BootsrapAccordion($terms);
 
-return $html;
 
-}
+        $html .= '<div class="tab-content" id="pills-tabContent">';
+        $cnt = 0;
+        $active_class = '';
+        foreach ($terms as $key => $terminis) {
+
+            $randomNumber = mt_rand(5221, 1000000);
+
+            if ($cnt == 0) {
+                $active_class = 'show active';
+            } else {
+                $active_class = '';
+            }
+            $html .= ' <div class="tab-pane fade '.$active_class.'" id="pills-'.$key.'" role="tabpanel" aria-labelledby="pills-'.$key.'-tab" tabindex="0">';
+            $html .= $this->BootsrapAccordion($terminis);
+
+            $html .= '</div>';
+            $cnt++;
+        }
+
+
+
+        $html .= '</div>'; //tab closer
+
+
+        //print_r($terms);
+
+        return $html;
+
+    }
 
 
 
