@@ -78,7 +78,7 @@ $navbar = new Navbar();
                 <?php endif; ?>
 
                 <form action="#" method="get">
-                    <select name="language" id="language" class="top_nav_select">
+                    <select name="language" id="language" class="form-select top_nav_select">
                         <option value="he">עברית</option>
                         <option value="en">English</option>
                     </select>
@@ -164,7 +164,7 @@ $navbar = new Navbar();
                 <?php endif; ?>
 
                 <form action="#" method="get">
-                    <select name="language" id="language" class="top_nav_select">
+                    <select name="language" id="language" class="form-select top_nav_select">
                         <option value="he">עברית</option>
                         <option value="en">English</option>
                     </select>
@@ -224,7 +224,7 @@ $navbar = new Navbar();
                     <?php endif; ?>
 
                     <form action="#" method="get">
-                        <select name="language" id="language" class="top_nav_select">
+                        <select name="language" id="language" class="form-select top_nav_select">
                             <option value="he">עברית</option>
                             <option value="en">English</option>
                         </select>
