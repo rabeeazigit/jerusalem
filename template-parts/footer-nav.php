@@ -157,4 +157,78 @@ $footer_copyright_text = get_field("footer_copyright_text", "options") ?? null;
         </div>
     </div>
 <?php else : ?>
+    <?php if ($footer_logos_gallery) : ?>
+        <div class="row row-gap-3 justify-content-between align-items-center py-3">
+            <?php foreach ($footer_logos_gallery as $e) : ?>
+                <div class="col-4">
+                    <img src="<?= $e; ?>" class="img-fluid object-fit-cover">
+                </div>
+            <?php endforeach; ?>
+
+            <hr>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($footer_menus) : ?>
+        <?php foreach ($footer_menus as $e) : ?>
+            <?php
+            $menu_title = $e["menu_title"] ?? null;
+            $menu_items = $e["menu_items"] ?? null;
+            $menu_id = wp_unique_id("footer_nav_menu");
+            ?>
+            <?php if ($menu_title && is_array($menu_items)) : ?>
+                <div class="px-3 py-2 mb-3 border rounded-4">
+                    <div class="hstack align-items-center justify-content-between footer_mobile_menu_item collapsed" data-bs-toggle="collapse" data-bs-target="#<?= $menu_id; ?>">
+                        <div class="fs-5 fw-bold">
+                            <?= $menu_title; ?>
+                        </div>
+
+                        <img src="<?= get_template_directory_uri() . "/assets/images/down-arrow.png"; ?>" class="img-fluid">
+                    </div>
+
+                    <div class="collapse" id="<?= $menu_id; ?>">
+                        <div class="vstack align-items-start py-2 gap-3">
+                            <?php foreach ($menu_items as $mi) : ?>
+                                <a href="<?= $mi["menu_link"]["url"]; ?>" target="<?= $mi["menu_link"]["target"]; ?>" class="fs-5 text-reset text-decoration-none">
+                                    <?= $mi["menu_link"]["title"]; ?>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <?php if ($footer_brand_logo) : ?>
+        <div class="vstack align-items-center justify-content-center my-5">
+            <img src="<?= $footer_brand_logo; ?>" class="img-fluid">
+        </div>
+    <?php endif; ?>
+
+    <?php if ($social_media_links) : ?>
+        <div class="row justify-content-center align-items-center row-gap-4 gx-2 my-4">
+            <?php foreach ($social_media_links as $e) : ?>
+                <div class="col-3">
+                    <div class="hstack justify-content-center">
+                        <a href="<?= $e["link"]["url"] ?? "#"; ?>" target="<?= $e["link"]["target"] ?? ""; ?>" title="<?= $e["link"]["title"] ?? ""; ?>" class="text-reset text-decoration-none">
+                            <?php if ($e["icon"]) : ?>
+                                <img src="<?= $e["icon"]; ?>" alt="<?= $e["link"]["title"] ?? ""; ?>" class="navbar_social_icon">
+                            <?php endif; ?>
+                        </a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($footer_copyright_text) : ?>
+        <div class="text-center opacity-75 my-4">
+            <span>
+                <?= $footer_copyright_text; ?>
+            </span>
+
+            <span>© <?= date("Y"); ?></span>
+        </div>
+    <?php endif; ?>
 <?php endif; ?>

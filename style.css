@@ -720,3 +720,11 @@ body {
 .mobile_menu_head:not(.collapsed) img {
     transform: scaleY(-1);
 }
+
+.footer_mobile_menu_item img {
+    transition: transform 250ms ease-in-out;
+}
+
+.footer_mobile_menu_item:not(.collapsed) img {
+    transform: scaleY(-1);
+}
