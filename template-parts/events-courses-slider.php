@@ -55,7 +55,7 @@ $events_and_courses_items = $args["events_and_courses_items"] ?? [];
                                 "event_card_short_description" => get_field("event_card_short_description", $e),
                                 "event_card_short_button_text" => get_field("event_card_short_button_text", $e),
                                 "permalink" => get_permalink($e),
-                                "post_type" => get_post_type($e)
+                                "post_type" => get_field("event_type", $e)
                             ]) ?>
                         <?php endforeach; ?>
                     </div>

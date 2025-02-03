@@ -6,7 +6,6 @@ class SQLinkSCF
     {
         // fields groups go here
         $this->article_list_fieldgroup();
-        $this->events_courses_formus_fieldgroup();
         $this->information_fieldgroup();
         $this->neighborhood_fieldgroup();
         $this->project_status_fieldgroup();
@@ -26,11 +25,10 @@ class SQLinkSCF
         $this->AreaActivities();
 
         // post types go here
-        $this->event_cpt();
         $this->project_cpt();
         $this->article_cpt();
         $this->forum_cpt();
-        $this->course_cpt();
+        $this->event_cpt();
         $this->neightborhood_cpt();
         //Wisam
         $this->AreaFilds_cpt();
@@ -182,7 +180,7 @@ class SQLinkSCF
         });
     }
 
-    public function events_courses_formus_fieldgroup()
+    public function dont_useevents_courses_formus_fieldgroup()
     {
         add_action('acf/include_fields', function () {
             if (! function_exists('acf_add_local_field_group')) {
@@ -1988,6 +1986,41 @@ class SQLinkSCF
                         'acfe_clone_modal_size' => 'large',
                     ),
                     array(
+                        'key' => 'field_67a0d474db89f',
+                        'label' => 'Events And Courses',
+                        'name' => 'events_and_courses_items',
+                        'aria-label' => '',
+                        'type' => 'relationship',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'post_type' => array(
+                            0 => 'event',
+                        ),
+                        'post_status' => array(
+                            0 => 'publish',
+                        ),
+                        'taxonomy' => '',
+                        'filters' => array(
+                            0 => 'search',
+                        ),
+                        'return_format' => 'object',
+                        'acfe_bidirectional' => array(
+                            'acfe_bidirectional_enabled' => '0',
+                        ),
+                        'min' => '',
+                        'max' => '',
+                        'allow_in_bindings' => 0,
+                        'elements' => '',
+                        'bidirectional' => 0,
+                        'bidirectional_target' => array(),
+                    ),
+                    array(
                         'key' => 'field_67989c8f9022b',
                         'label' => 'Article List Options',
                         'name' => '',
@@ -3768,12 +3801,12 @@ class SQLinkSCF
             }
 
             acf_add_local_field_group(array(
-                'key' => 'group_67977f105634f',
-                'title' => 'Events And Courses Slider',
+                'key' => 'group_67978c3c3236e',
+                'title' => 'Events, Courses and Forums',
                 'fields' => array(
                     array(
-                        'key' => 'field_67977f1030d32',
-                        'label' => 'Events And Courses Slider Options',
+                        'key' => 'field_67a0d0e586692',
+                        'label' => 'Type',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -3790,9 +3823,72 @@ class SQLinkSCF
                         'selected' => 0,
                     ),
                     array(
-                        'key' => 'field_67977f2830d33',
-                        'label' => 'Events And Courses Title',
-                        'name' => 'events_courses_title',
+                        'key' => 'field_67a0d10086693',
+                        'label' => 'Event Type',
+                        'name' => 'event_type',
+                        'aria-label' => '',
+                        'type' => 'radio',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'choices' => array(
+                            'event' => 'Event',
+                            'course' => 'Course',
+                        ),
+                        'default_value' => 'event',
+                        'return_format' => 'value',
+                        'allow_null' => 0,
+                        'other_choice' => 0,
+                        'allow_in_bindings' => 0,
+                        'layout' => 'horizontal',
+                        'save_other_choice' => 0,
+                    ),
+                    array(
+                        'key' => 'field_67978caac511a',
+                        'label' => 'Information',
+                        'name' => '',
+                        'aria-label' => '',
+                        'type' => 'tab',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'placement' => 'top',
+                        'endpoint' => 0,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'key' => 'field_67978c3cc5117',
+                        'label' => 'Event Occurrence Date',
+                        'name' => 'event_occurrence_date',
+                        'aria-label' => '',
+                        'type' => 'date_time_picker',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'display_format' => 'Y/m/d H:i',
+                        'return_format' => 'Y/m/d H:i',
+                        'first_day' => 1,
+                        'allow_in_bindings' => 0,
+                    ),
+                    array(
+                        'key' => 'field_67978d00c511e',
+                        'label' => 'Event Place',
+                        'name' => 'event_place',
                         'aria-label' => '',
                         'type' => 'text',
                         'instructions' => '',
@@ -3811,9 +3907,55 @@ class SQLinkSCF
                         'append' => '',
                     ),
                     array(
-                        'key' => 'field_6797802630d34',
-                        'label' => 'Events And Courses Paragraph',
-                        'name' => 'events_and_courses_paragraph',
+                        'key' => 'field_67978cb8c511b',
+                        'label' => 'Card Information',
+                        'name' => '',
+                        'aria-label' => '',
+                        'type' => 'tab',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'placement' => 'top',
+                        'endpoint' => 0,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'key' => 'field_67978cc2c511c',
+                        'label' => 'Event Card Image',
+                        'name' => 'event_card_image',
+                        'aria-label' => '',
+                        'type' => 'image',
+                        'instructions' => 'Recommended Size: 500x280',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'uploader' => '',
+                        'return_format' => 'url',
+                        'library' => 'all',
+                        'acfe_thumbnail' => 0,
+                        'min_width' => '',
+                        'min_height' => '',
+                        'min_size' => '',
+                        'max_width' => '',
+                        'max_height' => '',
+                        'max_size' => '',
+                        'mime_types' => '',
+                        'allow_in_bindings' => 0,
+                        'preview_size' => 'thumbnail',
+                    ),
+                    array(
+                        'key' => 'field_67978f88c511f',
+                        'label' => 'Event Card Short Description',
+                        'name' => 'event_card_short_description',
                         'aria-label' => '',
                         'type' => 'textarea',
                         'instructions' => '',
@@ -3833,11 +3975,11 @@ class SQLinkSCF
                         'new_lines' => 'br',
                     ),
                     array(
-                        'key' => 'field_679780d430d35',
-                        'label' => 'Events And Courses Link',
-                        'name' => 'events_and_courses_link',
+                        'key' => 'field_6797a58998e3a',
+                        'label' => 'Event Card Short Button Text',
+                        'name' => 'event_card_short_button_text',
                         'aria-label' => '',
-                        'type' => 'link',
+                        'type' => 'text',
                         'instructions' => '',
                         'required' => 0,
                         'conditional_logic' => 0,
@@ -3846,45 +3988,12 @@ class SQLinkSCF
                             'class' => '',
                             'id' => '',
                         ),
-                        'return_format' => 'array',
+                        'default_value' => '',
+                        'maxlength' => '',
                         'allow_in_bindings' => 0,
-                    ),
-                    array(
-                        'key' => 'field_679780dc30d36',
-                        'label' => 'Events And Courses Items',
-                        'name' => 'events_and_courses_items',
-                        'aria-label' => '',
-                        'type' => 'relationship',
-                        'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
-                        'wrapper' => array(
-                            'width' => '',
-                            'class' => '',
-                            'id' => '',
-                        ),
-                        'post_type' => array(
-                            0 => 'course',
-                            1 => 'forum',
-                            2 => 'event',
-                        ),
-                        'post_status' => '',
-                        'taxonomy' => '',
-                        'filters' => array(
-                            0 => 'search',
-                            1 => 'post_type',
-                            2 => 'taxonomy',
-                        ),
-                        'return_format' => 'object',
-                        'acfe_bidirectional' => array(
-                            'acfe_bidirectional_enabled' => '0',
-                        ),
-                        'min' => '',
-                        'max' => '',
-                        'allow_in_bindings' => 0,
-                        'elements' => '',
-                        'bidirectional' => 0,
-                        'bidirectional_target' => array(),
+                        'placeholder' => '',
+                        'prepend' => '',
+                        'append' => '',
                     ),
                 ),
                 'location' => array(
@@ -3892,7 +4001,14 @@ class SQLinkSCF
                         array(
                             'param' => 'post_type',
                             'operator' => '==',
-                            'value' => 'page',
+                            'value' => 'forum',
+                        ),
+                    ),
+                    array(
+                        array(
+                            'param' => 'post_type',
+                            'operator' => '==',
+                            'value' => 'event',
                         ),
                     ),
                 ),
@@ -3902,7 +4018,7 @@ class SQLinkSCF
                 'label_placement' => 'left',
                 'instruction_placement' => 'label',
                 'hide_on_screen' => '',
-                'active' => false,
+                'active' => true,
                 'description' => '',
                 'show_in_rest' => 0,
                 'acfe_display_title' => '',
@@ -4931,21 +5047,21 @@ class SQLinkSCF
         add_action('init', function () {
             register_post_type('event', array(
                 'labels' => array(
-                    'name' => 'Events',
-                    'singular_name' => 'Event',
-                    'menu_name' => 'Events',
-                    'all_items' => 'All Events',
-                    'edit_item' => 'Edit Event',
-                    'view_item' => 'View Event',
-                    'view_items' => 'View Events',
-                    'add_new_item' => 'Add New Event',
-                    'add_new' => 'Add New Event',
-                    'new_item' => 'New Event',
-                    'parent_item_colon' => 'Parent Event:',
-                    'search_items' => 'Search Events',
-                    'not_found' => 'No events found',
-                    'not_found_in_trash' => 'No events found in Trash',
-                    'archives' => 'Event Archives',
+                    'name' => 'Events And Courses',
+                    'singular_name' => 'Event/Course',
+                    'menu_name' => 'Events And Courses',
+                    'all_items' => 'All Events And Courses',
+                    'edit_item' => 'Edit Event/Course',
+                    'view_item' => 'View Event/Course',
+                    'view_items' => 'View Events And Courses',
+                    'add_new_item' => 'Add New Event/Course',
+                    'add_new' => 'Add New Event/Course',
+                    'new_item' => 'New Event/Course',
+                    'parent_item_colon' => 'Parent Event/Course:',
+                    'search_items' => 'Search Event/Course',
+                    'not_found' => 'No events/courses found',
+                    'not_found_in_trash' => 'No events/courses found in Trash',
+                    'archives' => 'Event/Course Archives',
                     'attributes' => 'Event Attributes',
                     'insert_into_item' => 'Insert into event',
                     'uploaded_to_this_item' => 'Uploaded to this event',
