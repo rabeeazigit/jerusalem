@@ -197,9 +197,9 @@ $navbar = new Navbar();
         </div>
     </div>
 
-    <div class="offcanvas offcanvas-top h-100" id="mobile-hamburger">
-        <div class="offcanvas-header">
-            <div class="vstack gap-3">
+    <div class="offcanvas offcanvas-top" id="mobile-hamburger">
+        <div class="offcanvas-header p-0">
+            <div class="vstack gap-3 px-3">
                 <div class="hstack justify-content-between align-items-center py-2 top_navbar_wrapper_mobile">
                     <?php if ($navbar->owner_login_link && $navbar->owner_login_label) : ?>
                         <a href="<?= $navbar->owner_login_link; ?>" target="_blank" class="fs-5 hstack gap-2 text-reset text-decoration-none">
@@ -266,13 +266,46 @@ $navbar = new Navbar();
                 </div>
             </div>
 
-            <?php if ($navbar->residents_menu_label) : ?>
-                <div class="hstack align-items-center my-4 justify-content-between">
-                    <div class="fs-5">
-                        <?= $navbar->residents_menu_label; ?>
-                    </div>
+            <?php
+            $mobile_menus = $navbar->get_mobile_menus();
+            $mobile_menu_length = count($mobile_menus);
+            ?>
 
-                    <img src="<?= get_template_directory_uri() . "/assets/images/dropdown-arrow.png"; ?>">
+            <?php if ($mobile_menus && is_array($mobile_menus) && !empty($mobile_menus)) : ?>
+                <div class="vstack px-3 my-3 gap-2">
+                    <?php foreach ($mobile_menus as $i => $e) : ?>
+                        <?php if (count($e["links"]) > 1) : ?>
+                            <div class="hstack align-items-center justify-content-between mobile_menu_head collapsed" data-bs-toggle="collapse" data-bs-target="#mobile_menu_item_<?= $i; ?>">
+                                <div class="fs-5 fw-semibold">
+                                    <?= $e["label"]; ?>
+                                </div>
+
+                                <?php if (count($e["links"]) > 1) : ?>
+                                    <img src="<?= get_template_directory_uri() . "/assets/images/dropdown-arrow.png"; ?>">
+                                <?php endif; ?>
+                            </div>
+
+                            <div class="collapse" id="mobile_menu_item_<?= $i; ?>">
+                                <?php if ($e["links"] && is_array($e["links"])) : ?>
+                                    <div class="vstack gap-3 px-5">
+                                        <?php foreach ($e["links"] as $link) : ?>
+                                            <a class="text-reset fs-6 text-decoration-none" href="<?= $link["url"]; ?>">
+                                                <?= $link["title"]; ?>
+                                            </a>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php else : ?>
+                            <a class="text-reset fs-5 fw-semibold text-decoration-none" href="<?= $e["links"][0]["url"]; ?>">
+                                <?= $e["links"][0]["title"]; ?>
+                            </a>
+                        <?php endif; ?>
+
+                        <?php if ($mobile_menu_length !== $i + 1) : ?>
+                            <hr>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
             <?php endif; ?>
         </div>

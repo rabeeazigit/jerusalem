@@ -697,6 +697,10 @@ body {
     border-left: none;
 }
 
+#mobile-hamburger {
+    height: fit-content;
+}
+
 .mobile_searchbox {
     background-color: transparent;
     border: none;
@@ -707,4 +711,12 @@ body {
     font-size: 18px;
     background-color: transparent;
     outline: none;
+}
+
+.mobile_menu_head img {
+    transition: transform 100ms ease-in-out;
+}
+
+.mobile_menu_head:not(.collapsed) img {
+    transform: scaleY(-1);
 }

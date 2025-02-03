@@ -80,4 +80,111 @@ class Navbar
         $this->contact_us_label = get_field("contact_us_label", "options") ?? null;
         $this->contact_us_label_mobile = get_field("contact_us_label_mobile", "options") ?? null;
     }
+
+    public function get_mobile_menus()
+    {
+        if ($this->residents_menu_label) {
+            $residents_menu_item = [
+                "label" => $this->residents_menu_label,
+                "links" => []
+            ];
+
+            if ($this->residents_menu_cards && is_array($this->residents_menu_cards)) {
+                foreach ($this->residents_menu_cards as $e) {
+                    if (isset($e["link"])) {
+                        $residents_menu_item["links"][] = $e["link"];
+                    }
+                }
+            }
+
+            if ($this->residents_menu_links && is_array($this->residents_menu_links)) {
+                foreach ($this->residents_menu_links as $e) {
+                    if (isset($e["link"]) && isset($e["label"])) {
+                        $residents_menu_item["links"][] = [
+                            "title" => $e["label"],
+                            "url" => $e["link"]
+                        ];
+                    }
+                }
+            }
+        }
+
+        if ($this->entrepreneurs_menu_label) {
+            $enterpreneurs_menu_item = [
+                "label" => $this->entrepreneurs_menu_label,
+                "links" => []
+            ];
+
+            if ($this->entrepreneurs_menu_cards && is_array($this->entrepreneurs_menu_cards)) {
+                foreach ($this->entrepreneurs_menu_cards as $e) {
+                    if (isset($e["link"])) {
+                        $enterpreneurs_menu_item["links"][] = $e["link"];
+                    }
+                }
+            }
+
+            if ($this->entrepreneurs_menu_links && is_array($this->entrepreneurs_menu_links)) {
+                foreach ($this->entrepreneurs_menu_links as $e) {
+                    if (isset($e["link"]) && isset($e["label"])) {
+                        $enterpreneurs_menu_item["links"][] = [
+                            "title" => $e["label"],
+                            "url" => $e["link"]
+                        ];
+                    }
+                }
+            }
+
+            if ($this->renewing_neighborhoods_label && $this->renewing_neighborhoods_link) {
+                $renewing_menu_item = [
+                    "label" => $this->renewing_neighborhoods_label,
+                    "links" => [
+                        [
+                            "title" => $this->renewing_neighborhoods_label,
+                            "url" => $this->renewing_neighborhoods_link
+                        ]
+                    ]
+                ];
+            }
+        }
+
+        if ($this->about_management_label) {
+            $about_menu_item = [
+                "label" => $this->about_management_label,
+                "links" => []
+            ];
+
+            if ($this->about_management_links) {
+                foreach ($this->about_management_links as $e) {
+                    $about_menu_item["links"][] = $e["link"];
+                }
+            }
+        }
+
+        if ($this->events_courses_label) {
+            $events_courses_menu_item = [
+                "label" => $this->events_courses_label,
+                "links" => [
+                    [
+                        "title" => $this->events_courses_label,
+                        "url" => $this->events_courses_link
+                    ]
+                ]
+            ];
+        }
+
+        if ($this->news_update_label) {
+            $news_update_menu_item = [
+                "label" => $this->news_update_label,
+                "links" => [
+                    [
+                        "title" => $this->news_update_label,
+                        "url" => $this->news_update_link
+                    ]
+                ]
+            ];
+        }
+
+        $result = [$residents_menu_item, $enterpreneurs_menu_item, $renewing_menu_item, $about_menu_item, $events_courses_menu_item, $news_update_menu_item];
+        return $result;
+    }
 }
