@@ -10,7 +10,7 @@ class Areafields
     private $community_field_title;
     private $community_field_content;
     private $community_field_title_accotdion ;
-
+    private $pid;
     public function __construct()
     {
         $this->pid = get_the_ID() ;
@@ -22,6 +22,7 @@ class Areafields
         $this->arie_fields_connection =  get_field('arie_fields_connection', $this->pid);
         $this->community_field_title_accotdion =  get_field('community_field_title_accotdion', $this->pid);
 
+     
     }
 
     public function LeftSideCats()
@@ -30,33 +31,34 @@ class Areafields
     }
 
 
-
-
-
-
     public function HeroSeccssion()
     {
-
-
-        //print_r($this->hero_section);
-
         $html = '
-                <div class="container-fluid mt-5 secssionBk">
-                        <div class="hero-section p-4">
-                            <div class="row align-items-start">
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 about_text ">
-                                    <h1 class="aboutTitle display-4 fw-bold">'.get_the_title(get_the_ID()).'</h1>
-                                    <span class="fs-5">'.$this->hero_section['about_content'].'</span><br></div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                    <img src="'.$this->hero_section['hero_image'].'" alt="" class="img-fluid rounded">
-                                </div>
-                            </div>
-                        </div>
-                    </div>';
-
+        <div class="container-fluid mt-5 secssionBk">
+            <div class="hero-section p-4">
+                <div class="row align-items-start">
+                    
+                    <!-- Left Column: Text Content -->
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 about_text">
+                        <h1 class="aboutTitle display-4 fw-bold">' . get_the_title($this->pid) . '</h1>
+                        <span class="fs-5">' . ($this->hero_section['about_content'] ?? '') . '</span>
+                        <br />
+                    </div>
+    
+                    <!-- Right Column: Image -->
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <img src="' . ($this->hero_section['hero_image'] ?? '') . '" 
+                             alt="Hero Image" 
+                             class="img-fluid rounded">
+                    </div>
+    
+                </div>
+            </div>
+        </div>';
+    
         return $html;
     }
-
+    
 
     public function MainHeader()
     {
@@ -148,45 +150,55 @@ class Areafields
 
 
         foreach ($terms as $post) {
+
             $GroupContent = $this->GetAccordionContent($post->ID);
+
+
             //area_sticky_image
             $sticky =  $GroupContent['area_sticky_image']  == 1 ? 'class="img-fluid position-sticky" style="top: 20px;" ' : 'style="width:100%;"';
-            $html .= ' 
-<div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button" 
-                type="button" 
-                data-bs-toggle="collapse" 
-                data-bs-target="#panelsStayOpen-collapse'.$post->ID.'" 
-                aria-expanded="true" 
-                aria-controls="panelsStayOpen-collapse'.$post->ID.'" >
-        '.$post->post_title.'
-      </button>
-    </h2>
-    <div id="panelsStayOpen-collapse'.$post->ID.'"  class="accordion-collapse collapse" data-bs-parent="#accordionPanelsfields">
-      <div class="accordion-body">
-       <h1>'. $GroupContent['area_title'] . '</h1>
-                <div class="container">
-                <div class="row">
-                <div class="col-lg-8 col-sm-12">
-                    <div class="GroupContent">'. $GroupContent['area_content'] . '</div>
-                </div>
-                <div class="col-lg-4 col-sm-12 position-relative"><img src="'. $GroupContent['area_image'] .' " loading="lazy" '.$sticky.'/>
-                </div>
-                
-                </div>
-                </div>
+            $sec1Args = array(
+                'area_title' => $GroupContent['area_title'] ,
+                'area_content' => $GroupContent['area_content'] ,
+                'area_image' => $GroupContent['area_image'] ,
+                'area_more_btn' => $GroupContent['area_more_btn'] ?? '' ,
+                'sticky' => $sticky);
 
-        </div>
-    </div>
-  </div>
-  ';
+                $sec2Args=array($GroupContent['area_table'], $GroupContent['table_title']);
+                $sec3Args = $GroupContent['downloads'] ;
+
+
+
+            $html .= ' 
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button" 
+                                type="button" 
+                                data-bs-toggle="collapse" 
+                                data-bs-target="#panelsStayOpen-collapse'.$post->ID.'" 
+                                aria-expanded="true" 
+                                aria-controls="panelsStayOpen-collapse'.$post->ID.'" >
+                        '.$post->post_title.'
+                    </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapse'.$post->ID.'"  class="accordion-collapse collapse" data-bs-parent="#accordionPanelsfields">
+                 <div class="accordion-body">';
+            ob_start();
+            get_template_part("template-parts/area-fields/acc-section1", null, $sec1Args);
+            get_template_part("template-parts/area-fields/acc-section2", null, $sec2Args);
+            get_template_part("template-parts/area-fields/acc-section3", null, $sec3Args);
+           
+           
+            $html .= ob_get_clean();
+
+
+            $html .= '</div></div></div>';
 
         }
 
 
 
         $html .= '</div>' ; //Closer Accordion
+
         return $html;
     }
 
@@ -195,11 +207,22 @@ class Areafields
     private function GetAccordionContent($pid)
     {
         $LayOut = [];
-        $content = get_field('main_area_fields', $pid);
+        $content = get_field('main_area_fields', $pid); //GROUP ACF 
+       
         $LayOut['area_title'] = $content[0]['area_title'];
         $LayOut['area_content'] = $content[0]['area_content'];
         $LayOut['area_image'] = $content[0]['area_image']['url'];
         $LayOut['area_sticky_image'] = $content[0]['area_sticky_image'];
+        $LayOut['area_more_btn'] = $content[0]['area_more_btn'];
+        //================================================================
+        $LayOut['area_table'] = $content[1]['area_table'];
+        $LayOut['table_title'] = $content[1]['table_title'];
+        //================================================================
+
+        $LayOut['downloads'] = $content[2]['area_files_download'];
+        
+
+
 
         return $LayOut;
     }

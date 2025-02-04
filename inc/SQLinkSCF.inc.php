@@ -24,7 +24,8 @@ class SQLinkSCF
         $this->footer_fieldgroup();
         //Wisam
         $this->AreaActivities();
-      
+        $this->AreaFieldsPage();
+
 
         // post types go here
         $this->event_cpt();
@@ -5270,11 +5271,11 @@ class SQLinkSCF
 
     public function AreaActivities()
     {
-        add_action( 'acf/include_fields', function() {
-            if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+        add_action('acf/include_fields', function () {
+            if (! function_exists('acf_add_local_field_group')) {
                 return;
             }
-        
+
             acf_add_local_field_group(array(
                 'key' => 'group_679a2ee974d29',
                 'title' => 'Area Fields',
@@ -5428,6 +5429,27 @@ class SQLinkSCF
                                 'label' => 'טבלת נתונים',
                                 'display' => 'block',
                                 'sub_fields' => array(
+                                    array(
+                                        'key' => 'field_67a1e0f46599b',
+                                        'label' => 'כותרת טבלה',
+                                        'name' => 'table_title',
+                                        'aria-label' => '',
+                                        'type' => 'text',
+                                        'instructions' => '',
+                                        'required' => 0,
+                                        'conditional_logic' => 0,
+                                        'wrapper' => array(
+                                            'width' => '',
+                                            'class' => '',
+                                            'id' => '',
+                                        ),
+                                        'default_value' => 'טבלת נתונים',
+                                        'maxlength' => '',
+                                        'allow_in_bindings' => 0,
+                                        'placeholder' => '',
+                                        'prepend' => '',
+                                        'append' => '',
+                                    ),
                                     array(
                                         'key' => 'field_679a32006dd06',
                                         'label' => 'טבלת נתונים',
@@ -5788,294 +5810,294 @@ class SQLinkSCF
                 'acfe_meta' => '',
                 'acfe_note' => '',
             ));
-
-
-
-            acf_add_local_field_group( array(
-            'key' => 'group_679a426a94dbc',
-            'title' => 'Area Fields Page',
-            'fields' => array(
-                array(
-                    'key' => 'field_679b477a630ff',
-                    'label' => 'Hero Section',
-                    'name' => '',
-                    'aria-label' => '',
-                    'type' => 'tab',
-                    'instructions' => '',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'placement' => 'top',
-                    'endpoint' => 0,
-                    'selected' => 0,
-                ),
-                array(
-                    'key' => 'field_679b479e63100',
-                    'label' => 'Hero',
-                    'name' => 'area_fields_hero_section',
-                    'aria-label' => '',
-                    'type' => 'clone',
-                    'instructions' => '',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'clone' => array(
-                        0 => 'field_6798997513b22',
-                        1 => 'field_679787e4be7f8',
-                        2 => 'field_679750bd33199',
-                    ),
-                    'display' => 'seamless',
-                    'layout' => 'block',
-                    'prefix_label' => 0,
-                    'prefix_name' => 0,
-                    'acfe_seamless_style' => 0,
-                    'acfe_clone_modal' => 0,
-                    'acfe_clone_modal_close' => 0,
-                    'acfe_clone_modal_button' => '',
-                    'acfe_clone_modal_size' => 'large',
-                ),
-                array(
-                    'key' => 'field_679f6e417ccca',
-                    'label' => 'תוכן קהילתי',
-                    'name' => '',
-                    'aria-label' => '',
-                    'type' => 'tab',
-                    'instructions' => '',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'placement' => 'top',
-                    'endpoint' => 0,
-                    'selected' => 0,
-                ),
-                array(
-                    'key' => 'field_679f6cc77ccc8',
-                    'label' => 'תחום קהילה כותרת',
-                    'name' => 'community_field_title',
-                    'aria-label' => '',
-                    'type' => 'text',
-                    'instructions' => '',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'default_value' => '',
-                    'maxlength' => '',
-                    'allow_in_bindings' => 0,
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                ),
-
-
-                array(
-                    'key' => 'field_679f6bb11ccc8',
-                    'label' => 'טקסט לאקורדיון',
-                    'name' => 'community_field_title_accotdion',
-                    'aria-label' => '',
-                    'type' => 'text',
-                    'instructions' => '',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'default_value' => '',
-                    'maxlength' => '',
-                    'allow_in_bindings' => 0,
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                ),
-
-
-                array(
-                    'key' => 'field_679f6dfc7ccc9',
-                    'label' => 'תחום קהילה תוכן',
-                    'name' => 'community_field_content',
-                    'aria-label' => '',
-                    'type' => 'wysiwyg',
-                    'instructions' => '',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'default_value' => '',
-                    'allow_in_bindings' => 0,
-                    'tabs' => 'all',
-                    'toolbar' => 'full',
-                    'media_upload' => 1,
-                    'delay' => 0,
-                ),
-                array(
-                    'key' => 'field_679f6e5d7cccb',
-                    'label' => 'תחומים',
-                    'name' => '',
-                    'aria-label' => '',
-                    'type' => 'tab',
-                    'instructions' => '',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'placement' => 'top',
-                    'endpoint' => 0,
-                    'selected' => 0,
-                ),
-                array(
-                    'key' => 'field_679f5b84cd4b9',
-                    'label' => 'בחר תחומים',
-                    'name' => 'arie_fields_connection',
-                    'aria-label' => '',
-                    'type' => 'relationship',
-                    'instructions' => '',
-                    'required' => 0,
-                    'conditional_logic' => 0,
-                    'wrapper' => array(
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ),
-                    'post_type' => array(
-                        0 => 'area-fields',
-                    ),
-                    'post_status' => '',
-                    'taxonomy' => '',
-                    'filters' => array(
-                        0 => 'search',
-                        1 => 'post_type',
-                        2 => 'taxonomy',
-                    ),
-                    'return_format' => 'object',
-                    'acfe_bidirectional' => array(
-                        'acfe_bidirectional_enabled' => '0',
-                    ),
-                    'min' => '',
-                    'max' => '',
-                    'allow_in_bindings' => 0,
-                    'elements' => '',
-                    'bidirectional' => 0,
-                    'bidirectional_target' => array(
-                    ),
-                ),
-            ),
-            'location' => array(
-                array(
-                    array(
-                        'param' => 'page_template',
-                        'operator' => '==',
-                        'value' => 'page-templates/areafileds.php',
-                    ),
-                ),
-            ),
-            'menu_order' => 0,
-            'position' => 'normal',
-            'style' => 'default',
-            'label_placement' => 'left',
-            'instruction_placement' => 'label',
-            'hide_on_screen' => array(
-                0 => 'block_editor',
-                1 => 'the_content',
-                2 => 'excerpt',
-                3 => 'discussion',
-                4 => 'comments',
-                5 => 'slug',
-                6 => 'author',
-                7 => 'format',
-                8 => 'featured_image',
-                9 => 'send-trackbacks',
-            ),
-            'active' => true,
-            'description' => '',
-            'show_in_rest' => 0,
-            'acfe_display_title' => '',
-            'acfe_autosync' => '',
-            'acfe_form' => 0,
-            'acfe_meta' => '',
-            'acfe_note' => '',
-        ) );
-        } );
-        
-        
+        });
     }
 
+    public function AreaFieldsPage()
+    {
+        add_action('acf/include_fields', function () {
+            if (! function_exists('acf_add_local_field_group')) {
+                return;
+            }
 
+            acf_add_local_field_group(array(
+                'key' => 'group_679a426a94dbc',
+                'title' => 'Area Fields Page',
+                'fields' => array(
+                    array(
+                        'key' => 'field_679b477a630ff',
+                        'label' => 'Hero Section',
+                        'name' => '',
+                        'aria-label' => '',
+                        'type' => 'tab',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'placement' => 'top',
+                        'endpoint' => 0,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'key' => 'field_679b479e63100',
+                        'label' => 'Hero',
+                        'name' => 'area_fields_hero_section',
+                        'aria-label' => '',
+                        'type' => 'clone',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'clone' => array(
+                            0 => 'field_6798997513b22',
+                            1 => 'field_679787e4be7f8',
+                            2 => 'field_679750bd33199',
+                        ),
+                        'display' => 'seamless',
+                        'layout' => 'block',
+                        'prefix_label' => 0,
+                        'prefix_name' => 0,
+                        'acfe_seamless_style' => 0,
+                        'acfe_clone_modal' => 0,
+                        'acfe_clone_modal_close' => 0,
+                        'acfe_clone_modal_button' => '',
+                        'acfe_clone_modal_size' => 'large',
+                    ),
+                    array(
+                        'key' => 'field_679f6e417ccca',
+                        'label' => 'תוכן קהילתי',
+                        'name' => '',
+                        'aria-label' => '',
+                        'type' => 'tab',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'placement' => 'top',
+                        'endpoint' => 0,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'key' => 'field_679f6cc77ccc8',
+                        'label' => 'תחום קהילה כותרת',
+                        'name' => 'community_field_title',
+                        'aria-label' => '',
+                        'type' => 'text',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'default_value' => '',
+                        'maxlength' => '',
+                        'allow_in_bindings' => 0,
+                        'placeholder' => '',
+                        'prepend' => '',
+                        'append' => '',
+                    ),
+
+
+                    array(
+                        'key' => 'field_679f6bb11ccc8',
+                        'label' => 'טקסט לאקורדיון',
+                        'name' => 'community_field_title_accotdion',
+                        'aria-label' => '',
+                        'type' => 'text',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'default_value' => '',
+                        'maxlength' => '',
+                        'allow_in_bindings' => 0,
+                        'placeholder' => '',
+                        'prepend' => '',
+                        'append' => '',
+                    ),
+
+
+                    array(
+                        'key' => 'field_679f6dfc7ccc9',
+                        'label' => 'תחום קהילה תוכן',
+                        'name' => 'community_field_content',
+                        'aria-label' => '',
+                        'type' => 'wysiwyg',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'default_value' => '',
+                        'allow_in_bindings' => 0,
+                        'tabs' => 'all',
+                        'toolbar' => 'full',
+                        'media_upload' => 1,
+                        'delay' => 0,
+                    ),
+                    array(
+                        'key' => 'field_679f6e5d7cccb',
+                        'label' => 'תחומים',
+                        'name' => '',
+                        'aria-label' => '',
+                        'type' => 'tab',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'placement' => 'top',
+                        'endpoint' => 0,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'key' => 'field_679f5b84cd4b9',
+                        'label' => 'בחר תחומים',
+                        'name' => 'arie_fields_connection',
+                        'aria-label' => '',
+                        'type' => 'relationship',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'post_type' => array(
+                            0 => 'area-fields',
+                        ),
+                        'post_status' => '',
+                        'taxonomy' => '',
+                        'filters' => array(
+                            0 => 'search',
+                            1 => 'post_type',
+                            2 => 'taxonomy',
+                        ),
+                        'return_format' => 'object',
+                        'acfe_bidirectional' => array(
+                            'acfe_bidirectional_enabled' => '0',
+                        ),
+                        'min' => '',
+                        'max' => '',
+                        'allow_in_bindings' => 0,
+                        'elements' => '',
+                        'bidirectional' => 0,
+                        'bidirectional_target' => array(),
+                    ),
+                ),
+                'location' => array(
+                    array(
+                        array(
+                            'param' => 'page_template',
+                            'operator' => '==',
+                            'value' => 'page-templates/areafileds.php',
+                        ),
+                    ),
+                ),
+                'menu_order' => 0,
+                'position' => 'normal',
+                'style' => 'default',
+                'label_placement' => 'left',
+                'instruction_placement' => 'label',
+                'hide_on_screen' => array(
+                    0 => 'block_editor',
+                    1 => 'the_content',
+                    2 => 'excerpt',
+                    3 => 'discussion',
+                    4 => 'comments',
+                    5 => 'slug',
+                    6 => 'author',
+                    7 => 'format',
+                    8 => 'featured_image',
+                    9 => 'send-trackbacks',
+                ),
+                'active' => true,
+                'description' => '',
+                'show_in_rest' => 0,
+                'acfe_display_title' => '',
+                'acfe_autosync' => '',
+                'acfe_form' => 0,
+                'acfe_meta' => '',
+                'acfe_note' => '',
+            ));
+        });
+    }
 
     public function AreaFilds_cpt()
     {
-        add_action( 'init', function() {
-            register_post_type( 'area-fields', array(
-            'labels' => array(
-                'name' => 'תחומים',
-                'singular_name' => 'תחום',
-                'menu_name' => 'Area Fields',
-                'all_items' => 'All Area Fields',
-                'edit_item' => 'Edit area_fields',
-                'view_item' => 'View area_fields',
-                'view_items' => 'View Area Fields',
-                'add_new_item' => 'Add New area_fields',
-                'add_new' => 'Add New area_fields',
-                'new_item' => 'New area_fields',
-                'parent_item_colon' => 'Parent area_fields:',
-                'search_items' => 'Search Area Fields',
-                'not_found' => 'No area fields found',
-                'not_found_in_trash' => 'No area fields found in Trash',
-                'archives' => 'area_fields Archives',
-                'attributes' => 'area_fields Attributes',
-                'insert_into_item' => 'Insert into area_fields',
-                'uploaded_to_this_item' => 'Uploaded to this area_fields',
-                'filter_items_list' => 'Filter area fields list',
-                'filter_by_date' => 'Filter area fields by date',
-                'items_list_navigation' => 'Area Fields list navigation',
-                'items_list' => 'Area Fields list',
-                'item_published' => 'area_fields published.',
-                'item_published_privately' => 'area_fields published privately.',
-                'item_reverted_to_draft' => 'area_fields reverted to draft.',
-                'item_scheduled' => 'area_fields scheduled.',
-                'item_updated' => 'area_fields updated.',
-                'item_link' => 'area_fields Link',
-                'item_link_description' => 'A link to a area_fields.',
-            ),
-            'public' => true,
-            'show_in_rest' => false,
-            'menu_icon' => 'dashicons-welcome-widgets-menus',
-            'supports' => array(
-                0 => 'title',
-                1 => 'editor',
-                2 => 'thumbnail',
-                3 => 'custom-fields',
-            ),
-            'taxonomies' => array(
-                0 => 'category',
-                1 => 'post_tag',
-            ),
-            'delete_with_user' => false,
-        ) );
-        } );
-        
-        
+        add_action('init', function () {
+            register_post_type('area-fields', array(
+                'labels' => array(
+                    'name' => 'תחומים',
+                    'singular_name' => 'תחום',
+                    'menu_name' => 'Area Fields',
+                    'all_items' => 'All Area Fields',
+                    'edit_item' => 'Edit area_fields',
+                    'view_item' => 'View area_fields',
+                    'view_items' => 'View Area Fields',
+                    'add_new_item' => 'Add New area_fields',
+                    'add_new' => 'Add New area_fields',
+                    'new_item' => 'New area_fields',
+                    'parent_item_colon' => 'Parent area_fields:',
+                    'search_items' => 'Search Area Fields',
+                    'not_found' => 'No area fields found',
+                    'not_found_in_trash' => 'No area fields found in Trash',
+                    'archives' => 'area_fields Archives',
+                    'attributes' => 'area_fields Attributes',
+                    'insert_into_item' => 'Insert into area_fields',
+                    'uploaded_to_this_item' => 'Uploaded to this area_fields',
+                    'filter_items_list' => 'Filter area fields list',
+                    'filter_by_date' => 'Filter area fields by date',
+                    'items_list_navigation' => 'Area Fields list navigation',
+                    'items_list' => 'Area Fields list',
+                    'item_published' => 'area_fields published.',
+                    'item_published_privately' => 'area_fields published privately.',
+                    'item_reverted_to_draft' => 'area_fields reverted to draft.',
+                    'item_scheduled' => 'area_fields scheduled.',
+                    'item_updated' => 'area_fields updated.',
+                    'item_link' => 'area_fields Link',
+                    'item_link_description' => 'A link to a area_fields.',
+                ),
+                'public' => true,
+                'show_in_rest' => false,
+                'menu_icon' => 'dashicons-welcome-widgets-menus',
+                'supports' => array(
+                    0 => 'title',
+                    1 => 'editor',
+                    2 => 'thumbnail',
+                    3 => 'custom-fields',
+                ),
+                'taxonomies' => array(
+                    0 => 'category',
+                    1 => 'post_tag',
+                ),
+                'delete_with_user' => false,
+            ));
+        });
     }
 }//END CLASS====================================================================

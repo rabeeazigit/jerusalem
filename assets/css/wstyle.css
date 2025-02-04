@@ -1,9 +1,8 @@
+.about_text span p {
 
-.about_text span p{
-
-max-width: 744px;
-break-after: always;
-margin-top: 20px;
+    max-width: 744px;
+    break-after: always;
+    margin-top: 20px;
 }
 
 .secssionBk {
@@ -45,61 +44,161 @@ margin-top: 20px;
     margin: 5px;
 }
 
-section{
+section {
     margin-top: -4px !important;
     margin-bottom: -4px !important;
 }
-.hovertagabout a{
+
+.hovertagabout a {
     color: #454242 !important;
-  text-decoration: none  !important;
+    text-decoration: none !important;
 }
-.hovertagabout:hover{
+
+.hovertagabout:hover {
     background: #e7e4de;
-  color: #454242;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    color: #454242;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-.staff_photo{
+
+.staff_photo {
     transition: all 0.5s ease-in-out;
 }
-.staff_photo:hover{
+
+.staff_photo:hover {
     background: #EBE8E3;
 }
 
 .small-button {
-    font-size: 12px; /* Adjust text size */
-    font-weight: normal; /* Removes bold */
-    padding: 5px 10px; /* Adjust padding */
-    border:solid 1px #B2AEA8;
+    font-size: 12px;
+    /* Adjust text size */
+    font-weight: normal;
+    /* Removes bold */
+    padding: 5px 10px;
+    /* Adjust padding */
+    border: solid 1px #B2AEA8;
     min-width: 149px;
 
 }
-.community_field_content{
+
+.community_field_content {
     max-width: 700px;
     font-size: 18px !important;
 }
 
-.community_field_content p{
+.community_field_content p {
     font-size: 17px !important;
     text-align: justify;
 }
 
 /*Accordion style As Figma Demands*/
-.accordion-button:not(.collapsed){
-    background-color:transparent !important;
+.accordion-button:not(.collapsed) {
+    background-color: transparent !important;
 }
-.accordion-button{
-    background-color:transparent !important;
+
+.accordion-button {
+    background-color: transparent !important;
 }
-.accordion-item{
-    background-color:transparent !important;
+
+.accordion-item {
+    background-color: transparent !important;
     margin-bottom: 20px;
-    border:solid 1px #B2AEA8 !important;
-border-radius: 10px;
+    border: solid 1px #B2AEA8 !important;
+    border-radius: 10px;
 }
+
 .GroupContent {
     font-weight: 300 !important;
     font-size: 16px !important;
 }
-.accordion-body h1{
-    font-size:  24px !important;
+
+.accordion-body h1 {
+    font-size: 24px !important;
+}
+
+.infotable {
+    border: solid 1px #B2AEA8;
+    padding: 10px;
+
+
+}
+
+.infotable thead tr th {
+    border: solid 1px #EBE8E3 !important;
+    padding: 10px !important;
+
+    font-size: 16px !important;
+    font-weight: 600;
+}
+
+
+.infotable tbody tr td {
+    border: solid 2px #EBE8E3 !important;
+    padding: 10px !important;
+
+    font-size: 16px !important;
+    font-weight: 100;
+}
+
+.table-responsive {
+    margin-top: 25px;
+}
+
+@media (max-width: 1000px) {
+    .filedownload {
+        margin-top:5px;
+    }
+}
+
+
+@media (min-width: 1000px) {
+    .filedownload {
+        margin:5px;
+        max-width: 31%
+    }
+    .span {
+        max-width: 76%;
+        margin: auto;
+        text-align: justify;
+    }
+}
+
+.filedownload {
+    border: solid 1px #B2AEA8;
+    border-radius: 10px;
+    min-height: 123px;
+    font-size: 16px !important;
+    padding: 10px;
+
+}
+
+.filedownload h2 {
+    font-size: 13px !important;
+    font-weight: 500;
+}
+
+
+.filedownload p {
+    font-size: 12px !important;
+}
+
+
+.span {
+    font-size: 11px !important;
+    font-weight:normal;
+    color: #000;
+    
+
+}
+
+.fileicon {
+    width: auto;
+    position: absolute;
+    margin-top: -30px;
+    margin-right: -10px;
+}
+
+.filedownload_icon {
+    width: auto;
+    margin-right: 210px;
+    cursor: pointer;
 }
