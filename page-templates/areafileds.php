@@ -7,6 +7,7 @@ get_header();
 $Areafields = new Areafields();
 $AFcats = $Areafields->FetchAreaFiedlsCategories();
 $GetPillsCategories = $Areafields->GetPillsCategories();
+
 ?>
 
 <section class="hero-section">
@@ -19,12 +20,19 @@ $rightsideCats = $Areafields->LeftSideCats();
 ?>
 </section>
 <section id="categories">
-<div class="container-fluid px-5 py-5 mt-5 article_list_wrapper">
+<div class="container-fluid px-5 py-5  article_list_wrapper">
     
     <?php  get_template_part("template-parts/area-activity-list", null, [
-    'article_list_options' => ['article_list_side_image' => $rightsideCats, 'GetPillsCategories' => $GetPillsCategories]
+    'article_list_options' => ['article_list_side_image' => $rightsideCats,
+     'GetPillsCategories' => $GetPillsCategories
+     ]
 ]); ?>
+
+
 </div>
+
+
+
 </section>
 
 <section id="howcanwehelp">

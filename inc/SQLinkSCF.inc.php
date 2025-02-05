@@ -24,6 +24,8 @@ class SQLinkSCF
         $this->rosh_ha_aer_fieldgroup();
         //Wisam
         $this->AreaActivities();
+        $this->AreaFieldsPage();
+
 
         // post types go here
         $this->project_cpt();
@@ -5545,6 +5547,27 @@ class SQLinkSCF
                                 'display' => 'block',
                                 'sub_fields' => array(
                                     array(
+                                        'key' => 'field_67a1e0f46599b',
+                                        'label' => 'כותרת טבלה',
+                                        'name' => 'table_title',
+                                        'aria-label' => '',
+                                        'type' => 'text',
+                                        'instructions' => '',
+                                        'required' => 0,
+                                        'conditional_logic' => 0,
+                                        'wrapper' => array(
+                                            'width' => '',
+                                            'class' => '',
+                                            'id' => '',
+                                        ),
+                                        'default_value' => 'טבלת נתונים',
+                                        'maxlength' => '',
+                                        'allow_in_bindings' => 0,
+                                        'placeholder' => '',
+                                        'prepend' => '',
+                                        'append' => '',
+                                    ),
+                                    array(
                                         'key' => 'field_679a32006dd06',
                                         'label' => 'טבלת נתונים',
                                         'name' => 'area_table',
@@ -5904,6 +5927,15 @@ class SQLinkSCF
                 'acfe_meta' => '',
                 'acfe_note' => '',
             ));
+        });
+    }
+
+    public function AreaFieldsPage()
+    {
+        add_action('acf/include_fields', function () {
+            if (! function_exists('acf_add_local_field_group')) {
+                return;
+            }
 
             acf_add_local_field_group(array(
                 'key' => 'group_679a426a94dbc',
@@ -5956,6 +5988,144 @@ class SQLinkSCF
                         'acfe_clone_modal_button' => '',
                         'acfe_clone_modal_size' => 'large',
                     ),
+                    array(
+                        'key' => 'field_679f6e417ccca',
+                        'label' => 'תוכן קהילתי',
+                        'name' => '',
+                        'aria-label' => '',
+                        'type' => 'tab',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'placement' => 'top',
+                        'endpoint' => 0,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'key' => 'field_679f6cc77ccc8',
+                        'label' => 'תחום קהילה כותרת',
+                        'name' => 'community_field_title',
+                        'aria-label' => '',
+                        'type' => 'text',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'default_value' => '',
+                        'maxlength' => '',
+                        'allow_in_bindings' => 0,
+                        'placeholder' => '',
+                        'prepend' => '',
+                        'append' => '',
+                    ),
+
+
+                    array(
+                        'key' => 'field_679f6bb11ccc8',
+                        'label' => 'טקסט לאקורדיון',
+                        'name' => 'community_field_title_accotdion',
+                        'aria-label' => '',
+                        'type' => 'text',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'default_value' => '',
+                        'maxlength' => '',
+                        'allow_in_bindings' => 0,
+                        'placeholder' => '',
+                        'prepend' => '',
+                        'append' => '',
+                    ),
+
+
+                    array(
+                        'key' => 'field_679f6dfc7ccc9',
+                        'label' => 'תחום קהילה תוכן',
+                        'name' => 'community_field_content',
+                        'aria-label' => '',
+                        'type' => 'wysiwyg',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'default_value' => '',
+                        'allow_in_bindings' => 0,
+                        'tabs' => 'all',
+                        'toolbar' => 'full',
+                        'media_upload' => 1,
+                        'delay' => 0,
+                    ),
+                    array(
+                        'key' => 'field_679f6e5d7cccb',
+                        'label' => 'תחומים',
+                        'name' => '',
+                        'aria-label' => '',
+                        'type' => 'tab',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'placement' => 'top',
+                        'endpoint' => 0,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'key' => 'field_679f5b84cd4b9',
+                        'label' => 'בחר תחומים',
+                        'name' => 'arie_fields_connection',
+                        'aria-label' => '',
+                        'type' => 'relationship',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'post_type' => array(
+                            0 => 'area-fields',
+                        ),
+                        'post_status' => '',
+                        'taxonomy' => '',
+                        'filters' => array(
+                            0 => 'search',
+                            1 => 'post_type',
+                            2 => 'taxonomy',
+                        ),
+                        'return_format' => 'object',
+                        'acfe_bidirectional' => array(
+                            'acfe_bidirectional_enabled' => '0',
+                        ),
+                        'min' => '',
+                        'max' => '',
+                        'allow_in_bindings' => 0,
+                        'elements' => '',
+                        'bidirectional' => 0,
+                        'bidirectional_target' => array(),
+                    ),
                 ),
                 'location' => array(
                     array(
@@ -5994,8 +6164,6 @@ class SQLinkSCF
             ));
         });
     }
-
-
 
     public function AreaFilds_cpt()
     {
