@@ -197,11 +197,12 @@ body {
     border: 1px solid #b2aea8;
 }
 
-.main_menu_dropdown {
+.dropdown-menu {
     width: 60dvw;
     position: fixed;
     top: 15px !important;
     left: -239px !important;
+    z-index: 99999;
 }
 
 .navbar_menu_arrow {
