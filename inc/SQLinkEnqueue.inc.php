@@ -10,6 +10,7 @@ class SQLinkEnqueue
             wp_enqueue_style("slick_css", "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css", [], "1.9.0", "all");
             wp_enqueue_style("slick_theme_css", "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css", [], "1.9.0", "all");
             wp_enqueue_style("main_css", get_template_directory_uri() . "/style.css", ["bs_css"], filemtime(get_template_directory() . "/style.css"), "all");
+            wp_enqueue_style("custom-_bs_css", get_template_directory_uri() . "/assets/css/custom-bootstrap.css", filemtime(get_template_directory() . "/assets/css/custom-bootstrap.css"), ["main_css"], "all");
             $this->enqueue_styles();
 
             // Enqueue scripts

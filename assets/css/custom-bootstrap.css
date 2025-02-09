@@ -1,0 +1,29 @@
+.btn-sq-primary {
+    color: #fff; /* Dark text for contrast */
+    padding: 10px 16px; /* Adjust padding for a balanced square look */
+    border-radius: 4px; /* Slight rounding */
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+    border: none;
+}
+
+.btn-sq-primary:hover,
+.btn-sq-primary.active {
+    color: #212529; /* Dark text for contrast */
+    background-color: #bdab73; /* Bootstrap yellow */
+}
+
+.btn-sq-secondary {
+    color: black; /* Dark text for contrast */
+    padding: 10px 16px; /* Adjust padding for a balanced square look */
+    border-radius: 4px; /* Slight rounding */
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #174a75;
+}
+
+.btn-sq-secondary:hover,
+.btn-sq-secondary.active {
+    color: white; /* Dark text for contrast */
+    background-color: #174a75; /* Bootstrap yellow */
+}

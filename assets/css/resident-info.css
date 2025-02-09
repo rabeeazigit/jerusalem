@@ -1,0 +1,88 @@
+.resident_accordion,
+.resident_accordion * {
+    transition: all 250ms ease-in-out;
+}
+
+.resident_accordion:hover {
+    cursor: pointer;
+    background: #bdab73;
+}
+
+.resident_accordion:hover img.resident_info_row_arrow {
+    transform: rotate(-50deg);
+}
+
+.resident_side_image {
+    object-fit: cover;
+    object-position: center;
+    width: 80%;
+    height: 50dvh;
+}
+
+.faq_side_image {
+    height: 450px;
+    width: 80%;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.faq_toggler {
+    cursor: pointer;
+    border: 1px solid #bdab73;
+    transition: all 250ms ease-in-out;
+    background-color: #ebe8e3;
+}
+
+.faq_toggler:hover {
+    box-shadow: 0 0 16px #00000013;
+}
+
+.faq_icon {
+    transition: all 250ms ease-in-out;
+    width: 24px;
+    height: 24px;
+    background-image: url(../images/plus.png);
+}
+
+.faq_toggler:not(.collapsed) .faq_icon {
+    transform: scaleY(-1);
+    background-image: url(../images/minus.png);
+}
+
+.input-group:has(.downloadable_file_search) {
+    width: 34dvw;
+}
+
+.downloadable_file_search {
+    padding: 10px;
+    background-color: white;
+}
+
+.downloadable_file_item {
+    transition: all 250ms ease-in-out;
+    border: 1px solid #bdab73;
+}
+
+.downloadable_file_item:hover {
+    box-shadow: 0 0 16px #00000013;
+    cursor: pointer;
+}
+
+.external_links_container {
+    cursor: pointer;
+    background-color: #fff;
+    transition: all 250ms ease-in-out;
+}
+
+.external_links_container:hover {
+    background-color: #bdab7350;
+}
+
+.external_link_image {
+    width: 103px;
+    height: 84px;
+    object-fit: contain;
+    object-position: center;
+    border: 1px solid #bdab73;
+    border-radius: 16px;
+}

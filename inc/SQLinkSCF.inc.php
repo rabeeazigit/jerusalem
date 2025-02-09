@@ -33,11 +33,18 @@ class SQLinkSCF
         $this->forum_cpt();
         $this->event_cpt();
         $this->neightborhood_cpt();
+        $this->urban_renewal_process_cpt();
+        $this->resident_rights_cpt();
+
         //Wisam
         $this->AreaFilds_cpt();
 
         // taxonomies go here
         $this->project_status_taxonomy();
+        $this->urban_renewal_process_category_taxonomy();
+        $this->resident_rights_category_taxonomy();
+
+        // options page goes here
         $this->site_settings_options();
     }
 
@@ -6359,4 +6366,176 @@ class SQLinkSCF
             ));
         });
     }
-}//END CLASS====================================================================
+
+    public function urban_renewal_process_cpt()
+    {
+        add_action('init', function () {
+            register_post_type('urban-renewal-proces', array(
+                'labels' => array(
+                    'name' => 'Urban Renewal Process',
+                    'singular_name' => 'Urban Renewal Process',
+                    'menu_name' => 'Urban Renewal Process',
+                    'all_items' => 'All Urban Renewal Process',
+                    'edit_item' => 'Edit Urban Renewal Process',
+                    'view_item' => 'View Urban Renewal Process',
+                    'view_items' => 'View Urban Renewal Process',
+                    'add_new_item' => 'Add New Urban Renewal Process',
+                    'add_new' => 'Add New Urban Renewal Process',
+                    'new_item' => 'New Urban Renewal Process',
+                    'parent_item_colon' => 'Parent Urban Renewal Process:',
+                    'search_items' => 'Search Urban Renewal Process',
+                    'not_found' => 'No urban renewal process found',
+                    'not_found_in_trash' => 'No urban renewal process found in Trash',
+                    'archives' => 'Urban Renewal Process Archives',
+                    'attributes' => 'Urban Renewal Process Attributes',
+                    'insert_into_item' => 'Insert into urban renewal process',
+                    'uploaded_to_this_item' => 'Uploaded to this urban renewal process',
+                    'filter_items_list' => 'Filter urban renewal process list',
+                    'filter_by_date' => 'Filter urban renewal process by date',
+                    'items_list_navigation' => 'Urban Renewal Process list navigation',
+                    'items_list' => 'Urban Renewal Process list',
+                    'item_published' => 'Urban Renewal Process published.',
+                    'item_published_privately' => 'Urban Renewal Process published privately.',
+                    'item_reverted_to_draft' => 'Urban Renewal Process reverted to draft.',
+                    'item_scheduled' => 'Urban Renewal Process scheduled.',
+                    'item_updated' => 'Urban Renewal Process updated.',
+                    'item_link' => 'Urban Renewal Process Link',
+                    'item_link_description' => 'A link to a urban renewal process.',
+                ),
+                'public' => true,
+                'show_in_rest' => true,
+                'menu_icon' => 'dashicons-hammer',
+                'supports' => array(
+                    0 => 'title',
+                    1 => 'custom-fields',
+                ),
+                'taxonomies' => array(
+                    0 => 'urban-renewal-process-category',
+                ),
+                'delete_with_user' => false,
+            ));
+        });
+    }
+
+    public function urban_renewal_process_category_taxonomy()
+    {
+        add_action('init', function () {
+            register_taxonomy('urban-renewal-process-category', array(
+                0 => 'urban-renewal-proces',
+            ), array(
+                'labels' => array(
+                    'name' => 'Urban Renewal Process Categories',
+                    'singular_name' => 'Urban Renewal Process Category',
+                    'menu_name' => 'Urban Renewal Process Category',
+                    'all_items' => 'All Urban Renewal Process Category',
+                    'edit_item' => 'Edit Urban Renewal Process Category',
+                    'view_item' => 'View Urban Renewal Process Category',
+                    'update_item' => 'Update Urban Renewal Process Category',
+                    'add_new_item' => 'Add New Urban Renewal Process Category',
+                    'new_item_name' => 'New Urban Renewal Process Category Name',
+                    'search_items' => 'Search Urban Renewal Process Category',
+                    'popular_items' => 'Popular Urban Renewal Process Category',
+                    'separate_items_with_commas' => 'Separate urban renewal process category with commas',
+                    'add_or_remove_items' => 'Add or remove urban renewal process category',
+                    'choose_from_most_used' => 'Choose from the most used urban renewal process category',
+                    'not_found' => 'No urban renewal process category found',
+                    'no_terms' => 'No urban renewal process category',
+                    'items_list_navigation' => 'Urban Renewal Process Category list navigation',
+                    'items_list' => 'Urban Renewal Process Category list',
+                    'back_to_items' => '← Go to urban renewal process category',
+                    'item_link' => 'Urban Renewal Process Category Link',
+                    'item_link_description' => 'A link to a urban renewal process category',
+                ),
+                'public' => true,
+                'show_in_menu' => true,
+                'show_in_rest' => true,
+            ));
+        });
+    }
+
+    public function resident_rights_cpt()
+    {
+        add_action('init', function () {
+            register_post_type('resident-right', array(
+                'labels' => array(
+                    'name' => 'Resident Rights',
+                    'singular_name' => 'Resident Right',
+                    'menu_name' => 'Resident Rights',
+                    'all_items' => 'All Resident Rights',
+                    'edit_item' => 'Edit Resident Right',
+                    'view_item' => 'View Resident Right',
+                    'view_items' => 'View Resident Rights',
+                    'add_new_item' => 'Add New Resident Right',
+                    'add_new' => 'Add New Resident Right',
+                    'new_item' => 'New Resident Right',
+                    'parent_item_colon' => 'Parent Resident Right:',
+                    'search_items' => 'Search Resident Rights',
+                    'not_found' => 'No resident rights found',
+                    'not_found_in_trash' => 'No resident rights found in Trash',
+                    'archives' => 'Resident Right Archives',
+                    'attributes' => 'Resident Right Attributes',
+                    'insert_into_item' => 'Insert into resident right',
+                    'uploaded_to_this_item' => 'Uploaded to this resident right',
+                    'filter_items_list' => 'Filter resident rights list',
+                    'filter_by_date' => 'Filter resident rights by date',
+                    'items_list_navigation' => 'Resident Rights list navigation',
+                    'items_list' => 'Resident Rights list',
+                    'item_published' => 'Resident Right published.',
+                    'item_published_privately' => 'Resident Right published privately.',
+                    'item_reverted_to_draft' => 'Resident Right reverted to draft.',
+                    'item_scheduled' => 'Resident Right scheduled.',
+                    'item_updated' => 'Resident Right updated.',
+                    'item_link' => 'Resident Right Link',
+                    'item_link_description' => 'A link to a resident right.',
+                ),
+                'public' => true,
+                'show_in_rest' => true,
+                'menu_icon' => 'dashicons-shield',
+                'supports' => array(
+                    0 => 'title',
+                    1 => 'custom-fields',
+                ),
+                'taxonomies' => array(
+                    0 => 'resident-rights-category',
+                ),
+                'delete_with_user' => false,
+            ));
+        });
+    }
+
+    public function resident_rights_category_taxonomy()
+    {
+        add_action('init', function () {
+            register_taxonomy('resident-rights-category', array(
+                0 => 'resident-right',
+            ), array(
+                'labels' => array(
+                    'name' => 'Resident Rights Categories',
+                    'singular_name' => 'Resident Rights Category',
+                    'menu_name' => 'Resident Rights Categories',
+                    'all_items' => 'All Resident Rights Categories',
+                    'edit_item' => 'Edit Resident Rights Category',
+                    'view_item' => 'View Resident Rights Category',
+                    'update_item' => 'Update Resident Rights Category',
+                    'add_new_item' => 'Add New Resident Rights Category',
+                    'new_item_name' => 'New Resident Rights Category Name',
+                    'search_items' => 'Search Resident Rights Categories',
+                    'popular_items' => 'Popular Resident Rights Categories',
+                    'separate_items_with_commas' => 'Separate resident rights categories with commas',
+                    'add_or_remove_items' => 'Add or remove resident rights categories',
+                    'choose_from_most_used' => 'Choose from the most used resident rights categories',
+                    'not_found' => 'No resident rights categories found',
+                    'no_terms' => 'No resident rights categories',
+                    'items_list_navigation' => 'Resident Rights Categories list navigation',
+                    'items_list' => 'Resident Rights Categories list',
+                    'back_to_items' => '← Go to resident rights categories',
+                    'item_link' => 'Resident Rights Category Link',
+                    'item_link_description' => 'A link to a resident rights category',
+                ),
+                'public' => true,
+                'show_in_menu' => true,
+                'show_in_rest' => true,
+            ));
+        });
+    }
+}
