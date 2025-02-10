@@ -11,6 +11,7 @@
 .btn-sq-primary.active {
     color: #212529; /* Dark text for contrast */
     background-color: #bdab73;
+    box-shadow: 0 0 16px #00000040;
 }
 
 .btn-sq-secondary {

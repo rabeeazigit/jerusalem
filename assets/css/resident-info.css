@@ -19,39 +19,6 @@
     height: 50dvh;
 }
 
-.faq_side_image {
-    height: 450px;
-    width: 80%;
-    object-fit: cover;
-    border-radius: 100%;
-}
-
-.faq_toggler {
-    cursor: pointer;
-    border: 1px solid #bdab73;
-    transition: all 250ms ease-in-out;
-    background-color: #ebe8e3;
-}
-
-.faq_toggler:hover {
-    box-shadow: 0 0 16px #00000013;
-}
-
-.faq_icon {
-    transition: all 250ms ease-in-out;
-    width: 24px;
-    height: 24px;
-    background-image: url(../images/plus.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
-.faq_toggler:not(.collapsed) .faq_icon {
-    transform: scaleY(-1);
-    background-image: url(../images/minus.png);
-}
-
 .input-group:has(.downloadable_file_search) {
     width: 34dvw;
 
@@ -81,48 +48,4 @@
 .downloadable_file_item:hover {
     box-shadow: 0 0 16px #00000013;
     cursor: pointer;
-}
-
-.external_links_container {
-    cursor: pointer;
-    background-color: #fff;
-    transition: all 250ms ease-in-out;
-}
-
-.external_links_container:has(.external_links_toggler:hover) {
-    background-color: #bdab7350;
-}
-
-.external_link_image {
-    width: 103px;
-    height: 84px;
-    object-fit: contain;
-    object-position: center;
-    border: 1px solid #bdab73;
-    border-radius: 16px;
-}
-
-.external_link_container {
-    border-radius: 20px;
-    border-bottom: 1px solid #00000013;
-}
-
-.external_link_container:hover {
-    background-color: #bdab7350;
-}
-
-.external_link_container:last-of-type {
-    border-bottom: none;
-}
-
-.external_links_toggler img.external_link_icon {
-    transition: all 250ms ease-in-out;
-}
-
-.external_links_toggler:not(.collapsed) img.external_link_icon {
-    transform: scaleY(-1);
-}
-
-.form-control:focus {
-    box-shadow: none;
 }

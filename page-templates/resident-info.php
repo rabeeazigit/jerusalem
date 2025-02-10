@@ -400,6 +400,7 @@ $resident_rights = $controller->get_resident_rights();
     </div>
 </div>
 
+<!-- External Links -->
 <?php if ($controller->external_links_items && is_array($controller->external_links_items) && !empty($controller->external_links_items)) : ?>
     <div id="external_links_section" class="container-fluid px-md-5 px-3 my-5">
         <?php if ($controller->external_links_title): ?>
@@ -458,6 +459,7 @@ $resident_rights = $controller->get_resident_rights();
     </div>
 <?php endif; ?>
 
+<!-- Contact Us -->
 <div class="container-fluid px-0">
     <?php get_template_part('template-parts/howcanwehelp'); ?>
 </div>

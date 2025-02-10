@@ -28,4 +28,71 @@ class UrbanRenewal
         $this->external_links_subtitle = get_field("external_links_subtitle") ?? null;
         $this->external_links_items = get_field("external_links_items") ?? null;
     }
+
+    public function get_renewal_categories()
+    {
+        return get_terms([
+            "taxonomy" => "urban-renewal-process-category",
+            "hide_empty" => true,
+        ]);
+    }
+
+    public function get_urban_renewal_processes_grouped_by_stages()
+    {
+        $result = [];
+
+        $stages = get_terms([
+            "taxonomy" => "urban-renewal-stage",
+            "hide_empty" => true,
+        ]);
+
+        foreach ($stages as $stage) {
+            $result[$stage->name] = $this->get_urban_renewal_processes_by_stage($stage);
+        }
+
+        return $result;
+    }
+
+    public function get_urban_renewal_processes_by_stage($stage)
+    {
+        return get_posts([
+            "post_type" => "urban-renewal-proces",
+            "posts_per_page" => -1,
+            "orderby" => "ID",
+            "order" => "ASC",
+            "tax_query" => [
+                [
+                    "taxonomy" => "urban-renewal-stage",
+                    "field"    => "term_id",
+                    "terms"    => $stage,
+                ]
+            ]
+        ]);
+    }
+
+    public function get_urban_renewal_processes($category = null)
+    {
+        if (!$category) {
+            return get_posts([
+                "post_type" => "urban-renewal-proces",
+                "posts_per_page" => -1,
+                "orderby" => "ID",
+                "order" => "ASC"
+            ]);
+        }
+
+        return get_posts([
+            "post_type" => "urban-renewal-proces",
+            "posts_per_page" => -1,
+            "orderby" => "ID",
+            "order" => "ASC",
+            "tax_query" => [
+                [
+                    "taxonomy" => "urban-renewal-process-category",
+                    "field"    => "term_id",
+                    "terms"    => $category,
+                ]
+            ]
+        ]);
+    }
 }
