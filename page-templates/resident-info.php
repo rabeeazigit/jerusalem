@@ -8,6 +8,20 @@ get_header(); ?>
 
 <?php
 $controller = new ResidentInfo();
+
+// Setting up renewual items
+$urban_renewal_terms = $controller->get_renewal_categories();
+$urban_renewal_items = [];
+
+if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_renewal_terms)) {
+    foreach ($urban_renewal_terms as $term) {
+        $urban_renewal_items[$term->name] = $controller->get_urban_renewal_processes($term);
+    }
+}
+
+// Settings up resident rights
+$resident_rights = $controller->get_resident_rights();
+
 ?>
 
 <!-- Hero -->
@@ -26,6 +40,56 @@ $controller = new ResidentInfo();
                         <?= $controller->hero_description; ?>
                     </div>
                 <?php endif; ?>
+
+                <div class="hstack w-75 gap-3 flex-wrap">
+                    <?php if ($urban_renewal_items && is_array($urban_renewal_items) && !empty($urban_renewal_items)) : ?>
+                        <div class="">
+                            <a href="#urban_renewal_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
+                                <?= $controller->urban_renewal_title; ?>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($resident_rights && is_array($resident_rights) && !empty($resident_rights)) : ?>
+                        <div class="">
+                            <a href="#resident_rights_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
+                                <?= $controller->resident_rights_title; ?>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($controller->faq_items && is_array($controller->faq_items) && !empty($controller->faq_items)) : ?>
+                        <div class="">
+                            <a href="#faq_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
+                                <?= $controller->faq_title; ?>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($controller->event_slider_items && is_array($controller->event_slider_items) && !empty($controller->event_slider_items)) : ?>
+                        <div class="">
+                            <a href="#event_slider_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
+                                <?= $controller->event_slider_title; ?>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($controller->downloadable_files_title) : ?>
+                        <div class="">
+                            <a href="#downloads_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
+                                <?= $controller->downloadable_files_title; ?>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($controller->external_links_items && is_array($controller->external_links_items) && !empty($controller->external_links_items)) : ?>
+                        <div class="">
+                            <a href="#external_links_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
+                                <?= $controller->external_links_title; ?>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
 
@@ -46,20 +110,8 @@ $controller = new ResidentInfo();
 </div>
 
 <!-- Urban Renewal -->
-
-<?php
-$urban_renewal_terms = $controller->get_renewal_categories();
-$urban_renewal_items = [];
-
-if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_renewal_terms)) {
-    foreach ($urban_renewal_terms as $term) {
-        $urban_renewal_items[$term->name] = $controller->get_urban_renewal_processes($term);
-    }
-}
-?>
-
 <?php if ($urban_renewal_items && is_array($urban_renewal_items) && !empty($urban_renewal_items)) : ?>
-    <div class="container-fluid py-5 mb-4" style="background-color: #174A75;">
+    <div class="container-fluid py-5 mb-4" style="background-color: #174A75;" id="urban_renewal_section">
         <?php if ($controller->urban_renewal_title) : ?>
             <div class="display-5 text-center text-white fw-semibold mb-4">
                 <?= $controller->urban_renewal_title; ?>
@@ -131,10 +183,9 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
     </div>
 <?php endif; ?>
 
-<?php $resident_rights = $controller->get_resident_rights(); ?>
-
+<!-- Residents Rights -->
 <?php if ($resident_rights && is_array($resident_rights) && !empty($resident_rights)) : ?>
-    <div class="container" style="background-image: url(<?= $controller->hero_background_image; ?>); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <div id="resident_rights_section" class="container" style="background-image: url(<?= $controller->hero_background_image; ?>); background-size: cover; background-position: center; background-repeat: no-repeat;">
         <?php if ($controller->resident_rights_title) : ?>
             <div class="text-center display-4 fw-semibold mb-3">
                 <?= $controller->resident_rights_title; ?>
@@ -175,8 +226,9 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
     </div>
 <?php endif; ?>
 
+<!-- FAQ -->
 <?php if ($controller->faq_items && is_array($controller->faq_items) && !empty($controller->faq_items)) : ?>
-    <div class="container-fluid my-4 p-5" style="background-image: url(<?= $controller->faq_background_image; ?>); background-size: cover; background-repeat: no-repeat; background-position: center">
+    <div id="faq_section" class="container-fluid my-4 p-5" style="background-image: url(<?= $controller->faq_background_image; ?>); background-size: cover; background-repeat: no-repeat; background-position: center">
         <?php if ($controller->faq_title) : ?>
             <div class="display-4 fw-semibold mb-4">
                 <?= $controller->faq_title; ?>
@@ -220,17 +272,19 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
 <?php endif; ?>
 
 <!-- Events And Courses Slider -->
-<div class="container-fluid pt-5 pb-3 my-5">
-    <?php get_template_part("template-parts/events-courses-slider", null, [
-        "events_courses_title" => $controller->event_slider_title,
-        "events_and_courses_paragraph" => $controller->event_slider_description,
-        "events_and_courses_link" => $controller->event_slider_link,
-        "events_and_courses_items" => $controller->event_slider_items,
-    ]); ?>
-</div>
+<?php if ($controller->event_slider_items && is_array($controller->event_slider_items) && !empty($controller->event_slider_items)) : ?>
+    <div id="event_slider_section" class="container-fluid pt-5 pb-3 my-5">
+        <?php get_template_part("template-parts/events-courses-slider", null, [
+            "events_courses_title" => $controller->event_slider_title,
+            "events_and_courses_paragraph" => $controller->event_slider_description,
+            "events_and_courses_link" => $controller->event_slider_link,
+            "events_and_courses_items" => $controller->event_slider_items,
+        ]); ?>
+    </div>
+<?php endif; ?>
 
 <!-- Downloadable Files -->
-<div class="container-fluid p-5 my-4" style="background-color: #EBE8E3;">
+<div id="downloads_section" class="container-fluid p-5 my-4" style="background-color: #EBE8E3;">
     <?php if ($controller->downloadable_files_title) : ?>
         <div class="display-4 fw-semibold mb-2">
             <?= $controller->downloadable_files_title; ?>
@@ -301,7 +355,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
 </div>
 
 <?php if ($controller->external_links_items && is_array($controller->external_links_items) && !empty($controller->external_links_items)) : ?>
-    <div class="container-fluid px-5 my-5">
+    <div id="external_links_section" class="container-fluid px-5 my-5">
         <?php if ($controller->external_links_title): ?>
             <div class="display-4 fw-semibold mb-2">
                 <?= $controller->external_links_title; ?>
