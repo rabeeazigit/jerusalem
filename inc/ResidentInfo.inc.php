@@ -94,6 +94,8 @@ class ResidentInfo
         return get_posts([
             "post_type" => "urban-renewal-proces",
             "posts_per_page" => -1,
+            "orderby" => "ID",
+            "order" => "ASC",
             "tax_query" => [
                 [
                     "taxonomy" => "urban-renewal-process-category",
