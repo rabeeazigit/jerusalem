@@ -195,6 +195,19 @@ body {
 
 .main_menu_nav {
     border: 1px solid #b2aea8;
+    background-color: #f4f4f4;
+}
+
+.navbar_light_mode {
+    .main_menu_nav {
+        border: 1px solid #b2aea8;
+        background-color: #f4f4f4;
+        color: black;
+    }
+
+    .main_nav_item {
+        color: black !important;
+    }
 }
 
 .dropdown-menu {
@@ -289,6 +302,16 @@ body {
     border: none;
     font-size: 18px;
     outline: none;
+}
+
+.navbar_light_mode {
+    .dropdown-toggle {
+        color: white;
+    }
+
+    .management_dropdown_toggle::after {
+        background-image: url(./assets/images/arrow_down_light.png);
+    }
 }
 
 .carousel_weird_card_thing {

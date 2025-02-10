@@ -1,9 +1,10 @@
 <?php
 $navbar = new Navbar();
+$dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
 ?>
 
 <?php if (!wp_is_mobile()) : ?>
-    <div class="container-fluid px-5">
+    <div class="container-fluid <?= $dark_theme ? "text-light navbar_light_mode" : ""; ?> px-5">
         <div class="hstack justify-content-between align-items-center py-1 mb-3" id="top-navbar">
             <?php if ($navbar->social_media_links && is_array($navbar->social_media_links) && count($navbar->social_media_links) > 0) : ?>
                 <div class="hstack gap-2 align-items-center">
@@ -67,7 +68,11 @@ $navbar = new Navbar();
                 <div class="vr"></div>
 
                 <div>
-                    <img src="<?= get_template_directory_uri() . "/assets/images/contrast.png"; ?>" class="navbar_contrast_icon">
+                    <?php if (!$dark_theme) : ?>
+                        <img src="<?= get_template_directory_uri() . "/assets/images/contrast.png"; ?>" class="navbar_contrast_icon">
+                    <?php else : ?>
+                        <img src="<?= get_template_directory_uri() . "/assets/images/contrast_light.png"; ?>" class="navbar_contrast_icon">
+                    <?php endif; ?>
                 </div>
 
 
@@ -131,7 +136,7 @@ $navbar = new Navbar();
             </div>
 
             <?php if ($navbar->contact_us_label) : ?>
-                <a href="#contact-us" class="sq-secondary-button text-decoration-none">
+                <a href="#contact-us" class="sq-secondary-button text-decoration-none shadow">
                     <?= $navbar->contact_us_label; ?>
                 </a>
             <?php endif; ?>
@@ -189,7 +194,7 @@ $navbar = new Navbar();
                 </a>
 
                 <?php if ($navbar->contact_us_label_mobile) : ?>
-                    <a href="#contact-us" class="fs-6 sq-secondary-button text-decoration-none">
+                    <a href="#contact-us" class="fs-6 sq-secondary-button text-decoration-none shadow">
                         <?= $navbar->contact_us_label_mobile; ?>
                     </a>
                 <?php endif; ?>
@@ -248,7 +253,7 @@ $navbar = new Navbar();
                     </a>
 
                     <?php if ($navbar->contact_us_label_mobile) : ?>
-                        <a href="#contact-us" class="fs-6 sq-secondary-button text-decoration-none">
+                        <a href="#contact-us" class="fs-6 sq-secondary-button text-decoration-none shadow">
                             <?= $navbar->contact_us_label_mobile; ?>
                         </a>
                     <?php endif; ?>
