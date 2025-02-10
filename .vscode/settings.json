@@ -1,3 +1,8 @@
 {
-    "intelephense.environment.includePaths": ["../", "../..", "../../.."]
+    "intelephense.environment.includePaths": [
+        "../",
+        "../..",
+        "../../..",
+        "../../../../"
+    ]
 }

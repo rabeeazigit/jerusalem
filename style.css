@@ -729,3 +729,19 @@ body {
 .footer_mobile_menu_item:not(.collapsed) img {
     transform: scaleY(-1);
 }
+
+.home_breadcrumb {
+    background-size: cover;
+    background-position: center;
+    display: inline-block;
+}
+
+.seperator {
+    background-image: url(./assets/images/left-arrow.png);
+    width: 16px;
+    height: 16px;
+    margin: 0 16px;
+    background-size: cover;
+    background-position: center;
+    display: inline-block;
+}

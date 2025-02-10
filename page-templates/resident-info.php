@@ -29,6 +29,12 @@ $resident_rights = $controller->get_resident_rights();
     <div class="row my-md-5 mt-5 row-gap-4">
         <div class="col-md-6">
             <div class="vstack gap-3">
+                <?php if (function_exists("yoast_breadcrumb")) : ?>
+                    <div class="sq_breadcrumbs fs-5">
+                        <?php yoast_breadcrumb(); ?>
+                    </div>
+                <?php endif; ?>
+
                 <?php if ($controller->hero_title) : ?>
                     <div class="display-3 fw-bold">
                         <?= $controller->hero_title; ?>
