@@ -317,8 +317,8 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
         <div class="row row-gap-4">
             <?php foreach ($controller->external_links_items as $idx => $e) : ?>
                 <div class="col-md-4">
-                    <div class="vstack justify-content-between align-items-center border rounded-4 py-2 px-3 external_links_container" data-bs-toggle="collapse" data-bs-target="#external_collapse_<?= $idx; ?>">
-                        <div class="hstack align-items-center justify-content-between">
+                    <div class="vstack justify-content-between align-items-center border rounded-4 py-2 px-3 external_links_container">
+                        <div class="hstack align-items-center justify-content-between external_links_toggler" data-bs-toggle="collapse" data-bs-target="#external_collapse_<?= $idx; ?>">
                             <div class="hstack gap-2 align-items-center">
                                 <img src="<?= get_field("image", $e); ?>" alt="" class="external_link_image">
 
@@ -332,20 +332,22 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
                             </div>
                         </div>
 
-                        <div class="collapse" id="external_collapse_<?= $idx; ?>">
-                            <div class="vstack gap-3">
+                        <div class="collapse w-100" id="external_collapse_<?= $idx; ?>">
+                            <div class="vstack my-2 gap-3">
                                 <?php foreach (get_field("links", $e) as $link) : ?>
-                                    <div class="hstack py-3 gap-4 align-items-center justify-content-between border-bottom">
-                                        <img src="<?= get_template_directory_uri() . "/assets/images/link.png"; ?>" style="width: 24px; height: 24px">
+                                    <?php if (isset($link["link"])) : ?>
+                                        <a class="text-reset text-decoration-none external_link_container" href="<?= $link["link"]; ?>">
+                                            <div class="hstack py-3 gap-4 align-items-center justify-content-between">
+                                                <img src="<?= get_template_directory_uri() . "/assets/images/link.png"; ?>" style="width: 24px; height: 24px">
 
-                                        <?php if (isset($link["link"])) : ?>
-                                            <a href="<?= $link["link"]; ?>" class="text-reset text-decoration-none">
-                                                <?= $link["link"]; ?>
-                                            </a>
-                                        <?php endif; ?>
+                                                <div class="fs-6 fw-semibold">
+                                                    <?= $link["label"]; ?>
+                                                </div>
 
-                                        <img src="<?= get_template_directory_uri() . "/assets/images/btn-arrow-black.png"; ?>" style="width: 24px; height: 24px">
-                                    </div>
+                                                <img src="<?= get_template_directory_uri() . "/assets/images/btn-arrow-black.png"; ?>" style="width: 24px; height: 24px">
+                                            </div>
+                                        </a>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
                             </div>
                         </div>
@@ -355,5 +357,9 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
         </div>
     </div>
 <?php endif; ?>
+
+<div class="container-fluid px-0">
+    <?php get_template_part('template-parts/howcanwehelp'); ?>
+</div>
 
 <?php get_footer(); ?>

@@ -74,7 +74,7 @@
     transition: all 250ms ease-in-out;
 }
 
-.external_links_container:hover {
+.external_links_container:has(.external_links_toggler:hover) {
     background-color: #bdab7350;
 }
 
@@ -85,4 +85,17 @@
     object-position: center;
     border: 1px solid #bdab73;
     border-radius: 16px;
+}
+
+.external_link_container {
+    border-radius: 20px;
+    border-bottom: 1px solid #00000013;
+}
+
+.external_link_container:hover {
+    background-color: #bdab7350;
+}
+
+.external_link_container:last-of-type {
+    border-bottom: none;
 }
