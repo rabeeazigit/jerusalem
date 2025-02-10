@@ -47,7 +47,7 @@ $resident_rights = $controller->get_resident_rights();
                     </div>
                 <?php endif; ?>
 
-                <div class="hstack w-75 gap-3 flex-wrap">
+                <div class="hstack anchor_tags_container gap-3 flex-wrap">
                     <?php if ($urban_renewal_items && is_array($urban_renewal_items) && !empty($urban_renewal_items)) : ?>
                         <div class="">
                             <a href="#urban_renewal_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
@@ -171,16 +171,18 @@ $resident_rights = $controller->get_resident_rights();
             </div>
 
             <!-- Image Column -->
-            <div class="col-md-7">
-                <div class="d-flex sticky-top justify-content-center">
-                    <img src="" alt="" class="rounded-5 resident_side_image">
+            <?php if (!wp_is_mobile()) : ?>
+                <div class="col-md-7">
+                    <div class="d-flex sticky-top justify-content-center">
+                        <img src="" alt="" class="rounded-5 resident_side_image">
+                    </div>
                 </div>
-            </div>
+            <?php endif; ?>
         </div>
 
         <!-- Link -->
         <?php if ($controller->urban_renewal_link) : ?>
-            <div class="d-flex justify-content-start align-items-center">
+            <div class="d-flex justify-content-md-start justify-content-center align-items-center">
                 <a href="<?= $controller->urban_renewal_link["url"]; ?>" target="<?= $controller->urban_renewal_link["target"]; ?>" class="text-decoration-none fs-5 sq-primary-button">
                     <?= $controller->urban_renewal_link["title"]; ?>
                 </a>
@@ -234,11 +236,17 @@ $resident_rights = $controller->get_resident_rights();
 
 <!-- FAQ -->
 <?php if ($controller->faq_items && is_array($controller->faq_items) && !empty($controller->faq_items)) : ?>
-    <div id="faq_section" class="container-fluid my-4 p-5" style="background-image: url(<?= $controller->faq_background_image; ?>); background-size: cover; background-repeat: no-repeat; background-position: center">
+    <div id="faq_section" class="container-fluid my-4 p-md-5 p-3" style="background-image: url(<?= $controller->faq_background_image; ?>); background-size: cover; background-repeat: no-repeat; background-position: center">
         <?php if ($controller->faq_title) : ?>
-            <div class="display-4 fw-semibold mb-4">
-                <?= $controller->faq_title; ?>
-            </div>
+            <?php if (wp_is_mobile()) : ?>
+                <div class="display-4 text-center fw-semibold mb-4">
+                    <?= $controller->faq_title; ?>
+                </div>
+            <?php else : ?>
+                <div class="display-4 fw-semibold mb-4">
+                    <?= $controller->faq_title; ?>
+                </div>
+            <?php endif; ?>
         <?php endif; ?>
 
         <div class="row">
@@ -266,7 +274,7 @@ $resident_rights = $controller->get_resident_rights();
             </div>
 
             <!-- FAQS Side Image -->
-            <?php if ($controller->faq_side_image) : ?>
+            <?php if (!wp_is_mobile() && $controller->faq_side_image) : ?>
                 <div class="col-md-4">
                     <div class="d-flex align-items-center justify-content-center sticky-top">
                         <img src="<?= $controller->faq_side_image; ?>" class="faq_side_image">
@@ -290,35 +298,67 @@ $resident_rights = $controller->get_resident_rights();
 <?php endif; ?>
 
 <!-- Downloadable Files -->
-<div id="downloads_section" class="container-fluid p-5 my-4" style="background-color: #EBE8E3;">
+<div id="downloads_section" class="container-fluid p-md-5 p-3 my-4" style="background-color: #EBE8E3;">
     <?php if ($controller->downloadable_files_title) : ?>
-        <div class="display-4 fw-semibold mb-2">
-            <?= $controller->downloadable_files_title; ?>
-        </div>
+        <?php if (wp_is_mobile()) : ?>
+            <div class="display-4 text-center fw-semibold mb-2">
+                <?= $controller->downloadable_files_title; ?>
+            </div>
+        <?php else : ?>
+            <div class="display-4 fw-semibold mb-2">
+                <?= $controller->downloadable_files_title; ?>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
 
     <?php if ($controller->downloadable_files_subtitle) : ?>
-        <div class="fs-6 mb-4">
-            <?= $controller->downloadable_files_subtitle; ?>
-        </div>
+        <?php if (wp_is_mobile()) : ?>
+            <div class="fs-6 text-center mb-4">
+                <?= $controller->downloadable_files_subtitle; ?>
+            </div>
+        <?php else : ?>
+            <div class="fs-6 mb-4">
+                <?= $controller->downloadable_files_subtitle; ?>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
 
     <?php if ($controller->file_categories_to_show && is_array($controller->file_categories_to_show) && !empty($controller->file_categories_to_show)) : ?>
-        <div class="hstack align-items-center justify-content-start gap-3" role="tablist">
-            <?php foreach ($controller->file_categories_to_show as $idx => $file_category) : ?>
-                <button class="btn btn-sq-secondary rounded-pill px-4 <?= $idx == 0 ? "active show" : ""; ?>" data-bs-toggle="tab" data-bs-target="#file_tab_<?= $file_category->term_id; ?>">
-                    <?= $file_category->name; ?>
-                </button>
-            <?php endforeach; ?>
+        <?php if (!wp_is_mobile()) : ?>
+            <div class="hstack align-items-center justify-content-start gap-3" role="tablist">
+                <?php foreach ($controller->file_categories_to_show as $idx => $file_category) : ?>
+                    <button class="btn btn-sq-secondary rounded-pill px-4 <?= $idx == 0 ? "active show" : ""; ?>" data-bs-toggle="tab" data-bs-target="#file_tab_<?= $file_category->term_id; ?>">
+                        <?= $file_category->name; ?>
+                    </button>
+                <?php endforeach; ?>
 
-            <div class="input-group rounded-pill overflow-hidden">
-                <span class="input-group-text border-none" style=" background-color: white">
-                    <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
-                </span>
+                <div class="input-group rounded-pill overflow-hidden">
+                    <span class="input-group-text border-none" style=" background-color: white">
+                        <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
+                    </span>
 
-                <input type="text" class="form-control border-0 downloadable_file_search" placeholder="Search">
+                    <input type="text" class="form-control border-0 downloadable_file_search" placeholder="Search">
+                </div>
             </div>
-        </div>
+        <?php else : ?>
+            <div class="vstack" role="tablist">
+                <div class="input-group rounded-pill overflow-hidden">
+                    <span class="input-group-text border-none" style=" background-color: white">
+                        <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
+                    </span>
+
+                    <input type="text" class="form-control border-0 downloadable_file_search" placeholder="Search">
+                </div>
+
+                <div class="hstack gap-4 overflow-auto py-3 my-3">
+                    <?php foreach ($controller->file_categories_to_show as $idx => $file_category) : ?>
+                        <button style="white-space: nowrap" class="btn btn-sq-secondary rounded-pill px-4 <?= $idx == 0 ? "active show" : ""; ?>" data-bs-toggle="tab" data-bs-target="#file_tab_<?= $file_category->term_id; ?>" style="width: fit-content">
+                            <?= $file_category->name; ?>
+                        </button>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
 
     <div class="tab-content">
@@ -361,7 +401,7 @@ $resident_rights = $controller->get_resident_rights();
 </div>
 
 <?php if ($controller->external_links_items && is_array($controller->external_links_items) && !empty($controller->external_links_items)) : ?>
-    <div id="external_links_section" class="container-fluid px-5 my-5">
+    <div id="external_links_section" class="container-fluid px-md-5 px-3 my-5">
         <?php if ($controller->external_links_title): ?>
             <div class="display-4 fw-semibold mb-2">
                 <?= $controller->external_links_title; ?>
@@ -378,7 +418,7 @@ $resident_rights = $controller->get_resident_rights();
             <?php foreach ($controller->external_links_items as $idx => $e) : ?>
                 <div class="col-md-4">
                     <div class="vstack justify-content-between align-items-center border rounded-4 py-2 px-3 external_links_container">
-                        <div class="hstack align-items-center justify-content-between external_links_toggler" data-bs-toggle="collapse" data-bs-target="#external_collapse_<?= $idx; ?>">
+                        <div class="hstack align-items-center justify-content-between external_links_toggler collapsed" data-bs-toggle="collapse" data-bs-target="#external_collapse_<?= $idx; ?>">
                             <div class="hstack gap-2 align-items-center">
                                 <img src="<?= get_field("image", $e); ?>" alt="" class="external_link_image">
 
@@ -388,7 +428,7 @@ $resident_rights = $controller->get_resident_rights();
                             </div>
 
                             <div class="justify-self-end">
-                                <img src="<?= get_template_directory_uri() . "/assets/images/down-arrow.png"; ?>" style="width: 24px; height: 24px">
+                                <img class="external_link_icon" src="<?= get_template_directory_uri() . "/assets/images/down-arrow.png"; ?>" style="width: 24px; height: 24px">
                             </div>
                         </div>
 

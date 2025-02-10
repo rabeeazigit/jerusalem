@@ -42,6 +42,9 @@
     width: 24px;
     height: 24px;
     background-image: url(../images/plus.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .faq_toggler:not(.collapsed) .faq_icon {
@@ -51,6 +54,18 @@
 
 .input-group:has(.downloadable_file_search) {
     width: 34dvw;
+
+    @media screen and (width <= 768px) {
+        width: 100%;
+    }
+}
+
+.anchor_tags_container {
+    width: 75%;
+
+    @media screen and (width <= 768px) {
+        width: 100%;
+    }
 }
 
 .downloadable_file_search {
@@ -98,4 +113,12 @@
 
 .external_link_container:last-of-type {
     border-bottom: none;
+}
+
+.external_links_toggler img.external_link_icon {
+    transition: all 250ms ease-in-out;
+}
+
+.external_links_toggler:not(.collapsed) img.external_link_icon {
+    transform: scaleY(-1);
 }
