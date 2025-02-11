@@ -202,3 +202,12 @@ section {
     margin-right: 210px;
     cursor: pointer;
 }
+.carousel-control-prev-icon {
+    background-image: url('../images/video/right_arrow.png') !important;
+}
+.carousel-control-next-icon {
+    background-image: url('../images/video/left_arrow.png') !important;
+}
+.carousel{
+    margin-top: 20px;
+}

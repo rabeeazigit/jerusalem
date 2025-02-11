@@ -22,7 +22,7 @@ class Areafields
         $this->arie_fields_connection =  get_field('arie_fields_connection', $this->pid);
         $this->community_field_title_accotdion =  get_field('community_field_title_accotdion', $this->pid);
 
-     
+
     }
 
     public function LeftSideCats()
@@ -55,10 +55,10 @@ class Areafields
                 </div>
             </div>
         </div>';
-    
+
         return $html;
     }
-    
+
 
     public function MainHeader()
     {
@@ -163,8 +163,11 @@ class Areafields
                 'area_more_btn' => $GroupContent['area_more_btn'] ?? '' ,
                 'sticky' => $sticky);
 
-                $sec2Args=array($GroupContent['area_table'], $GroupContent['table_title']);
-                $sec3Args = $GroupContent['downloads'] ;
+            $sec2Args = array($GroupContent['area_table'], $GroupContent['table_title']);
+            $sec3Args = $GroupContent['downloads'] ;
+            $pid = $GroupContent['pid'];
+            $sec_videos_Args = $GroupContent['videos'] ;
+             
 
 
 
@@ -182,17 +185,20 @@ class Areafields
                     </h2>
                     <div id="panelsStayOpen-collapse'.$post->ID.'"  class="accordion-collapse collapse" data-bs-parent="#accordionPanelsfields">
                  <div class="accordion-body">';
-            ob_start();
+                
+                 ob_start();
+                
             get_template_part("template-parts/area-fields/acc-section1", null, $sec1Args);
             get_template_part("template-parts/area-fields/acc-section2", null, $sec2Args);
             get_template_part("template-parts/area-fields/acc-section3", null, $sec3Args);
+
            
-           
+        
+         include(get_template_directory(). "/template-parts/area-fields/acc-section_video.php");
             $html .= ob_get_clean();
-
-
+            
             $html .= '</div></div></div>';
-
+           
         }
 
 
@@ -207,8 +213,8 @@ class Areafields
     private function GetAccordionContent($pid)
     {
         $LayOut = [];
-        $content = get_field('main_area_fields', $pid); //GROUP ACF 
-       
+        $content = get_field('main_area_fields', $pid); //GROUP ACF
+
         $LayOut['area_title'] = $content[0]['area_title'];
         $LayOut['area_content'] = $content[0]['area_content'];
         $LayOut['area_image'] = $content[0]['area_image']['url'];
@@ -220,7 +226,9 @@ class Areafields
         //================================================================
 
         $LayOut['downloads'] = $content[2]['area_files_download'];
-        
+        $LayOut['videos'] = $content[3]['area_videos'];
+        $LayOut['pid'] = wp_unique_id('slider_');
+
 
 
 
@@ -247,12 +255,12 @@ class Areafields
             $term_id = $cat->term_id;
 
             $html .= ' <li class="nav-item" 
-    role="presentation">
-    <button class="small-button rounded-pill '.$active_class.'  m-2" id="pills-'.$term_id.'-tab" 
-    data-bs-toggle="pill" data-bs-target="#pills-'.  $term_id . '" 
-    type="button" role="tab" aria-controls="pills-'.  $term_id . '" 
-    aria-selected="true">'.$cat->name.'</button>
-  </li>';
+                            role="presentation">
+                            <button class="small-button rounded-pill '.$active_class.'  m-2" id="pills-'.$term_id.'-tab" 
+                            data-bs-toggle="pill" data-bs-target="#pills-'.  $term_id . '" 
+                            type="button" role="tab" aria-controls="pills-'.  $term_id . '" 
+                            aria-selected="true">'.$cat->name.'</button>
+                        </li>';
 
             $terms[$term_id] = $this->GET_AreaFieldsTermsPosts($term_id);
             $cnt++;
@@ -286,16 +294,11 @@ class Areafields
             $cnt++;
         }
 
-
-
         $html .= '</div>'; //tab closer
-
-
         //print_r($terms);
-
         return $html;
-
     }
+
 
 
 
