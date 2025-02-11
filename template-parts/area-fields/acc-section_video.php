@@ -1,5 +1,5 @@
 
-<?php ?>
+
 <div id="carouselExample_<?php echo( $pid );?>" class="carousel slide ">
   <div class="carousel-inner">
 
@@ -21,9 +21,11 @@ foreach($sec_videos_Args as $videos){
    
    <iframe width="100%" height="400"
    src="https://www.youtube.com/embed/<?php echo $video; ?>"         
-   title="<?php echo "helllooo";?>" 
+   title="<?php echo $video_title;?>" 
    frameborder="0"
   loading="lazy"
+  allow="accelerometer;  gyroscope; picture-in-picture; web-share"
+  allowfullscreen
    >
    </iframe>
    
