@@ -211,3 +211,17 @@ section {
 .carousel{
     margin-top: 20px;
 }
+.accordion-header{
+    outline: none !important;
+}
+.accordion-button{
+    outline: none !important;
+}
+
+.accordion-button:focus{
+    outline: none !important;
+}
+
+button:focus:not(:focus-visible){
+    outline: none !important;
+}
