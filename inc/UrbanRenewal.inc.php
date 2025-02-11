@@ -95,4 +95,12 @@ class UrbanRenewal
             ]
         ]);
     }
+
+    public function get_dynamic_template($stage)
+    {
+        $fc_layout = $stage["acf_fc_layout"] ?? null;
+        $value = $stage["value"] ?? null;
+
+        get_template_part("template-parts/flex-content/{$fc_layout}", null, $value);
+    }
 }

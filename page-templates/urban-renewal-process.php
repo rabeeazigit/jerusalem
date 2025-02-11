@@ -128,17 +128,48 @@ $urban_renewal_items = $controller->get_urban_renewal_processes();
             <div class="rounded-4 bg-white p-4">
                 <?php foreach ($urban_renewal_items as $index => $item) : ?>
                     <div class="vstack">
-                        <button class="btn btn-outline-secondary collapsed" data-bs-toggle="collapse" data-bs-target="#item_<?= $index; ?>">
-                            <?= $item->post_title; ?>
-                        </button>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="vstack gap-3">
+                                    <div class="hstack align-items-center justify-content-between">
+                                        <div class="fs-2 fw-light opacity-50">
+                                            שלב <?= $index + 1; ?>
+                                        </div>
 
-                        <div class="collapse" id="item_<?= $index; ?>">
-                            working
-                            <!-- <pre>
-                                <?php print_r(get_field("stages", $item)); ?>
-                            </pre> -->
+                                        <button class="btn p-1 stage_btn rounded-circle collapsed" style="background-color: lightgray" data-bs-toggle="collapse" data-bs-target="#item_<?= $index; ?>">
+                                            <img class="object-fit-cover" style="width: 24px; height: 24px" src="<?= get_template_directory_uri() . "/assets/images/arrow-down.png"; ?>">
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="fs-1 fw-semibold">
+                                    <?= $item->post_title; ?>
+                                </div>
+
+                                <?php if (get_field("paragraph", $item)) : ?>
+                                    <div class="fs-6 my-3">
+                                        <?= get_field("paragraph", $item); ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+
+                            <div class="col-md-5">
+                                <?php if (get_field("displayed_image", $item)) : ?>
+                                    <div class="d-flex px-4 py-2 align-items-center justify-content-center">
+                                        <img class="rounded-3 object-fit-cover stage_displayd_image" src="<?= get_field("displayed_image", $item); ?>">
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
+                        <div class="collapse px-5" id="item_<?= $index; ?>">
+                            <?php foreach (get_field("stages", $item) as $e) : ?>
+                                <?= $controller->get_dynamic_template($e); ?>
+                            <?php endforeach; ?>
                         </div>
                     </div>
+
+                    <hr style="border-width: 4px">
                 <?php endforeach; ?>
             </div>
         </div>

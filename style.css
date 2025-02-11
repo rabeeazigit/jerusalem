@@ -852,3 +852,33 @@ body {
     object-fit: contain;
     object-position: center;
 }
+
+.stage_btn img {
+    transition: all 250ms ease-in-out;
+}
+
+.stage_btn:not(.collapsed) img {
+    transform: scaleY(-1);
+}
+
+.stage_displayd_image {
+    width: 100%;
+    height: 35dvh;
+}
+
+.stage_paragraph_side_image {
+    width: 100%;
+    height: 24dvh;
+    object-fit: cover;
+    object-position: center;
+}
+
+.downloadable_file_item {
+    transition: all 250ms ease-in-out;
+    border: 1px solid #bdab73;
+}
+
+.downloadable_file_item:hover {
+    box-shadow: 0 0 16px #00000013;
+    cursor: pointer;
+}
