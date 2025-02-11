@@ -10,7 +10,7 @@ $description = $args["description"] ?? null;
 <?php endif; ?>
 
 <?php if ($description) : ?>
-    <div class="fs-6">
+    <div class="fs-6 mb-4">
         <?= $description; ?>
     </div>
 <?php endif; ?>

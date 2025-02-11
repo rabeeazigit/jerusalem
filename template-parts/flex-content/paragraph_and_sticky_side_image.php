@@ -4,7 +4,7 @@ $paragraph = $args["paragraph"] ?? null;
 $read_more_link = $args["read_more_link"] ?? null;
 ?>
 
-<div class="row mb-3">
+<div class="row mb-4">
     <div class="col-md-7">
         <?php if ($paragraph) : ?>
             <div class="mb-4">

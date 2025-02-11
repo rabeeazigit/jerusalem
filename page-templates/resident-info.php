@@ -332,7 +332,7 @@ $resident_rights = $controller->get_resident_rights();
                     </button>
                 <?php endforeach; ?>
 
-                <div class="input-group rounded-pill overflow-hidden">
+                <div class="input-group rounded-pill overflow-hidden ">
                     <span class="input-group-text border-none" style=" background-color: white">
                         <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
                     </span>

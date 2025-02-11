@@ -882,3 +882,63 @@ body {
     box-shadow: 0 0 16px #00000013;
     cursor: pointer;
 }
+
+.stage_arrow {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.stage_circle {
+    width: 32px;
+    height: 32px;
+    background-color: #ebe8e3;
+    border-radius: 100%;
+}
+
+.stage_accordion {
+    cursor: pointer;
+
+    .stage_arrow {
+        transition: all 250ms ease-in-out;
+    }
+}
+
+.stage_accordion_wrapper * {
+    transition: all 250ms ease-in-out;
+}
+
+.stage_accordion_wrapper {
+    border: 1px solid #b2aea8;
+    border-radius: 18px;
+}
+
+.stage_accordion_wrapper:hover {
+    background-color: var(--primary-hover);
+}
+
+.stage_accordion_wrapper:hover .stage_circle,
+.stage_accordion:not(.collapsed) .stage_circle {
+    background-color: var(--primary-active);
+}
+
+.stage_accordion:not(.collapsed) .stage_arrow {
+    transform: scaleY(-1);
+}
+
+.stage_accordion_wrapper:has(.stage_accordion:not(.collapsed)) {
+    background-color: transparent !important;
+}
+
+.input-group:has(.stages_search) {
+    width: 24dvw;
+
+    @media screen and (width <= 768px) {
+        width: 100%;
+    }
+}
+.stages_search {
+    padding: 10px;
+    background-color: white;
+}

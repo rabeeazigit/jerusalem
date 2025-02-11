@@ -12,6 +12,7 @@ $controller = new UrbanRenewal();
 $urban_renewal_terms = $controller->get_renewal_categories();
 $urban_renewal_grouped_items = $controller->get_urban_renewal_processes_grouped_by_stages();
 $urban_renewal_items = $controller->get_urban_renewal_processes();
+$urban_category = $_GET["urban_category"] ?? null;
 ?>
 
 <!-- COLORED HERO -->
@@ -67,9 +68,9 @@ $urban_renewal_items = $controller->get_urban_renewal_processes();
     </div>
 
     <!-- The Main Row And Columns -->
-    <div class="row text-dark">
+    <div class="row text-dark" id="urban_renewal_process_section">
         <div class="col-md-4">
-            <div class="rounded-4 bg-white p-4">
+            <div class="rounded-4 bg-white p-4 sticky-top">
                 <!-- Stage Selector -->
                 <div class="hstack align-items-center justify-content-between">
                     <div class="fs-6 fw-semibold">
@@ -89,6 +90,7 @@ $urban_renewal_items = $controller->get_urban_renewal_processes();
 
                 <!-- Stages -->
                 <?php if ($urban_renewal_grouped_items && is_array($urban_renewal_grouped_items) && !empty($urban_renewal_grouped_items)) : ?>
+                    <?php $side_stage_count = 0; ?>
                     <?php foreach ($urban_renewal_grouped_items as $stage => $proccesses) : ?>
                         <div class="vstack gap-2 mb-3">
                             <div class="row px-0 rounded-4 border">
@@ -126,13 +128,31 @@ $urban_renewal_items = $controller->get_urban_renewal_processes();
 
         <div class="col-md-8">
             <div class="rounded-4 bg-white p-4">
+                <div class="sticky-top bg-white">
+                    <div class="hstack align-items-center justify-content-between ">
+                        <div class="fs-6 fw-semibold">
+                            תהליך התחדשות עירונית
+                        </div>
+
+                        <div class="input-group rounded-pill overflow-hidden border">
+                            <span class="input-group-text border-none" style=" background-color: white">
+                                <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
+                            </span>
+
+                            <input type="text" class="form-control border-0 stages_search" placeholder="Search">
+                        </div>
+                    </div>
+
+                    <hr>
+                </div>
+
                 <?php foreach ($urban_renewal_items as $index => $item) : ?>
                     <div class="vstack">
                         <div class="row">
                             <div class="col-md-7">
                                 <div class="vstack gap-3">
                                     <div class="hstack align-items-center justify-content-between">
-                                        <div class="fs-2 fw-light opacity-50">
+                                        <div class="fs-3 fw-light opacity-50">
                                             שלב <?= $index + 1; ?>
                                         </div>
 
@@ -142,7 +162,7 @@ $urban_renewal_items = $controller->get_urban_renewal_processes();
                                     </div>
                                 </div>
 
-                                <div class="fs-1 fw-semibold">
+                                <div class="fs-2 fw-semibold">
                                     <?= $item->post_title; ?>
                                 </div>
 
@@ -162,10 +182,50 @@ $urban_renewal_items = $controller->get_urban_renewal_processes();
                             </div>
                         </div>
 
-                        <div class="collapse px-5" id="item_<?= $index; ?>">
-                            <?php foreach (get_field("stages", $item) as $e) : ?>
-                                <?= $controller->get_dynamic_template($e); ?>
-                            <?php endforeach; ?>
+                        <div class="collapse" id="item_<?= $index; ?>">
+                            <?php
+                            $stages_title = get_field("stages_title", $item) ?? null;
+                            $renewal_stages = get_field("renewal_stages", $item) ?? null;
+                            ?>
+
+                            <?php if ($stages_title) : ?>
+                                <div class="fs-6 fw-semibold mb-4">
+                                    <?= $stages_title; ?>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if ($renewal_stages && is_array($renewal_stages) && !empty($renewal_stages)) : ?>
+                                <?php foreach ($renewal_stages as $stage_index => $stage) : ?>
+                                    <?php
+                                    $stage_title = $stage["stage_title"] ?? null;
+                                    $stages = $stage["stages"] ?? null;
+                                    ?>
+
+                                    <?php if ($stage_title) : ?>
+                                        <div class="stage_accordion_wrapper py-3 px-4">
+                                            <div class="hstack align-items-center justify-content-between collapsed stage_accordion" data-bs-toggle="collapse" data-bs-target="#stage_<?= $stage_index; ?>">
+                                                <div class="hstack gap-2 align-items-center">
+                                                    <div class="stage_circle"></div>
+
+                                                    <div class="fs-6">
+                                                        <?= $stage_title; ?>
+                                                    </div>
+                                                </div>
+
+                                                <img src="<?= get_template_directory_uri() . "/assets/images/down-arrow.png"; ?>" class="stage_arrow">
+                                            </div>
+
+                                            <div class="collapse stage_collapable py-4" id="stage_<?= $stage_index; ?>">
+                                                <hr>
+
+                                                <?php foreach (get_field("stages", $item) as $e) : ?>
+                                                    <?= $controller->get_dynamic_template($e); ?>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -175,10 +235,6 @@ $urban_renewal_items = $controller->get_urban_renewal_processes();
         </div>
     </div>
 </div>
-
-<pre>
-    <?php print_r($controller->get_urban_renewal_processes_grouped_by_stages()); ?>
-</pre>
 
 <!-- FAQ -->
 <?php if ($controller->faq_items && is_array($controller->faq_items) && !empty($controller->faq_items)) : ?>
@@ -294,5 +350,23 @@ $urban_renewal_items = $controller->get_urban_renewal_processes();
 <div class="container-fluid px-0">
     <?php get_template_part('template-parts/howcanwehelp'); ?>
 </div>
+
+<script>
+    $(".stage_collapable").on("show.bs.collapse", function() {
+        const slider = $(this).find(".youtube_rs_slider")
+
+        if (!slider.hasClass("slick-initialized")) {
+            slider.slick({
+                rtl: true,
+                arrows: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                dots: true,
+                infinite: false,
+                swipe: false,
+            });
+        }
+    });
+</script>
 
 <?php get_footer(); ?>

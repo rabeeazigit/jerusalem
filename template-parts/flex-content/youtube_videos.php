@@ -1,7 +1,7 @@
 <?php
 $title = $args["title"] ?? null;
 $youtube_ids = $args["youtube_ids"] ?? null;
-$slider_id = wp_unique_id("youtube_slider");
+$slider_id = "youtube_slider_" . time();
 ?>
 
 <?php if ($title) : ?>
@@ -40,6 +40,26 @@ $slider_id = wp_unique_id("youtube_slider");
         top: 362px;
     }
 
+    .youtube_rs_slider .slick-next::before {
+        content: "";
+        background-image: url(<?= get_template_directory_uri() . "/assets/images/video/left_arrow.png"; ?>);
+        display: block;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        background-size: contain;
+    }
+
+    .youtube_rs_slider .slick-prev::before {
+        content: "";
+        background-image: url(<?= get_template_directory_uri() . "/assets/images/video/right_arrow.png"; ?>);
+        display: block;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        background-size: contain;
+    }
+
     .youtube_rs_slider .slick-prev {
         z-index: 99;
         right: 52px;
@@ -47,15 +67,19 @@ $slider_id = wp_unique_id("youtube_slider");
         scale: 3;
         top: 362px;
     }
-</style>
 
-<script>
-    $(function() {
-        $("#<?= $slider_id; ?>").slick({
-            rtl: true,
-            arrows: true,
-            slidesToShow: 1,
-            slidesToScroll: 1
-        })
-    });
-</script>
+    .youtube_rs_slider .slick-dots {
+        bottom: 24px;
+    }
+
+    .youtube_rs_slider .slick-dots button:before {
+        color: white !important;
+        font-size: 1rem;
+        opacity: 0.6;
+        transition: all 250ms ease-in-out;
+    }
+
+    .youtube_rs_slider .slick-dots li.slick-active button:before {
+        font-size: 1.4rem;
+    }
+</style>
