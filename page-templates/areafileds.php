@@ -4,6 +4,7 @@
  * Description:  By Wisam Shomar.
  */
 get_header();
+
 $Areafields = new Areafields();
 $AFcats = $Areafields->FetchAreaFiedlsCategories();
 $GetPillsCategories = $Areafields->GetPillsCategories();
@@ -38,4 +39,10 @@ $rightsideCats = $Areafields->LeftSideCats();
 <section id="howcanwehelp">
 <?php get_template_part('template-parts/howcanwehelp');?>
 </section>
+<script>
+  $( document ).ready(function() {
+    const carousel = new bootstrap.Carousel('#carouselExample');
+});
+   
+</script>
 <?php get_footer();?>

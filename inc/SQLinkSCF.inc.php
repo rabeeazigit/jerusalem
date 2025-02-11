@@ -5868,11 +5868,39 @@ class SQLinkSCF
                                                     'class' => '',
                                                     'id' => '',
                                                 ),
+
+
+
                                                 'default_value' => '',
                                                 'allow_in_bindings' => 0,
                                                 'placeholder' => '',
                                                 'parent_repeater' => 'field_679a35886dd0f',
                                             ),
+
+                                            array(
+                                                'key' => 'field_659b35m00dd10',
+                                                'label' => 'כותרת סרטון',
+                                                'name' => 'area_video_title',
+                                                'aria-label' => '',
+                                                'type' => 'text',
+                                                'instructions' => '',
+                                                'required' => 0,
+                                                'conditional_logic' => 0,
+                                                'wrapper' => array(
+                                                    'width' => '',
+                                                    'class' => '',
+                                                    'id' => '',
+                                                ),
+
+
+
+                                                'default_value' => '',
+                                                'allow_in_bindings' => 0,
+                                                'placeholder' => '',
+                                                'parent_repeater' => 'field_679a35886dd0f',
+                                            ),
+
+
                                         ),
                                     ),
                                 ),
