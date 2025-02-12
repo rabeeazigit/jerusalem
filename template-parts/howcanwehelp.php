@@ -39,9 +39,9 @@ $hcwh_link = get_field("hcwh_link", "options");
     <div class="container-fluid px-0 howcanwehelp" style="background:url('<?php echo get_template_directory_uri(); ?>/assets/images/about/bk1.png');">
         <div class="row align-items-center">
             <div class="col-12">
-                <div class="align-items-center justify-content-center vstack p-5">
+                <div class="align-items-center justify-content-center vstack px-5 py-4">
                     <?php if ($hwch_title) : ?>
-                        <div class="h1 hcwhy-h">
+                        <div class="fw-bold fs-1">
                             <?php echo $hwch_title; ?>
                         </div>
                     <?php endif; ?>

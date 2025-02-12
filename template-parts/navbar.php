@@ -147,7 +147,7 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
         <div class="vstack gap-3">
             <div class="hstack px-3 justify-content-between align-items-center py-2 top_navbar_wrapper_mobile">
                 <?php if ($navbar->owner_login_link && $navbar->owner_login_label) : ?>
-                    <a href="<?= $navbar->owner_login_link; ?>" target="_blank" class="fs-5 hstack gap-2 text-reset text-decoration-none">
+                    <a href="<?= $navbar->owner_login_link; ?>" target="_blank" class="fs-6 hstack gap-2 text-reset text-decoration-none">
                         <?php if ($navbar->owner_login_logo) : ?>
                             <img src="<?= $navbar->owner_login_logo; ?>" class="navbar_owner_logo">
                         <?php endif; ?>
@@ -178,7 +178,7 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
 
             <div class="hstack px-3 justify-content-between align-items-center">
                 <button class="btn" data-bs-toggle="offcanvas" data-bs-target="#mobile-hamburger">
-                    <img src="<?= get_template_directory_uri() . "/assets/images/hamburger_icon.png"; ?>" alt="Open Nav Menu" class="img-fluid">
+                    <img src="<?= get_template_directory_uri() . "/assets/images/" . ($dark_theme ? "hamburger-icon-light.svg" : "hamburger_icon.png"); ?>" alt="Open Nav Menu" class="img-fluid">
                 </button>
 
                 <a href="<?= home_url(); ?>" class="hstack gap-2 align-items-center text-reset text-decoration-none">
@@ -315,4 +315,36 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
             <?php endif; ?>
         </div>
     </div>
+<?php endif; ?>
+
+<script>
+    // a script to override the default yoast home and seperator breadcrumbs icons
+    $(function() {
+        $(".sq_breadcrumbs *").each(function() {
+            if ($(this).text().trim() === "[home]") {
+                $(this).empty();
+
+                $(this).html(`
+                        <a href="<?= home_url(); ?>">
+                            <img src="<?= get_template_directory_uri(); ?>/assets/images/<?= $dark_theme ? "home-light.svg" : "home.png" ?>" />
+                        </a>
+                    `);
+
+                $(this).addClass("home_breadcrumb");
+            }
+
+            if ($(this).text().trim() === "[seperator]") {
+                $(this).empty();
+                $(this).addClass("seperator_breadcrumb");
+            }
+        });
+    });
+</script>
+
+<?php if ($dark_theme) : ?>
+    <script>
+        $(() => {
+            $(".seperator").addClass("light");
+        })
+    </script>
 <?php endif; ?>

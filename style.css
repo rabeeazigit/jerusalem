@@ -769,9 +769,13 @@ body {
     display: inline-block;
 }
 
+.seperator.light {
+    background-image: url(./assets/images/seperator-light.svg);
+}
+
 .faq_side_image {
-    height: 400px;
-    width: 400px;
+    height: 24dvw;
+    width: 24dvw;
     object-fit: cover;
     border-radius: 100%;
 }
@@ -941,4 +945,11 @@ body {
 .stages_search {
     padding: 10px;
     background-color: white;
+}
+
+.data_table_wrapper th,
+.data_table_wrapper td {
+    @media screen and (width <= 768px) {
+        min-width: 150px;
+    }
 }

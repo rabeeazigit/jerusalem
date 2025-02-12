@@ -15,15 +15,27 @@ $slider_id = "youtube_slider_" . time();
         <?php foreach ($youtube_ids as $youtube_id) : ?>
             <?php if (!isset($youtube_id["video_id"]) || !$youtube_id["video_id"]) continue; ?>
 
-            <iframe
-                class="rounded-4"
-                style="width: 100%; height: 68dvh"
-                src="https://www.youtube.com/embed/<?= $youtube_id["video_id"]; ?>"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen></iframe>
+            <?php if (wp_is_mobile()) : ?>
+                <iframe
+                    class="rounded-4"
+                    style="width: 100%; height: 200px"
+                    src="https://www.youtube.com/embed/<?= $youtube_id["video_id"]; ?>"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen></iframe>
+            <?php else : ?>
+                <iframe
+                    class="rounded-4"
+                    style="width: 100%; height: 68dvh"
+                    src="https://www.youtube.com/embed/<?= $youtube_id["video_id"]; ?>"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen></iframe>
+            <?php endif; ?>
         <?php endforeach; ?>
     </div>
 <?php endif; ?>
@@ -38,6 +50,11 @@ $slider_id = "youtube_slider_" . time();
         position: absolute;
         scale: 3;
         top: 362px;
+
+        @media screen and (width <=768px) {
+            top: 135px;
+            left: 8px;
+        }
     }
 
     .youtube_rs_slider .slick-next::before {
@@ -66,6 +83,11 @@ $slider_id = "youtube_slider_" . time();
         position: absolute;
         scale: 3;
         top: 362px;
+
+        @media screen and (width <=768px) {
+            top: 135px;
+            right: 24px;
+        }
     }
 
     .youtube_rs_slider .slick-dots {

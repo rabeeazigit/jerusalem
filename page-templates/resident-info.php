@@ -125,12 +125,14 @@ $resident_rights = $controller->get_resident_rights();
         <?php endif; ?>
 
         <!-- Category Toggle -->
-        <div class="hstack align-items-center border rounded-pill p-1 mb-3" style="width: fit-content;" role="tablist">
-            <?php foreach ($urban_renewal_terms as $i => $category) : ?>
-                <button class="btn btn-sq-primary rounded-pill fs-5 <?= $i == 0 ? "active" : ""; ?>" data-bs-toggle="tab" data-bs-target="#tab_<?= $i; ?>">
-                    <?= $category->name; ?>
-                </button>
-            <?php endforeach; ?>
+        <div class="hstack w-100 justify-content-md-start justify-content-center align-items-center">
+            <div class="hstack align-items-center border rounded-pill p-1 mb-3" style="width: fit-content;" role="tablist">
+                <?php foreach ($urban_renewal_terms as $i => $category) : ?>
+                    <button class="btn btn-sq-primary rounded-pill fs-5 <?= $i == 0 ? "active" : ""; ?>" data-bs-toggle="tab" data-bs-target="#tab_<?= $i; ?>">
+                        <?= $category->name; ?>
+                    </button>
+                <?php endforeach; ?>
+            </div>
         </div>
 
         <div class="row mb-4">

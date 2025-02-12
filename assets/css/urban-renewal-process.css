@@ -1,0 +1,20 @@
+.stage_side_wrapper:hover {
+    background-color: var(--primary-hover);
+    border-radius: 18px;
+}
+
+.stage_side_wrapper {
+    cursor: pointer;
+}
+
+.stage_side_wrapper .stage_side_arrows {
+    transition: all 250ms ease-in-out;
+}
+
+.stage_side_wrapper:not(.collapsed) .stage_side_arrows {
+    transform: scaleY(-1);
+}
+
+.youtube_rs_slider.slick-dotted {
+    margin-bottom: 0;
+}

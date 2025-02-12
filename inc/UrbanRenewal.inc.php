@@ -27,6 +27,21 @@ class UrbanRenewal
         $this->external_links_title = get_field("external_links_title") ?? null;
         $this->external_links_subtitle = get_field("external_links_subtitle") ?? null;
         $this->external_links_items = get_field("external_links_items") ?? null;
+
+        wp_enqueue_style(
+            "uc_style",
+            get_template_directory_uri() . "/assets/css/urban-renewal-process.css",
+            ["main_css"],
+            filemtime(get_template_directory() . "/assets/css/urban-renewal-process.css"),
+            "all"
+        );
+
+        wp_enqueue_script(
+            "uc_style",
+            get_template_directory_uri() . "/assets/js/urban-renewal-process.js",
+            ["jquery_cdn"],
+            filemtime(get_template_directory() . "/assets/js/urban-renewal-process.js"),
+        );
     }
 
     public function get_renewal_categories()
@@ -37,7 +52,7 @@ class UrbanRenewal
         ]);
     }
 
-    public function get_urban_renewal_processes_grouped_by_stages()
+    public function get_urban_renewal_processes_grouped_by_stages($category)
     {
         $result = [];
 
@@ -47,13 +62,13 @@ class UrbanRenewal
         ]);
 
         foreach ($stages as $stage) {
-            $result[$stage->name] = $this->get_urban_renewal_processes_by_stage($stage);
+            $result[$stage->name] = $this->get_urban_renewal_processes_by_stage($stage, $category);
         }
 
         return $result;
     }
 
-    public function get_urban_renewal_processes_by_stage($stage)
+    public function get_urban_renewal_processes_by_stage($stage, $category)
     {
         return get_posts([
             "post_type" => "urban-renewal-proces",
@@ -65,6 +80,11 @@ class UrbanRenewal
                     "taxonomy" => "urban-renewal-stage",
                     "field"    => "term_id",
                     "terms"    => $stage,
+                ],
+                [
+                    "taxonomy" => "urban-renewal-process-category",
+                    "field"    => "term_id",
+                    "terms"    => $category,
                 ]
             ]
         ]);
