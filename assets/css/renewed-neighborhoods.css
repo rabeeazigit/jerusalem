@@ -1,0 +1,29 @@
+.hero_section_bg {
+    background-image: url(../images/yellow-vector.png);
+    background-position: bottom left;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.project_map_placeholder {
+    height: 540px;
+    object-fit: fill;
+    object-position: center;
+}
+
+.project_status_arrow {
+    transition: transform 250ms ease-in-out;
+}
+
+.project_status_collapse.collapsed .project_status_arrow {
+    transform: scaleY(-1);
+}
+
+.project_status_wrapper_rwduc {
+    border-bottom: 1px solid #b2aea8;
+}
+
+.udc_search_container {
+    max-width: 1000px;
+    margin: auto;
+}
