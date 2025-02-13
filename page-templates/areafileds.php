@@ -5,7 +5,7 @@
  */
 get_header();
 
-$Areafields = new Areafields();
+$Areafields = new Areafields;
 $AFcats = $Areafields->FetchAreaFiedlsCategories();
 $GetPillsCategories = $Areafields->GetPillsCategories();
 
@@ -16,8 +16,6 @@ $GetPillsCategories = $Areafields->GetPillsCategories();
 echo $Areafields->MainHeader();
 echo $Areafields->HeroSeccssion();
 $rightsideCats = $Areafields->LeftSideCats();
-
-// echo $About->SexyNumber();
 ?>
 </section>
 <section id="categories">
@@ -32,17 +30,10 @@ $rightsideCats = $Areafields->LeftSideCats();
 
 </div>
 
-
-
 </section>
 
 <section id="howcanwehelp">
 <?php get_template_part('template-parts/howcanwehelp');?>
 </section>
-<script>
-  $( document ).ready(function() {
-    const carousel = new bootstrap.Carousel('#carouselExample');
-});
-   
-</script>
+
 <?php get_footer();?>

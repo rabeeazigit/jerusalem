@@ -145,16 +145,17 @@ section {
 
 @media (max-width: 1000px) {
     .filedownload {
-        margin-top:5px;
+        margin-top: 5px;
     }
 }
 
 
 @media (min-width: 1000px) {
     .filedownload {
-        margin:5px;
+        margin: 5px;
         max-width: 31%
     }
+
     .span {
         max-width: 76%;
         margin: auto;
@@ -184,9 +185,9 @@ section {
 
 .span {
     font-size: 11px !important;
-    font-weight:normal;
+    font-weight: normal;
     color: #000;
-    
+
 
 }
 
@@ -202,26 +203,210 @@ section {
     margin-right: 210px;
     cursor: pointer;
 }
+
 .carousel-control-prev-icon {
     background-image: url('../images/video/right_arrow.png') !important;
 }
+
 .carousel-control-next-icon {
     background-image: url('../images/video/left_arrow.png') !important;
 }
-.carousel{
+
+.carousel {
     margin-top: 20px;
 }
-.accordion-header{
-    outline: none !important;
-}
-.accordion-button{
+
+.accordion-header {
     outline: none !important;
 }
 
-.accordion-button:focus{
+.accordion-button {
     outline: none !important;
 }
 
-button:focus:not(:focus-visible){
+.accordion-button:focus {
     outline: none !important;
+}
+
+button:focus:not(:focus-visible) {
+    outline: none !important;
+}
+
+.aboutTitle {
+
+    max-width: 740px;
+}
+
+.nbrhd {
+    max-width: 690px;
+    list-style: decimal;
+    text-align: justify !important;
+
+}
+
+.nbrhd li {
+    display: inline-flex;
+    font-size: 20px;
+    color: #0C263C;
+    margin: 5px 5px 0 5px;
+}
+
+.nbrhd li::after {
+    content: "|";
+    padding-right: 10px;
+}
+
+.nbrhd li:last-child::after {
+    content: "";
+
+}
+
+.nbrhd li:nth-child(3n)::after {
+    content: "";
+}
+
+.Status_pill {
+    display: inline-flex;
+    align-items: center;
+    background-color: #ffffff;
+    color: #333;
+    text-decoration: none;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    width: auto;
+    border: solid 1px #BDAB73;
+    -webkit-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.75);
+}
+
+.Status_pill .circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-left: 7px;
+}
+
+.sts_title {
+    display: inline-flex;
+
+    font-size: 20px;
+    position: relative;
+    height: 43px;
+    /* background: aliceblue; */
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    vertical-align: top;
+    padding-top: 8px;
+    padding-left: 10px;
+}
+
+
+.fadeCarousle .slick-arrow::before {
+    display: none;
+}
+
+
+.fadeCarousle .slick-next {
+
+    z-index: 999;
+
+    position: absolute;
+    top: 42%;
+    transform: translateY(-50%);
+    z-index: 10;
+    left: 77px;
+}
+
+
+.fadeCarousle .slick-prev {
+    z-index: 999;
+    top: 42%;
+    transform: translateY(-50%);
+    z-index: 10;
+    right: 37px;
+
+}
+
+.src_image_gallery {
+    border-radius: 20px;
+    width: 100%;
+    height: 510px;
+}
+
+.slick-dots {
+    bottom: 71px !important;
+}
+
+.slick-dots li.slick-active button:before {
+    opacity: .75;
+    color: #fff;
+    width: 25px;
+    z-index: 999999999 !important;
+}
+
+.slick-dots li button:before {
+    font-size: 16px;
+    line-height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    content: '•';
+    text-align: center;
+    opacity: .25;
+    color: #c9c3c3;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    z-index: 999999999 !important;
+}
+
+.slick-dots li button:before {
+    width: 20px;
+}
+
+.yt_video_gallery iframe{
+    height: 510px;
+}
+
+@media (max-width: 768px) {
+     .slick-prev {
+        right: -6px !important;
+        top: 33% !important;
+        z-index: 999999999 !important;
+    }
+
+      .slick-next {
+        left: 40px !important;
+        top: 33% !important;
+        z-index: 999999999 !important;
+    }
+
+
+    .slick-dots li{
+        margin:0px !important;
+    }
+
+
+    .src_image_gallery {
+        
+        height: 240px !important;
+    }
+
+    .yt_video_gallery iframe{
+        height: 240px !important;
+    }
+
+}
+
+
+.pro_desc {
+    max-width: 744px;
 }
