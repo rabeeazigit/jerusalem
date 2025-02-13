@@ -379,14 +379,20 @@ button:focus:not(:focus-visible) {
 @media (max-width: 768px) {
      .slick-prev {
         right: -6px !important;
-        top: 33% !important;
+        top: 44% !important;
         z-index: 999999999 !important;
+        z-index: 999999999999999 !important;
+        width: 50%;
+        height: 100%;
+        text-align: start;
     }
 
       .slick-next {
-        left: 40px !important;
-        top: 33% !important;
+        left: -61px !important;
+        top: 44% !important;
         z-index: 999999999 !important;
+        width: 50%;
+        height: 100%;
     }
 
 
@@ -409,4 +415,33 @@ button:focus:not(:focus-visible) {
 
 .pro_desc {
     max-width: 744px;
+}
+
+.external_link_wrapper{
+    max-width: 744px;
+    border: solid 1px #B2AEA8;
+    border-radius: 20px;
+    padding:10px;
+}
+
+.el_logo{
+    border: 1px solid #B2AEA8;
+    border-radius: 10px;
+    width: max-content;
+}
+
+.s_number{
+    color: #0C263C;
+    font-size: 40px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-weight: 500;
+}
+.s_title{
+    color: #0C263C;
+    font-size: 18px;
+    width: 100%;
+    display: block;
+    text-align: center;
 }

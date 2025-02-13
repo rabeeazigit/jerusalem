@@ -31,8 +31,6 @@ class SQLinkSCF
         $this->urban_renewal_fieldgroup();
         $this->urban_renewal_page_fieldgroup();
         $this->renewal_process_stage_fieldgroup();
-        $this->urban_renewal_stage_cpt_fieldgroup();
-        $this->entrepreneurs_info_fieldgroup();
         $this->renewed_neightborhoods_page_fieldgroup();
         //Wisam
         $this->AreaActivities();
@@ -49,7 +47,6 @@ class SQLinkSCF
         $this->downloadable_files_cpt();
         $this->external_links_cpt();
         $this->faq_cpt();
-        $this->urban_renewal_stage_cpt();
 
         //Wisam
         $this->AreaFilds_cpt();
@@ -1989,10 +1986,10 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6797811c373ab',
-                        'label' => 'Section Title',
-                        'name' => 'events_courses_title',
+                        'label' => 'Events And Courses Slider Options',
+                        'name' => 'events_and_courses_slider_options',
                         'aria-label' => '',
-                        'type' => 'text',
+                        'type' => 'clone',
                         'instructions' => '',
                         'required' => 0,
                         'conditional_logic' => 0,
@@ -2001,51 +1998,18 @@ class SQLinkSCF
                             'class' => '',
                             'id' => '',
                         ),
-                        'default_value' => '',
-                        'maxlength' => '',
-                        'allow_in_bindings' => 1,
-                        'placeholder' => '',
-                        'prepend' => '',
-                        'append' => '',
-                    ),
-                    array(
-                        'key' => 'field_67ac5267062ec',
-                        'label' => 'Section Paragraph',
-                        'name' => 'events_and_courses_paragraph',
-                        'aria-label' => '',
-                        'type' => 'textarea',
-                        'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
-                        'wrapper' => array(
-                            'width' => '',
-                            'class' => '',
-                            'id' => '',
+                        'clone' => array(
+                            0 => 'group_67977f105634f',
                         ),
-                        'default_value' => '',
-                        'acfe_textarea_code' => 0,
-                        'maxlength' => '',
-                        'allow_in_bindings' => 0,
-                        'rows' => '',
-                        'placeholder' => '',
-                        'new_lines' => 'br',
-                    ),
-                    array(
-                        'key' => 'field_67ac5286062ee',
-                        'label' => 'Section Button/Link',
-                        'name' => 'events_and_courses_link',
-                        'aria-label' => '',
-                        'type' => 'link',
-                        'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
-                        'wrapper' => array(
-                            'width' => '',
-                            'class' => '',
-                            'id' => '',
-                        ),
-                        'return_format' => 'array',
-                        'allow_in_bindings' => 0,
+                        'display' => 'seamless',
+                        'layout' => 'block',
+                        'prefix_label' => 0,
+                        'prefix_name' => 0,
+                        'acfe_seamless_style' => 0,
+                        'acfe_clone_modal' => 0,
+                        'acfe_clone_modal_close' => 0,
+                        'acfe_clone_modal_button' => '',
+                        'acfe_clone_modal_size' => 'large',
                     ),
                     array(
                         'key' => 'field_67a0d474db89f',
@@ -3167,8 +3131,8 @@ class SQLinkSCF
                         ),
                         'taxonomy' => 'project-status',
                         'add_term' => 1,
-                        'save_terms' => 1,
-                        'load_terms' => 1,
+                        'save_terms' => 0,
+                        'load_terms' => 0,
                         'return_format' => 'object',
                         'field_type' => 'checkbox',
                         'acfe_bidirectional' => array(
@@ -3231,7 +3195,7 @@ class SQLinkSCF
                                 'required' => 0,
                                 'conditional_logic' => 0,
                                 'wrapper' => array(
-                                    'width' => '15',
+                                    'width' => '33',
                                     'class' => '',
                                     'id' => '',
                                 ),
@@ -3269,7 +3233,7 @@ class SQLinkSCF
                                     ),
                                 ),
                                 'wrapper' => array(
-                                    'width' => '40',
+                                    'width' => '50',
                                     'class' => '',
                                     'id' => '',
                                 ),
@@ -3306,7 +3270,7 @@ class SQLinkSCF
                                     ),
                                 ),
                                 'wrapper' => array(
-                                    'width' => '40',
+                                    'width' => '50',
                                     'class' => '',
                                     'id' => '',
                                 ),
@@ -3336,7 +3300,7 @@ class SQLinkSCF
                                     ),
                                 ),
                                 'wrapper' => array(
-                                    'width' => '40',
+                                    'width' => '50',
                                     'class' => '',
                                     'id' => '',
                                 ),
@@ -3344,9 +3308,6 @@ class SQLinkSCF
                                 'allow_in_bindings' => 0,
                                 'placeholder' => '',
                                 'parent_repeater' => 'field_6796350da90e0',
-                                'maxlength' => '',
-                                'prepend' => '',
-                                'append' => '',
                             ),
                             array(
                                 'key' => 'field_67adafe068d09',
@@ -3366,7 +3327,7 @@ class SQLinkSCF
                                     ),
                                 ),
                                 'wrapper' => array(
-                                    'width' => '40',
+                                    'width' => '50',
                                     'class' => '',
                                     'id' => '',
                                 ),
@@ -5765,7 +5726,6 @@ class SQLinkSCF
         });
     }
 
-    // do not initalize
     public function course_cpt()
     {
         add_action('init', function () {
@@ -5914,6 +5874,7 @@ class SQLinkSCF
             ));
         });
     }
+
 
     public function AreaActivities()
     {
@@ -9452,159 +9413,6 @@ class SQLinkSCF
                         'selected' => 0,
                     ),
                     array(
-                        'key' => 'field_67ab3ca876349',
-                        'label' => 'Stages Title',
-                        'name' => 'stages_title',
-                        'aria-label' => '',
-                        'type' => 'text',
-                        'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
-                        'wrapper' => array(
-                            'width' => '',
-                            'class' => '',
-                            'id' => '',
-                        ),
-                        'default_value' => '',
-                        'maxlength' => '',
-                        'allow_in_bindings' => 0,
-                        'placeholder' => '',
-                        'prepend' => '',
-                        'append' => '',
-                    ),
-                    array(
-                        'key' => 'field_67ac8074a8148',
-                        'label' => 'Renewal Stages',
-                        'name' => 'renewal_stages',
-                        'aria-label' => '',
-                        'type' => 'relationship',
-                        'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
-                        'wrapper' => array(
-                            'width' => '',
-                            'class' => '',
-                            'id' => '',
-                        ),
-                        'post_type' => array(
-                            0 => 'urban-renewal-stage',
-                        ),
-                        'post_status' => array(
-                            0 => 'publish',
-                        ),
-                        'taxonomy' => '',
-                        'filters' => array(
-                            0 => 'search',
-                        ),
-                        'return_format' => 'object',
-                        'acfe_bidirectional' => array(
-                            'acfe_bidirectional_enabled' => '0',
-                        ),
-                        'min' => '',
-                        'max' => '',
-                        'allow_in_bindings' => 0,
-                        'elements' => '',
-                        'bidirectional' => 0,
-                        'bidirectional_target' => array(),
-                    ),
-                ),
-                'location' => array(
-                    array(
-                        array(
-                            'param' => 'post_type',
-                            'operator' => '==',
-                            'value' => 'urban-renewal-proces',
-                        ),
-                    ),
-                ),
-                'menu_order' => 0,
-                'position' => 'normal',
-                'style' => 'default',
-                'label_placement' => 'left',
-                'instruction_placement' => 'label',
-                'hide_on_screen' => '',
-                'active' => true,
-                'description' => '',
-                'show_in_rest' => 0,
-                'acfe_display_title' => '',
-                'acfe_autosync' => '',
-                'acfe_form' => 0,
-                'acfe_meta' => '',
-                'acfe_note' => '',
-            ));
-        });
-    }
-
-    public function renewal_process_stage_taxonmy()
-    {
-        add_action('init', function () {
-            register_taxonomy('urban-renewal-stage', array(
-                0 => 'urban-renewal-proces',
-            ), array(
-                'labels' => array(
-                    'name' => 'Urban Renewal Stages',
-                    'singular_name' => 'Urban Renewal Stage',
-                    'menu_name' => 'Urban Renewal Stages',
-                    'all_items' => 'All Urban Renewal Stages',
-                    'edit_item' => 'Edit Urban Renewal Stage',
-                    'view_item' => 'View Urban Renewal Stage',
-                    'update_item' => 'Update Urban Renewal Stage',
-                    'add_new_item' => 'Add New Urban Renewal Stage',
-                    'new_item_name' => 'New Urban Renewal Stage Name',
-                    'search_items' => 'Search Urban Renewal Stages',
-                    'popular_items' => 'Popular Urban Renewal Stages',
-                    'separate_items_with_commas' => 'Separate urban renewal stages with commas',
-                    'add_or_remove_items' => 'Add or remove urban renewal stages',
-                    'choose_from_most_used' => 'Choose from the most used urban renewal stages',
-                    'not_found' => 'No urban renewal stages found',
-                    'no_terms' => 'No urban renewal stages',
-                    'items_list_navigation' => 'Urban Renewal Stages list navigation',
-                    'items_list' => 'Urban Renewal Stages list',
-                    'back_to_items' => '← Go to urban renewal stages',
-                    'item_link' => 'Urban Renewal Stage Link',
-                    'item_link_description' => 'A link to a urban renewal stage',
-                ),
-                'public' => true,
-                'show_in_menu' => true,
-                'show_in_rest' => true,
-                'meta_box_cb' => false,
-            ));
-        });
-    }
-
-    public function urban_renewal_stage_cpt_fieldgroup()
-    {
-        add_action('acf/include_fields', function () {
-            if (! function_exists('acf_add_local_field_group')) {
-                return;
-            }
-
-            acf_add_local_field_group(array(
-                'key' => 'group_67ac7e047285f',
-                'title' => 'Urban Renewal Stage - CPT',
-                'fields' => array(
-                    array(
-                        'key' => 'field_67ab3a4ef1126',
-                        'label' => 'Stage Title',
-                        'name' => 'stage_title',
-                        'aria-label' => '',
-                        'type' => 'text',
-                        'instructions' => '',
-                        'required' => 1,
-                        'conditional_logic' => 0,
-                        'wrapper' => array(
-                            'width' => '',
-                            'class' => '',
-                            'id' => '',
-                        ),
-                        'default_value' => '',
-                        'maxlength' => '',
-                        'allow_in_bindings' => 0,
-                        'placeholder' => '',
-                        'prepend' => '',
-                        'append' => '',
-                    ),
-                    array(
                         'key' => 'field_67aa0b28cfd41',
                         'label' => 'Stages',
                         'name' => 'stages',
@@ -10228,7 +10036,7 @@ class SQLinkSCF
                         array(
                             'param' => 'post_type',
                             'operator' => '==',
-                            'value' => 'urban-renewal-stage',
+                            'value' => 'urban-renewal-proces',
                         ),
                     ),
                 ),
@@ -10250,10 +10058,12 @@ class SQLinkSCF
         });
     }
 
-    public function urban_renewal_stage_cpt()
+    public function renewal_process_stage_taxonmy()
     {
         add_action('init', function () {
-            register_post_type('urban-renewal-stage', array(
+            register_taxonomy('urban-renewal-stage', array(
+                0 => 'urban-renewal-proces',
+            ), array(
                 'labels' => array(
                     'name' => 'Urban Renewal Stages',
                     'singular_name' => 'Urban Renewal Stage',
@@ -10261,31 +10071,24 @@ class SQLinkSCF
                     'all_items' => 'All Urban Renewal Stages',
                     'edit_item' => 'Edit Urban Renewal Stage',
                     'view_item' => 'View Urban Renewal Stage',
-                    'view_items' => 'View Urban Renewal Stages',
+                    'update_item' => 'Update Urban Renewal Stage',
                     'add_new_item' => 'Add New Urban Renewal Stage',
-                    'add_new' => 'Add New Urban Renewal Stage',
-                    'new_item' => 'New Urban Renewal Stage',
-                    'parent_item_colon' => 'Parent Urban Renewal Stage:',
+                    'new_item_name' => 'New Urban Renewal Stage Name',
                     'search_items' => 'Search Urban Renewal Stages',
+                    'popular_items' => 'Popular Urban Renewal Stages',
+                    'separate_items_with_commas' => 'Separate urban renewal stages with commas',
+                    'add_or_remove_items' => 'Add or remove urban renewal stages',
+                    'choose_from_most_used' => 'Choose from the most used urban renewal stages',
                     'not_found' => 'No urban renewal stages found',
-                    'not_found_in_trash' => 'No urban renewal stages found in Trash',
-                    'archives' => 'Urban Renewal Stage Archives',
-                    'attributes' => 'Urban Renewal Stage Attributes',
-                    'insert_into_item' => 'Insert into urban renewal stage',
-                    'uploaded_to_this_item' => 'Uploaded to this urban renewal stage',
-                    'filter_items_list' => 'Filter urban renewal stages list',
-                    'filter_by_date' => 'Filter urban renewal stages by date',
+                    'no_terms' => 'No urban renewal stages',
                     'items_list_navigation' => 'Urban Renewal Stages list navigation',
                     'items_list' => 'Urban Renewal Stages list',
-                    'item_published' => 'Urban Renewal Stage published.',
-                    'item_published_privately' => 'Urban Renewal Stage published privately.',
-                    'item_reverted_to_draft' => 'Urban Renewal Stage reverted to draft.',
-                    'item_scheduled' => 'Urban Renewal Stage scheduled.',
-                    'item_updated' => 'Urban Renewal Stage updated.',
+                    'back_to_items' => '← Go to urban renewal stages',
                     'item_link' => 'Urban Renewal Stage Link',
-                    'item_link_description' => 'A link to a urban renewal stage.',
+                    'item_link_description' => 'A link to a urban renewal stage',
                 ),
                 'public' => true,
+                'show_in_menu' => true,
                 'show_in_rest' => true,
                 'menu_icon' => 'dashicons-update',
                 'supports' => array(

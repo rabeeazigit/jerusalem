@@ -197,25 +197,20 @@ class Lobyprojects
 
         </div>
 
-        <div class="row align-items-start">
+        <div class="row align-items-center">
 
         <!-- Left Column: Text Content -->
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 about_text order-2 order-md-1">
         <h6 class="ps-0 ps-md-5 display-4 fs-2 fw-bold">מידע חיצוני נוסף</h6>
-'.$this->External_Links().'
-
+                ' . $this->External_Links() . '
         </div>
 
         <!-- Right Column: Image -->
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 order-1 order-md-2">
-               
-
+               ' . $this->Sexeual_Numbers() . '
         </div>
 
         </div>
-
-
-
 
         </div>
     </div>';
@@ -224,24 +219,99 @@ class Lobyprojects
     }
 
 
-private  function External_Links(){
+    private function Sexeual_Numbers()
+    {
+        $sexy_numbers = $this->projects_sexy_numbers;
+        $html = "";
+        $html .= "<div class='row py-5 py-md-0'>";
+        foreach ($sexy_numbers as $sn) {
+            $html .= "<div class='col'><span class='s_number'>{$sn['the_sexy_number']} </span><span class='s_title'>{$sn['project_text_sexy_number']}</span></div>";
+        }
+        $html .= "</div>";
+        return $html;
+    }
 
-    $sexy_numbers = $this->projects_sexy_numbers; 
-    $external = $this->project_external_link ; 
 
 
-   $html ="<div class='external_link_wrapper'>";
+
+    private  function External_Links()
+    {
+        $external = $this->project_external_link;
 
 
-   return $html;
 
+        $html = '<div class="row row-gap-4 ms-0 ms-md-4 ">';
+        foreach ($external as $idx => $e) {
+            $html .= '<div class="col-md-8">
+                    <div class="vstack justify-content-between align-items-center border rounded-4 py-2 px-3 external_links_container">
+                        <div class="hstack align-items-center justify-content-between external_links_toggler collapsed" data-bs-toggle="collapse" data-bs-target="#external_collapse_' . $idx . '">
+                            <div class="hstack gap-2 align-items-center">
+                                <img src="' . get_field("image", $e) . '" alt="" class="external_link_image">
+
+                                <div class="fs-6 fw-semibold">' . get_field("title", $e) . '
+                                </div>
+                            </div>
+
+                            <div class="justify-self-end">
+                                <img class="external_link_icon" src="' . get_template_directory_uri() . '/assets/images/down-arrow.png" style="width: 24px; height: 24px">
+                            </div>
+                        </div>
+
+                        <div class="collapse w-100" id="external_collapse_' . $idx . '">
+                            <div class="vstack my-2 gap-3">';
+            foreach (get_field("links", $e) as $link) {
+                if (isset($link["link"])) :
+                    $html .= '<a class="text-reset text-decoration-none external_link_container" href="' . $link["link"] . '">
+                                            <div class="hstack py-3 gap-4 align-items-center justify-content-between">
+                                                <img src="' . get_template_directory_uri() . '/assets/images/link.png" style="width: 24px; height: 24px">
+
+                                                <div class="fs-6 fw-semibold">' . $link["label"] . '
+                                                </div>
+
+                                                <img src="' . get_template_directory_uri() . '/assets/images/btn-arrow-black.png" style="width: 24px; height: 24px">
+                                            </div>
+                                        </a>';
+                endif;
+            }
+            $html .= '</div>
+                        </div>
+                    </div>
+                </div>';
+        }
+        $html .= '</div>';
+
+        return $html;
+    }
+
+
+public function GetProjects_Random(){
 
 }
 
 
 
+public function GetProject_fetured_mnualy(){
+
+    $fetured = $this->fetured_projects;
+   echo '<div class="container-fluid py-4"><div class="row row-gap-5">';
+    foreach( $fetured as $key=>$fet){
+    $e= $fet->ID;
+echo '<div class="col-md-3">';
+    get_template_part("template-parts/project-card", null, [
+        "project_neighborhood" => get_field("project_neighborhood", $e) ?? null,
+        "project_status" => get_field("project_status", $e) ?? null,
+        "project_card_image" => get_field("project_card_image", $e) ?? null,
+        "project_name" => $e->post_title ?? null,
+    ]);
+    echo '</div>';
+    }
 
 
+echo '</div></div>';
+
+
+
+}
 
 
 
