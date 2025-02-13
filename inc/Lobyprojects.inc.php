@@ -208,7 +208,7 @@ class Lobyprojects
 
         <!-- Right Column: Image -->
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 order-1 order-md-2">
-                Sexy numbers
+               
 
         </div>
 
@@ -231,7 +231,7 @@ private  function External_Links(){
 
 
    $html ="<div class='external_link_wrapper'>";
-   
+
 
    return $html;
 
