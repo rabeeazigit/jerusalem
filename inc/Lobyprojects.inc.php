@@ -1,25 +1,252 @@
-<?php 
-class Lobyprojects {
-
-public function __construct() {
-  
-}
-
-
-public function MainHeader()
+<?php
+class Lobyprojects
 {
 
-    $html =
+
+    public $pid;
+
+    //Neighborhoods tab
+    public $project_neighborhood;
+    public $tzof_number;
+    public $tabaa_number;
+    public $project_entrepreneur;
+    public $project_lowyer;
+    public $yt;
+    //Status tab
+    public $project_status;
+
+    //Galeery tab
+    public $project_card_image_repeater; //gallery   project_card_image_repeater 
+
+    //Project Details tab
+    public $area_description;
+    public $projects_sexy_numbers; //repeater
+    public $project_external_link; //post object
+
+    //Featured Projects
+    public $auto_featured_project_selector; // true\false
+    public $fetured_projects; //post object
+
+    public function __construct()
+    {
+        $this->pid = get_the_ID();
+        $this->yt = 'https://www.youtube.com/embed/';
+
+        //Neighborhoods tab
+        $this->project_neighborhood = get_field("project_neighborhood", $this->pid);
+        $this->tzof_number = get_field("tzof_number", $this->pid);
+        $this->tabaa_number = get_field("tabaa_number", $this->pid);
+        $this->project_entrepreneur = get_field("project_entrepreneur", $this->pid);
+        $this->project_lowyer = get_field("project_lowyer", $this->pid);
+        //Status tab
+        $this->project_status = get_field("project_status", $this->pid);
+
+        //Galeery tab
+        $this->project_card_image_repeater = get_field("project_card_image_repeater", $this->pid); //gallery
+
+        //Project Details tab
+        $this->area_description = get_field("area_description", $this->pid);
+        $this->projects_sexy_numbers = get_field("projects_sexy_numbers", $this->pid); //repeater
+        $this->project_external_link = get_field("project_external_link", $this->pid); //post object
+
+        //Featured Projects
+        $this->auto_featured_project_selector = get_field("auto_featured_project_selector", $this->pid); // true\false
+        $this->fetured_projects = get_field("fetured_projects", $this->pid); //post object
+
+
+    }
+
+
+
+
+    public function MainHeader()
+    {
+
+        $html =
             '<div class="container-fluid px-0">
                 <div class="row">
                     <div class="col">
-                    '. get_template_part("template-parts/navbar") . ' 
+                    ' . get_template_part("template-parts/navbar") . ' 
                 </div> 
              </div>';
 
-    return $html;
+        return $html;
+    }
+
+    private function GetProjectStatus()
+    {
+
+        $Status = [];
+        $ProjectStatus = $this->project_status;
+        foreach ($ProjectStatus as $st) {
+            $Status['name'] = $st->name;
+            $Status['color'] = get_field("project_status_color", "project-status_" . $st->term_id);
+        }
+        return $Status;
+    }
+
+
+    private function Neighborhoods()
+    {
+
+        $Status = $this->GetProjectStatus();
+        $title = $this->project_neighborhood;
+
+        $html = "<ul class='nbrhd ps-0 ps-md-5'>";
+        $html .= "<li>{$title->post_title}</li>";
+        $html .= "<li>{$this->tzof_number}</li>";
+        $html .= "<li>{$this->tabaa_number}</li>";
+        $html .= "<li>{$this->project_entrepreneur}</li>";
+        $html .= "<li>{$this->project_lowyer}</li>";
+        $html .= "</ul>";
+        $html .= "<div class='sts_title ms-0 ms-md-5'>התקדמות תהליך</div><div class='Status_pill '><span style='background:{$Status['color']}' class='circle'></span>{$Status['name']}</div>";
+
+
+        return $html;
+    }
+
+
+    private function ProjectCarousle()
+    {
+        $Gallery = [];
+        $Gallery_RAW = $this->project_card_image_repeater;
+
+        foreach ($Gallery_RAW as $key => $gal) {
+            $gallery_source = $gal['gallery_source'];
+
+            switch ($gallery_source) {
+                case 'video':
+                    $Gallery[$key]['source'] = 'video';
+                    $Gallery[$key]['video_src'] = $gal['youtube_video'];
+                    $Gallery[$key]['video_title'] = $gal['pg_video_title'];
+                    break;
+
+                case 'image':
+                    $Gallery[$key]['source'] = 'image';
+                    $Gallery[$key]['image_src'] = $gal['gallery_image'];
+                    $Gallery[$key]['image_title'] = $gal['pg_image_title'];
+                    break;
+            }
+        }
+        return $Gallery;
+    }
+
+    private function HTMLGallery()
+    {
+        $html = "";
+        $Gallery = $this->ProjectCarousle();
+
+
+        if (!empty($Gallery)) {
+            foreach ($Gallery as $gal) {
+
+                if ($gal['source'] == 'video') {
+                    $html .= "<div class='yt_video_gallery' style='z-index:99;position:relative;'>";
+                    $html .= "<iframe width='100%' height='510' style='z-index:99;position:relative;border-radius:30px;'
+            src='https://www.youtube.com/embed/{$gal['video_src']}?mute=1' 
+            title='{$gal['video_title']}' 
+            frameborder='0'
+            loading='lazy'>
+            </iframe>";
+                    $html .= "<div class='image_title '><h6>{$gal['video_title']}</h6></div></div>";
+                }
+
+                if ($gal['source'] == 'image') {
+                    $html .= "<div class='image_gallery'><img class='src_image_gallery' src='{$gal['image_src']}'/>";
+                    $html .= "<div class='image_title '><h6>{$gal['image_title']}</h6></div></div>";
+                }
+            }
+            return $html;
+        }
+    }
+
+
+    public function project_Description()
+    {
+        $area_description = get_field("area_description", $this->pid);
+        $html = "<h3 class='ps-0 ps-md-5 mt-3'>תיאור המתחם</h3>";
+        $html .= "<div class='pro_desc ps-0 ps-md-5'><p>{$area_description}</p></div>";
+        return $html;
+    }
+
+
+    public function HeroSeccssion()
+    {
+        $html = '
+    <div class="container-fluid mt-5 secssionBk">
+        <div class="hero-section p-4">
+            <div class="row align-items-start">
+                
+                <!-- Left Column: Text Content -->
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 about_text">
+                    <h1 class="aboutTitle ps-0 ps-md-5 display-4 fw-bold">' . get_the_title($this->pid) . '</h1>
+                        <div class="list-first">
+                        ' . $this->Neighborhoods() . '
+                        </div>
+                        ' . $this->project_Description() . '
+                    
+                </div>
+
+                <!-- Right Column: Image -->
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="fadeCarousle">
+                    ' . $this->HTMLGallery() . '
+                    </div>
+                    
+                </div>
+
+        </div>
+
+        <div class="row align-items-start">
+
+        <!-- Left Column: Text Content -->
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 about_text order-2 order-md-1">
+        <h6 class="ps-0 ps-md-5 display-4 fs-2 fw-bold">מידע חיצוני נוסף</h6>
+'.$this->External_Links().'
+
+        </div>
+
+        <!-- Right Column: Image -->
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 order-1 order-md-2">
+                Sexy numbers
+
+        </div>
+
+        </div>
+
+
+
+
+        </div>
+    </div>';
+
+        return $html;
+    }
+
+
+private  function External_Links(){
+
+    $sexy_numbers = $this->projects_sexy_numbers; 
+    $external = $this->project_external_link ; 
+
+
+   $html ="<div class='external_link_wrapper'>";
+   
+
+   return $html;
+
+
 }
 
 
-}//END CLASS
-?>
+
+
+
+
+
+
+
+
+
+
+} //END CLASS
