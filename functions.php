@@ -31,6 +31,29 @@ function truncate_sentence($sentence, $limit = 10, $afterfix = true)
     return $result . ($afterfix ? "..." : "");
 }
 
+// Looks for page by it's template name
+function get_page_by_template($template_name)
+{
+    $args = [
+        'post_type'      => 'page',
+        'posts_per_page' => 1,
+        'meta_query'     => [
+            [
+                'key'   => '_wp_page_template',
+                'value' => $template_name
+            ]
+        ]
+    ];
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        return $query->posts[0];
+    }
+
+    return null;
+}
+
 
 // Will be enabled later on
 new SQLinkSCF();

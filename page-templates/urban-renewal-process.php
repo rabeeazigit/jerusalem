@@ -214,7 +214,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                     <!-- Stages Collapseable Elements -->
                     <?php foreach ($urban_renewal_terms as $uc_ind => $urban_category) : ?>
                         <?php $urban_renewal_items = $controller->get_urban_renewal_processes($urban_category); ?>
-                        <div class="urban_category_accordion_wrapper <?= $uc_ind > 0 ? "uc_hidden" : ""; ?>" data-process-category="<?= $urban_category->name; ?>" style="<?= $uc_ind > 0 ? "display:none" : ""; ?>">
+                        <div class="urban_category_accordion_wrapper py-3 py-md-5 <?= $uc_ind > 0 ? "uc_hidden" : ""; ?>" data-process-category="<?= $urban_category->name; ?>" style="<?= $uc_ind > 0 ? "display:none" : ""; ?>">
                             <?php foreach ($urban_renewal_items as $index => $item) : ?>
                                 <div class="vstack">
                                     <div class="row">
@@ -304,7 +304,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                     </div>
                                 </div>
 
-                                <hr style="border-width: 4px">
+                                <hr class="mt-3 mt-md-5" style="border-width: 4px">
                             <?php endforeach; ?>
                         </div>
                     <?php endforeach; ?>

@@ -1,13 +1,13 @@
 <?php
 
-// Template Name: Resident Info
+// Template Name: Entrepreneurs Info
 
 get_header(); ?>
 
 <?php get_template_part("template-parts/navbar"); ?>
 
 <?php
-$controller = new ResidentInfo();
+$controller = new EntreprenuersInfo();
 
 // Setting up renewual items
 $urban_renewal_terms = $controller->get_renewal_categories();
@@ -19,10 +19,6 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
         $urban_renewal_items[$term->name] = $controller->get_urban_renewal_processes($term);
     }
 }
-
-// Settings up resident rights
-$resident_rights = $controller->get_resident_rights();
-
 ?>
 
 <!-- Hero -->
@@ -57,7 +53,7 @@ $resident_rights = $controller->get_resident_rights();
                         </div>
                     <?php endif; ?>
 
-                    <?php if ($resident_rights && is_array($resident_rights) && !empty($resident_rights)) : ?>
+                    <?php if ($controller->stage_cards && is_array($controller->stage_cards) && !empty($controller->stage_cards)) : ?>
                         <div class="">
                             <a href="#resident_rights_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
                                 <?= $controller->resident_rights_title; ?>
@@ -194,8 +190,8 @@ $resident_rights = $controller->get_resident_rights();
     </div>
 <?php endif; ?>
 
-<!-- Residents Rights -->
-<?php if ($resident_rights && is_array($resident_rights) && !empty($resident_rights)) : ?>
+<!-- Stage Cards -->
+<?php if ($controller->stage_cards && is_array($controller->stage_cards) && !empty($controller->stage_cards)) : ?>
     <div id="resident_rights_section" class="container" style="background-image: url(<?= $controller->hero_background_image; ?>); background-size: cover; background-position: center; background-repeat: no-repeat;">
         <?php if ($controller->resident_rights_title) : ?>
             <div class="text-center display-4 fw-semibold mb-3">
@@ -212,24 +208,30 @@ $resident_rights = $controller->get_resident_rights();
         <?php endif; ?>
 
         <div class="row row-gap-4 justify-content-center">
-            <?php foreach ($resident_rights as $e) : ?>
+            <?php foreach ($controller->stage_cards as $e) : ?>
                 <div class="col-md-3">
                     <div class="vstack h-100 align-items-start justify-content-between border rounded-5 p-4 mb-5 bg-white">
                         <div>
-                            <div class="fs-3 fw-bold mb-3">
-                                <?= $e->name; ?>
-                            </div>
+                            <?php if (isset($e["title"])) : ?>
+                                <div class="fs-3 fw-bold mb-3">
+                                    <?= $e["title"]; ?>
+                                </div>
+                            <?php endif; ?>
 
-                            <div class="fs-6">
-                                <?= get_field("description", $e); ?>
-                            </div>
+                            <?php if (isset($e["paragraph"])) : ?>
+                                <div class="fs-6">
+                                    <?= $e["paragraph"]; ?>
+                                </div>
+                            <?php endif; ?>
                         </div>
 
-                        <div class="vstack align-items-start justify-content-end">
-                            <a href="<?= get_permalink($e); ?>" class="text-decoration-none fs-5 sq-tertiary-button">
-                                <?= get_field("link_text", $e); ?>
-                            </a>
-                        </div>
+                        <?php if (isset($e["link"])) : ?>
+                            <div class="vstack align-items-start justify-content-end">
+                                <a href="<?= $e["link"]["url"]; ?>" target="<?= $e["link"]["target"]; ?>" class="text-decoration-none fs-5 sq-tertiary-button">
+                                    <?= $e["link"]["title"]; ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach; ?>
