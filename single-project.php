@@ -11,7 +11,11 @@ $Lobyprojects = new Lobyprojects;
   //echo $Lobyprojects->HeroSeccssion2();
   ?>
 </section>
-
+<section class="projects_sec">
+  <?php
+$Lobyprojects->GetProject_fetured_mnualy();
+?>
+</section>
 
 
 
