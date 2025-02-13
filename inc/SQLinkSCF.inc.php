@@ -33,7 +33,7 @@ class SQLinkSCF
         $this->renewal_process_stage_fieldgroup();
         $this->urban_renewal_stage_cpt_fieldgroup();
         $this->entrepreneurs_info_fieldgroup();
-        // $this->renewed_neightborhoods_page_fieldgroup();
+        $this->renewed_neightborhoods_page_fieldgroup();
         //Wisam
         $this->AreaActivities();
         $this->AreaFieldsPage();
