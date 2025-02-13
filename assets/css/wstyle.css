@@ -379,14 +379,20 @@ button:focus:not(:focus-visible) {
 @media (max-width: 768px) {
      .slick-prev {
         right: -6px !important;
-        top: 33% !important;
+        top: 44% !important;
         z-index: 999999999 !important;
+        z-index: 999999999999999 !important;
+        width: 50%;
+        height: 100%;
+        text-align: start;
     }
 
       .slick-next {
-        left: 40px !important;
-        top: 33% !important;
+        left: -61px !important;
+        top: 44% !important;
         z-index: 999999999 !important;
+        width: 50%;
+        height: 100%;
     }
 
 

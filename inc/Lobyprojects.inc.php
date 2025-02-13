@@ -223,7 +223,7 @@ class Lobyprojects
     {
         $sexy_numbers = $this->projects_sexy_numbers;
         $html = "";
-        $html .= "<div class='row'>";
+        $html .= "<div class='row py-5 py-md-0'>";
         foreach ($sexy_numbers as $sn) {
             $html .= "<div class='col'><span class='s_number'>{$sn['the_sexy_number']} </span><span class='s_title'>{$sn['project_text_sexy_number']}</span></div>";
         }
