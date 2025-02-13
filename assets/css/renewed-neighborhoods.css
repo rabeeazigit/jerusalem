@@ -1,14 +1,31 @@
+body {
+    background: linear-gradient(54deg, white 89%, #cec09750);
+
+    @media screen and (width <= 768px) {
+        background: linear-gradient(54deg, white 73%, #cec09750);
+    }
+}
+
 .hero_section_bg {
     background-image: url(../images/yellow-vector.png);
     background-position: bottom left;
     background-size: contain;
     background-repeat: no-repeat;
+
+    @media screen and (width <= 768px) {
+        background-image: unset;
+    }
 }
 
 .project_map_placeholder {
     height: 540px;
     object-fit: fill;
     object-position: center;
+
+    @media screen and (width <= 768px) {
+        object-fit: cover;
+        height: 340px;
+    }
 }
 
 .project_status_arrow {
@@ -23,7 +40,18 @@
     border-bottom: 1px solid #b2aea8;
 }
 
+.project_status_wrapper_rwduc:last-of-type {
+    border-bottom: unset;
+}
+
 .udc_search_container {
     max-width: 1000px;
     margin: auto;
+}
+
+.udc_search_container .form-select:focus,
+.udc_search_container .input-group:has(.form-control:focus) {
+    border-color: #b2aea8;
+    outline: 0;
+    box-shadow: 0 0 2px #b2aea8;
 }

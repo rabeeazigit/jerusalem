@@ -58,3 +58,4 @@ function get_page_by_template($template_name)
 // Will be enabled later on
 new SQLinkSCF();
 new SQLinkEnqueue();
+new AjaxHandler();

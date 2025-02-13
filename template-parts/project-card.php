@@ -37,7 +37,7 @@ $project_card_image = $args["project_card_image"] ?? null;
         <?php if ($project_neighborhood) : ?>
             <div class="hstack px-2 align-items-center gap-3 opacity-75">
                 <div>
-                    שכונה
+                    <?= $project_neighborhood->post_title; ?>
                 </div>
 
                 <div class="vr"></div>

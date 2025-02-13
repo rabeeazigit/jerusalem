@@ -12,6 +12,18 @@ wp_enqueue_style(
     "all"
 );
 
+wp_enqueue_script(
+    "renewed_neighborhoods_js",
+    get_template_directory_uri() . "/assets/js/renewed-neighborhoods.js",
+    ["jquery_cdn"],
+    filemtime(get_template_directory() . "/assets/js/renewed-neighborhoods.js")
+);
+
+wp_localize_script("renewed_neighborhoods_js", "ajaxObject", [
+    "ajaxUrl" => admin_url("admin-ajax.php"),
+    "nonce" => wp_create_nonce("load_projects_nonce")
+]);
+
 ?>
 
 <!-- HEADER SECTION -->
@@ -25,11 +37,11 @@ $map_placeholder_image = get_field("map_placeholder_image") ?? null;
 <?php get_template_part("template-parts/navbar"); ?>
 
 
-<main class="hero_section_bg">
+<section class="hero_section_bg">
     <!-- Header Section -->
     <div class="container-fluid px-3 px-md-5 py-5">
         <?php if (function_exists("yoast_breadcrumb")) : ?>
-            <div class="sq_breadcrumbs fs-5">
+            <div class="sq_breadcrumbs fs-5 mb-4 mb-md-0">
                 <?php yoast_breadcrumb(); ?>
             </div>
         <?php endif; ?>
@@ -47,7 +59,7 @@ $map_placeholder_image = get_field("map_placeholder_image") ?? null;
         <?php endif; ?>
 
         <!-- Map & Project Status -->
-        <div class="row mb-5">
+        <div class="row mb-5 row-gap-3 row-gap-md-0">
             <?php
             $project_status = get_terms([
                 "taxonomy" => "project-status",
@@ -58,7 +70,7 @@ $map_placeholder_image = get_field("map_placeholder_image") ?? null;
             <!-- Project Status Collapse -->
             <div class="col-md-3">
                 <div class="border rounded-4 py-3 px-4 bg-white">
-                    <div class="hstack align-items-center justify-content-between active show project_status_collapse" data-bs-toggle="collapse" data-bs-target="#project_status_list" style="cursor: pointer">
+                    <div class="hstack align-items-center justify-content-between <?= !wp_is_mobile() ? "active show" : ""; ?> project_status_collapse" data-bs-toggle="collapse" data-bs-target="#project_status_list" style="cursor: pointer">
                         <div class="fs-5 fw-bold">
                             מקרא סטטוס הפרויקט
                         </div>
@@ -67,7 +79,7 @@ $map_placeholder_image = get_field("map_placeholder_image") ?? null;
                     </div>
 
                     <?php if ($project_status && is_array($project_status) && !empty($project_status)) : ?>
-                        <div id="project_status_list" class="collapse show">
+                        <div id="project_status_list" class="collapse <?= !wp_is_mobile() ? "show" : ""; ?>">
                             <div>
                                 <div class="vstack pt-2">
                                     <?php foreach ($project_status as $i => $e) : ?>
@@ -105,23 +117,26 @@ $map_placeholder_image = get_field("map_placeholder_image") ?? null;
 
         <!-- Projects Section -->
         <?php
+        $projects_title = get_field("projects_title") ?? null;
         $neightborhoods = get_posts([
             "post_type" => "neighborhood",
             "posts_per_page" => -1
         ]);
         ?>
-        <div class="container-fluid px-3 px-md-5">
-            <div class="display-4 fw-bold text-center mb-4">
-                פרויקטים
-            </div>
+        <div class="container-fluid px-3 px-md-5" id="projects">
+            <?php if ($projects_title) : ?>
+                <div class="display-4 fw-bold text-center mb-4">
+                    <?= $projects_title; ?>
+                </div>
+            <?php endif; ?>
         </div>
 
         <div class="udc_search_container">
-            <div class="row">
-                <div class="col-md-3">
+            <form class="row row-gap-3" id="neighborhoods_search">
+                <div class="col-md-3 col-6">
                     <?php if ($neightborhoods && is_array($neightborhoods) && !empty($neightborhoods)) : ?>
-                        <select id="neighborhood_select" class="form-select rounded-pill">
-                            <option selected value="" disabled>שכונה</option>
+                        <select id="neighborhood_select" name="neighborhood" class="form-select rounded-pill">
+                            <option selected value="">שכונה</option>
                             <?php foreach ($neightborhoods as $e) : ?>
                                 <option value="<?= $e->ID; ?>">
                                     <?= $e->post_title; ?>
@@ -131,12 +146,12 @@ $map_placeholder_image = get_field("map_placeholder_image") ?? null;
                     <?php endif; ?>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
                     <?php if ($project_status && is_array($project_status) && !empty($project_status)) : ?>
-                        <select id="project_status_select" class="form-select rounded-pill">
-                            <option selected value="" disabled>סטטוס הפרויקט</option>
+                        <select id="project_status_select" name="project_status" class="form-select rounded-pill">
+                            <option selected value="">סטטוס הפרויקט</option>
                             <?php foreach ($project_status as $e) : ?>
-                                <option value="<?= $e->ID; ?>">
+                                <option value="<?= $e->term_id; ?>">
                                     <?= $e->name; ?>
                                 </option>
                             <?php endforeach; ?>
@@ -144,18 +159,108 @@ $map_placeholder_image = get_field("map_placeholder_image") ?? null;
                     <?php endif; ?>
                 </div>
 
-                <div class="col-md-5">
+                <div class="col-md-5 col-12">
                     <div class="input-group bg-white rounded-pill border overflow-hidden">
                         <span class="input-group-text border-0" style="background-color: transparent;">
                             <i class="bi bi-search"></i>
                         </span>
 
-                        <input type="text" class="form-control border-0" id="search_input" placeholder="חיפוש פרויקט">
+                        <input type="text" class="form-control border-0" name="query" id="search_input" placeholder="חיפוש פרויקט">
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
-</main>
+</section>
+
+<!-- Project Numbers Section -->
+<?php
+$projects_numbers = get_field("projects_numbers") ?? null;
+?>
+<section class="container-fluid px-3 px-md-5">
+    <?php if ($projects_numbers && is_array($projects_numbers) && !empty($projects_numbers)) : ?>
+        <hr>
+
+        <div class="row justify-content-center justify-content-md-start row-gap-4 py-2">
+            <?php foreach ($projects_numbers as $e) : ?>
+                <?php
+                $label = $e["label"] ?? null;
+                $number = $e["number"] ?? null;
+                ?>
+                <?php if (wp_is_mobile()) : ?>
+                    <div class="col-4">
+                        <div class="vstack align-items-center justify-content-center">
+                            <div class="fs-2 fw-bold">
+                                <?= $number; ?>
+                            </div>
+
+                            <div class="fs-5 opacity-75 text-center">
+                                <?= $label; ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php else : ?>
+                    <div class="rs-col-5">
+                        <div class="vstack align-items-center justify-content-center">
+                            <div class="fs-2 fw-bold">
+                                <?= $number; ?>
+                            </div>
+
+                            <div class="fs-5 opacity-75">
+                                <?= $label; ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+
+        <hr>
+    <?php endif; ?>
+</section>
+
+<!-- Projects Grid -->
+<?php
+// Getting the initial projects to display
+$total_projects = wp_count_posts("project")->publish;
+$projects_limit = 16;
+$projects_page = 1;
+$remaining_projects = max(0, $total_projects - $projects_limit);
+$projects = get_posts([
+    "post_type" => "project",
+    "posts_per_page" => $projects_limit,
+    "paged" => $projects_page,
+    "post_status" => "publish"
+]);
+?>
+<section class="container-fluid px-3 px-md-5" id="projects-container-after-reset">
+    <?php if ($projects && is_array($projects) && !empty($projects)) : ?>
+        <div class="row row-gap-3 my-5" id="projects-container">
+            <?php foreach ($projects as $e) : ?>
+                <div class="col-md-3">
+                    <?php get_template_part("template-parts/project-card", null, [
+                        "project_neighborhood" => get_field("project_neighborhood", $e) ?? null,
+                        "project_status" => get_field("project_status", $e) ?? null,
+                        "project_card_image" => get_field("project_card_image", $e) ?? null,
+                        "project_name" => $e->post_title ?? null,
+                    ]) ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($remaining_projects > 0) : ?>
+        <div class="hstack justify-content-center align-items-center">
+            <button class="btn btn-sm btn-sq-tertiary rounded-pill" data-remaining="<?= $remaining_projects; ?>" data-limit="<?= $projects_limit; ?>" data-page="<?= $projects_page; ?>" id="loadMoreProjects">
+                טען עוד
+                <span>(<?= $remaining_projects; ?>)</span>
+            </button>
+        </div>
+    <?php endif; ?>
+</section>
+
+<section class="my-5">
+    <?php get_template_part("template-parts/howcanwehelp"); ?>
+</section>
 
 <?php get_footer(); ?>

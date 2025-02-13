@@ -33,7 +33,7 @@ class SQLinkSCF
         $this->renewal_process_stage_fieldgroup();
         $this->urban_renewal_stage_cpt_fieldgroup();
         $this->entrepreneurs_info_fieldgroup();
-        $this->renewed_neightborhoods_page_fieldgroup();
+        // $this->renewed_neightborhoods_page_fieldgroup();
         //Wisam
         $this->AreaActivities();
         $this->AreaFieldsPage();
@@ -2949,6 +2949,52 @@ class SQLinkSCF
                 'key' => 'group_679633d0aeb42',
                 'title' => 'Project',
                 'fields' => array(
+                    array(
+                        'key' => 'field_67ade782a4209',
+                        'label' => 'Card',
+                        'name' => '',
+                        'aria-label' => '',
+                        'type' => 'tab',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'placement' => 'top',
+                        'endpoint' => 0,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'key' => 'field_67ade79fa420a',
+                        'label' => 'כרטיסית סליידר',
+                        'name' => 'project_card_image',
+                        'aria-label' => '',
+                        'type' => 'image',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'uploader' => '',
+                        'return_format' => 'url',
+                        'library' => 'all',
+                        'acfe_thumbnail' => 0,
+                        'min_width' => '',
+                        'min_height' => '',
+                        'min_size' => '',
+                        'max_width' => '',
+                        'max_height' => '',
+                        'max_size' => '',
+                        'mime_types' => '',
+                        'allow_in_bindings' => 0,
+                        'preview_size' => 'medium',
+                    ),
                     array(
                         'key' => 'field_679637e63259e',
                         'label' => 'שכונות',

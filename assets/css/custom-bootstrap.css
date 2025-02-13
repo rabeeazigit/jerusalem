@@ -44,3 +44,27 @@
     background-color: #00000010;
     box-shadow: 0 0 16px #00000010;
 }
+
+.btn-sq-tertiary {
+    padding: var(--spacing-4, 12px) var(--spacing-5, 16px);
+    border: 1px solid var(--border-secondary, #b2aea8);
+}
+
+.btn-sq-tertiary:hover {
+    border: 1px solid var(--border-brand, #bdab73);
+    background: var(--surface-secondary, #ebe8e3);
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.16);
+}
+
+.btn-sq-tertiary:focus {
+    border: 1px solid var(--border-brand, #bdab73);
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.16);
+}
+
+.btn-sq-tertiary:active {
+    border: 1px solid var(--border-secondary, #b2aea8);
+}
+
+.btn-sq-tertiary:disabled {
+    border: 1px solid var(--border-secondary, #b2aea8);
+}
