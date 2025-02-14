@@ -38,6 +38,10 @@ body {
     direction: rtl;
 }
 
+.linear_bg_page {
+    background: linear-gradient(70deg, #174a74 85%, #376a93);
+}
+
 .sq-primary-button {
     background-color: var(--primary);
     color: #ffffff;
@@ -348,14 +352,15 @@ body {
 
 .carousel_info_card {
     z-index: 999;
-    height: 350px;
+    /* height: 350px; */
 
     border-radius: 24px;
     border: 1px solid #b2aea8;
     background-color: #fcfbf9e5;
 
     @media screen and (width <= 768px) {
-        height: 220px;
+        /* height: 220px; */
+        height: auto;
     }
 }
 
@@ -960,4 +965,27 @@ body {
     @media screen and (width <= 768px) {
         min-width: 150px;
     }
+}
+
+.article_display_image {
+    width: 380px;
+    object-fit: cover;
+    object-position: center;
+
+    @media screen and (width <= 768px) {
+        width: 100%;
+    }
+}
+
+@media and screen (width > 768px) {
+    .article_card_elm:not(:last-of-type) {
+        border-bottom: 1px solid #b2aea8;
+    }
+}
+
+.article_wrapper {
+    background-image: url(./assets/images/yellow-vector-extended.png);
+    background-position: left;
+    background-repeat: repeat-y;
+    background-size: auto;
 }

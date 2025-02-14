@@ -1,6 +1,31 @@
 <?php
 $carousel_items = $args["carousel_items"] ?? [];
+$dark_mode = $args["dark_mode"] ?? false;
 ?>
+
+<?php if ($dark_mode) : ?>
+    <style>
+        .carousel_play {
+            background-image: url(<?= get_template_directory_uri() . "/assets/images/pause-light.png"; ?>) !important;
+
+        }
+
+        .carousel_play.carousel_paused {
+            background-image: url(<?= get_template_directory_uri() . "/assets/images/play-light.png"; ?>) !important;
+
+        }
+
+        .carousel_prev {
+            background-image: url(<?= get_template_directory_uri() . "/assets/images/carousel_arrow_light.png "; ?>) !important;
+
+        }
+
+        .carousel_next {
+            background-image: url(<?= get_template_directory_uri() . "/assets/images/carousel_arrow_light.png"; ?>) !important;
+
+        }
+    </style>
+<?php endif; ?>
 
 <div class="vstack">
     <div class="carousel-controls mb-3 px-5">
@@ -33,7 +58,7 @@ $carousel_items = $args["carousel_items"] ?? [];
                     </div>
                 </div>
 
-                <div class="col-md-3 carousel_weird_card_thing">
+                <div class="col carousel_weird_card_thing <?= $dark_mode ? "text-dark" : ""; ?>">
                     <div class="vstack h-100 justify-content-end">
                         <div class="rounded-4 p-3 carousel_info_card">
                             <div class="vstack h-100 align-items-start">

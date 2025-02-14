@@ -77,6 +77,7 @@ $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
                 slidesToShow: 1.5,
                 slidesToScroll: 1,
                 infinite: false,
+                arrows: false,
                 rtl: true
             })
         });

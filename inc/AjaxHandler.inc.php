@@ -10,8 +10,11 @@ class AjaxHandler
         add_action("wp_ajax_get_filtered_projects", [$this, "get_filtered_projects"]);
         add_action("wp_ajax_nopriv_get_filtered_projects", [$this, "get_filtered_projects"]);
 
-        add_action("wp_ajax_reset_projects", [$this, "reset_projects"]);
-        add_action("wp_ajax_nopriv_reset_projects", [$this, "reset_projects"]);
+        add_action("wp_ajax_load_articles", [$this, "load_articles"]);
+        add_action("wp_ajax_nopriv_load_articles", [$this, "load_articles"]);
+
+        add_action("wp_ajax_search_articles", [$this, "search_articles"]);
+        add_action("wp_ajax_nopriv_search_articles", [$this, "search_articles"]);
     }
 
     public function load_projects()
@@ -106,48 +109,271 @@ class AjaxHandler
         ]);
     }
 
-    public function reset_projects()
+    public function load_articles()
     {
-        $total_projects = wp_count_posts("project")->publish;
-        $projects_limit = 16;
-        $projects_page = 1;
-        $remaining_projects = max(0, $total_projects - $projects_limit);
-        $projects = get_posts([
-            "post_type" => "project",
-            "posts_per_page" => $projects_limit,
-            "paged" => $projects_page,
-            "post_status" => "publish"
-        ]);
+        check_ajax_referer("load_articles_nonce", "nonce");
 
+        $limit = isset($_POST["limit"]) ? intval($_POST["limit"]) : 16;
+        $page  = isset($_POST["page"]) ? intval($_POST["page"]) : 1;
+
+        $args = [
+            "post_type" => "article",
+            "posts_per_page" => $limit,
+            "paged" => $page,
+            "post_status" => "publish",
+        ];
+
+        $articles = get_posts($args);
         ob_start(); ?>
-        <?php if ($projects && is_array($projects) && !empty($projects)) : ?>
-            <div class="row row-gap-3 my-5" id="projects-container">
-                <?php foreach ($projects as $e) : ?>
-                    <div class="col-md-3">
-                        <?php get_template_part("template-parts/project-card", null, [
-                            "project_neighborhood" => get_field("project_neighborhood", $e) ?? null,
-                            "project_status" => get_field("project_status", $e) ?? null,
-                            "project_card_image" => get_field("project_card_image", $e) ?? null,
-                            "project_name" => $e->post_title ?? null,
-                        ]) ?>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
+        <?php foreach ($articles as $e) : ?>
+            <?php
+            $title = $e->post_title ?? null;
+            $image = get_field("article_image", $e) ?? null;
+            $description = get_field("article_description", $e) ?? null;
+            $date = get_field("article_date", $e) ?? null;
 
-        <?php if ($remaining_projects > 0) : ?>
-            <div class="hstack justify-content-center align-items-center">
-                <button class="btn btn-sm btn-sq-tertiary rounded-pill" data-remaining="<?= $remaining_projects; ?>" data-limit="<?= $projects_limit; ?>" data-page="<?= $projects_page; ?>" id="loadMoreProjects">
-                    טען עוד
-                    <span>(<?= $remaining_projects; ?>)</span>
-                </button>
-            </div>
-        <?php endif; ?>
-<?php
-        $html = ob_get_clean();
+
+            ?>
+
+            <?php if (!wp_is_mobile()) : ?>
+                <div class="hstack gap-5 justify-content-between align-items-start py-5 article_card_elm">
+                    <?php if ($date) : ?>
+                        <?php
+                        $month = explode(" | ", $date)[1] ?? "";
+                        $day = explode("/", explode(" | ", $date)[0])[0];
+                        $year = explode("/", explode(" | ", $date)[0])[2];
+                        ?>
+                        <div class="vstack">
+                            <div class="fw-semibold fs-4">
+                                <?= $day; ?>
+                            </div>
+
+                            <div class="opacity-75">
+                                <?= $month; ?>
+                            </div>
+
+                            <div class="opacity-75">
+                                <?= $year; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($title || $description) : ?>
+                        <div class="vstack gap-2">
+                            <?php if ($title) : ?>
+                                <div class="fs-4 fw-bold">
+                                    <?= $title; ?>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if ($description) : ?>
+                                <div class="fs-6">
+                                    <?= $description; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($image) : ?>
+                        <img class="article_display_image" src="<?= $image; ?>" alt="<?= $title; ?>" class="img-fluid w-100 object-fit-cover rounded-4">
+                    <?php endif; ?>
+                </div>
+            <?php else : ?>
+                <div class="vstack gap-2 justify-content-between align-items-start py-3 article_card_elm">
+                    <?php if ($image) : ?>
+                        <img class="article_display_image" src="<?= $image; ?>" alt="<?= $title; ?>" class="img-fluid w-100 object-fit-cover rounded-4">
+                    <?php endif; ?>
+
+                    <div class="hstack gap-2">
+                        <?php if ($date) : ?>
+                            <?php
+                            $month = explode(" | ", $date)[1] ?? "";
+                            $day = explode("/", explode(" | ", $date)[0])[0];
+                            $year = explode("/", explode(" | ", $date)[0])[2];
+                            ?>
+                            <div class="vstack">
+                                <div class="fw-semibold fs-4">
+                                    <?= $day; ?>
+                                </div>
+
+                                <div class="opacity-75">
+                                    <?= $month; ?>
+                                </div>
+
+                                <div class="opacity-75">
+                                    <?= $year; ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ($title || $description) : ?>
+                            <div class="vstack gap-2">
+                                <?php if ($title) : ?>
+                                    <div class="fs-5 fw-bold">
+                                        <?= $title; ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if ($description) : ?>
+                                    <div class="fs-6">
+                                        <?= truncate_sentence($description, 64); ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php
+        $article_html = ob_get_clean();
+        $total_articles = wp_count_posts("article")->publish;
 
         wp_send_json([
-            "projects" => $html
+            "articles" => $article_html,
+            "remaining" => max(0, $total_articles - (($page + 1) * $limit))
+        ]);
+    }
+
+    public function search_articles()
+    {
+        check_ajax_referer("search_articles_nonce", "nonce");
+
+        $search_query = $_POST["query"] ?? null;
+
+        $args = [
+            "post_type" => "article",
+            "posts_per_page" => -1,
+            "post_status" => "publish",
+            "s" => $search_query
+        ];
+        $regular_search = get_posts($args);
+
+        $acf_args = [
+            "post_type" => "article",
+            "posts_per_page" => -1,
+            "post_status" => "publish",
+            "exclude" => array_map(fn($e) => $e->ID, $regular_search),
+            "meta_query" => [
+                "relation" => "OR",
+                [
+                    "key" => "article_description",
+                    "value" => $search_query,
+                    "compare" => "LIKE"
+                ]
+            ]
+        ];
+
+        $advanced_search = get_posts($acf_args);
+
+        $articles = [...$regular_search, ...$advanced_search];
+        ob_start(); ?>
+
+        <?php foreach ($articles as $e) : ?>
+            <?php
+            $title = $e->post_title ?? null;
+            $image = get_field("article_image", $e) ?? null;
+            $description = get_field("article_description", $e) ?? null;
+            $date = get_field("article_date", $e) ?? null;
+
+
+            ?>
+
+            <?php if (!wp_is_mobile()) : ?>
+                <div class="hstack gap-5 justify-content-between align-items-start py-5 article_card_elm">
+                    <?php if ($date) : ?>
+                        <?php
+                        $month = explode(" | ", $date)[1] ?? "";
+                        $day = explode("/", explode(" | ", $date)[0])[0];
+                        $year = explode("/", explode(" | ", $date)[0])[2];
+                        ?>
+                        <div class="vstack">
+                            <div class="fw-semibold fs-4">
+                                <?= $day; ?>
+                            </div>
+
+                            <div class="opacity-75">
+                                <?= $month; ?>
+                            </div>
+
+                            <div class="opacity-75">
+                                <?= $year; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($title || $description) : ?>
+                        <div class="vstack gap-2">
+                            <?php if ($title) : ?>
+                                <div class="fs-4 fw-bold">
+                                    <?= $title; ?>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if ($description) : ?>
+                                <div class="fs-6">
+                                    <?= $description; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($image) : ?>
+                        <img class="article_display_image" src="<?= $image; ?>" alt="<?= $title; ?>" class="img-fluid w-100 object-fit-cover rounded-4">
+                    <?php endif; ?>
+                </div>
+            <?php else : ?>
+                <div class="vstack gap-2 justify-content-between align-items-start py-3 article_card_elm">
+                    <?php if ($image) : ?>
+                        <img class="article_display_image" src="<?= $image; ?>" alt="<?= $title; ?>" class="img-fluid w-100 object-fit-cover rounded-4">
+                    <?php endif; ?>
+
+                    <div class="hstack gap-2">
+                        <?php if ($date) : ?>
+                            <?php
+                            $month = explode(" | ", $date)[1] ?? "";
+                            $day = explode("/", explode(" | ", $date)[0])[0];
+                            $year = explode("/", explode(" | ", $date)[0])[2];
+                            ?>
+                            <div class="vstack">
+                                <div class="fw-semibold fs-4">
+                                    <?= $day; ?>
+                                </div>
+
+                                <div class="opacity-75">
+                                    <?= $month; ?>
+                                </div>
+
+                                <div class="opacity-75">
+                                    <?= $year; ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ($title || $description) : ?>
+                            <div class="vstack gap-2">
+                                <?php if ($title) : ?>
+                                    <div class="fs-5 fw-bold">
+                                        <?= $title; ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if ($description) : ?>
+                                    <div class="fs-6">
+                                        <?= truncate_sentence($description, 64); ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+<?php
+        $articles_html = ob_get_clean();
+
+        wp_send_json([
+            "articles" => $articles_html
         ]);
     }
 }

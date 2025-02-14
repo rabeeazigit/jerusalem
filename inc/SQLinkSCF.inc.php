@@ -33,6 +33,7 @@ class SQLinkSCF
         $this->renewal_process_stage_fieldgroup();
         $this->renewed_neightborhoods_page_fieldgroup();
         $this->resident_rights_page_fieldgroup();
+        $this->news_update_page_fieldgroup();
         //Wisam
         $this->AreaActivities();
         $this->AreaFieldsPage();
@@ -4098,7 +4099,7 @@ class SQLinkSCF
                 'fields' => array(
                     array(
                         'key' => 'field_67989ae8479c1',
-                        'label' => 'Date & Description',
+                        'label' => 'Card Information',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -4113,6 +4114,34 @@ class SQLinkSCF
                         'placement' => 'top',
                         'endpoint' => 0,
                         'selected' => 0,
+                    ),
+                    array(
+                        'key' => 'field_67af3a505c884',
+                        'label' => 'Displayed Image',
+                        'name' => 'article_image',
+                        'aria-label' => '',
+                        'type' => 'image',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'uploader' => '',
+                        'return_format' => 'url',
+                        'library' => 'all',
+                        'acfe_thumbnail' => 0,
+                        'min_width' => '',
+                        'min_height' => '',
+                        'min_size' => '',
+                        'max_width' => '',
+                        'max_height' => '',
+                        'max_size' => '',
+                        'mime_types' => '',
+                        'allow_in_bindings' => 0,
+                        'preview_size' => 'medium',
                     ),
                     array(
                         'key' => 'field_679899b6479be',
@@ -4240,24 +4269,6 @@ class SQLinkSCF
                         'placement' => 'top',
                         'endpoint' => 0,
                         'selected' => 0,
-                    ),
-                    array(
-                        'key' => 'field_67989b26479c4',
-                        'label' => 'Article To Do Later',
-                        'name' => '',
-                        'aria-label' => '',
-                        'type' => 'message',
-                        'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
-                        'wrapper' => array(
-                            'width' => '',
-                            'class' => '',
-                            'id' => '',
-                        ),
-                        'message' => 'This section will be implemented later on',
-                        'new_lines' => 'wpautop',
-                        'esc_html' => 0,
                     ),
                 ),
                 'location' => array(
@@ -12050,6 +12061,162 @@ class SQLinkSCF
                             'param' => 'page_template',
                             'operator' => '==',
                             'value' => 'page-templates/resident-rights.php',
+                        ),
+                    ),
+                ),
+                'menu_order' => 0,
+                'position' => 'normal',
+                'style' => 'default',
+                'label_placement' => 'left',
+                'instruction_placement' => 'label',
+                'hide_on_screen' => array(
+                    0 => 'block_editor',
+                    1 => 'the_content',
+                    2 => 'excerpt',
+                    3 => 'discussion',
+                    4 => 'comments',
+                    5 => 'revisions',
+                    6 => 'slug',
+                    7 => 'author',
+                    8 => 'format',
+                    9 => 'featured_image',
+                    10 => 'send-trackbacks',
+                ),
+                'active' => true,
+                'description' => '',
+                'show_in_rest' => 0,
+                'acfe_display_title' => '',
+                'acfe_autosync' => '',
+                'acfe_form' => 0,
+                'acfe_meta' => '',
+                'acfe_note' => '',
+            ));
+        });
+    }
+
+    public function news_update_page_fieldgroup()
+    {
+        add_action('acf/include_fields', function () {
+            if (! function_exists('acf_add_local_field_group')) {
+                return;
+            }
+
+            acf_add_local_field_group(array(
+                'key' => 'group_67af348e533e1',
+                'title' => 'News And Updates - Page',
+                'fields' => array(
+                    array(
+                        'key' => 'field_67af348e10636',
+                        'label' => 'Carousel',
+                        'name' => '',
+                        'aria-label' => '',
+                        'type' => 'tab',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'placement' => 'top',
+                        'endpoint' => 0,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'key' => 'field_67af351c72205',
+                        'label' => 'Main Title',
+                        'name' => 'main_title',
+                        'aria-label' => '',
+                        'type' => 'text',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'default_value' => '',
+                        'maxlength' => '',
+                        'allow_in_bindings' => 0,
+                        'placeholder' => '',
+                        'prepend' => '',
+                        'append' => '',
+                    ),
+                    array(
+                        'key' => 'field_67af349a10637',
+                        'label' => 'Carousel Options',
+                        'name' => 'carousel_options',
+                        'aria-label' => '',
+                        'type' => 'clone',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'clone' => array(
+                            0 => 'group_6791ee3a5d4ef',
+                        ),
+                        'display' => 'seamless',
+                        'layout' => 'block',
+                        'prefix_label' => 0,
+                        'prefix_name' => 0,
+                        'acfe_seamless_style' => 0,
+                        'acfe_clone_modal' => 0,
+                        'acfe_clone_modal_close' => 0,
+                        'acfe_clone_modal_button' => '',
+                        'acfe_clone_modal_size' => 'large',
+                    ),
+                    array(
+                        'key' => 'field_67af3c9c845a1',
+                        'label' => 'Articles',
+                        'name' => '',
+                        'aria-label' => '',
+                        'type' => 'tab',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'placement' => 'top',
+                        'endpoint' => 0,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'key' => 'field_67af3cc2845a2',
+                        'label' => 'Articles Title',
+                        'name' => 'articles_title',
+                        'aria-label' => '',
+                        'type' => 'text',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'default_value' => '',
+                        'maxlength' => '',
+                        'allow_in_bindings' => 0,
+                        'placeholder' => '',
+                        'prepend' => '',
+                        'append' => '',
+                    ),
+                ),
+                'location' => array(
+                    array(
+                        array(
+                            'param' => 'page_template',
+                            'operator' => '==',
+                            'value' => 'page-templates/news-updates.php',
                         ),
                     ),
                 ),

@@ -23,7 +23,7 @@
     </div>
 
     <?php get_template_part("template-parts/carousel", null, [
-        "carousel_items" => array_reverse(get_field("carousel_items") ?? [])
+        "carousel_items" => get_field("carousel_items") ?? []
     ]); ?>
 
     <div>

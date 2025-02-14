@@ -55,6 +55,12 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
                     </a>
                 <?php endif; ?>
 
+                <?php if ($navbar->news_update_link && $navbar->news_update_label) : ?>
+                    <a href="<?= $navbar->news_update_link; ?>" class="text-reset text-decoration-none">
+                        <?= $navbar->news_update_label; ?>
+                    </a>
+                <?php endif; ?>
+
                 <?php if ($navbar->owner_login_link && $navbar->owner_login_label) : ?>
                     <a href="<?= $navbar->owner_login_link; ?>" target="_blank" class="hstack gap-2 text-reset text-decoration-none">
                         <?php if ($navbar->owner_login_logo) : ?>
@@ -136,7 +142,7 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
             </div>
 
             <?php if ($navbar->contact_us_label) : ?>
-                <a href="#contact-us" class="sq-secondary-button text-decoration-none shadow">
+                <a href="#contact-us" class="sq-secondary-button text-decoration-none shadow" style="<?= $dark_theme ? "background-color: #235d8d" : ""; ?>">
                     <?= $navbar->contact_us_label; ?>
                 </a>
             <?php endif; ?>
