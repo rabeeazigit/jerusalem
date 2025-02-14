@@ -15,13 +15,18 @@ $controller = new RoshHaAer();
 <div class="container-fluid px-0">
     <!-- Navbar -->
     <?php get_template_part("template-parts/navbar"); ?>
-
-    <!-- Breadcrumbs -->
 </div>
 
 <!-- Row -->
-<div class="container-fluid px-md-5 px-3">
-    <div class="row my-md-5 mt-5 row-gap-4">
+<div class="container-fluid px-md-5  px-3">
+    <!-- Breadcrumbs -->
+    <?php if (function_exists("yoast_breadcrumb")) : ?>
+        <div class="sq_breadcrumbs mt-5 fs-5 mb-4 mb-md-0">
+            <?php yoast_breadcrumb(); ?>
+        </div>
+    <?php endif; ?>
+
+    <div class="row my-3 row-gap-4">
         <!-- Information Column -->
         <div class="col-md-6">
             <div class="vstack gap-3">
@@ -43,13 +48,13 @@ $controller = new RoshHaAer();
         <div class="col-md-6">
             <?php if (!wp_is_mobile() && $controller->side_image) : ?>
                 <div class="d-flex sticky-top align-items-center justify-content-center">
-                    <img class="rosh-ha-aer-sideimage" src="<?= $controller->side_image; ?>" alt="תמונת דברי ראש העיר" loading="lazy">
+                    <img class="rosh-ha-aer-sideimage" src="<?= $controller->side_image; ?>" alt="" loading="lazy">
                 </div>
             <?php endif; ?>
 
             <?php if (wp_is_mobile() && $controller->mobile_side_image) : ?>
                 <div class="d-flex sticky-top align-items-center justify-content-center">
-                    <img class="rosh-ha-aer-sideimage" src="<?= $controller->mobile_side_image; ?>" alt="תמונת דברי ראש העיר" loading="lazy">
+                    <img class="rosh-ha-aer-sideimage" src="<?= $controller->mobile_side_image; ?>" alt="" loading="lazy">
                 </div>
             <?php endif; ?>
         </div>

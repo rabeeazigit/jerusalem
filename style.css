@@ -644,8 +644,8 @@ body {
     object-fit: cover;
     object-position: center;
     border-radius: 100%;
-    width: 25dvw;
-    height: 25dvw;
+    width: 23dvw;
+    height: 23dvw;
 }
 
 @keyframes infiniteRotation {
@@ -661,8 +661,8 @@ body {
 }
 
 .article_list_side_cube {
-    width: 15vw;
-    height: 15vw;
+    width: 12vw;
+    height: 12vw;
     position: relative;
     left: 120px;
     object-fit: cover;

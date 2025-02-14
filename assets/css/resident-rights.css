@@ -1,0 +1,19 @@
+#main_rr_section {
+    background: var(--surface-secondary, #ebe8e3);
+}
+
+.rr_wrapper_collapse {
+    border: 1px solid #b2aea8;
+}
+
+.rr_trigger_collapse {
+    cursor: pointer;
+}
+
+.rr_trigger_collapse .rr_icon {
+    transition: transform 250ms ease-in-out;
+}
+
+.rr_trigger_collapse:not(.collapsed) .rr_icon {
+    transform: scaleY(-1);
+}

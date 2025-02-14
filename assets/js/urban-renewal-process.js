@@ -24,6 +24,7 @@ $(() => {
 
     $(".stage_collapable").on("show.bs.collapse", function () {
         const slider = $(this).find(".youtube_rs_slider");
+        const id = $(this).find(".youtube_rs_slider").attr("id");
 
         if (!slider.hasClass("slick-initialized")) {
             slider.slick({
@@ -34,6 +35,16 @@ $(() => {
                 dots: true,
                 infinite: false,
                 swipe: false,
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            arrows: true,
+                            prevArrow: `#next_${id}`,
+                            nextArrow: `#prev_${id}`,
+                        },
+                    },
+                ],
             });
         }
     });
