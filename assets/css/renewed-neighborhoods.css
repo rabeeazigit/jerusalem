@@ -1,11 +1,3 @@
-body {
-    background: linear-gradient(54deg, white 89%, #cec09750);
-
-    @media screen and (width <= 768px) {
-        background: linear-gradient(54deg, white 73%, #cec09750);
-    }
-}
-
 .hero_section_bg {
     background-image: url(../images/yellow-vector.png);
     background-position: bottom left;

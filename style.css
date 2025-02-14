@@ -7,6 +7,11 @@
 
 body {
     font-family: "Rubik";
+    background: linear-gradient(54deg, white 89%, #cec09750);
+
+    @media screen and (width <= 768px) {
+        background: linear-gradient(54deg, white 73%, #cec09750);
+    }
 }
 
 html,
