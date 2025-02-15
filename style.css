@@ -343,7 +343,8 @@ body {
 
 .carousel_media_container img,
 .carousel_media_container video {
-    height: 606px;
+    height: 60dvh;
+    /* height: 606px; */
 
     @media screen and (width <= 768px) {
         height: 200px;
@@ -510,7 +511,8 @@ body {
 .event_card_image {
     background-position: center;
     background-size: cover;
-    height: 280px;
+    /* height: 280px; */
+    height: 32dvh;
     border-radius: 18px;
     transition: filter 250ms ease-in-out;
 }
@@ -977,7 +979,7 @@ body {
     }
 }
 
-@media and screen (width > 768px) {
+@media screen and (width > 768px) {
     .article_card_elm:not(:last-of-type) {
         border-bottom: 1px solid #b2aea8;
     }
@@ -988,4 +990,16 @@ body {
     background-position: left;
     background-repeat: repeat-y;
     background-size: auto;
+}
+
+.events-container {
+    max-width: clamp(70%, 90vw, 90%);
+
+    @media screen and (width <= 768px) {
+        max-width: 100%;
+    }
+}
+
+.event_searchbar {
+    width: 24dvw;
 }

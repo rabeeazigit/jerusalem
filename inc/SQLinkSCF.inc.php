@@ -34,6 +34,7 @@ class SQLinkSCF
         $this->renewed_neightborhoods_page_fieldgroup();
         $this->resident_rights_page_fieldgroup();
         $this->news_update_page_fieldgroup();
+        $this->events_courses_page_fieldgroup();
         //Wisam
         $this->AreaActivities();
         $this->AreaFieldsPage();
@@ -12217,6 +12218,162 @@ class SQLinkSCF
                             'param' => 'page_template',
                             'operator' => '==',
                             'value' => 'page-templates/news-updates.php',
+                        ),
+                    ),
+                ),
+                'menu_order' => 0,
+                'position' => 'normal',
+                'style' => 'default',
+                'label_placement' => 'left',
+                'instruction_placement' => 'label',
+                'hide_on_screen' => array(
+                    0 => 'block_editor',
+                    1 => 'the_content',
+                    2 => 'excerpt',
+                    3 => 'discussion',
+                    4 => 'comments',
+                    5 => 'revisions',
+                    6 => 'slug',
+                    7 => 'author',
+                    8 => 'format',
+                    9 => 'featured_image',
+                    10 => 'send-trackbacks',
+                ),
+                'active' => true,
+                'description' => '',
+                'show_in_rest' => 0,
+                'acfe_display_title' => '',
+                'acfe_autosync' => '',
+                'acfe_form' => 0,
+                'acfe_meta' => '',
+                'acfe_note' => '',
+            ));
+        });
+    }
+
+    public function events_courses_page_fieldgroup()
+    {
+        add_action('acf/include_fields', function () {
+            if (! function_exists('acf_add_local_field_group')) {
+                return;
+            }
+
+            acf_add_local_field_group(array(
+                'key' => 'group_67b05d8495a4b',
+                'title' => 'Events And Courses - Page',
+                'fields' => array(
+                    array(
+                        'key' => 'field_67b05d84a208e',
+                        'label' => 'Carousel',
+                        'name' => '',
+                        'aria-label' => '',
+                        'type' => 'tab',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'placement' => 'top',
+                        'endpoint' => 0,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'key' => 'field_67b05d84a5ac9',
+                        'label' => 'Main Title',
+                        'name' => 'main_title',
+                        'aria-label' => '',
+                        'type' => 'text',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'default_value' => '',
+                        'maxlength' => '',
+                        'allow_in_bindings' => 0,
+                        'placeholder' => '',
+                        'prepend' => '',
+                        'append' => '',
+                    ),
+                    array(
+                        'key' => 'field_67b05d84a9628',
+                        'label' => 'Carousel Options',
+                        'name' => 'carousel_options',
+                        'aria-label' => '',
+                        'type' => 'clone',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'clone' => array(
+                            0 => 'group_6791ee3a5d4ef',
+                        ),
+                        'display' => 'seamless',
+                        'layout' => 'block',
+                        'prefix_label' => 0,
+                        'prefix_name' => 0,
+                        'acfe_seamless_style' => 0,
+                        'acfe_clone_modal' => 0,
+                        'acfe_clone_modal_close' => 0,
+                        'acfe_clone_modal_button' => '',
+                        'acfe_clone_modal_size' => 'large',
+                    ),
+                    array(
+                        'key' => 'field_67b05d84ad1aa',
+                        'label' => 'Posts',
+                        'name' => '',
+                        'aria-label' => '',
+                        'type' => 'tab',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'placement' => 'top',
+                        'endpoint' => 0,
+                        'selected' => 0,
+                    ),
+                    array(
+                        'key' => 'field_67b05d84b0e23',
+                        'label' => 'Posts Title',
+                        'name' => 'posts_title',
+                        'aria-label' => '',
+                        'type' => 'text',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'default_value' => '',
+                        'maxlength' => '',
+                        'allow_in_bindings' => 0,
+                        'placeholder' => '',
+                        'prepend' => '',
+                        'append' => '',
+                    ),
+                ),
+                'location' => array(
+                    array(
+                        array(
+                            'param' => 'page_template',
+                            'operator' => '==',
+                            'value' => 'page-templates/events-articles.php',
                         ),
                     ),
                 ),

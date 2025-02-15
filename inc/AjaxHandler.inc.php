@@ -15,6 +15,12 @@ class AjaxHandler
 
         add_action("wp_ajax_search_articles", [$this, "search_articles"]);
         add_action("wp_ajax_nopriv_search_articles", [$this, "search_articles"]);
+
+        add_action("wp_ajax_load_events", [$this, "load_events"]);
+        add_action("wp_ajax_nopriv_load_events", [$this, "load_events"]);
+
+        add_action("wp_ajax_filter_events", [$this, "filter_events"]);
+        add_action("wp_ajax_nopriv_filter_events", [$this, "filter_events"]);
     }
 
     public function load_projects()
@@ -369,11 +375,146 @@ class AjaxHandler
                 </div>
             <?php endif; ?>
         <?php endforeach; ?>
-<?php
+    <?php
         $articles_html = ob_get_clean();
 
         wp_send_json([
             "articles" => $articles_html
+        ]);
+    }
+
+    public function load_events()
+    {
+        check_ajax_referer("load_events_nonce", "nonce");
+
+        $limit = isset($_POST["limit"]) ? intval($_POST["limit"]) : 16;
+        $page  = isset($_POST["page"]) ? intval($_POST["page"]) : 1;
+
+        $args = [
+            "post_type" => "event",
+            "posts_per_page" => $limit,
+            "paged" => $page,
+            "post_status" => "publish",
+        ];
+
+        $events = get_posts($args);
+        ob_start(); ?>
+        <?php foreach ($events as $e) : ?>
+            <div class="col-md-4 col-12">
+                <?php get_template_part("template-parts/event-card", null, [
+                    "event_name" => $e->post_title,
+                    "event_occurrence_date" => get_field("event_occurrence_date", $e),
+                    "event_place" => get_field("event_place", $e),
+                    "event_card_image" => get_field("event_card_image", $e),
+                    "event_card_short_description" => get_field("event_card_short_description", $e),
+                    "event_card_short_button_text" => get_field("event_card_short_button_text", $e),
+                    "permalink" => get_permalink($e),
+                    "post_type" => get_field("event_type", $e)
+                ]) ?>
+            </div>
+        <?php endforeach; ?>
+    <?php
+        $events_html = ob_get_clean();
+        $total_events = wp_count_posts("event")->publish;
+
+        wp_send_json([
+            "events" => $events_html,
+            "remaining" => max(0, $total_events - (($page + 1) * $limit))
+        ]);
+    }
+
+    public function filter_events()
+    {
+        check_ajax_referer("filter_events_nonce", "nonce");
+
+        $event = isset($_POST["event"]) && $_POST["event"] == "true";
+        $course = isset($_POST["course"]) && $_POST["course"] == "true";
+        $query = $_POST["query"] ?? "";
+        $done = isset($_POST["done"]) && $_POST["done"] == "true";
+        $meta_query = [
+            "relation" => "OR",
+        ];
+
+        if ($event) {
+            $meta_query[] = [
+                "key" => "event_type",
+                "value" => "event",
+                "compare" => "="
+            ];
+        }
+
+        if ($course) {
+            $meta_query[] = [
+                "key" => "event_type",
+                "value" => "course",
+                "compare" => "="
+            ];
+        }
+
+        if ($query) {
+            $meta_query[] = [
+                "key" => "event_card_short_description",
+                "value" => $query,
+                "compare" => "LIKE"
+            ];
+        }
+
+        if ($done) {
+            $meta_query[] = [
+                "key" => "event_occurrence_date",
+                "value" => date("Ymd"),
+                "compare" => "<",
+                "type" => "DATE"
+            ];
+        }
+
+        if (empty($meta_query)) {
+            $meta_query[] = [
+                "key" => "event_type",
+                "compare" => "EXISTS"
+            ];
+        }
+
+        $args = [
+            "post_type" => "event",
+            "posts_per_page" => -1,
+            "post_status" => "publish",
+            "meta_query" => $meta_query
+        ];
+        $result_1 = get_posts($args);
+
+        $args = [
+            "post_type" => "event",
+            "posts_per_page" => -1,
+            "post_status" => "publish",
+            "exclude" => array_map(fn($e) => $e->ID, $result_1),
+            "s" => $query,
+            "meta_query" => $meta_query
+        ];
+        $result_2 = get_posts($args);
+
+
+        $events = [...$result_1, ...$result_2];
+        ob_start(); ?>
+        <?php foreach ($events as $e) : ?>
+            <div class="col-md-4 col-12">
+                <?php get_template_part("template-parts/event-card", null, [
+                    "event_name" => $e->post_title,
+                    "event_occurrence_date" => get_field("event_occurrence_date", $e),
+                    "event_place" => get_field("event_place", $e),
+                    "event_card_image" => get_field("event_card_image", $e),
+                    "event_card_short_description" => get_field("event_card_short_description", $e),
+                    "event_card_short_button_text" => get_field("event_card_short_button_text", $e),
+                    "permalink" => get_permalink($e),
+                    "post_type" => get_field("event_type", $e)
+                ]) ?>
+            </div>
+        <?php endforeach; ?>
+<?php
+        $events_html = ob_get_clean();
+
+        wp_send_json([
+            "events" => $events_html,
         ]);
     }
 }
