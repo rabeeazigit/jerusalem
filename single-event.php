@@ -121,37 +121,39 @@ $controller = new SingleEvent();
                     <?php endif; ?>
                 <?php else : ?>
                     <?php if ($controller->details_gallery) : ?>
-                        <div class="event_gallery_container">
-                            <?php foreach ($controller->details_gallery as $e) : ?>
-                                <?php
-                                $type = $e["type"] ?? null;
-                                $image = $e["image"] ?? null;
-                                $youtube_video_id = $e["youtube_video_id"] ?? null;
-                                ?>
-                                <?php if ($type == "image" && $image) : ?>
-                                    <img src="<?= $image; ?>" class=" single-event-side-image">
-                                <?php elseif ($type == "video" && $youtube_video_id) : ?>
-                                    <?php if (wp_is_mobile()) : ?>
-                                        <iframe
-                                            class="single-event-side-image rounded-4 youtube_video_rs"
-                                            src="https://www.youtube.com/embed/<?= $youtube_video_id; ?>"
-                                            title="YouTube video player"
-                                            frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                            referrerpolicy="strict-origin-when-cross-origin"
-                                            allowfullscreen></iframe>
-                                    <?php else : ?>
-                                        <iframe
-                                            class="single-event-side-image rounded-4"
-                                            src="https://www.youtube.com/embed/<?= $youtube_video_id; ?>"
-                                            title="YouTube video player"
-                                            frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                            referrerpolicy="strict-origin-when-cross-origin"
-                                            allowfullscreen></iframe>
+                        <div class="sticky-top">
+                            <div class="event_gallery_container">
+                                <?php foreach ($controller->details_gallery as $e) : ?>
+                                    <?php
+                                    $type = $e["type"] ?? null;
+                                    $image = $e["image"] ?? null;
+                                    $youtube_video_id = $e["youtube_video_id"] ?? null;
+                                    ?>
+                                    <?php if ($type == "image" && $image) : ?>
+                                        <img src="<?= $image; ?>" class=" single-event-side-image">
+                                    <?php elseif ($type == "video" && $youtube_video_id) : ?>
+                                        <?php if (wp_is_mobile()) : ?>
+                                            <iframe
+                                                class="single-event-side-image rounded-4 youtube_video_rs"
+                                                src="https://www.youtube.com/embed/<?= $youtube_video_id; ?>"
+                                                title="YouTube video player"
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                referrerpolicy="strict-origin-when-cross-origin"
+                                                allowfullscreen></iframe>
+                                        <?php else : ?>
+                                            <iframe
+                                                class="single-event-side-image rounded-4"
+                                                src="https://www.youtube.com/embed/<?= $youtube_video_id; ?>"
+                                                title="YouTube video player"
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                referrerpolicy="strict-origin-when-cross-origin"
+                                                allowfullscreen></iframe>
+                                        <?php endif; ?>
                                     <?php endif; ?>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>
