@@ -85,3 +85,38 @@
     --bs-btn-disabled-border-color: #174a75;
     --bs-gradient: none;
 }
+
+.form-control-sq {
+    border-radius: 8px;
+    border: 2px solid #b2aea8;
+    background: #fff;
+    padding: 10px;
+}
+
+.form-control-sq::placeholder {
+    color: #000000;
+}
+
+.form-control-sq:focus {
+    border: 2px solid #bdab73;
+}
+
+.btn-sq-primary-fill {
+    color: #212529;
+    background-color: #bdab73;
+    padding: 10px 16px;
+    transition: all 0.2s ease-in-out;
+    border: none;
+}
+
+.btn-sq-primary-fill:hover,
+.btn-sq-primary-fill.active {
+    color: #212529;
+    background-color: #bdab73;
+    box-shadow: 0 0 16px #00000040;
+}
+
+.form-check-input:checked {
+    background-color: #bdab73;
+    border-color: #bdab73;
+}

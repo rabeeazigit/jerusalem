@@ -1,0 +1,50 @@
+.wpcf7-form {
+    direction: rtl !important;
+}
+
+.wpcf7-form * {
+    direction: rtl !important;
+}
+
+main {
+    background-image: url(../images/yellow-vector-extended.png);
+    background-repeat: repeat-y;
+}
+
+.single-event-side-image {
+    border-radius: 18px;
+    object-fit: cover;
+    height: 480px;
+
+    @media screen and (width <= 768px) {
+        width: 100%;
+        height: 250px;
+    }
+}
+
+.event_gallery_container .slick-prev {
+    right: 26px;
+    z-index: 9999;
+    scale: 3;
+
+    @media screen and (width <= 768px) {
+        top: 173px !important;
+        scale: 1.4;
+        right: 55px !important;
+    }
+}
+
+.event_gallery_container .slick-next {
+    left: 26px;
+    z-index: 9999;
+    scale: 3;
+
+    @media screen and (width <= 768px) {
+        top: 173px !important;
+        scale: 1.4;
+    }
+}
+
+.event_gallery_container .slick-dots {
+    bottom: 21px !important;
+}

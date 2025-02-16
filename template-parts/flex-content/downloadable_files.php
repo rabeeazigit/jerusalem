@@ -30,7 +30,14 @@ $files = $args["files"] ?? null;
                         </div>
 
                         <div class="fs-6">
-                            <?= truncate_sentence(get_field("short_description", $file) ?? "", 80); ?>
+                            <?php
+                            $word_limit = 80;
+
+                            if (isset($args["word_limit"]) && is_numeric($args["word_limit"]) && intval($args["word_limit"]) > 0) {
+                                $word_limit = intval($args["word_limit"]);
+                            }
+                            ?>
+                            <?= truncate_sentence(get_field("short_description", $file) ?? "", $word_limit); ?>
                         </div>
                     </div>
 

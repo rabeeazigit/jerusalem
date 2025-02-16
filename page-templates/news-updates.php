@@ -12,7 +12,12 @@ get_header();
         $main_title = get_field("main_title") ?? null;
         $sub_title = get_field("sub_title") ?? null;
         ?>
-        <div class="vstack my-3 px-md-5 px-3">
+        <div class="vstack my-3 pt-4 px-md-5 px-3">
+            <?php if (function_exists("yoast_breadcrumb")) : ?>
+                <div class="sq_breadcrumbs fs-5">
+                    <?php yoast_breadcrumb(); ?>
+                </div>
+            <?php endif; ?>
             <?php if ($main_title) : ?>
                 <div class="display-4 fw-semibold">
                     <?= $main_title; ?>
