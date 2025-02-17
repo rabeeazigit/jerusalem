@@ -243,6 +243,7 @@ $projects = get_posts([
                         "project_status" => get_field("project_status", $e) ?? null,
                         "project_card_image" => get_field("project_card_image", $e) ?? null,
                         "project_name" => $e->post_title ?? null,
+                        "project_link" => get_permalink($e) ?? null,
                     ]) ?>
                 </div>
             <?php endforeach; ?>

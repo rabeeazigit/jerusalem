@@ -39,6 +39,7 @@ class Navbar
 
     public $contact_us_label;
     public $contact_us_label_mobile;
+    public $contact_us_link;
 
     public function __construct()
     {
@@ -79,6 +80,7 @@ class Navbar
 
         $this->contact_us_label = get_field("contact_us_label", "options") ?? null;
         $this->contact_us_label_mobile = get_field("contact_us_label_mobile", "options") ?? null;
+        $this->contact_us_link = get_page_by_template("page-templates/contact-us.php") ? get_permalink(get_page_by_template("page-templates/contact-us.php")) : "#";
     }
 
     public function get_mobile_menus()

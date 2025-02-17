@@ -284,39 +284,29 @@ class Lobyprojects
     }
 
 
-public function GetProjects_Random(){
-
-}
+    public function GetProjects_Random() {}
 
 
 
-public function GetProject_fetured_mnualy(){
+    public function GetProject_fetured_mnualy()
+    {
 
-    $fetured = $this->fetured_projects;
-   echo '<div class="container-fluid py-4"><div class="row row-gap-5">';
-    foreach( $fetured as $key=>$fet){
-    $e= $fet->ID;
-echo '<div class="col-md-3">';
-    get_template_part("template-parts/project-card", null, [
-        "project_neighborhood" => get_field("project_neighborhood", $e) ?? null,
-        "project_status" => get_field("project_status", $e) ?? null,
-        "project_card_image" => get_field("project_card_image", $e) ?? null,
-        "project_name" => $e->post_title ?? null,
-    ]);
-    echo '</div>';
+        $fetured = $this->fetured_projects;
+        echo '<div class="container-fluid py-4"><div class="row row-gap-5">';
+        foreach ($fetured as $key => $fet) {
+            $e = $fet->ID;
+            echo '<div class="col-md-3">';
+            get_template_part("template-parts/project-card", null, [
+                "project_neighborhood" => get_field("project_neighborhood", $e) ?? null,
+                "project_status" => get_field("project_status", $e) ?? null,
+                "project_card_image" => get_field("project_card_image", $e) ?? null,
+                "project_name" => $e->post_title ?? null,
+                "project_link" => get_permalink($e) ?? null,
+            ]);
+            echo '</div>';
+        }
+
+
+        echo '</div></div>';
     }
-
-
-echo '</div></div>';
-
-
-
-}
-
-
-
-
-
-
-
 } //END CLASS

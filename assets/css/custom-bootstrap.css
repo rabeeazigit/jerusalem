@@ -93,12 +93,20 @@
     padding: 10px;
 }
 
+.form-select-sq {
+    border-radius: 8px;
+    border: 2px solid #b2aea8;
+    padding: 10px;
+}
+
 .form-control-sq::placeholder {
     color: #000000;
 }
 
-.form-control-sq:focus {
+.form-control-sq:focus,
+.form-select-sq:focus {
     border: 2px solid #bdab73;
+    box-shadow: none;
 }
 
 .btn-sq-primary-fill {

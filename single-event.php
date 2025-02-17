@@ -172,4 +172,8 @@ $controller = new SingleEvent();
     </div>
 </main>
 
+<section class="container-fluid my-4 px-0">
+    <?php get_template_part('template-parts/howcanwehelp'); ?>
+</section>
+
 <?php get_footer(); ?>

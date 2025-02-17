@@ -1,11 +1,12 @@
 <?php
 $project_name = $args["project_name"] ?? null;
+$project_link = $args["project_link"] ?? "#";
 $project_neighborhood = $args["project_neighborhood"] ?? null;
 $project_status = $args["project_status"] ?? null;
 $project_card_image = $args["project_card_image"] ?? null;
 ?>
 
-<div class="vstack project_card_wrapper px-3 gap-2">
+<a href="<?= $project_link; ?>" class="text-reset text-decoration-none vstack project_card_wrapper px-3 gap-2">
     <div class="d-flex align-items-start justify-content-start project_card_image" style="background-image: url(<?= $project_card_image; ?>);">
         <?php if ($project_status && is_array($project_status) && !empty($project_status)) : ?>
             <div class="hstack gap-2 align-items-start project_status_wrapper">
@@ -48,4 +49,4 @@ $project_card_image = $args["project_card_image"] ?? null;
             </div>
         <?php endif; ?>
     </div>
-</div>
+</a>

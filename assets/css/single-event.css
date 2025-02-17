@@ -1,11 +1,3 @@
-.wpcf7-form {
-    direction: rtl !important;
-}
-
-.wpcf7-form * {
-    direction: rtl !important;
-}
-
 main {
     background-image: url(../images/yellow-vector-extended.png);
     background-repeat: repeat-y;

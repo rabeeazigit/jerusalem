@@ -119,4 +119,8 @@ get_header();
     </div>
 <?php endif; ?>
 
+<section class="container-fluid my-4 px-0">
+    <?php get_template_part('template-parts/howcanwehelp'); ?>
+</section>
+
 <?php get_footer(); ?>

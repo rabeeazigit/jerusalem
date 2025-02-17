@@ -1037,3 +1037,31 @@ body {
         height: 260px;
     }
 }
+
+.wpcf7-form {
+    direction: rtl !important;
+}
+
+.wpcf7-form * {
+    direction: rtl !important;
+}
+
+textarea {
+    height: 120px;
+}
+
+.contact-form-tablist {
+    width: fit-content;
+    border-radius: var(--border-radius-full, 100px);
+    border: 2px solid var(--border-secondary, #b2aea8);
+}
+
+.contact-form-tab {
+    color: black !important;
+    border: none;
+    transition: all 250ms ease-in-out;
+}
+
+.contact-form-tab.active {
+    background-color: #b19b59;
+}

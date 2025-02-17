@@ -99,7 +99,7 @@ $footer_copyright_text = get_field("footer_copyright_text", "options") ?? null;
                     <?php endif; ?>
 
                     <?php if ($footer_contact_information_row && is_array($footer_contact_information_row) && !empty($footer_contact_information_row)) : ?>
-                        <div class="vstack align-items-start gap-3">
+                        <div class="row row-gap-3">
                             <?php foreach ($footer_contact_information_row as $info_row) : ?>
                                 <?php
                                 $label = $info_row["label"] ?? null;
@@ -118,13 +118,15 @@ $footer_copyright_text = get_field("footer_copyright_text", "options") ?? null;
                                     $value_to_display = null;
                                 }
                                 ?>
-                                <div class="hstack justify-content-between align-items-start">
+                                <div class="col-5">
                                     <?php if ($label) : ?>
                                         <div class="fs-6 fw-bold">
                                             <?= $label; ?>
                                         </div>
                                     <?php endif; ?>
+                                </div>
 
+                                <div class="col-6">
                                     <?php if (strtolower($value_type) == "paragraph") : ?>
                                         <div class="fs-6">
                                             <?= $paragraph; ?>
