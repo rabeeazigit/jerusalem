@@ -52,6 +52,7 @@ class SQLinkSCF
         $this->external_links_cpt();
         $this->faq_cpt();
         $this->area_fields_cpt();
+        $this->urban_renewal_stage_details_cpt();
 
         // taxonomies go here
         $this->project_status_taxonomy();
@@ -13719,6 +13720,54 @@ class SQLinkSCF
                 'acfe_form' => 0,
                 'acfe_meta' => '',
                 'acfe_note' => '',
+            ));
+        });
+    }
+
+    public function urban_renewal_stage_details_cpt()
+    {
+        add_action('init', function () {
+            register_post_type('ur-stage-details', array(
+                'labels' => array(
+                    'name' => 'Urban Renewal Stage Details',
+                    'singular_name' => 'Urban Renewal Stage Details',
+                    'menu_name' => 'Urban Renewal Stage Details',
+                    'all_items' => 'All Urban Renewal Stage Details',
+                    'edit_item' => 'Edit Urban Renewal Stage Details',
+                    'view_item' => 'View Urban Renewal Stage Details',
+                    'view_items' => 'View Urban Renewal Stage Details',
+                    'add_new_item' => 'Add New Urban Renewal Stage Details',
+                    'add_new' => 'Add New Urban Renewal Stage Details',
+                    'new_item' => 'New Urban Renewal Stage Details',
+                    'parent_item_colon' => 'Parent Urban Renewal Stage Details:',
+                    'search_items' => 'Search Urban Renewal Stage Details',
+                    'not_found' => 'No urban renewal stage details found',
+                    'not_found_in_trash' => 'No urban renewal stage details found in Trash',
+                    'archives' => 'Urban Renewal Stage Details Archives',
+                    'attributes' => 'Urban Renewal Stage Details Attributes',
+                    'insert_into_item' => 'Insert into urban renewal stage details',
+                    'uploaded_to_this_item' => 'Uploaded to this urban renewal stage details',
+                    'filter_items_list' => 'Filter urban renewal stage details list',
+                    'filter_by_date' => 'Filter urban renewal stage details by date',
+                    'items_list_navigation' => 'Urban Renewal Stage Details list navigation',
+                    'items_list' => 'Urban Renewal Stage Details list',
+                    'item_published' => 'Urban Renewal Stage Details published.',
+                    'item_published_privately' => 'Urban Renewal Stage Details published privately.',
+                    'item_reverted_to_draft' => 'Urban Renewal Stage Details reverted to draft.',
+                    'item_scheduled' => 'Urban Renewal Stage Details scheduled.',
+                    'item_updated' => 'Urban Renewal Stage Details updated.',
+                    'item_link' => 'Urban Renewal Stage Details Link',
+                    'item_link_description' => 'A link to a urban renewal stage details.',
+                ),
+                'public' => true,
+                'show_in_rest' => true,
+                'menu_position' => 7,
+                'menu_icon' => 'dashicons-chart-bar',
+                'supports' => array(
+                    0 => 'title',
+                    1 => 'custom-fields',
+                ),
+                'delete_with_user' => false,
             ));
         });
     }
