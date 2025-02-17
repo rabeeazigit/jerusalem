@@ -6020,6 +6020,7 @@ class SQLinkSCF
                     'item_link_description' => 'A link to a event.',
                 ),
                 'public' => true,
+                'has_archive' => true,
                 'show_in_rest' => true,
                 'menu_icon' => 'dashicons-star-empty',
                 'supports' => array(
@@ -6165,6 +6166,7 @@ class SQLinkSCF
                 ),
                 'public' => true,
                 'show_in_rest' => true,
+                'has_archive' => true,
                 'menu_icon' => 'dashicons-format-chat',
                 'supports' => array(
                     0 => 'title',
