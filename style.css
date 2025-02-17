@@ -1026,3 +1026,14 @@ body {
 .spinner-border-sq-primary {
     color: var(--primary) !important;
 }
+
+.image_gallery_image_item {
+    object-fit: cover;
+    object-position: center;
+    height: 550px;
+    width: 100%;
+
+    @media screen and (width <= 768px) {
+        height: 260px;
+    }
+}

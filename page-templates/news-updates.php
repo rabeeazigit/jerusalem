@@ -79,7 +79,7 @@ get_header();
                     ?>
 
                     <?php if (!wp_is_mobile()) : ?>
-                        <div class="hstack gap-5 justify-content-between align-items-start py-5 article_card_elm">
+                        <a href="<?= get_permalink($e); ?>" class="text-reset text-decoration-none hstack gap-5 justify-content-between align-items-start py-5 article_card_elm">
                             <?php if ($date) : ?>
                                 <?php
                                 $month = explode(" | ", $date)[1] ?? "";
@@ -120,9 +120,9 @@ get_header();
                             <?php if ($image) : ?>
                                 <img class="article_display_image" src="<?= $image; ?>" alt="<?= $title; ?>" class="img-fluid w-100 object-fit-cover rounded-4">
                             <?php endif; ?>
-                        </div>
+                        </a>
                     <?php else : ?>
-                        <div class="vstack gap-2 justify-content-between align-items-start py-3 article_card_elm">
+                        <a href="<?= get_permalink($e); ?>" class="text-reset text-decoration-none vstack gap-2 justify-content-between align-items-start py-3 article_card_elm">
                             <?php if ($image) : ?>
                                 <img class="article_display_image" src="<?= $image; ?>" alt="<?= $title; ?>" class="img-fluid w-100 object-fit-cover rounded-4">
                             <?php endif; ?>
@@ -165,7 +165,7 @@ get_header();
                                     </div>
                                 <?php endif; ?>
                             </div>
-                        </div>
+                        </a>
                     <?php endif; ?>
                 <?php endforeach; ?>
             </div>

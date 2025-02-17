@@ -15,7 +15,7 @@ class SQLinkSCF
         $this->main_navbar_fieldgroup();
         $this->project_fieldgroup();
         $this->top_navbar_fieldgroup();
-        $this->article_fieldgroup();
+        // $this->article_fieldgroup();
         $this->how_can_we_help_fieldgroup();
         $this->main_topics_fieldgroup();
         $this->project_slider_fieldgroup();
@@ -36,7 +36,7 @@ class SQLinkSCF
         $this->events_courses_page_fieldgroup();
         $this->area_activities_fieldgroup();
         $this->area_fields_page_fieldgroup();
-        // $this->event_courses_slider_fieldgroup();
+        $this->event_courses_slider_fieldgroup();
 
         // post types go here
         $this->project_cpt();
@@ -6119,6 +6119,7 @@ class SQLinkSCF
                 ),
                 'public' => true,
                 'show_in_rest' => true,
+                'has_archive' => true,
                 'menu_icon' => 'dashicons-admin-post',
                 'supports' => array(
                     0 => 'title',

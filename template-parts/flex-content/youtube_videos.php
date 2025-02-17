@@ -12,12 +12,14 @@ $slider_id = uniqid() . "_youtube_slider_" . uniqid();
 
 <?php if ($youtube_ids && is_array($youtube_ids) && !empty($youtube_ids)) : ?>
     <div class="vstack">
-        <div class="hstack justify-content-end gap-3">
-            <?php if (wp_is_mobile()) : ?>
-                <img src="<?= get_template_directory_uri() . "/assets/images/video/right_arrow.png"; ?>" id="<?= "next_" . $slider_id; ?>" class="rs_mb_arrow rs_mb_next" alt="">
-                <img src="<?= get_template_directory_uri() . "/assets/images/video/left_arrow.png"; ?>" id="<?= "prev_" . $slider_id; ?>" class="rs_mb_arrow rs_mb_prev" alt="">
-            <?php endif; ?>
-        </div>
+        <?php if (count($youtube_ids) > 1) : ?>
+            <div class="hstack justify-content-end gap-3">
+                <?php if (wp_is_mobile()) : ?>
+                    <img src="<?= get_template_directory_uri() . "/assets/images/video/right_arrow.png"; ?>" id="<?= "next_" . $slider_id; ?>" class="rs_mb_arrow rs_mb_next" alt="">
+                    <img src="<?= get_template_directory_uri() . "/assets/images/video/left_arrow.png"; ?>" id="<?= "prev_" . $slider_id; ?>" class="rs_mb_arrow rs_mb_prev" alt="">
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
 
         <div class="youtube_rs_slider" id="<?= $slider_id; ?>">
             <?php foreach ($youtube_ids as $youtube_id) : ?>
