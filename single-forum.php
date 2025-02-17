@@ -92,31 +92,27 @@ $controller = new SingleEvent();
                 <?php endforeach; ?>
             <?php endif; ?>
 
-            <?php if (in_array($controller->post_type, ["course", "event"])) : ?>
-                <div class="vstack">
-                    <div class="my-4 p-5 pt-4 rounded-4" style="background-color: #EBE8E3;">
-                        <div class="mb-5">
-                            <div class="display-6 fw-bold mb-0">
-                                <?php if ($controller->post_type == "course") : ?>
-                                    הרשמה לקורס
-                                <?php elseif ($controller->post_type == "event") : ?>
-                                    הרשמה לכנס
-                                <?php endif; ?>
-                            </div>
-
-                            <div class="fs-5">
-                                מלאו את הפרטים שלכם להרשמה.
-                            </div>
+            <div class="vstack">
+                <div class="my-4 p-5 pt-4 rounded-4" style="background-color: #EBE8E3;">
+                    <div class="mb-5">
+                        <div class="display-6 fw-bold mb-0">
+                            <?php if ($controller->post_type == "course") : ?>
+                                הרשמה לקורס
+                            <?php elseif ($controller->post_type == "forum") : ?>
+                                הרשמה לפורום
+                            <?php elseif ($controller->post_type == "event") : ?>
+                                הרשמה לכנס
+                            <?php endif; ?>
                         </div>
 
-                        <?php if ($controller->post_type == "course") : ?>
-                            <?= do_shortcode('[contact-form-7 id="40c6b24" title="Course Form"]'); ?>
-                        <?php elseif ($controller->post_type == "event") : ?>
-                            <?= do_shortcode('[contact-form-7 id="a5ae09f" title="Event Form"]'); ?>
-                        <?php endif; ?>
+                        <div class="fs-5">
+                            מלאו את הפרטים שלכם להרשמה.
+                        </div>
                     </div>
+
+                    <?= do_shortcode('[contact-form-7 id="34c254e" title="Forum Form"]'); ?>
                 </div>
-            <?php endif; ?>
+            </div>
         </div>
 
         <div class="col-md-1"></div>

@@ -7,4 +7,10 @@ $(() => {
         dots: true,
         infinite: false,
     });
+
+    $(".wpcf7-spinner").html(`
+        <div class="spinner-border spinner-border-sq-primary text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    `);
 });

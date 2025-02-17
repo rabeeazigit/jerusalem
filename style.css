@@ -1003,3 +1003,26 @@ body {
 .event_searchbar {
     width: 24dvw;
 }
+
+/* First we hide the default CF7 loader */
+.wpcf7-spinner::before {
+    display: none;
+}
+
+/* Add custom CF7 loader */
+.wpcf7-spinner {
+    top: 11px;
+    background-color: transparent;
+}
+
+.wpcf7-response-output {
+    border-color: transparent !important;
+    color: #dc3232;
+    text-align: center;
+    font-weight: 600;
+    margin: 0 !important;
+}
+
+.spinner-border-sq-primary {
+    color: var(--primary) !important;
+}

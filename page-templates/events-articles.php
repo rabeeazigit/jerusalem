@@ -45,7 +45,7 @@ get_header();
         $limit = 12;
         $page = 1;
         $posts = get_posts([
-            "post_type" => "event",
+            "post_type" => ["event", "forum"],
             "posts_per_page" => $limit,
             "paged" => $page,
         ]);
@@ -120,7 +120,7 @@ get_header();
                             "event_card_short_description" => get_field("event_card_short_description", $e),
                             "event_card_short_button_text" => get_field("event_card_short_button_text", $e),
                             "permalink" => get_permalink($e),
-                            "post_type" => get_field("event_type", $e)
+                            "post_type" => get_post_type($e) == "forum" ? "forum" : get_field("event_type", $e)
                         ]) ?>
                     </div>
                 <?php endforeach; ?>

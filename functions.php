@@ -54,8 +54,8 @@ function get_page_by_template($template_name)
     return null;
 }
 
+// customzing stuff in contact form 7
 
-// Will be enabled later on
 new SQLinkSCF();
 new SQLinkEnqueue();
 new AjaxHandler();

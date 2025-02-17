@@ -391,7 +391,7 @@ class AjaxHandler
         $page  = isset($_POST["page"]) ? intval($_POST["page"]) : 1;
 
         $args = [
-            "post_type" => "event",
+            "post_type" => ["event", "forum"],
             "posts_per_page" => $limit,
             "paged" => $page,
             "post_status" => "publish",
@@ -409,7 +409,7 @@ class AjaxHandler
                     "event_card_short_description" => get_field("event_card_short_description", $e),
                     "event_card_short_button_text" => get_field("event_card_short_button_text", $e),
                     "permalink" => get_permalink($e),
-                    "post_type" => get_field("event_type", $e)
+                    "post_type" => get_post_type($e) == "forum" ? "forum" : get_field("event_type", $e)
                 ]) ?>
             </div>
         <?php endforeach; ?>
@@ -476,7 +476,7 @@ class AjaxHandler
         }
 
         $args = [
-            "post_type" => "event",
+            "post_type" => ["event", "forum"],
             "posts_per_page" => -1,
             "post_status" => "publish",
             "meta_query" => $meta_query
@@ -506,7 +506,7 @@ class AjaxHandler
                     "event_card_short_description" => get_field("event_card_short_description", $e),
                     "event_card_short_button_text" => get_field("event_card_short_button_text", $e),
                     "permalink" => get_permalink($e),
-                    "post_type" => get_field("event_type", $e)
+                    "post_type" => get_post_type($e) == "forum" ? "forum" : get_field("event_type", $e)
                 ]) ?>
             </div>
         <?php endforeach; ?>

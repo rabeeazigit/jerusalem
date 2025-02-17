@@ -15,9 +15,10 @@ class SingleEvent
     public function __construct()
     {
         $this->post = get_queried_object();
+
         $this->hero_title = $this->post->post_title;
         $this->hero_desc = get_field("event_card_short_description", $this->post);
-        $this->post_type = get_field("event_type", $this->post);
+        $this->post_type = get_post_type($this->post) == "forum" ? "forum" : get_field("event_type", $this->post);
         $this->details_show_gallery = !empty(get_field("details_show_gallery", $this->post)) ? true : false;
         $this->details_side_image = get_field("details_side_image", $this->post);
         $this->details_gallery = get_field("details_gallery", $this->post);
