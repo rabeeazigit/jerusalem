@@ -114,11 +114,11 @@ get_header();
 
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="resident-form">
-                                <?= do_shortcode('[contact-form-7 id="e8abf5b" title="Contact Us - Resident"]'); ?>
+                                <?= do_shortcode('[contact-form-7 title="Contact Us - Resident"]'); ?>
                             </div>
 
                             <div class="tab-pane fade" id="entre-form">
-                                <?= do_shortcode('[contact-form-7 id="a80ab40" title="Contact Us - Entrepreneur"]'); ?>
+                                <?= do_shortcode('[contact-form-7 title="Contact Us - Entrepreneur"]'); ?>
                             </div>
                         </div>
                     </div>
