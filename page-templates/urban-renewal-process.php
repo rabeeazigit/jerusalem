@@ -199,13 +199,15 @@ $urban_category = $_GET["urban_category"] ?? null;
                                 תהליך התחדשות עירונית
                             </div>
 
-                            <div class="input-group rounded-pill overflow-hidden border">
-                                <span class="input-group-text border-none" style=" background-color: white">
-                                    <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
-                                </span>
+                            <?php if (false) : ?>
+                                <div class="input-group rounded-pill overflow-hidden border">
+                                    <span class="input-group-text border-none" style=" background-color: white">
+                                        <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
+                                    </span>
 
-                                <input type="text" class="form-control border-0 stages_search" placeholder="Search">
-                            </div>
+                                    <input type="text" class="form-control border-0 stages_search" placeholder="Search">
+                                </div>
+                            <?php endif; ?>
                         </div>
 
                         <hr>

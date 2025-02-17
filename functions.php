@@ -16,7 +16,7 @@ function hide_posts_and_comments()
 
     remove_menu_page("edit-comments.php");
 }
-add_action("admin_menu", "hide_posts_and_comments", 999);
+add_action("admin_menu", "hide_posts_and_comments", 10);
 
 // Slices a sentence to the limit provided
 // Returns the same string if it"s length is less that the limit
