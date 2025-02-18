@@ -196,7 +196,7 @@ $resident_rights = $controller->get_resident_rights();
 
 <!-- Residents Rights -->
 <?php if ($resident_rights && is_array($resident_rights) && !empty($resident_rights)) : ?>
-    <div id="resident_rights_section" class="container" style="background-image: url(<?= $controller->hero_background_image; ?>); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <div id="resident_rights_section" class="container" style="background-image: url(<?= ""; ?>); background-size: cover; background-position: center; background-repeat: no-repeat;">
         <?php if ($controller->resident_rights_title) : ?>
             <div class="text-center display-4 fw-semibold mb-3">
                 <?= $controller->resident_rights_title; ?>
