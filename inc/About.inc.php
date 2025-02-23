@@ -130,7 +130,7 @@ class About
         $Staff =  $this->our_staff;
 
         $html = '
- <div class="container">
+ <div id="our-staff" class="container">
        <div class="d-flex flex-wrap align-items-center justify-content-around py-5 my-2">
 ';
         foreach ($Staff as $Staff) {
