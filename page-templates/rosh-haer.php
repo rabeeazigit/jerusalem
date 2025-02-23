@@ -47,13 +47,13 @@ $controller = new RoshHaAer();
         <!-- Image Column -->
         <div class="col-md-6">
             <?php if (!wp_is_mobile() && $controller->side_image) : ?>
-                <div class="d-flex align-items-center justify-content-center">
+                <div class="d-flex sticky-top align-items-center justify-content-center">
                     <img class="rosh-ha-aer-sideimage" src="<?= $controller->side_image; ?>" alt="" loading="lazy">
                 </div>
             <?php endif; ?>
 
             <?php if (wp_is_mobile() && $controller->mobile_side_image) : ?>
-                <div class="d-flex align-items-center justify-content-center">
+                <div class="d-flex sticky-top align-items-center justify-content-center">
                     <img class="rosh-ha-aer-sideimage" src="<?= $controller->mobile_side_image; ?>" alt="" loading="lazy">
                 </div>
             <?php endif; ?>
