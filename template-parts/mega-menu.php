@@ -9,7 +9,7 @@ $menu_links = $args["menu_links"] ?? null;
         <?= $label; ?>
     </button>
 
-    <div class="dropdown-menu main_menu_dropdown">
+    <div class="dropdown-menu main_menu_dropdown z-1">
         <div class="row p-4">
             <div class="col-md-9">
                 <?php if ($menu_cards) : ?>
