@@ -41,6 +41,10 @@
 .staff_photo img {
     object-position: center;
     height: 28dvh;
+
+    @media screen and (width <= 768px) {
+        height: 38dvh;
+    }
 }
 
 section {

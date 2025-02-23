@@ -133,7 +133,7 @@ class About
 ';
         foreach ($Staff as $Staff) {
             $html .=
-                '<div class="col-xl-3 col-md-4 col-6 mb-5">
+                '<div class="col-xl-3 col-md-4 col-12 mb-5">
                     <div class="staff_photo">
                         <img class="img-fluid w-100 object-fit-cover" src="' . $Staff['staff_member_photo'] . '" loading="lazy"/>
                     </div>
