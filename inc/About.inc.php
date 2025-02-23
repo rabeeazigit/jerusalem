@@ -114,6 +114,7 @@ class About
     public function AreaOfActivities()
     {
         $bk = $this->bk_sec_activities ? $this->bk_sec_activities : '';
+        echo "<div id='areas-of-activities'>";
         get_template_part('template-parts/main-topics', null, [
             "main_topics_main_topics" => $this->main_topic_options['main_topics'] ?? null,
             "main_topics_title" => $this->aoa_title,
@@ -121,6 +122,7 @@ class About
             "main_topics_content_class" => "apw",
             "main_topics_link" => ["text" => "לכל התחומים", "url" => "#"]
         ]);
+        echo "</div>";
     }
 
     public function OurStaff()
