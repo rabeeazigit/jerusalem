@@ -3,7 +3,7 @@ $navbar = new Navbar();
 $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
 ?>
 
-<div class="d-lg-block d-none">
+<div class="d-lg-block d-none sticky-top z-1">
     <div class="container-fluid <?= $dark_theme ? "text-light navbar_light_mode" : ""; ?> px-5">
         <div class="hstack justify-content-between align-items-center py-1 mb-3" id="top-navbar">
             <?php if ($navbar->social_media_links && is_array($navbar->social_media_links) && count($navbar->social_media_links) > 0) : ?>
