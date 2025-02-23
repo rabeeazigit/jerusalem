@@ -42,7 +42,7 @@ class About
             //$tag[$key]['text'] =$val['tagd_links_text'];
             //$tag[$key]['link'] =$val['tagd_links_url'];
             $html .= "<div class='btn btn-outline-secondary rounded-pill hovertagabout m-2'>
-<a href='{$tag['tagd_links_url']}' target='_BLANK'>{$tag['tagd_links_text']}</a></div>";
+<a href='{$tag['tagd_links_url']}'>{$tag['tagd_links_text']}</a></div>";
         }
 
         return $html;
