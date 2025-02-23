@@ -1,5 +1,4 @@
 .about_text span p {
-
     max-width: 744px;
     break-after: always;
     margin-top: 20px;
@@ -13,22 +12,19 @@
 
 .all_acts {
     width: 172px;
-    background: #BDAB73;
+    background: #bdab73;
     border-radius: 30px;
-    border: solid 1px #BDAB73;
+    border: solid 1px #bdab73;
     margin: 0 auto;
     text-align: center;
     position: relative;
     padding: 12px;
-
-
 }
 
 .all_acts a {
     color: #fff;
     text-decoration: none;
 }
-
 
 .apw {
     max-width: 957px;
@@ -37,11 +33,14 @@
 }
 
 .staff_photo {
-    max-width: auto;
     border: solid 2px #f1e1c1;
     border-radius: 20px;
-    overflow: hidden;
     margin: 5px;
+}
+
+.staff_photo img {
+    object-position: center;
+    height: 24dvh;
 }
 
 section {
@@ -65,7 +64,7 @@ section {
 }
 
 .staff_photo:hover {
-    background: #EBE8E3;
+    background: #ebe8e3;
 }
 
 .small-button {
@@ -75,9 +74,8 @@ section {
     /* Removes bold */
     padding: 5px 10px;
     /* Adjust padding */
-    border: solid 1px #B2AEA8;
+    border: solid 1px #b2aea8;
     min-width: 149px;
-
 }
 
 .community_field_content {
@@ -102,7 +100,7 @@ section {
 .accordion-item {
     background-color: transparent !important;
     margin-bottom: 20px;
-    border: solid 1px #B2AEA8 !important;
+    border: solid 1px #b2aea8 !important;
     border-radius: 10px;
 }
 
@@ -116,23 +114,20 @@ section {
 }
 
 .infotable {
-    border: solid 1px #B2AEA8;
+    border: solid 1px #b2aea8;
     padding: 10px;
-
-
 }
 
 .infotable thead tr th {
-    border: solid 1px #EBE8E3 !important;
+    border: solid 1px #ebe8e3 !important;
     padding: 10px !important;
 
     font-size: 16px !important;
     font-weight: 600;
 }
 
-
 .infotable tbody tr td {
-    border: solid 2px #EBE8E3 !important;
+    border: solid 2px #ebe8e3 !important;
     padding: 10px !important;
 
     font-size: 16px !important;
@@ -149,11 +144,10 @@ section {
     }
 }
 
-
 @media (min-width: 1000px) {
     .filedownload {
         margin: 5px;
-        max-width: 31%
+        max-width: 31%;
     }
 
     .span {
@@ -164,12 +158,11 @@ section {
 }
 
 .filedownload {
-    border: solid 1px #B2AEA8;
+    border: solid 1px #b2aea8;
     border-radius: 10px;
     min-height: 123px;
     font-size: 16px !important;
     padding: 10px;
-
 }
 
 .filedownload h2 {
@@ -177,18 +170,14 @@ section {
     font-weight: 500;
 }
 
-
 .filedownload p {
     font-size: 12px !important;
 }
-
 
 .span {
     font-size: 11px !important;
     font-weight: normal;
     color: #000;
-
-
 }
 
 .fileicon {
@@ -205,11 +194,11 @@ section {
 }
 
 .carousel-control-prev-icon {
-    background-image: url('../images/video/right_arrow.png') !important;
+    background-image: url("../images/video/right_arrow.png") !important;
 }
 
 .carousel-control-next-icon {
-    background-image: url('../images/video/left_arrow.png') !important;
+    background-image: url("../images/video/left_arrow.png") !important;
 }
 
 .carousel {
@@ -233,7 +222,6 @@ button:focus:not(:focus-visible) {
 }
 
 .aboutTitle {
-
     max-width: 740px;
 }
 
@@ -241,13 +229,12 @@ button:focus:not(:focus-visible) {
     max-width: 690px;
     list-style: decimal;
     text-align: justify !important;
-
 }
 
 .nbrhd li {
     display: inline-flex;
     font-size: 20px;
-    color: #0C263C;
+    color: #0c263c;
     margin: 5px 5px 0 5px;
 }
 
@@ -258,7 +245,6 @@ button:focus:not(:focus-visible) {
 
 .nbrhd li:last-child::after {
     content: "";
-
 }
 
 .nbrhd li:nth-child(3n)::after {
@@ -277,7 +263,7 @@ button:focus:not(:focus-visible) {
     font-size: 20px;
     font-weight: bold;
     width: auto;
-    border: solid 1px #BDAB73;
+    border: solid 1px #bdab73;
     -webkit-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.75);
@@ -307,14 +293,11 @@ button:focus:not(:focus-visible) {
     padding-left: 10px;
 }
 
-
 .fadeCarousle .slick-arrow::before {
     display: none;
 }
 
-
 .fadeCarousle .slick-next {
-
     z-index: 999;
 
     position: absolute;
@@ -324,14 +307,12 @@ button:focus:not(:focus-visible) {
     left: 77px;
 }
 
-
 .fadeCarousle .slick-prev {
     z-index: 999;
     top: 42%;
     transform: translateY(-50%);
     z-index: 10;
     right: 37px;
-
 }
 
 .src_image_gallery {
@@ -345,7 +326,7 @@ button:focus:not(:focus-visible) {
 }
 
 .slick-dots li.slick-active button:before {
-    opacity: .75;
+    opacity: 0.75;
     color: #fff;
     width: 25px;
     z-index: 999999999 !important;
@@ -359,9 +340,9 @@ button:focus:not(:focus-visible) {
     left: 0;
     width: 20px;
     height: 20px;
-    content: '•';
+    content: "•";
     text-align: center;
-    opacity: .25;
+    opacity: 0.25;
     color: #c9c3c3;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -372,12 +353,12 @@ button:focus:not(:focus-visible) {
     width: 20px;
 }
 
-.yt_video_gallery iframe{
+.yt_video_gallery iframe {
     height: 510px;
 }
 
 @media (max-width: 768px) {
-     .slick-prev {
+    .slick-prev {
         right: -6px !important;
         top: 44% !important;
         z-index: 999999999 !important;
@@ -387,7 +368,7 @@ button:focus:not(:focus-visible) {
         text-align: start;
     }
 
-      .slick-next {
+    .slick-next {
         left: -61px !important;
         top: 44% !important;
         z-index: 999999999 !important;
@@ -395,51 +376,46 @@ button:focus:not(:focus-visible) {
         height: 100%;
     }
 
-
-    .slick-dots li{
-        margin:0px !important;
+    .slick-dots li {
+        margin: 0px !important;
     }
-
 
     .src_image_gallery {
-        
         height: 240px !important;
     }
 
-    .yt_video_gallery iframe{
+    .yt_video_gallery iframe {
         height: 240px !important;
     }
-
 }
-
 
 .pro_desc {
     max-width: 744px;
 }
 
-.external_link_wrapper{
+.external_link_wrapper {
     max-width: 744px;
-    border: solid 1px #B2AEA8;
+    border: solid 1px #b2aea8;
     border-radius: 20px;
-    padding:10px;
+    padding: 10px;
 }
 
-.el_logo{
-    border: 1px solid #B2AEA8;
+.el_logo {
+    border: 1px solid #b2aea8;
     border-radius: 10px;
     width: max-content;
 }
 
-.s_number{
-    color: #0C263C;
+.s_number {
+    color: #0c263c;
     font-size: 40px;
     width: 100%;
     display: block;
     text-align: center;
     font-weight: 500;
 }
-.s_title{
-    color: #0C263C;
+.s_title {
+    color: #0c263c;
     font-size: 18px;
     width: 100%;
     display: block;
