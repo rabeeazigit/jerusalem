@@ -39,6 +39,7 @@ class SQLinkSCF
         $this->event_courses_slider_fieldgroup();
         $this->contact_us_page_fieldgroup();
         $this->contact_us_options_page_fieldgroup();
+        $this->entrepreneurs_info_fieldgroup();
 
         // post types go here
         $this->project_cpt();
