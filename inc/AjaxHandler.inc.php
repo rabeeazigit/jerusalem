@@ -98,17 +98,27 @@ class AjaxHandler
         $projects = get_posts($args);
         ob_start(); ?>
 
-        <?php foreach ($projects as $e) : ?>
-            <div class="col-md-3">
-                <?php get_template_part("template-parts/project-card", null, [
-                    "project_neighborhood" => get_field("project_neighborhood", $e) ?? null,
-                    "project_status" => get_field("project_status", $e) ?? null,
-                    "project_card_image" => get_field("project_card_image", $e) ?? null,
-                    "project_name" => $e->post_title ?? null,
-                    "project_link" => get_permalink($e) ?? null,
-                ]) ?>
+        <?php if ($projects && is_array($projects) && !empty($projects)) : ?>
+            <?php foreach ($projects as $e) : ?>
+                <div class="col-xl-3 col-md-4">
+                    <?php get_template_part("template-parts/project-card", null, [
+                        "project_neighborhood" => get_field("project_neighborhood", $e) ?? null,
+                        "project_status" => get_field("project_status", $e) ?? null,
+                        "project_card_image" => get_field("project_card_image", $e) ?? null,
+                        "project_name" => $e->post_title ?? null,
+                        "project_link" => get_permalink($e) ?? null,
+                    ]) ?>
+                </div>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <div class="col-12">
+                <div class="hstack align-items-center justify-content-center">
+                    <div class="fs-5 py-4 fw-bold">
+                        לא נמצאו פרויקטים
+                    </div>
+                </div>
             </div>
-        <?php endforeach; ?>
+        <?php endif; ?>
     <?php
         $projects_html = ob_get_clean();
 

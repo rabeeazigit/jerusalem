@@ -26,11 +26,11 @@ $(() => {
                 $(this).prop("disabled", true);
             },
             success: function (response) {
-                console.log(response);
                 const projects = response.projects ?? null;
 
-                $("#projects-container").html(projects);
-                $("#loadMoreProjects").fadeOut();
+                $("#loadMoreProjects").fadeOut(function () {
+                    $("#projects-container").html(projects);
+                });
             },
             error: function (error) {
                 console.error(error);
