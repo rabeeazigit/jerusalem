@@ -39,3 +39,10 @@
     padding: 10px;
     background-color: white;
 }
+
+.resident_info_head_wrapper {
+    background-image: url(../images/yellow-vector-right.png);
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    background-size: 23dvh;
+}

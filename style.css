@@ -1070,3 +1070,10 @@ textarea {
     position: relative;
     transition: all 250ms ease-in-out;
 }
+
+.home_header_wrapper {
+    background-image: url(./assets/images/yellow-vector-bottom.png);
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    background-size: 50dvh;
+}

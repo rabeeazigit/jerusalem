@@ -26,8 +26,8 @@ $resident_rights = $controller->get_resident_rights();
 ?>
 
 <!-- Hero -->
-<div class="container-fluid px-md-5 px-3">
-    <div class="row my-md-5 mt-5 row-gap-4">
+<div class="container-fluid px-md-5 px-3 resident_info_head_wrapper">
+    <div class="row py-md-5 pt-5 row-gap-4">
         <div class="col-md-6">
             <div class="vstack gap-3">
                 <?php if (function_exists("yoast_breadcrumb")) : ?>
