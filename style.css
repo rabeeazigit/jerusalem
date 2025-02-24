@@ -1065,3 +1065,8 @@ textarea {
 .contact-form-tab.active {
     background-color: #b19b59;
 }
+
+#top-navbar {
+    position: relative;
+    transition: all 250ms ease-in-out;
+}
