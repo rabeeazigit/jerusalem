@@ -1,3 +1,5 @@
+let currentScroll = 0;
+
 document.addEventListener("DOMContentLoaded", (event) => {
     // Get the top navbar element
     const topNavbar = document.querySelector("#top-navbar");
@@ -6,6 +8,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     document.addEventListener("scroll", (event) => {
         // Get the current scrollY of the screen
         const currentY = window.scrollY;
+        currentScroll = currentY;
 
         // If the user is at 100px on the y-axis
         // The top navbar should be hidden
@@ -15,5 +18,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         } else {
             topNavbar.style.top = "0";
         }
+
+        console.log(currentScroll);
     });
 });

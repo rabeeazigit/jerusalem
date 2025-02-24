@@ -10,8 +10,14 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
                 <div class="hstack gap-2 align-items-center">
                     <?php foreach ($navbar->social_media_links as $e) : ?>
                         <a href="<?= $e["link"]["url"] ?? "#"; ?>" target="<?= $e["link"]["target"] ?? ""; ?>" title="<?= $e["link"]["title"] ?? ""; ?>" class="text-reset text-decoration-none">
-                            <?php if ($e["icon"]) : ?>
-                                <img src="<?= $e["icon"]; ?>" alt="<?= $e["link"]["title"] ?? ""; ?>" class="navbar_social_icon">
+                            <?php if ($dark_theme) : ?>
+                                <?php if ($e["icon_dark"]) : ?>
+                                    <img src="<?= $e["icon_dark"]; ?>" alt="<?= $e["link"]["title"] ?? ""; ?>" class="navbar_social_icon">
+                                <?php endif; ?>
+                            <?php else : ?>
+                                <?php if ($e["icon"]) : ?>
+                                    <img src="<?= $e["icon"]; ?>" alt="<?= $e["link"]["title"] ?? ""; ?>" class="navbar_social_icon">
+                                <?php endif; ?>
                             <?php endif; ?>
                         </a>
                     <?php endforeach; ?>
