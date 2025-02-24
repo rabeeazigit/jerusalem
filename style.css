@@ -1113,7 +1113,7 @@ textarea {
 }
 
 #search-modal .modal-content {
-    top: 111px;
+    top: 18dvh;
     width: 45dvw;
     left: 7dvw;
     max-height: 39dvh;
