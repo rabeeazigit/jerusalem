@@ -21,6 +21,9 @@ class AjaxHandler
 
         add_action("wp_ajax_filter_events", [$this, "filter_events"]);
         add_action("wp_ajax_nopriv_filter_events", [$this, "filter_events"]);
+
+        add_action("wp_ajax_sq_site_search", [$this, "sq_site_search"]);
+        add_action("wp_ajax_nopriv_sq_site_search", [$this, "sq_site_search"]);
     }
 
     public function load_projects()
@@ -522,11 +525,87 @@ class AjaxHandler
                 ]) ?>
             </div>
         <?php endforeach; ?>
-<?php
+        <?php
         $events_html = ob_get_clean();
 
         wp_send_json([
             "events" => $events_html,
         ]);
+    }
+
+    public function sq_site_search()
+    {
+        try {
+            $is_nonce_valid = check_ajax_referer("sq_site_search", "security", false);
+
+            if (!$is_nonce_valid) {
+                wp_send_json([
+                    "data" => null,
+                    "error" => "Unauthrozied"
+                ], 401);
+            }
+
+            $query = $_POST["query"] ?? null;
+
+            if (!$query) {
+                wp_send_json([
+                    "data" => [],
+                    "error" => null
+                ], 404);
+            }
+
+            $posts = get_posts([
+                "post_type" => [
+                    "page",
+                    "project",
+                    "event",
+                    "article",
+                    "forum",
+                    "course",
+                    "neighborhood",
+                    "area-fields",
+                    "urban-renewal-proces",
+                    "resident-right",
+                    "downloadable-file",
+                    "faq",
+                    "ur-stage-details"
+                ],
+                "post_status" => "publish",
+                "posts_per_page" => -1,
+                "s" => $query
+            ]);
+
+            ob_start();
+        ?>
+            <div class="vstack gap-3">
+                <?php if (count($posts) > 0) : ?>
+                    <?php foreach ($posts as $e) : ?>
+                        <a class="sq-search-item py-3 text-reset text-decoration-none" href="<?= get_permalink($e); ?>">
+                            <div class="fs-5">
+                                <?= $e->post_title; ?>
+                            </div>
+
+                            <div class="sq-search-item-arrow"></div>
+                        </a>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <div class="hstack align-items-center justify-content-center py-4">
+                        <div class="fs-5">
+                            לא נמצאו תוצאות
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+<?php
+            wp_send_json([
+                "data" => ob_get_clean(),
+                "error" => null
+            ], 200);
+        } catch (Throwable $error) {
+            wp_send_json([
+                "data" => null,
+                "error" => $error->getMessage()
+            ], 500);
+        }
     }
 }

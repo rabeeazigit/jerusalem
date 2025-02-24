@@ -143,9 +143,19 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
 
                 <div class="hstack gap-1 searchbar_searchbox">
                     <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
-                    <input type="text" placeholder="<?= $navbar->searchbar_placeholder ?? ""; ?>">
+                    <input class="site-searchbox" type="text" placeholder="<?= $navbar->searchbar_placeholder ?? ""; ?>">
                 </div>
             </div>
+
+            <!-- <div class="hstack align-items-center main_menu gap-4 rounded-pill shadow px-4">
+                <div class="list-group">
+                    <div class="list-group-item">lorem4</div>
+                    <div class="list-group-item">lorem4</div>
+                    <div class="list-group-item">lorem4</div>
+                    <div class="list-group-item">lorem4</div>
+                    <div class="list-group-item">lorem4</div>
+                </div>
+            </div> -->
 
             <?php if ($navbar->contact_us_label) : ?>
                 <a href="<?= $navbar->contact_us_link; ?>" class="sq-secondary-button text-decoration-none shadow" style="<?= $dark_theme ? "background-color: #235d8d" : ""; ?>">
@@ -281,7 +291,7 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
                 <span class="input-group-text mobile_searchbox">
                     <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
                 </span>
-                <input type="text" class="mobile_searchbox_input py-3" placeholder="<?= $navbar->searchbar_placeholder ?? ""; ?>">
+                <input type="text" class="site-searchbox mobile_searchbox_input py-3" placeholder="<?= $navbar->searchbar_placeholder ?? ""; ?>">
             </div>
         </div>
 

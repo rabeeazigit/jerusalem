@@ -24,6 +24,15 @@ class SQLinkEnqueue
                 ["jquery_cdn", "slick_js", "bs_js"],
                 filemtime(get_template_directory() . "/assets/js/global.js")
             );
+
+            wp_localize_script(
+                "global_js",
+                "wpAjax",
+                [
+                    "ajaxUrl" => admin_url("admin-ajax.php"),
+                    "ajaxNonce" => wp_create_nonce("sq_site_search")
+                ]
+            );
         });
     }
 
