@@ -96,7 +96,7 @@ class About
 
         $html = '
 
-       <div class="container">
+       <div class="container d-none d-lg-block">
        <div class="row py-5 my-2">';
         foreach ($SexyNumbers as $numbers) {
             $html .=
@@ -131,7 +131,7 @@ class About
 
         $html = '
  <div id="our-staff" class="container">
-       <div class="d-flex flex-wrap align-items-center justify-content-around py-5 my-2">
+       <div class="row align-items-center justify-content-center py-5 my-2">
 ';
         foreach ($Staff as $Staff) {
             $html .=
