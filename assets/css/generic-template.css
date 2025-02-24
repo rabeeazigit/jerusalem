@@ -1,4 +1,4 @@
-.rosh-ha-aer-sideimage {
+.generic-template-sideimage {
     height: 570px;
     width: 35dvw;
     object-fit: contain;
@@ -14,8 +14,15 @@
     }
 }
 
-div:has(.rosh-ha-aer-sideimage) {
+div:has(.generic-template-sideimage) {
     @media screen and (width <= 768px) {
         padding: 0;
     }
+}
+
+.generic-flex-content-wrapper {
+    background-image: url(../images/yellow-vector-extended.png);
+    background-position: left;
+    background-repeat: repeat-y;
+    background-size: auto;
 }
