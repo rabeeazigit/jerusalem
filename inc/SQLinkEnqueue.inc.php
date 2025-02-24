@@ -18,6 +18,12 @@ class SQLinkEnqueue
             wp_enqueue_script("jquery_cdn", "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js", [], "3.7.1");
             wp_enqueue_script("slick_js", "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js", ["jquery_cdn"], "1.9.0");
             wp_enqueue_script("bs_js", "https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js", ["jquery_cdn"], "5.3.3");
+            wp_enqueue_script(
+                "global_js",
+                get_template_directory_uri() . "/assets/js/global.js",
+                ["jquery_cdn", "slick_js", "bs_js"],
+                filemtime(get_template_directory() . "/assets/js/global.js")
+            );
         });
     }
 

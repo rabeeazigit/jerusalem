@@ -11,9 +11,7 @@ get_header();
 $controller = new GenericTemplate();
 ?>
 
-<div class="container-fluid px-0">
-    <?php get_template_part("template-parts/navbar"); ?>
-</div>
+<?php get_template_part("template-parts/navbar"); ?>
 
 <div class="container-fluid px-md-5  px-3">
     <?php if (function_exists("yoast_breadcrumb")) : ?>
