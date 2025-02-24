@@ -1115,11 +1115,23 @@ textarea {
 #search-modal .modal-content {
     top: 111px;
     width: 45dvw;
-    left: 5dvw;
+    left: 7dvw;
     max-height: 39dvh;
     overflow-y: auto; /* Ensure scrolling is enabled */
     scrollbar-width: auto; /* For Firefox */
     background-color: white;
+
+    @media screen and (width <= 1600px) {
+        & {
+            left: 3dvw;
+        }
+    }
+
+    @media screen and (width <= 1440px) {
+        & {
+            left: 1dvw;
+        }
+    }
 
     @media screen and (width <= 768px) {
         left: 0;
