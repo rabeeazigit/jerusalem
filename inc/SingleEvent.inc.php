@@ -11,6 +11,7 @@ class SingleEvent
     public $details_side_image;
     public $details_gallery;
     public $detailed_content;
+    public $external_form_link;
 
     public function __construct()
     {
@@ -23,6 +24,7 @@ class SingleEvent
         $this->details_side_image = get_field("details_side_image", $this->post);
         $this->details_gallery = get_field("details_gallery", $this->post);
         $this->detailed_content = get_field("detailed_content", $this->post);
+        $this->external_form_link = get_field("external_form_link", $this->post);
 
         wp_enqueue_style(
             "single_event_styles",

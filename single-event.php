@@ -109,10 +109,22 @@ $controller = new SingleEvent();
                             </div>
                         </div>
 
-                        <?php if ($controller->post_type == "course") : ?>
+                        <?php
+                        // Old CF7 Form shortcode 
+                        ?>
+                        <?php if (false && $controller->post_type == "course") : ?>
                             <?= do_shortcode('[contact-form-7 id="40c6b24" title="Course Form"]'); ?>
-                        <?php elseif ($controller->post_type == "event") : ?>
+                        <?php elseif (false && $controller->post_type == "event") : ?>
                             <?= do_shortcode('[contact-form-7 id="a5ae09f" title="Event Form"]'); ?>
+                        <?php endif; ?>
+
+                        <?php
+                        // New external form link 
+                        ?>
+                        <?php if ($controller->external_form_link && is_array($controller->external_form_link)) : ?>
+                            <a href="<?= $controller->external_form_link["url"]; ?>" target="<?= $controller->external_form_link["target"]; ?>" class="btn sq-primary-button">
+                                <?= $controller->external_form_link["title"]; ?>
+                            </a>
                         <?php endif; ?>
                     </div>
                 </div>
