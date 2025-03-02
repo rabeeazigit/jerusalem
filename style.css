@@ -4,14 +4,19 @@
 */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap");
 
 body {
-    font-family: "Rubik";
+    font-family: "Heebo";
     background: linear-gradient(54deg, white 89%, #cec09750);
 
     @media screen and (width <= 768px) {
         background: linear-gradient(54deg, white 73%, #cec09750);
     }
+}
+
+.rubik {
+    font-family: "Rubik", serif;
 }
 
 html,
@@ -351,7 +356,7 @@ body {
 
 .carousel_media_container img,
 .carousel_media_container video {
-    height: 60dvh;
+    height: 66dvh;
     /* height: 606px; */
 
     @media screen and (width <= 768px) {
@@ -1157,4 +1162,9 @@ textarea {
 #search-modal .modal-content::-webkit-scrollbar-track {
     border-radius: 18px; /* Optional: round edges */
     background: white;
+}
+
+#main_menu_navbar_brand {
+    position: relative;
+    transition: all 250ms ease-in-out;
 }

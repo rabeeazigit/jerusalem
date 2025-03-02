@@ -8,9 +8,9 @@
     $sub_title = get_field("sub_title") ?? null;
     ?>
 
-    <div class="vstack my-3 px-md-5 px-3">
+    <div class="vstack rubik my-3 pt-5 px-md-5 px-3">
         <?php if ($main_title) : ?>
-            <div class="display-4 fw-semibold">
+            <div class="display-4 fw-normal">
                 <?= $main_title; ?>
             </div>
         <?php endif; ?>

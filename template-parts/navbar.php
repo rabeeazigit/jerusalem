@@ -110,7 +110,7 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
                 <?php endif; ?>
 
                 <?php if ($navbar->brand_label) : ?>
-                    <div class="brand_label_content fs-5">
+                    <div class="brand_label_content fs-5" id="main_menu_navbar_brand">
                         <?= $navbar->brand_label; ?>
                     </div>
                 <?php endif; ?>
