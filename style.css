@@ -366,14 +366,14 @@ body {
 
 .carousel_info_card {
     z-index: 999;
-    /* height: 350px; */
+    height: 350px;
 
     border-radius: 24px;
     border: 1px solid #b2aea8;
     background-color: #fcfbf9e5;
 
     @media screen and (width <= 768px) {
-        /* height: 220px; */
+        height: 220px;
         height: auto;
     }
 }
@@ -1167,4 +1167,27 @@ textarea {
 #main_menu_navbar_brand {
     position: relative;
     transition: all 250ms ease-in-out;
+}
+
+.carousel_play:not(.carousel_paused)::after {
+    content: "";
+    width: 40px;
+    height: 26px;
+    background-size: cover;
+    background-image: url(./assets/images/carousel_spinner_thing.png);
+    display: block;
+    padding: 21px;
+    left: 8px;
+    position: relative;
+    top: -9px;
+    animation: rotate360 5s linear infinite;
+}
+
+@keyframes rotate360 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
