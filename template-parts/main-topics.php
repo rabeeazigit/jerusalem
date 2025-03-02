@@ -45,7 +45,7 @@ $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
                         <a class="text-decoration-none text-reset vstack p-3 main_topic_card justify-content-between" href="<?= $main_topic_link; ?>">
                             <div class="hstack align-items-start justify-content-between">
                                 <?php if ($main_topic_title) : ?>
-                                    <div class="fs-5 fw-bold">
+                                    <div class="fs-5 fw-semibold rubik">
                                         <?= $main_topic_title; ?>
                                     </div>
                                 <?php endif; ?>

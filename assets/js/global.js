@@ -18,6 +18,22 @@ document.addEventListener("DOMContentLoaded", (event) => {
             topNavbar.style.top = "0";
             navbarBrandText.style.top = "0";
         }
+
+        const gradientTexts = document.querySelectorAll(".gradient-text");
+
+        gradientTexts.forEach((gt) => {
+            // Get the current scroll position
+            const scrollY = window.scrollY;
+
+            // Calculate the percentage based on the scroll position
+            let blackPercentage = Math.min(
+                100,
+                (scrollY / window.innerHeight) * 10
+            ); // Increase by 10% as you scroll
+
+            // Apply the gradient
+            gt.style.backgroundImage = `linear-gradient(to bottom left, black ${blackPercentage}%, #e4d8b2 100%)`;
+        });
     });
 
     // Get the elements

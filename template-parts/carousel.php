@@ -61,17 +61,25 @@ $dark_mode = $args["dark_mode"] ?? false;
                 <div class="col carousel_weird_card_thing <?= $dark_mode ? "text-dark" : ""; ?>">
                     <div class="vstack h-100 justify-content-end">
                         <div class="rounded-4 p-3 carousel_info_card">
-                            <div class="vstack h-100 align-items-start">
-                                <div class="flex-fill">
+                            <div class="vstack justify-content-between h-100 align-items-start">
+                                <div class="vstack">
                                     <?php if ($title) : ?>
-                                        <div class="fs-5 fw-bold mb-2">
+                                        <div class="fs-5 fw-bold mb-0 mb-md-2">
                                             <?= $title; ?>
                                         </div>
                                     <?php endif; ?>
 
                                     <?php if ($paragraph) : ?>
-                                        <div class="fs-6">
-                                            <?= $paragraph; ?>
+                                        <div class="d-none d-md-block">
+                                            <div class="fs-6 rubik limit-8-lines">
+                                                <?= $paragraph; ?>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-block d-md-none">
+                                            <div class="fs-6 rubik limit-3-lines">
+                                                <?= $paragraph; ?>
+                                            </div>
                                         </div>
                                     <?php endif; ?>
                                 </div>

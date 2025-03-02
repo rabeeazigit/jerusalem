@@ -125,7 +125,7 @@ wp_enqueue_script(
                 <div class="row">
                     <?php if ($right_title) : ?>
                         <div class="col-md-12">
-                            <div class="fs-1 fw-bold mb-2">
+                            <div class="fs-1 fw-bold mb-2  rubik">
                                 <?= $right_title; ?>
                             </div>
                         </div>
