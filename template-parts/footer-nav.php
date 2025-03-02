@@ -63,7 +63,7 @@ $footer_copyright_text = get_field("footer_copyright_text", "options") ?? null;
                         <?php if ($menu_items && is_array($menu_items) && !empty($menu_items)) : ?>
                             <div class="vstack align-items-start gap-3">
                                 <?php if ($menu_label) : ?>
-                                    <div class="fs-5 fw-bold">
+                                    <div class="fs-5 fw-bold rubik">
                                         <?= $menu_label; ?>
                                     </div>
 
@@ -93,7 +93,7 @@ $footer_copyright_text = get_field("footer_copyright_text", "options") ?? null;
 
                 <div class="vstack gap-3">
                     <?php if ($footer_contact_title) : ?>
-                        <div class="fs-5 fw-bold">
+                        <div class="fs-5 fw-bold rubik">
                             <?= $footer_contact_title; ?>
                         </div>
                     <?php endif; ?>
@@ -181,7 +181,7 @@ $footer_copyright_text = get_field("footer_copyright_text", "options") ?? null;
             <?php if ($menu_title && is_array($menu_items)) : ?>
                 <div class="px-3 py-2 mb-3 border rounded-4">
                     <div class="hstack align-items-center justify-content-between footer_mobile_menu_item collapsed" data-bs-toggle="collapse" data-bs-target="#<?= $menu_id; ?>">
-                        <div class="fs-5 fw-bold">
+                        <div class="fs-5 fw-bold rubik">
                             <?= $menu_title; ?>
                         </div>
 

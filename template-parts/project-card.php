@@ -30,20 +30,20 @@ $project_card_image = $args["project_card_image"] ?? null;
 
     <div class="vstack gap-1">
         <?php if ($project_name) : ?>
-            <div class="fs-5 fw-bold">
+            <div class="fs-5 fw-bold ">
                 <?= $project_name; ?>
             </div>
         <?php endif; ?>
 
         <?php if ($project_neighborhood) : ?>
             <div class="hstack px-2 align-items-center gap-3 opacity-75">
-                <div>
+                <div class="rubik">
                     <?= $project_neighborhood->post_title; ?>
                 </div>
 
                 <div class="vr"></div>
 
-                <div>
+                <div class="rubik">
                     <?= $project_neighborhood->post_title; ?>
                 </div>
             </div>

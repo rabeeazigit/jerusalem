@@ -10,7 +10,7 @@ $article_list_side_image = $article_list_options["article_list_side_image"] ?? n
     <div class="row">
         <?php if ($article_list_title) : ?>
             <div class="col-md-12">
-                <div class="fs-1 fw-bold mb-3">
+                <div class="fs-1 fw-bold mb-3 rubik">
                     <?= $article_list_title; ?>
                 </div>
 

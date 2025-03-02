@@ -14,15 +14,15 @@ $year_section = explode("/", explode(" | ", $article_date)[0])[2];
 <?php if ($article) : ?>
     <div class="hstack py-5 gap-4 article_list_tile">
         <div class="vstack">
-            <div class="fw-semibold fs-4">
+            <div class="fw-semibold rubik fs-4">
                 <?= $day_section; ?>
             </div>
 
-            <div class="opacity-75">
+            <div class="opacity-75  rubik">
                 <?= $month_section; ?>
             </div>
 
-            <div class="opacity-75">
+            <div class="opacity-75  rubik">
                 <?= $year_section; ?>
             </div>
         </div>
@@ -40,11 +40,11 @@ $year_section = explode("/", explode(" | ", $article_date)[0])[2];
 
             <?php if ($article_description) : ?>
                 <?php if (wp_is_mobile()) : ?>
-                    <div class="fs-5">
+                    <div class="fs-5 rubik">
                         <?= truncate_sentence($article_description, 80); ?>
                     </div>
                 <?php else : ?>
-                    <div class="fs-5">
+                    <div class="fs-5  rubik">
                         <?= $article_description; ?>
                     </div>
                 <?php endif; ?>

@@ -11,7 +11,7 @@ $events_and_courses_items = $args["events_and_courses_items"] ?? [];
             <div class="vstack h-100 justify-content-between align-items-start pt-0 p-4">
                 <div class="vstack align-items-md-start align-items-center">
                     <?php if ($events_courses_title) : ?>
-                        <div class="fs-1 fw-bold mb-3">
+                        <div class="fs-1 fw-bold mb-3 rubik">
                             <?= $events_courses_title; ?>
                         </div>
                     <?php endif; ?>

@@ -116,7 +116,7 @@ $information_banner_link = $information_options["information_banner_link"] ?? nu
                 <?php foreach ($information_numberical_data as $e) : ?>
                     <div class="vstack align-items-center gap-1">
                         <?php if (isset($e["number"])) : ?>
-                            <div class="display-1 fw-semibold">
+                            <div class="display-1 fw-normal rubik">
                                 <?= $e["number"]; ?>
                             </div>
                         <?php endif; ?>

@@ -49,7 +49,7 @@ switch ($post_type) {
 
         <div class="hstack px-2 align-items-center gap-3 opacity-75 mb-3">
             <?php if ($event_date) : ?>
-                <div>
+                <div class="rubik">
                     <?= $event_date; ?>
                 </div>
 
@@ -57,7 +57,7 @@ switch ($post_type) {
             <?php endif; ?>
 
             <?php if ($event_time) : ?>
-                <div>
+                <div class="rubik">
                     <?= $event_time; ?>
                 </div>
 
@@ -65,14 +65,14 @@ switch ($post_type) {
             <?php endif; ?>
 
             <?php if ($event_place) : ?>
-                <div>
+                <div class="rubik">
                     <?= $event_place; ?>
                 </div>
             <?php endif; ?>
         </div>
 
         <?php if (!wp_is_mobile() && $event_card_short_description) : ?>
-            <div class="fs-6 opacity-75 mb-3 event_card_short_description">
+            <div class="fs-6 opacity-75 mb-3 event_card_short_description rubik">
                 <?= $event_card_short_description; ?>
             </div>
         <?php endif; ?>

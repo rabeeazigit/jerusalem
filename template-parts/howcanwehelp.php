@@ -22,7 +22,7 @@ $hcwh_link = get_field("hcwh_link", "options");
                 <?php endif; ?>
 
                 <?php if ($hwch_text) : ?>
-                    <div class="hcwhy-p">
+                    <div class="hcwhy-p rubik">
                         <?php echo $hwch_text; ?>
                     </div>
                 <?php endif; ?>
@@ -47,7 +47,7 @@ $hcwh_link = get_field("hcwh_link", "options");
                     <?php endif; ?>
 
                     <?php if ($hwch_text) : ?>
-                        <div class="hcwhy-p text-center">
+                        <div class="hcwhy-p rubik text-center">
                             <?php echo $hwch_text; ?>
                         </div>
                     <?php endif; ?>

@@ -11,7 +11,7 @@ $project_slider_items = $args["project_slider_items"] ?? null;
             <div class="vstack h-100 justify-content-between align-items-start pt-0 p-4">
                 <div class="vstack align-items-md-start align-items-center">
                     <?php if ($project_slider_title) : ?>
-                        <div class="fs-1 fw-bold mb-3 ">
+                        <div class="fs-1 fw-bold mb-3 rubik">
                             <?= $project_slider_title; ?>
                         </div>
                     <?php endif; ?>
