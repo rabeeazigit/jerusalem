@@ -36,7 +36,7 @@
                 <?php if (isset($e["news"]) && !empty($e["news"])) : ?>
                     <div>
                         <div class="w-100 hstack gap-1 px-4 align-items-start justify-content-center carousel_news_item">
-                            <div class="fs-5"><?= $e["news"]; ?></div>
+                            <div class="fs-5" style="white-space: nowrap; overflow:hidden; width:max-content"><?= $e["news"]; ?></div>
                             <img src="<?= get_template_directory_uri() . "/assets/images/btn-arrow-black.png"; ?>">
                         </div>
                     </div>
@@ -61,7 +61,7 @@
         responsive: [{
             breakpoint: 768,
             settings: {
-                slidesToShow: 2
+                slidesToShow: 1
             }
         }]
     });
