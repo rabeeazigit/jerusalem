@@ -97,7 +97,7 @@ $information_banner_link = $information_options["information_banner_link"] ?? nu
 
 <div class="container my-5">
     <?php if ($information_paragraph) : ?>
-        <div class="fs-1 fw-semibold text-center mb-4 gradient-text rubik">
+        <div class="fs-1 fw-semibold text-center mb-4 gradientText rubik">
             <?= $information_paragraph; ?>
         </div>
     <?php endif; ?>
@@ -114,10 +114,10 @@ $information_banner_link = $information_options["information_banner_link"] ?? nu
         <div class="d-none d-md-block">
             <div class="hstack gap-5 my-5">
                 <?php foreach ($information_numberical_data as $e) : ?>
-                    <div class="vstack align-items-center gap-1">
+                    <div class="vstack align-items-center gap-1 mainTopicWrapper" data-count="<?= $e["number"]; ?>">
                         <?php if (isset($e["number"])) : ?>
-                            <div class="display-1 fw-normal rubik">
-                                <?= $e["number"]; ?>
+                            <div class="display-1 fw-normal rubik mainTopicNumber">
+                                0
                             </div>
                         <?php endif; ?>
 

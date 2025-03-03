@@ -18,27 +18,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
             topNavbar.style.top = "0";
             navbarBrandText.style.top = "0";
         }
-
-        const gradientTexts = document.querySelectorAll(".gradient-text");
-
-        gradientTexts.forEach((gt) => {
-            // Get the current scroll position
-            const scrollY = window.scrollY;
-
-            // Calculate the percentage based on the scroll position
-            let blackPercentage = Math.min(
-                100,
-                (scrollY / window.innerHeight) * 10
-            ); // Increase by 10% as you scroll
-
-            // Apply the gradient
-            gt.style.backgroundImage = `linear-gradient(to bottom left, black ${blackPercentage}%, #e4d8b2 100%)`;
-        });
     });
 
     // Get the elements
     const searchFields = document.querySelectorAll(".site-searchbox");
-    const searchBox = document.querySelector(".searchbar_searchbox");
 
     searchFields.forEach((searchField) => {
         searchField.addEventListener("input", async (event) => {
@@ -106,4 +89,54 @@ document.addEventListener("DOMContentLoaded", (event) => {
             }
         });
     });
+
+    // Animating the main topic numbers using Framer Motion
+    const { inView, animate, scroll } = Motion;
+    let mainTopicDelayer = 1;
+    const gradientText = document.querySelector(".gradientText");
+
+    inView(".mainTopicWrapper", (element) => {
+        const dataCount = parseInt(element.target.getAttribute("data-count"));
+
+        // If no number is provided, hide the element
+        if (isNaN(dataCount)) {
+            animate(element.target, { opacity: 0 });
+            return;
+        }
+
+        // Animate opacity and movement
+        animate(
+            element.target,
+            { opacity: 1, bottom: 0 },
+            { duration: 0.5, delay: mainTopicDelayer++ * 0.2 }
+        );
+
+        // Counter Effect
+        let currentCount = 0;
+        const increment = Math.max(1, Math.floor(dataCount / 100));
+
+        const updateCounter = () => {
+            if (currentCount < dataCount) {
+                currentCount = Math.min(currentCount + increment, dataCount);
+                element.target.querySelector(".mainTopicNumber").textContent =
+                    currentCount;
+                requestAnimationFrame(updateCounter);
+            }
+        };
+
+        // Start counting after the delay
+        setTimeout(updateCounter, 200);
+    });
+
+    // Handle the gradientText filling up on scroll
+    scroll(
+        (progress) => {
+            console.log(progress);
+
+            gradientText.style.backgroundImage = `linear-gradient(to bottom left, #0C263C ${
+                100 - progress * 100
+            }%, rgba(0, 0, 0, 0.15) 100%)`;
+        },
+        { target: document.querySelector(".gradientText") }
+    );
 });

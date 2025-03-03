@@ -1246,7 +1246,7 @@ textarea {
     }
 }
 
-.gradient-text {
+.gradientText {
     background: linear-gradient(to bottom left, black 0%, #e4d8b2 75%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -1314,4 +1314,15 @@ textarea {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.mainTopicNumber {
+    width: 150px;
+    text-align: center;
+}
+
+.mainTopicWrapper {
+    position: relative;
+    opacity: 0;
+    bottom: -50px;
 }
