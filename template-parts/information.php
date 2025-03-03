@@ -155,8 +155,8 @@ $information_banner_link = $information_options["information_banner_link"] ?? nu
     <?php endif; ?>
 </div>
 
-<div class="d-none d-md-block">
-    <div class="container my-5">
+<div class="d-none d-md-block information_banner_wrapper">
+    <div class="container my-5 ">
         <div class="information_banner" style="background-image: url(<?= $information_banner_background; ?>;">
             <div class="d-flex w-100 h-100 align-items-end justify-content-end">
                 <div class="rounded-4 p-3 information_banner_card">

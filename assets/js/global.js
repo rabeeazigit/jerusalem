@@ -90,11 +90,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     });
 
-    // Animating the main topic numbers using Framer Motion
+    // Using Framer Motion
     const { inView, animate, scroll } = Motion;
     let mainTopicDelayer = 1;
     const gradientText = document.querySelector(".gradientText");
 
+    // Animating the main topic numbers
     inView(".mainTopicWrapper", (element) => {
         const dataCount = parseInt(element.target.getAttribute("data-count"));
 

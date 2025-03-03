@@ -523,6 +523,14 @@ body {
     }
 }
 
+.information_banner_wrapper {
+    background-image: url(./assets/images/bg-art.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left;
+    background-attachment: fixed;
+}
+
 .information_banner {
     border-radius: 24px;
     height: 660px;
@@ -1235,15 +1243,6 @@ textarea {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-@keyframes marquee {
-    from {
-        transform: translateX(0%);
-    }
-    to {
-        transform: translateX(-50%);
-    }
 }
 
 .gradientText {
