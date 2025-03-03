@@ -132,12 +132,19 @@ document.addEventListener("DOMContentLoaded", (event) => {
     // Handle the gradientText filling up on scroll
     scroll(
         (progress) => {
-            console.log(progress);
-
-            gradientText.style.backgroundImage = `linear-gradient(to bottom left, #0C263C ${
-                100 - progress * 100
-            }%, rgba(0, 0, 0, 0.15) 100%)`;
+            if (gradientText) {
+                gradientText.style.backgroundImage = `linear-gradient(to bottom left, #0C263C ${
+                    100 - progress * 100
+                }%, rgba(0, 0, 0, 0.15) 100%)`;
+            }
         },
         { target: document.querySelector(".gradientText") }
     );
+
+    // Stop disabled links from navigating
+    document.querySelectorAll("a.disabled").forEach((disabledLink) => {
+        disabledLink.addEventListener("click", (event) => {
+            event.preventDefault();
+        });
+    });
 });

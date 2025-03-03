@@ -28,10 +28,7 @@ wp_enqueue_script(
 ?>
 
 <!-- Navbar -->
-<nav class="container-fluid px-0">
-    <!-- Navbar -->
-    <?php get_template_part("template-parts/navbar"); ?>
-</nav>
+<?php get_template_part("template-parts/navbar"); ?>
 
 <!-- Header -->
 <header class="container-fluid px-md-5 px-3 mb-5">
@@ -47,7 +44,7 @@ wp_enqueue_script(
         <div class="col-md-6">
             <div class="vstack gap-3">
                 <?php if ($main_title) : ?>
-                    <div class="display-3 fw-bold">
+                    <div class="display-3 fw-bold rubik">
                         <?= $main_title; ?>
                     </div>
                 <?php endif; ?>

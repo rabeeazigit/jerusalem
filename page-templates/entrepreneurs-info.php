@@ -33,7 +33,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
                 <?php endif; ?>
 
                 <?php if ($controller->hero_title) : ?>
-                    <div class="display-3 fw-bold">
+                    <div class="display-3 fw-bold rubik">
                         <?= $controller->hero_title; ?>
                     </div>
                 <?php endif; ?>
@@ -116,7 +116,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
 <?php if ($urban_renewal_items && is_array($urban_renewal_items) && !empty($urban_renewal_items)) : ?>
     <div class="container-fluid py-5 mb-4" style="background-color: #174A75;" id="urban_renewal_section">
         <?php if ($controller->urban_renewal_title) : ?>
-            <div class="display-5 text-center text-white fw-semibold mb-4">
+            <div class="display-5 text-center text-white fw-semibold mb-4 rubik">
                 <?= $controller->urban_renewal_title; ?>
             </div>
         <?php endif; ?>
@@ -194,7 +194,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
 <?php if ($controller->stage_cards && is_array($controller->stage_cards) && !empty($controller->stage_cards)) : ?>
     <div id="resident_rights_section" class="container" style="background-image: url(<?= $controller->hero_background_image; ?>); background-size: cover; background-position: center; background-repeat: no-repeat;">
         <?php if ($controller->resident_rights_title) : ?>
-            <div class="text-center display-4 fw-semibold mb-3">
+            <div class="text-center display-4 rubik fw-semibold mb-3">
                 <?= $controller->resident_rights_title; ?>
             </div>
         <?php endif; ?>
@@ -248,7 +248,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
                     <?= $controller->faq_title; ?>
                 </div>
             <?php else : ?>
-                <div class="display-4 fw-semibold mb-4">
+                <div class="display-4 fw-semibold mb-4 rubik">
                     <?= $controller->faq_title; ?>
                 </div>
             <?php endif; ?>
@@ -310,7 +310,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
                 <?= $controller->downloadable_files_title; ?>
             </div>
         <?php else : ?>
-            <div class="display-4 fw-semibold mb-2">
+            <div class="display-4 fw-semibold mb-2 rubik">
                 <?= $controller->downloadable_files_title; ?>
             </div>
         <?php endif; ?>
@@ -409,13 +409,13 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
 <?php if ($controller->external_links_items && is_array($controller->external_links_items) && !empty($controller->external_links_items)) : ?>
     <div id="external_links_section" class="container-fluid px-md-5 px-3 my-5">
         <?php if ($controller->external_links_title): ?>
-            <div class="display-4 fw-semibold mb-2">
+            <div class="display-4 fw-semibold mb-2 rubik">
                 <?= $controller->external_links_title; ?>
             </div>
         <?php endif; ?>
 
         <?php if ($controller->external_links_subtitle): ?>
-            <div class="fs-6">
+            <div class="fs-6 mb-5">
                 <?= $controller->external_links_subtitle; ?>
             </div>
         <?php endif; ?>

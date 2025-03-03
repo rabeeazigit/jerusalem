@@ -12,6 +12,12 @@ get_header();
         <?php get_template_part("template-parts/navbar", null, ["dark_theme" => true]); ?>
 
         <div class="py-5 px-3 px-md-5">
+            <?php if (function_exists("yoast_breadcrumb")) : ?>
+                <div class="sq_breadcrumbs fs-5">
+                    <?php yoast_breadcrumb(); ?>
+                </div>
+            <?php endif; ?>
+
             <div class="row row-gap-3">
                 <div class="col-12 col-xl-6">
                     <div class="vstack gap-2 mb-2">
@@ -130,6 +136,8 @@ get_header();
 
 <script>
     $("button[type=submit] br").remove();
+
+    $(".contact_us_btn").addClass("disabled");
 </script>
 
 <?php get_footer(); ?>

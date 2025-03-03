@@ -28,7 +28,7 @@ $urban_category = $_GET["urban_category"] ?? null;
             <?php endif; ?>
 
             <?php if ($controller->hero_title) : ?>
-                <div class="display-3 fw-bold">
+                <div class="display-3 fw-bold rubik">
                     <?= $controller->hero_title; ?>
                 </div>
             <?php endif; ?>
@@ -55,29 +55,29 @@ $urban_category = $_GET["urban_category"] ?? null;
 
                             <?php if (wp_is_mobile()) : ?>
                                 <div class="hstack flex-wrap pb-3 px-2 gap-3">
-                                    <a href="#urban_renewal_process_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill">
+                                    <a href="#urban_renewal_process_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
                                         תהליך התחדשות עירונית
                                     </a>
 
-                                    <a href="#faq_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill">
+                                    <a href="#faq_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
                                         שאלות נפוצות
                                     </a>
 
-                                    <a href="#external_links_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill">
+                                    <a href="#external_links_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
                                         קישורים חיצוניים
                                     </a>
                                 </div>
                             <?php else : ?>
                                 <div class="hstack pb-3 gap-4">
-                                    <a href="#urban_renewal_process_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill">
+                                    <a href="#urban_renewal_process_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
                                         תהליך התחדשות עירונית
                                     </a>
 
-                                    <a href="#faq_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill">
+                                    <a href="#faq_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
                                         שאלות נפוצות
                                     </a>
 
-                                    <a href="#external_links_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill">
+                                    <a href="#external_links_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
                                         קישורים חיצוניים
                                     </a>
                                 </div>
@@ -325,7 +325,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                     <?= $controller->faq_title; ?>
                 </div>
             <?php else : ?>
-                <div class="display-4 fw-semibold mb-4">
+                <div class="display-4 fw-semibold mb-4 rubik">
                     <?= $controller->faq_title; ?>
                 </div>
             <?php endif; ?>
@@ -371,13 +371,13 @@ $urban_category = $_GET["urban_category"] ?? null;
 <?php if ($controller->external_links_items && is_array($controller->external_links_items) && !empty($controller->external_links_items)) : ?>
     <div id="external_links_section" class="container-fluid px-md-5 px-3 my-5">
         <?php if ($controller->external_links_title): ?>
-            <div class="display-4 fw-semibold mb-2">
+            <div class="display-4 fw-semibold mb-2 rubik">
                 <?= $controller->external_links_title; ?>
             </div>
         <?php endif; ?>
 
         <?php if ($controller->external_links_subtitle): ?>
-            <div class="fs-6 mb-3">
+            <div class="fs-6 mb-5">
                 <?= $controller->external_links_subtitle; ?>
             </div>
         <?php endif; ?>

@@ -54,7 +54,7 @@ class About
     public function MainHeader()
     {
 
-        $html = '<div class="container-fluid px-0">
+        $html = '<div class="container-fluid px-0 about-header-wrapper">
             <div class="row">
                 <div class="col">
                 ' . get_template_part("template-parts/navbar") . ' 
@@ -64,8 +64,6 @@ class About
         return $html;
     }
 
-
-
     public function HeroSeccssion()
     {
 
@@ -73,7 +71,7 @@ class About
         $tags = $this->TagTheFucker($this->tagd_links);
         $html = '
 
-    <div class="container-fluid mt-5 secssionBk" style="background:url(' . $bk . ');">
+    <div class="container-fluid secssionBk" style="background:url(' . $bk . ');">
             <div class="hero-section p-4">
                 <div class="row align-items-start">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 about_text ">
@@ -101,9 +99,11 @@ class About
         foreach ($SexyNumbers as $numbers) {
             $html .=
                 '<div class="col text-center text-dark">
-              <div class="display-1 fw-semibold">' . $numbers['about_number'] . '</div>
-              <div class="fs-5 fw-semibold">' . $numbers['about_numbers_text'] . '</div>
-              </div>';
+                <div class="mainTopicWrapper vstack align-items-center" data-count="' . $numbers['about_number'] . '">
+                <div class="display-1 fw-semibold mainTopicNumber">0</div>
+                <div class="fs-5 fw-semibold">' . $numbers['about_numbers_text'] . '</div>
+                </div>
+            </div>';
         }
 
         $html .= '</div></div>';

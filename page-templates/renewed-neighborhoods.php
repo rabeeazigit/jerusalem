@@ -132,7 +132,7 @@ $map_placeholder_image = get_field("map_placeholder_image") ?? null;
         </div>
 
         <div class="udc_search_container">
-            <form class="row row-gap-3" id="neighborhoods_search">
+            <form class="row row-gap- gx-3" id="neighborhoods_search">
                 <div class="col-md-3 col-6">
                     <?php if ($neightborhoods && is_array($neightborhoods) && !empty($neightborhoods)) : ?>
                         <select id="neighborhood_select" name="neighborhood" class="form-select rounded-pill">
@@ -159,7 +159,7 @@ $map_placeholder_image = get_field("map_placeholder_image") ?? null;
                     <?php endif; ?>
                 </div>
 
-                <div class="col-md-5 col-12">
+                <div class="col-md-4 col-12">
                     <div class="input-group bg-white rounded-pill border overflow-hidden">
                         <span class="input-group-text border-0" style="background-color: transparent;">
                             <i class="bi bi-search"></i>

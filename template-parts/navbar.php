@@ -154,7 +154,7 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
             <div class="h-100 col-xl-3">
                 <div class="d-flex align-items-center justify-content-end">
                     <?php if ($navbar->contact_us_label) : ?>
-                        <a href="<?= $navbar->contact_us_link; ?>" class="sq-secondary-button text-decoration-none shadow" style="<?= $dark_theme ? "background-color: #235d8d" : ""; ?>">
+                        <a href="<?= $navbar->contact_us_link; ?>" class="sq-secondary-button text-decoration-none shadow contact_us_btn" style="<?= $dark_theme ? "background-color: #235d8d" : ""; ?>">
                             <?= $navbar->contact_us_label; ?>
                         </a>
                     <?php endif; ?>
@@ -198,24 +198,26 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
             </div>
 
             <div class="hstack px-3 justify-content-between align-items-center">
-                <button class="btn" data-bs-toggle="offcanvas" data-bs-target="#mobile-hamburger">
-                    <img src="<?= get_template_directory_uri() . "/assets/images/" . ($dark_theme ? "hamburger-icon-light.svg" : "hamburger_icon.png"); ?>" alt="Open Nav Menu" class="img-fluid">
-                </button>
+                <div class="hstack gap-2">
+                    <button class="btn" data-bs-toggle="offcanvas" data-bs-target="#mobile-hamburger">
+                        <img src="<?= get_template_directory_uri() . "/assets/images/" . ($dark_theme ? "hamburger-icon-light.svg" : "hamburger_icon.png"); ?>" alt="Open Nav Menu" class="img-fluid">
+                    </button>
 
-                <a href="<?= home_url(); ?>" class="hstack gap-2 align-items-center text-reset text-decoration-none">
-                    <?php if ($navbar->brand_logo) : ?>
-                        <img src="<?= $navbar->brand_logo; ?>" class="navbar_brand_logo">
-                    <?php endif; ?>
+                    <a href="<?= home_url(); ?>" class="hstack gap-2 align-items-center text-reset text-decoration-none">
+                        <?php if ($navbar->brand_logo) : ?>
+                            <img src="<?= $navbar->brand_logo; ?>" class="navbar_brand_logo">
+                        <?php endif; ?>
 
-                    <?php if ($navbar->brand_label) : ?>
-                        <div class="brand_label_content fs-6">
-                            <?= $navbar->brand_label; ?>
-                        </div>
-                    <?php endif; ?>
-                </a>
+                        <?php if ($navbar->brand_label) : ?>
+                            <div class="brand_label_content fs-6">
+                                <?= $navbar->brand_label; ?>
+                            </div>
+                        <?php endif; ?>
+                    </a>
+                </div>
 
                 <?php if ($navbar->contact_us_label_mobile) : ?>
-                    <a href="<?= $navbar->contact_us_link; ?>" class="fs-6 sq-secondary-button text-decoration-none shadow">
+                    <a href="<?= $navbar->contact_us_link; ?>" class="fs-6 sq-secondary-button text-decoration-none shadow contact_us_btn">
                         <?= $navbar->contact_us_label_mobile; ?>
                     </a>
                 <?php endif; ?>
@@ -275,7 +277,7 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
                 </a>
 
                 <?php if ($navbar->contact_us_label_mobile) : ?>
-                    <a href="#contact-us" class="fs-6 sq-secondary-button text-decoration-none shadow">
+                    <a href="#contact-us" class="fs-6 sq-secondary-button text-decoration-none shadow contact_us_btn">
                         <?= $navbar->contact_us_label_mobile; ?>
                     </a>
                 <?php endif; ?>

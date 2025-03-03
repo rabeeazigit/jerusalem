@@ -24,7 +24,7 @@ $controller = new GenericTemplate();
         <div class="col-md-6">
             <div class="vstack gap-3">
                 <?php if ($controller->page_title) : ?>
-                    <div class="display-3 fw-bold">
+                    <div class="display-3 fw-bold rubik">
                         <?= $controller->page_title; ?>
                     </div>
                 <?php endif; ?>

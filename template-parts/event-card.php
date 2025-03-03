@@ -29,7 +29,7 @@ switch ($post_type) {
 }
 ?>
 
-<div class="vstack event_card_wrapper px-3 gap-2 h-100">
+<a href="<?= $permalink; ?>" class="vstack event_card_wrapper px-3 gap-2 h-100 text-decoration-none text-reset">
     <div class="d-flex align-items-start justify-content-start event_card_image" style="background-image: url(<?= $event_card_image; ?>);">
         <div class="hstack gap-2 align-items-start event_status_wrapper">
             <?php if ($post_type) : ?>
@@ -78,9 +78,9 @@ switch ($post_type) {
         <?php endif; ?>
 
         <?php if ($event_card_short_button_text) : ?>
-            <a href="<?= $permalink; ?>" class="text-decoration-none sq-tertiary-button">
+            <div class="sq-tertiary-button">
                 <?= $event_card_short_button_text; ?>
-            </a>
+            </div>
         <?php endif; ?>
     </div>
-</div>
+</a>

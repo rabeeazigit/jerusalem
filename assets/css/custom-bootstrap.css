@@ -1,6 +1,6 @@
 .btn-sq-primary {
     color: #fff; /* Dark text for contrast */
-    padding: 10px 16px; /* Adjust padding for a balanced square look */
+    padding: 6px 16px; /* Adjust padding for a balanced square look */
     border-radius: 4px; /* Slight rounding */
     text-transform: uppercase;
     transition: all 0.2s ease-in-out;
@@ -23,19 +23,32 @@
     border: 1px solid #174a75 !important;
 }
 
-.btn-sq-secondary:hover,
 .btn-sq-secondary.active {
-    color: white !important; /* Dark text for contrast */
     background-color: #174a75 !important;
 }
 
+.btn-sq-secondary.active {
+    color: white !important;  */
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.16);
+}
+
+.btn-sq-secondary:hover
+ {
+    border-radius: var(--border-radius-full, 100px) !important;
+    border: 1px solid var(--border-brand, #bdab73) !important;
+    background: var(--surface-secondary, #ebe8e3) !important;
+
+    /* elevation/4 */
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.16);
+}
+
 .btn-sq-ghost {
+    border-radius: var(--border-radius-full, 100px);
+    border: 1px solid var(--border-secondary, #B2AEA8);
     color: black; /* Dark text for contrast */
-    padding: 10px 16px; /* Adjust padding for a balanced square look */
-    border-radius: 4px; /* Slight rounding */
+    padding: 5px 16px; /* Adjust padding for a balanced square look */
     text-transform: uppercase;
     transition: all 0.2s ease-in-out;
-    border: 1px solid;
 }
 
 .btn-sq-ghost:hover,
@@ -84,6 +97,11 @@
     --bs-btn-disabled-bg: transparent;
     --bs-btn-disabled-border-color: #174a75;
     --bs-gradient: none;
+}
+
+.btn-outline-sq-primary:hover,
+.btn-outline-sq-primary:focus {
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.16);
 }
 
 .form-control-sq {
