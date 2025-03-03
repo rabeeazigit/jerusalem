@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             // Get modal elements
             const searchModal = new bootstrap.Modal("#search-modal");
             const searchModalContent = document.querySelector(
-                "#search-modal .modal-body"
+                "#search-modal .modal-body .target-col"
             );
 
             // If the query is less than 3 letters do nothing

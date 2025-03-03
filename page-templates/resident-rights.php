@@ -173,7 +173,7 @@ wp_enqueue_script(
                     </div>
 
                     <?php if (!wp_is_mobile() && $list_side_image) : ?>
-                        <div class="col-md-5 ">
+                        <div class="col-md-5">
                             <div class="sticky-top">
                                 <div class="d-flex w-100 h-100 align-items-center justify-content-start">
                                     <img src="<?= $list_side_image; ?>" class="article_list_side_image">

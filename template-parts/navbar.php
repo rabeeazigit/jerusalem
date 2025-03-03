@@ -31,18 +31,18 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
                             <?= $navbar->about_management_label; ?>
                         </button>
 
-                        <ul class="dropdown-menu dropdown-menu-end about_managment_menu">
-                            <div class="row align-items-center p-2">
+                        <ul class="dropdown-menu dropdown-menu-end about_managment_menu p-3">
+                            <div class="row align-items-center">
                                 <?php if ($navbar->about_management_image) : ?>
-                                    <div class="col-md-6">
+                                    <div class="col-xl-6">
                                         <img src="<?= $navbar->about_management_image; ?>" class="about_management_image">
                                     </div>
                                 <?php endif; ?>
 
-                                <div class="col-md-6">
+                                <div class="col">
                                     <?php foreach ($navbar->about_management_links as $e) : ?>
                                         <?php if (isset($e["link"])) : ?>
-                                            <li>
+                                            <li class="mega_menu_dropdown_item">
                                                 <a class="dropdown-item" href="<?= $e["link"]["url"]; ?>" target="<?= $e["link"]["target"]; ?>">
                                                     <?= $e["link"]["title"]; ?>
                                                 </a>
@@ -103,65 +103,63 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
             </div>
         </div>
 
-        <div class="hstack align-items-center justify-content-between main_menu_wrapper mt-4" id="main-menu">
-            <a href="<?= home_url(); ?>" class="hstack gap-2 align-items-center text-reset text-decoration-none">
-                <?php if ($navbar->brand_logo) : ?>
-                    <img src="<?= $navbar->brand_logo; ?>" class="navbar_brand_logo">
-                <?php endif; ?>
+        <div class=" hstack align-items-center justify-content-between main_menu_wrapper mt-4" id="main-menu">
+            <div class="h-100 col-xl-3">
+                <a href="<?= home_url(); ?>" class="hstack gap-2 align-items-center text-reset text-decoration-none">
+                    <?php if ($navbar->brand_logo) : ?>
+                        <img src="<?= $navbar->brand_logo; ?>" class="navbar_brand_logo">
+                    <?php endif; ?>
 
-                <?php if ($navbar->brand_label) : ?>
-                    <div class="brand_label_content fs-5" id="main_menu_navbar_brand">
-                        <?= $navbar->brand_label; ?>
+                    <?php if ($navbar->brand_label) : ?>
+                        <div class="brand_label_content fs-5" id="main_menu_navbar_brand">
+                            <?= $navbar->brand_label; ?>
+                        </div>
+                    <?php endif; ?>
+                </a>
+            </div>
+
+            <div class="h-100 col">
+                <div class="hstack h-100 align-items-center main_menu gap-4 rounded-pill shadow px-4 main_menu_nav">
+                    <?php if ($navbar->residents_menu_label) : ?>
+                        <?php get_template_part("template-parts/mega-menu", null, [
+                            "label" => $navbar->residents_menu_label,
+                            "menu_cards" => $navbar->residents_menu_cards,
+                            "menu_links" => $navbar->residents_menu_links
+                        ]); ?>
+                    <?php endif; ?>
+
+                    <?php if ($navbar->entrepreneurs_menu_label) : ?>
+                        <?php get_template_part("template-parts/mega-menu", null, [
+                            "label" => $navbar->entrepreneurs_menu_label,
+                            "menu_cards" => $navbar->entrepreneurs_menu_cards,
+                            "menu_links" => $navbar->entrepreneurs_menu_links
+                        ]); ?>
+                    <?php endif; ?>
+
+                    <?php if ($navbar->renewing_neighborhoods_link && $navbar->renewing_neighborhoods_label) : ?>
+                        <a href="<?= $navbar->renewing_neighborhoods_link; ?>" class="fs-5 main_nav_item text-reset text-decoration-none">
+                            <?= $navbar->renewing_neighborhoods_label; ?>
+                        </a>
+                    <?php endif; ?>
+
+                    <div class="vr"></div>
+
+                    <div class="hstack gap-1 searchbar_searchbox">
+                        <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
+                        <input class="site-searchbox" type="text" placeholder="<?= $navbar->searchbar_placeholder ?? ""; ?>">
                     </div>
-                <?php endif; ?>
-            </a>
-
-            <div class="hstack align-items-center main_menu gap-4 rounded-pill shadow px-4 main_menu_nav">
-                <?php if ($navbar->residents_menu_label) : ?>
-                    <?php get_template_part("template-parts/mega-menu", null, [
-                        "label" => $navbar->residents_menu_label,
-                        "menu_cards" => $navbar->residents_menu_cards,
-                        "menu_links" => $navbar->residents_menu_links
-                    ]); ?>
-                <?php endif; ?>
-
-                <?php if ($navbar->entrepreneurs_menu_label) : ?>
-                    <?php get_template_part("template-parts/mega-menu", null, [
-                        "label" => $navbar->entrepreneurs_menu_label,
-                        "menu_cards" => $navbar->entrepreneurs_menu_cards,
-                        "menu_links" => $navbar->entrepreneurs_menu_links
-                    ]); ?>
-                <?php endif; ?>
-
-                <?php if ($navbar->renewing_neighborhoods_link && $navbar->renewing_neighborhoods_label) : ?>
-                    <a href="<?= $navbar->renewing_neighborhoods_link; ?>" class="fs-5 main_nav_item text-reset text-decoration-none">
-                        <?= $navbar->renewing_neighborhoods_label; ?>
-                    </a>
-                <?php endif; ?>
-
-                <div class="vr"></div>
-
-                <div class="hstack gap-1 searchbar_searchbox">
-                    <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
-                    <input class="site-searchbox" type="text" placeholder="<?= $navbar->searchbar_placeholder ?? ""; ?>">
                 </div>
             </div>
 
-            <!-- <div class="hstack align-items-center main_menu gap-4 rounded-pill shadow px-4">
-                <div class="list-group">
-                    <div class="list-group-item">lorem4</div>
-                    <div class="list-group-item">lorem4</div>
-                    <div class="list-group-item">lorem4</div>
-                    <div class="list-group-item">lorem4</div>
-                    <div class="list-group-item">lorem4</div>
+            <div class="h-100 col-xl-3">
+                <div class="d-flex align-items-center justify-content-end">
+                    <?php if ($navbar->contact_us_label) : ?>
+                        <a href="<?= $navbar->contact_us_link; ?>" class="sq-secondary-button text-decoration-none shadow" style="<?= $dark_theme ? "background-color: #235d8d" : ""; ?>">
+                            <?= $navbar->contact_us_label; ?>
+                        </a>
+                    <?php endif; ?>
                 </div>
-            </div> -->
-
-            <?php if ($navbar->contact_us_label) : ?>
-                <a href="<?= $navbar->contact_us_link; ?>" class="sq-secondary-button text-decoration-none shadow" style="<?= $dark_theme ? "background-color: #235d8d" : ""; ?>">
-                    <?= $navbar->contact_us_label; ?>
-                </a>
-            <?php endif; ?>
+            </div>
         </div>
     </div>
 </div>

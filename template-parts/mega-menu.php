@@ -16,7 +16,7 @@ $menu_links = $args["menu_links"] ?? null;
                     <div class="row">
                         <?php foreach ($menu_cards as $e) : ?>
                             <div class="col">
-                                <div class="vstack h-100 justify-content-between align-items-start">
+                                <div class="vstack h-100 justify-content-between align-items-start mega_menu_tile">
                                     <?php if ($e["image"]) : ?>
                                         <img src="<?= $e["image"]; ?>" class="main_menu_card_image mb-4">
                                     <?php endif; ?>
@@ -48,9 +48,9 @@ $menu_links = $args["menu_links"] ?? null;
             <div class="col-md-3">
                 <div class="vstack gap-2">
                     <?php foreach ($menu_links as $e) : ?>
-                        <a href="<?= $e["link"]; ?>" class="dropdown-item vstack gap-1">
+                        <a href="<?= $e["link"]; ?>" class="dropdown-item vstack gap-1 mega_menu_side_link">
                             <div class="hstack justify-content-between align-items-end">
-                                <div class="fs-6 fw-bold">
+                                <div class="fs-6 fw-bold rubik">
                                     <?= $e["label"]; ?>
                                 </div>
 

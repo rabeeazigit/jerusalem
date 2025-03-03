@@ -173,7 +173,13 @@ body {
 }
 
 .about_managment_menu:has(img) {
-    width: 350px;
+    width: max-content;
+
+    border-radius: var(--border-radius-normal, 8px);
+    border: 1px solid var(--border-secondary, #b2aea8);
+    background: rgba(252, 251, 249, 0.9);
+    box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(5px);
 }
 
 .about_management_image {
@@ -181,7 +187,7 @@ body {
     height: 150px;
     object-fit: cover;
     object-position: center;
-    border-radius: 24px;
+    border-radius: 8px;
 }
 
 .navbar_brand_logo {
@@ -201,7 +207,7 @@ body {
 }
 
 .main_menu_card_image {
-    width: 200px;
+    width: 100%;
     height: 150px;
     object-fit: cover;
     object-position: center;
@@ -610,6 +616,7 @@ body {
 
 .project_slider_dots .slick-dots li.slick-active button:before,
 .event_slider_dots .slick-dots li.slick-active button:before {
+    width: 100%;
     background-color: var(--primary);
     border-radius: 4px;
     height: 8px;
@@ -709,9 +716,10 @@ body {
     width: 12vw;
     height: 12vw;
     position: relative;
-    left: 120px;
+    left: 81px;
     object-fit: cover;
     animation: infiniteRotation 10s steps(4) infinite;
+    top: 80px;
 }
 
 .article_title_icon {
@@ -1138,17 +1146,18 @@ textarea {
 }
 
 #search-modal .modal-content {
-    top: 18dvh;
-    width: 45dvw;
-    left: 7dvw;
+    top: 14dvh;
+    /* width: 45dvw;
+    left: 9dvw;
     max-height: 39dvh;
-    overflow-y: auto; /* Ensure scrolling is enabled */
-    scrollbar-width: auto; /* For Firefox */
-    background-color: white;
+    overflow-y: auto;
+    scrollbar-width: auto;
+    background-color: white; */
 
-    @media screen and (width <= 1600px) {
+    /* @media screen and (width <= 1600px) {
         & {
-            left: 3dvw;
+            left: 100px;
+            top: 100px;
         }
     }
 
@@ -1164,7 +1173,7 @@ textarea {
         width: 100%;
         top: 250px;
         scrollbar-width: none;
-    }
+    } */
 }
 
 /* Scrollbar for Webkit browsers (Chrome, Safari, Edge) */
@@ -1242,4 +1251,67 @@ textarea {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+}
+
+.mega_menu_tile {
+    padding: 12px;
+    border-radius: var(--border-radius-normal, 8px);
+    background: var(--color-neutral-300, #f8f6f4);
+    transition: all 250ms ease-in-out;
+}
+
+.mega_menu_tile:hover {
+    border-radius: var(--border-radius-normal, 8px);
+    background: var(--color-neutral-300, #f8f6f4);
+
+    /* elevation/4 */
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.16);
+}
+
+.main_menu_dropdown {
+    border-radius: 20px;
+    border: 1px solid var(--border-secondary, #b2aea8);
+    background: rgba(252, 251, 249, 0.9);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(5px);
+}
+
+.mega_menu_dropdown_item:not(:last-of-type) {
+    border-bottom: 1px solid #b2aea8;
+}
+
+.mega_menu_dropdown_item:hover a {
+    background-color: inherit;
+    color: #b2aea8;
+}
+
+.mega_menu_side_link {
+    border-radius: 8px;
+    transition: all 250ms ease-in-out;
+}
+
+.mega_menu_side_link:hover,
+.mega_menu_side_link:active {
+    background-color: inherit;
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.1);
+}
+
+.event_card_image {
+    transition: all 250ms ease-in-out;
+}
+
+.event_card_wrapper:hover .event_card_image {
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.16);
+}
+
+.dark-blue-bg {
+    background: linear-gradient(
+            to bottom,
+            rgba(23, 74, 117, 0.8),
+            rgba(23, 74, 117, 0.5)
+        ),
+        url(./assets/images/shutterstock/blue-bg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }

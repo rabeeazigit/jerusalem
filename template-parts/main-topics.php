@@ -6,7 +6,7 @@ $main_topics = $args["main_topics_main_topics"] ?? null;
 $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
 ?>
 
-<div class="py-5 main_topic_wrapper">
+<div class="py-5 dark-blue-bg">
     <?php if ($main_topics_title) : ?>
         <div class="container-fluid mb-5">
             <div class="fs-1 fw-bold text-light text-center">
@@ -43,7 +43,7 @@ $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
 
                     <div class="rs-col-5">
                         <a class="text-decoration-none text-reset vstack p-3 main_topic_card justify-content-between" href="<?= $main_topic_link; ?>">
-                            <div class="hstack align-items-start justify-content-between">
+                            <div class="hstack gap-1 align-items-start justify-content-between">
                                 <?php if ($main_topic_title) : ?>
                                     <div class="fs-5 fw-semibold rubik">
                                         <?= $main_topic_title; ?>
