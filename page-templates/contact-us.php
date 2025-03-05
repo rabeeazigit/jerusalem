@@ -8,7 +8,7 @@ get_header();
 ?>
 
 <header class="container-fluid px-0 text-light">
-    <div class="linear_bg_page py-5">
+    <div class="linear_bg_page">
         <?php get_template_part("template-parts/navbar", null, ["dark_theme" => true]); ?>
 
         <div class="py-5 px-3 px-md-5">
