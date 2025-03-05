@@ -202,7 +202,7 @@ body {
     object-position: center;
 
     @media screen and (width <= 768px) {
-        width: 58px;
+        width: auto;
         height: 58px;
     }
 }
