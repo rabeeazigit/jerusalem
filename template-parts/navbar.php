@@ -259,7 +259,7 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
                 </a>
 
                 <?php if ($navbar->contact_us_label_mobile) : ?>
-                    <a href="#contact-us" class="fs-6 sq-secondary-button text-decoration-none shadow contact_us_btn">
+                    <a href="<?= $navbar->contact_us_link; ?>" class="fs-6 sq-secondary-button text-decoration-none shadow contact_us_btn">
                         <?= $navbar->contact_us_label_mobile; ?>
                     </a>
                 <?php endif; ?>
