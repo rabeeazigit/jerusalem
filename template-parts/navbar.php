@@ -201,12 +201,6 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
                         <?php if ($navbar->brand_logo) : ?>
                             <img src="<?= $navbar->brand_logo; ?>" class="navbar_brand_logo">
                         <?php endif; ?>
-
-                        <?php if ($navbar->brand_label) : ?>
-                            <div class="brand_label_content fs-6">
-                                <?= $navbar->brand_label; ?>
-                            </div>
-                        <?php endif; ?>
                     </a>
                 </div>
 
@@ -261,12 +255,6 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
                 <a href="<?= home_url(); ?>" class="hstack gap-2 align-items-center text-reset text-decoration-none">
                     <?php if ($navbar->brand_logo) : ?>
                         <img src="<?= $navbar->brand_logo; ?>" class="navbar_brand_logo">
-                    <?php endif; ?>
-
-                    <?php if ($navbar->brand_label) : ?>
-                        <div class="brand_label_content fs-6">
-                            <?= $navbar->brand_label; ?>
-                        </div>
                     <?php endif; ?>
                 </a>
 
