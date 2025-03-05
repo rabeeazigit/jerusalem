@@ -9,7 +9,7 @@ $footer_contact_information_row = get_field("footer_contact_information_row", "o
 $footer_copyright_text = get_field("footer_copyright_text", "options") ?? null;
 ?>
 
-<?php if (!wp_is_mobile()) : ?>
+<div class="d-lg-block d-none">
     <div class="hstack py-4 gap-5 justify-content-center align-items-center">
         <?php if ($footer_logos_gallery && is_array($footer_logos_gallery) && !empty($footer_logos_gallery)) : ?>
             <?php foreach ($footer_logos_gallery as $e) : ?>
@@ -158,7 +158,8 @@ $footer_copyright_text = get_field("footer_copyright_text", "options") ?? null;
             </div>
         </div>
     </div>
-<?php else : ?>
+</div>
+<div class="d-block d-lg-none">
     <?php if ($footer_logos_gallery) : ?>
         <div class="row row-gap-3 justify-content-between align-items-center py-3">
             <?php foreach ($footer_logos_gallery as $e) : ?>
@@ -233,4 +234,4 @@ $footer_copyright_text = get_field("footer_copyright_text", "options") ?? null;
             <span>© <?= date("Y"); ?></span>
         </div>
     <?php endif; ?>
-<?php endif; ?>
+</div>

@@ -5,7 +5,7 @@ $hwch_text = get_field("hwch_text", "options");
 $hcwh_link = get_field("hcwh_link", "options");
 ?>
 
-<?php if (!wp_is_mobile()) : ?>
+<div class="d-lg-block d-none">
     <div class="container-fluid howcanwehelp" style="background:url('<?php echo get_template_directory_uri(); ?>/assets/images/about/bk1.png');">
         <div class="row align-items-center p-5">
             <?php if ($hwch_image) : ?>
@@ -35,7 +35,8 @@ $hcwh_link = get_field("hcwh_link", "options");
             </div>
         </div>
     </div>
-<?php else : ?>
+</div>
+<div class="d-block d-lg-none">
     <div class="container-fluid px-0 howcanwehelp" style="background:url('<?php echo get_template_directory_uri(); ?>/assets/images/about/bk1.png');">
         <div class="row align-items-center">
             <div class="col-12">
@@ -69,4 +70,4 @@ $hcwh_link = get_field("hcwh_link", "options");
             <?php endif; ?>
         </div>
     </div>
-<?php endif; ?>
+</div>

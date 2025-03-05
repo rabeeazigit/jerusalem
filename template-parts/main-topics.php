@@ -70,16 +70,16 @@ $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
     <?php endif; ?>
 </div>
 
-<?php if (wp_is_mobile()) : ?>
-    <script>
-        $(function() {
+<script>
+    $(function() {
+        if (window.innerWidth <= 678) {
             $(".main_topics_wrapper").slick({
                 slidesToShow: 1.5,
                 slidesToScroll: 1,
                 infinite: false,
                 arrows: false,
                 rtl: true
-            })
-        });
-    </script>
-<?php endif; ?>
+            });
+        }
+    });
+</script>
