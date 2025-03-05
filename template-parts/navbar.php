@@ -109,12 +109,6 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
                     <?php if ($navbar->brand_logo) : ?>
                         <img src="<?= $navbar->brand_logo; ?>" class="navbar_brand_logo">
                     <?php endif; ?>
-
-                    <?php if ($navbar->brand_label) : ?>
-                        <div class="brand_label_content fs-5" id="main_menu_navbar_brand">
-                            <?= $navbar->brand_label; ?>
-                        </div>
-                    <?php endif; ?>
                 </a>
             </div>
 
