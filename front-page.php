@@ -31,7 +31,7 @@
     ?>
 
     <?php if ($news_slider && is_array($news_slider) && !empty($news_slider)) : ?>
-        <div class="carousel_news_sliders mt-4 hstack align-items-center justify-content-start overflow-hidden">
+        <div class="carousel_news_sliders hstack align-items-center justify-content-start overflow-hidden">
             <?php foreach ($news_slider as $e) : ?>
                 <?php if (isset($e["news"]) && !empty($e["news"]) && is_array($e["news"])) : ?>
                     <div>
