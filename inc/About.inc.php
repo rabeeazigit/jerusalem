@@ -10,7 +10,6 @@ class About
     private $main_topic_options;
     private $our_staff;
     private $hero_image;
-    private $bk_sec_about;
     private $bk_sec_activities;
     private $pid;
 
@@ -27,7 +26,6 @@ class About
         $this->main_topic_options = get_field('main_topic_options', $this->pid);
         $this->our_staff = get_field('our_staff', $this->pid);
         $this->hero_image = get_field('hero_image', $this->pid);
-        $this->bk_sec_about = get_field('bk_sec_about', $this->pid);
         $this->bk_sec_activities = get_field('bk_sec_activities', $this->pid);
     }
 
@@ -67,11 +65,10 @@ class About
     public function HeroSeccssion()
     {
 
-        $bk = $this->bk_sec_about ? $this->bk_sec_about : '';
         $tags = $this->TagTheFucker($this->tagd_links);
         $html = '
 
-    <div class="container-fluid secssionBk" style="background:url(' . $bk . ');">
+    <div class="container-fluid secssionBk">
             <div class="hero-section p-4">
                 <div class="row align-items-start">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 about_text ">
