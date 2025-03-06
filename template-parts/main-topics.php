@@ -42,7 +42,7 @@ $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
                     ?>
 
                     <div class="rs-col-5">
-                        <a class="text-decoration-none text-reset vstack p-3 main_topic_card justify-content-between" href="<?= $main_topic_link; ?>">
+                        <a class="text-decoration-none text-reset vstack p-3 main_topic_card justify-content-between" href="<?= $main_topic_link; ?>" target="_blank">
                             <div class="hstack gap-1 align-items-start justify-content-between">
                                 <?php if ($main_topic_title) : ?>
                                     <div class="fs-5 fw-semibold rubik">
