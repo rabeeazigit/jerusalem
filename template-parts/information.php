@@ -43,7 +43,7 @@ $information_banner_link = $information_options["information_banner_link"] ?? nu
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <?php if (isset($e["side_image"])) : ?>
+                                    <?php if (isset($e["side_image"]) && $e["side_image"]) : ?>
                                         <div class="d-flex h-100 align-items-end justify-content-end">
                                             <img src="<?= $e["side_image"]; ?>" class="information_square_image object-fit-cover">
                                         </div>
