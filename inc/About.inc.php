@@ -12,6 +12,7 @@ class About
     private $hero_image;
     private $bk_sec_activities;
     private $pid;
+    private $aoa_link;
 
 
 
@@ -23,6 +24,7 @@ class About
         $this->about_sexy_numbers = get_field('about_sexy_numbers', $this->pid);
         $this->aoa_title = get_field('aoa_title', $this->pid);
         $this->aoa_content = get_field('aoa_content', $this->pid);
+        $this->aoa_link = get_field('aoa_link', $this->pid);
         $this->main_topic_options = get_field('main_topic_options', $this->pid);
         $this->our_staff = get_field('our_staff', $this->pid);
         $this->hero_image = get_field('hero_image', $this->pid);
@@ -117,7 +119,11 @@ class About
             "main_topics_title" => $this->aoa_title,
             "main_topics_content" => $this->aoa_content,
             "main_topics_content_class" => "apw",
-            "main_topics_link" => ["text" => "לכל התחומים", "url" => "#"]
+            "main_topics_link" => [
+                "text" => $this->aoa_link["title"],
+                "url" => $this->aoa_link["url"],
+                "target" => $this->aoa_link["target"]
+            ]
         ]);
         echo "</div>";
     }

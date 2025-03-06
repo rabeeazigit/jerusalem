@@ -978,6 +978,23 @@ class SQLinkSCF
                         'append' => '',
                     ),
                     array(
+                        'key' => 'field_67c9bc9b0aa4b',
+                        'label' => 'קישור',
+                        'name' => 'aoa_link',
+                        'aria-label' => '',
+                        'type' => 'link',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'return_format' => 'array',
+                        'allow_in_bindings' => 0,
+                    ),
+                    array(
                         'key' => 'field_6797535317661',
                         'label' => 'תוכן',
                         'name' => 'aoa_content',
