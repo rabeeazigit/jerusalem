@@ -33,12 +33,16 @@
     <?php if ($news_slider && is_array($news_slider) && !empty($news_slider)) : ?>
         <div class="carousel_news_sliders mt-4 hstack align-items-center justify-content-start overflow-hidden">
             <?php foreach ($news_slider as $e) : ?>
-                <?php if (isset($e["news"]) && !empty($e["news"])) : ?>
+                <?php if (isset($e["news"]) && !empty($e["news"]) && is_array($e["news"])) : ?>
                     <div>
-                        <div class="w-100 hstack gap-1 px-4 align-items-start justify-content-center carousel_news_item">
-                            <div class="fs-5" style="white-space: nowrap; overflow:hidden; width:max-content"><?= $e["news"]; ?></div>
+                        <a
+                            href="<?= $e["news"]["url"]; ?>"
+                            target="<?= $e["news"]["target"]; ?>"
+                            class="w-100 hstack gap-1 px-4 align-items-start justify-content-center 
+                            carousel_news_item text-reset text-decoration-none">
+                            <div class="fs-5" style="white-space: nowrap; overflow:hidden; width:max-content"><?= $e["news"]["title"]; ?></div>
                             <img src="<?= get_template_directory_uri() . "/assets/images/btn-arrow-black.png"; ?>">
-                        </div>
+                        </a>
                     </div>
                 <?php endif; ?>
             <?php endforeach; ?>
