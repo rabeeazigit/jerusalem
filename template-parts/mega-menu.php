@@ -34,7 +34,7 @@ $menu_links = $args["menu_links"] ?? null;
                                     <?php endif; ?>
 
                                     <?php if ($e["link"]) : ?>
-                                        <a href="<?= $e["link"]["url"]; ?>" class="text-decoration-none sq-tertiary-button" target="<?= $e["link"]["target"]; ?>">
+                                        <a href="<?= $e["link"]["url"]; ?>" class="text-decoration-none sq-tertiary-button fs-6" target="<?= $e["link"]["target"]; ?>">
                                             <?= $e["link"]["title"]; ?>
                                         </a>
                                     <?php endif; ?>

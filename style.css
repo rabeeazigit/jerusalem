@@ -81,8 +81,10 @@ body {
     background-color: var(--primary-active);
 }
 
-.sq-primary-button:hover::after {
-    width: 24px;
+@media screen and (width > 768px) {
+    .sq-primary-button:hover::after {
+        width: 24px;
+    }
 }
 
 .sq-secondary-button {
@@ -114,8 +116,10 @@ body {
     background-color: var(--secondary-active);
 }
 
-.sq-secondary-button:hover::after {
-    width: 24px;
+@media screen and (width > 768px) {
+    .sq-secondary-button:hover::after {
+        width: 24px;
+    }
 }
 
 .sq-tertiary-button {
@@ -128,15 +132,17 @@ body {
     transition: all 150ms ease-in-out;
 }
 
-.sq-tertiary-button::after {
-    transition: all 150ms ease-in-out;
-    content: "";
-    display: inline-block;
-    width: 0;
-    height: 18px;
-    background-image: url("./assets/images/btn-arrow-black.png");
-    background-size: cover;
-    background-repeat: no-repeat;
+@media screen and (width > 768px) {
+    .sq-tertiary-button::after {
+        transition: all 150ms ease-in-out;
+        content: "";
+        display: inline-block;
+        width: 0;
+        height: 18px;
+        background-image: url("./assets/images/btn-arrow-black.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
 }
 
 .sq-tertiary-button:active {
@@ -148,8 +154,10 @@ body {
     border-color: var(--tertiary-border-hover);
 }
 
-.sq-tertiary-button:hover::after {
-    width: 24px;
+@media screen and (width > 768px) {
+    .sq-tertiary-button:hover::after {
+        width: 24px;
+    }
 }
 
 .navbar_social_icon {
@@ -278,18 +286,20 @@ body {
     background-color: #ebe8e3;
 }
 
-.mega_menu_toggle::after {
-    transition: all 150ms ease-in-out;
-    content: "";
-    display: inline-block;
-    border: none;
-    width: 24px;
-    height: 24px;
-    background-image: url(./assets/images/dropdown-arrow.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    margin: 0;
-    vertical-align: bottom;
+@media screen and (width > 768px) {
+    .mega_menu_toggle::after {
+        transition: all 150ms ease-in-out;
+        content: "";
+        display: inline-block;
+        border: none;
+        width: 24px;
+        height: 24px;
+        background-image: url(./assets/images/dropdown-arrow.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 0;
+        vertical-align: bottom;
+    }
 }
 
 .searchbar_searchbox input {
@@ -319,17 +329,19 @@ body {
     outline: none;
 }
 
-.management_dropdown_toggle::after {
-    content: "";
-    display: inline-block;
-    border: none;
-    width: 16px;
-    height: 16px;
-    background-image: url(./assets/images/arrow-down.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    margin: 0;
-    vertical-align: middle;
+@media screen and (width > 768px) {
+    .management_dropdown_toggle::after {
+        content: "";
+        display: inline-block;
+        border: none;
+        width: 16px;
+        height: 16px;
+        background-image: url(./assets/images/arrow-down.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 0;
+        vertical-align: middle;
+    }
 }
 
 .top_nav_select {
@@ -473,11 +485,13 @@ body {
     height: 272px;
     transition: transform 350ms ease-in-out;
 
-    &:hover {
-        transform: translateY(-20px) rotate(5deg);
-        border-radius: var(--border-radius-large, 16px);
-        background: var(--surface-secondary, #ebe8e3);
-        box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.25);
+    @media screen and (width > 768px) {
+        &:hover {
+            transform: translateY(-20px) rotate(5deg);
+            border-radius: var(--border-radius-large, 16px);
+            background: var(--surface-secondary, #ebe8e3);
+            box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.25);
+        }
     }
 }
 
@@ -666,15 +680,17 @@ body {
     border: solid 1px #fff;
 }
 
-.tertiary_button_trans::after {
-    transition: all 150ms ease-in-out;
-    content: "";
-    display: inline-block;
-    width: 0;
-    height: 18px;
-    background-image: url("./assets/images/btn-arrow.png");
-    background-size: cover;
-    background-repeat: no-repeat;
+@media screen and (width > 768px) {
+    .tertiary_button_trans::after {
+        transition: all 150ms ease-in-out;
+        content: "";
+        display: inline-block;
+        width: 0;
+        height: 18px;
+        background-image: url("./assets/images/btn-arrow.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
 }
 
 .tertiary_button_trans:hover {
@@ -1357,8 +1373,10 @@ textarea {
     cursor: default;
 }
 
-.sq-secondary-button.disabled:hover::after {
-    width: 0;
+@media screen and (width > 768px) {
+    .sq-secondary-button.disabled:hover::after {
+        width: 0;
+    }
 }
 
 .hot-fix-ghost-btn:hover {

@@ -81,7 +81,6 @@ $footer_copyright_text = get_field("footer_copyright_text", "options") ?? null;
                                 <?php endif; ?>
                             </div>
                         <?php endif; ?>
-
                     <?php endforeach; ?>
                 </div>
             </div>

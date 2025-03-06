@@ -31,12 +31,12 @@ $information_banner_link = $information_options["information_banner_link"] ?? nu
                                     <?php endif; ?>
                                     <div class="hstack gap-2 mt-5">
                                         <?php if ($e["white_link"]) : ?>
-                                            <a href="<?= $e["white_link"]["url"]; ?>" target="<?= $e["white_link"]["target"]; ?>" class="text-decoration-none sq-tertiary-button">
+                                            <a href="<?= $e["white_link"]["url"]; ?>" target="<?= $e["white_link"]["target"]; ?>" class="fs-6 text-decoration-none sq-tertiary-button">
                                                 <?= $e["white_link"]["title"]; ?>
                                             </a>
                                         <?php endif; ?>
                                         <?php if ($e["yellow_link"]) : ?>
-                                            <a href="<?= $e["yellow_link"]["url"]; ?>" target="<?= $e["yellow_link"]["target"]; ?>" class="text-decoration-none sq-primary-button">
+                                            <a href="<?= $e["yellow_link"]["url"]; ?>" target="<?= $e["yellow_link"]["target"]; ?>" class="fs-6 text-decoration-none sq-primary-button">
                                                 <?= $e["yellow_link"]["title"]; ?>
                                             </a>
                                         <?php endif; ?>
@@ -75,12 +75,12 @@ $information_banner_link = $information_options["information_banner_link"] ?? nu
                                     <?php endif; ?>
                                     <div class="hstack justify-content-center gap-2 mt-5">
                                         <?php if ($e["white_link"]) : ?>
-                                            <a href="<?= $e["white_link"]["url"]; ?>" target="<?= $e["white_link"]["target"]; ?>" class="text-decoration-none sq-tertiary-button">
+                                            <a href="<?= $e["white_link"]["url"]; ?>" target="<?= $e["white_link"]["target"]; ?>" class="fs-6 text-decoration-none sq-tertiary-button">
                                                 <?= $e["white_link"]["title"]; ?>
                                             </a>
                                         <?php endif; ?>
                                         <?php if ($e["yellow_link"]) : ?>
-                                            <a href="<?= $e["yellow_link"]["url"]; ?>" target="<?= $e["yellow_link"]["target"]; ?>" class="text-decoration-none sq-primary-button">
+                                            <a href="<?= $e["yellow_link"]["url"]; ?>" target="<?= $e["yellow_link"]["target"]; ?>" class="fs-6 text-decoration-none sq-primary-button">
                                                 <?= $e["yellow_link"]["title"]; ?>
                                             </a>
                                         <?php endif; ?>
