@@ -93,7 +93,7 @@ class About
 
         $html = '
 
-       <div class="container d-none d-lg-block">
+       <div class="container ">
        <div class="row py-5 my-2 row-gap-4">';
         foreach ($SexyNumbers as $numbers) {
             $html .=
