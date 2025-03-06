@@ -238,7 +238,7 @@ class SQLinkSCF
                         'acfe_repeater_stylised_button' => 0,
                         'layout' => 'table',
                         'pagination' => 0,
-                        'min' => 2,
+                        'min' => 0,
                         'max' => 2,
                         'collapsed' => '',
                         'button_label' => 'Add Information Row',
