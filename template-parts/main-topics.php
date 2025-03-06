@@ -33,7 +33,7 @@ $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
 
     <?php if ($main_topics && is_array($main_topics)) : ?>
         <div class="container">
-            <div class="row justify-content-center main_topics_wrapper">
+            <div class="row justify-content-center main_topics_wrapper row-gap-4">
                 <?php foreach ($main_topics as $e) : ?>
                     <?php
                     $main_topic_title = $e["main_topic_title"] ?? null;
