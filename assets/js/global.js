@@ -94,6 +94,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const { inView, animate, scroll } = Motion;
     let mainTopicDelayer = 1;
     const gradientText = document.querySelector(".gradientText");
+    let delayer = 0;
 
     // Animating the main topic numbers
     inView(".mainTopicWrapper", (element) => {
@@ -106,27 +107,33 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
 
         // Animate opacity and movement
+        // To revert back to old ways
+        // remove the .then
         animate(
             element.target,
             { opacity: 1, bottom: 0 },
             { duration: 0.5, delay: mainTopicDelayer++ * 0.2 }
-        );
+        ).then(() => {
+            // Counter Effect
+            let currentCount = 0;
+            const increment = Math.max(1, Math.floor(dataCount / 100));
 
-        // Counter Effect
-        let currentCount = 0;
-        const increment = Math.max(1, Math.floor(dataCount / 100));
+            const updateCounter = () => {
+                if (currentCount < dataCount) {
+                    currentCount = Math.min(
+                        currentCount + increment,
+                        dataCount
+                    );
+                    element.target.querySelector(
+                        ".mainTopicNumber"
+                    ).textContent = currentCount;
+                    requestAnimationFrame(updateCounter);
+                }
+            };
 
-        const updateCounter = () => {
-            if (currentCount < dataCount) {
-                currentCount = Math.min(currentCount + increment, dataCount);
-                element.target.querySelector(".mainTopicNumber").textContent =
-                    currentCount;
-                requestAnimationFrame(updateCounter);
-            }
-        };
-
-        // Start counting after the delay
-        setTimeout(updateCounter, 200);
+            // Start counting after the delay
+            setTimeout(updateCounter, 450);
+        });
     });
 
     // Handle the gradientText filling up on scroll
