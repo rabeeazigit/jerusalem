@@ -47,6 +47,7 @@ $project_slider_items = $args["project_slider_items"] ?? null;
                 <div class="project-slider">
                     <?php foreach ($project_slider_items as $e) : ?>
                         <?php get_template_part("template-parts/project-card", null, [
+                            "project_address" => get_field("project_address", $e) ?? null,
                             "project_neighborhood" => get_field("project_neighborhood", $e) ?? null,
                             "project_status" => get_field("project_status", $e) ?? null,
                             "project_card_image" => get_field("project_card_image", $e) ?? null,

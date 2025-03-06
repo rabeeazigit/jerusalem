@@ -1,5 +1,6 @@
 <?php
 $project_name = $args["project_name"] ?? null;
+$project_address = $args["project_address"] ?? null;
 $project_link = $args["project_link"] ?? "#";
 $project_neighborhood = $args["project_neighborhood"] ?? null;
 $project_status = $args["project_status"] ?? null;
@@ -41,11 +42,13 @@ $project_card_image = $args["project_card_image"] ?? null;
                     <?= $project_neighborhood->post_title; ?>
                 </div>
 
-                <div class="vr"></div>
+                <?php if ($project_address) : ?>
+                    <div class="vr"></div>
 
-                <div class="rubik">
-                    <?= $project_neighborhood->post_title; ?>
-                </div>
+                    <div class="rubik">
+                        <?= $project_address; ?>
+                    </div>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
     </div>

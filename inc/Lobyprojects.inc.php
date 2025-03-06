@@ -297,6 +297,7 @@ class Lobyprojects
             $e = $fet->ID;
             echo '<div class="col-md-3">';
             get_template_part("template-parts/project-card", null, [
+                "project_address" => get_field("project_address", $e) ?? null,
                 "project_neighborhood" => get_field("project_neighborhood", $e) ?? null,
                 "project_status" => get_field("project_status", $e) ?? null,
                 "project_card_image" => get_field("project_card_image", $e) ?? null,
