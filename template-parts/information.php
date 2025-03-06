@@ -1,6 +1,5 @@
 <?php
 $information_options = $args["information_options"] ?? null;
-$information_section_background = $information_options["information_section_background"] ?? null;
 $information_sqaures = $information_options["information_sqaures"] ?? null;
 $information_paragraph = $information_options["information_paragraph"] ?? null;
 $information_link = $information_options["information_link"] ?? null;
