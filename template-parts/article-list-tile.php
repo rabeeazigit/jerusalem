@@ -13,42 +13,46 @@ $year_section = explode("/", explode(" | ", $article_date)[0])[2];
 
 <?php if ($article) : ?>
     <div class="hstack py-5 gap-4 article_list_tile">
-        <div class="vstack">
-            <div class="fw-semibold rubik fs-4">
-                <?= $day_section; ?>
-            </div>
+        <div class="col-1">
+            <div class="vstack">
+                <div class="fw-semibold rubik fs-4">
+                    <?= $day_section; ?>
+                </div>
 
-            <div class="opacity-75  rubik">
-                <?= $month_section; ?>
-            </div>
+                <div class="opacity-75  rubik">
+                    <?= $month_section; ?>
+                </div>
 
-            <div class="opacity-75  rubik">
-                <?= $year_section; ?>
+                <div class="opacity-75  rubik">
+                    <?= $year_section; ?>
+                </div>
             </div>
         </div>
 
-        <a href="<?= $article_link; ?>" class="vstack text-reset text-decoration-none">
-            <?php if ($article_title) : ?>
-                <div class=" hstack justify-content-between align-items-center">
-                    <div class="article_title fs-5 fw-semibold mb-2">
-                        <?= $article_title; ?>
-                    </div>
+        <div class="col">
+            <a href="<?= $article_link; ?>" class="vstack text-reset text-decoration-none">
+                <?php if ($article_title) : ?>
+                    <div class=" hstack justify-content-between align-items-center">
+                        <div class="article_title fs-5 fw-semibold mb-2">
+                            <?= $article_title; ?>
+                        </div>
 
-                    <img src="<?= get_template_directory_uri() . "/assets/images/yellow-arrow-left.png"; ?>" class="article_title_icon">
-                </div>
-            <?php endif; ?>
-
-            <?php if ($article_description) : ?>
-                <?php if (wp_is_mobile()) : ?>
-                    <div class="fs-5 rubik">
-                        <?= truncate_sentence($article_description, 80); ?>
-                    </div>
-                <?php else : ?>
-                    <div class="fs-5  rubik">
-                        <?= $article_description; ?>
+                        <img src="<?= get_template_directory_uri() . "/assets/images/yellow-arrow-left.png"; ?>" class="article_title_icon">
                     </div>
                 <?php endif; ?>
-            <?php endif; ?>
-        </a>
+
+                <?php if ($article_description) : ?>
+                    <?php if (wp_is_mobile()) : ?>
+                        <div class="fs-5 rubik">
+                            <?= truncate_sentence($article_description, 80); ?>
+                        </div>
+                    <?php else : ?>
+                        <div class="fs-5  rubik">
+                            <?= $article_description; ?>
+                        </div>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </a>
+        </div>
     </div>
 <?php endif; ?>
