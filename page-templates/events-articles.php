@@ -47,7 +47,7 @@ get_header();
         $posts = get_posts([
             "post_type" => ["event", "forum"],
             "posts_per_page" => $limit,
-            "paged" => $page,
+            "paged" => $page++,
         ]);
         $remaining = max(0, wp_count_posts("event")->publish - count($posts));
         ?>

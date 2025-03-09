@@ -229,7 +229,7 @@ $remaining_projects = max(0, $total_projects - $projects_limit);
 $projects = get_posts([
     "post_type" => "project",
     "posts_per_page" => $projects_limit,
-    "paged" => $projects_page,
+    "paged" => $projects_page++,
     "post_status" => "publish"
 ]);
 ?>
