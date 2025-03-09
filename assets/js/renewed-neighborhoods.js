@@ -1,4 +1,6 @@
 $(() => {
+    
+    
     // handles the filtering logic
     $("#neighborhoods_search").on("change", function (event) {
         const formData = new FormData(event.currentTarget);

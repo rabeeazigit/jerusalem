@@ -159,46 +159,52 @@ class AjaxHandler
             ?>
 
             <?php if (!wp_is_mobile()) : ?>
-                <a href="<?= get_permalink($e); ?>" class="text-reset text-decoration-none hstack gap-5 justify-content-between align-items-start py-5 article_card_elm">
+                <a href="<?= get_permalink($e); ?>" class="text-reset text-decoration-none hstack gap-5 justify-content-start align-items-start py-5 article_card_elm">
                     <?php if ($date) : ?>
                         <?php
                         $month = explode(" | ", $date)[1] ?? "";
                         $day = explode("/", explode(" | ", $date)[0])[0];
                         $year = explode("/", explode(" | ", $date)[0])[2];
                         ?>
-                        <div class="vstack">
-                            <div class="fw-semibold fs-4">
-                                <?= $day; ?>
-                            </div>
+                        <div class="col-1">
+                            <div class="vstack">
+                                <div class="fw-semibold fs-4">
+                                    <?= $day; ?>
+                                </div>
 
-                            <div class="opacity-75">
-                                <?= $month; ?>
-                            </div>
+                                <div class="opacity-75">
+                                    <?= $month; ?>
+                                </div>
 
-                            <div class="opacity-75">
-                                <?= $year; ?>
+                                <div class="opacity-75">
+                                    <?= $year; ?>
+                                </div>
                             </div>
                         </div>
                     <?php endif; ?>
 
                     <?php if ($title || $description) : ?>
-                        <div class="vstack gap-2">
-                            <?php if ($title) : ?>
-                                <div class="fs-4 fw-bold">
-                                    <?= $title; ?>
-                                </div>
-                            <?php endif; ?>
+                        <div class="col">
+                            <div class="vstack gap-2">
+                                <?php if ($title) : ?>
+                                    <div class="fs-4 fw-bold">
+                                        <?= $title; ?>
+                                    </div>
+                                <?php endif; ?>
 
-                            <?php if ($description) : ?>
-                                <div class="fs-6">
-                                    <?= $description; ?>
-                                </div>
-                            <?php endif; ?>
+                                <?php if ($description) : ?>
+                                    <div class="fs-6">
+                                        <?= $description; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     <?php endif; ?>
 
                     <?php if ($image) : ?>
-                        <img class="article_display_image" src="<?= $image; ?>" alt="<?= $title; ?>" class="img-fluid w-100 object-fit-cover rounded-4">
+                        <div class="col-3">
+                            <img src="<?= $image; ?>" alt="<?= $title; ?>" class="img-fluid w-100 object-fit-cover rounded-4 article_display_image">
+                        </div>
                     <?php endif; ?>
                 </a>
             <?php else : ?>
@@ -303,46 +309,52 @@ class AjaxHandler
             ?>
 
             <?php if (!wp_is_mobile()) : ?>
-                <a href="<?= get_permalink($e); ?>" class="text-reset text-decoration-none hstack gap-5 justify-content-between align-items-start py-5 article_card_elm">
+                <a href="<?= get_permalink($e); ?>" class="text-reset text-decoration-none hstack gap-5 justify-content-start align-items-start py-5 article_card_elm">
                     <?php if ($date) : ?>
                         <?php
                         $month = explode(" | ", $date)[1] ?? "";
                         $day = explode("/", explode(" | ", $date)[0])[0];
                         $year = explode("/", explode(" | ", $date)[0])[2];
                         ?>
-                        <div class="vstack">
-                            <div class="fw-semibold fs-4">
-                                <?= $day; ?>
-                            </div>
+                        <div class="col-1">
+                            <div class="vstack">
+                                <div class="fw-semibold fs-4">
+                                    <?= $day; ?>
+                                </div>
 
-                            <div class="opacity-75">
-                                <?= $month; ?>
-                            </div>
+                                <div class="opacity-75">
+                                    <?= $month; ?>
+                                </div>
 
-                            <div class="opacity-75">
-                                <?= $year; ?>
+                                <div class="opacity-75">
+                                    <?= $year; ?>
+                                </div>
                             </div>
                         </div>
                     <?php endif; ?>
 
                     <?php if ($title || $description) : ?>
-                        <div class="vstack gap-2">
-                            <?php if ($title) : ?>
-                                <div class="fs-4 fw-bold">
-                                    <?= $title; ?>
-                                </div>
-                            <?php endif; ?>
+                        <div class="col">
+                            <div class="vstack gap-2">
+                                <?php if ($title) : ?>
+                                    <div class="fs-4 fw-bold">
+                                        <?= $title; ?>
+                                    </div>
+                                <?php endif; ?>
 
-                            <?php if ($description) : ?>
-                                <div class="fs-6">
-                                    <?= $description; ?>
-                                </div>
-                            <?php endif; ?>
+                                <?php if ($description) : ?>
+                                    <div class="fs-6">
+                                        <?= $description; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     <?php endif; ?>
 
                     <?php if ($image) : ?>
-                        <img class="article_display_image" src="<?= $image; ?>" alt="<?= $title; ?>" class="img-fluid w-100 object-fit-cover rounded-4">
+                        <div class="col-3">
+                            <img src="<?= $image; ?>" alt="<?= $title; ?>" class="img-fluid w-100 object-fit-cover rounded-4 article_display_image">
+                        </div>
                     <?php endif; ?>
                 </a>
             <?php else : ?>
