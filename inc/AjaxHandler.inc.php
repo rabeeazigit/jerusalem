@@ -506,7 +506,6 @@ class AjaxHandler
             "post_status" => "publish",
             "exclude" => array_map(fn($e) => $e->ID, $result_1),
             "s" => $query,
-            "meta_query" => $meta_query
         ];
         $result_2 = get_posts($args);
 
