@@ -75,13 +75,15 @@ class Lobyprojects
 
     private function GetProjectStatus()
     {
-
-        $Status = [];
-        $ProjectStatus = $this->project_status;
-        foreach ($ProjectStatus as $st) {
-            $Status['name'] = $st->name;
-            $Status['color'] = get_field("project_status_color", "project-status_" . $st->term_id);
+        if (!$this->project_status || empty($this->project_status)) {
+            return "";
         }
+        
+        $Status = [
+            "name" => $this->project_status->name,
+            "color" => get_field("project_status_color", "project-status_" . $this->project_status->term_id)
+        ];
+        
         return $Status;
     }
 
@@ -194,7 +196,7 @@ class Lobyprojects
     {
         $html = '
     <div class="container-fluid mt-5 secssionBk session_bg_vector">
-        <div class="hero-section p-4">
+        <div class="hero-section p-md-4">
             <div class="row align-items-start">
                 
                 <!-- Left Column: Text Content -->
@@ -220,7 +222,7 @@ class Lobyprojects
         <div class="row align-items-start">
 
         <!-- Left Column: Text Content -->
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 about_text order-2 order-md-1">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 about_text order-2 order-md-1 my-4 my-md-0">
         
         <h6 class="ps-0 ps-md-5 display-4 fs-2 fw-bold">מידע חיצוני נוסף</h6>
                 ' . $this->External_Links() . '
@@ -248,7 +250,7 @@ class Lobyprojects
         if ($sexy_numbers && is_array($sexy_numbers) && !empty($sexy_numbers)) {
             foreach ($sexy_numbers as $sn) {
                 $html .= "
-                <div class='col mainTopicWrapper' data-count='{$sn['the_sexy_number']}'>
+                <div class='col-12 col-md-4 mainTopicWrapper' data-count='{$sn['the_sexy_number']}'>
                     <span class='s_number fs-1 rubik mainTopicNumber' >
                         0
                     </span>
