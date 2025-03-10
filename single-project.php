@@ -7,11 +7,24 @@ $Lobyprojects = new Lobyprojects;
 <section class="hero-section">
   <?php
   echo $Lobyprojects->MainHeader();
+  ?>
+  
+  <?php if (function_exists("yoast_breadcrumb")) : ?>
+    <div class="sq_breadcrumbs pt-5 px-md-5 px-3 fs-5">
+        <?php yoast_breadcrumb(); ?>
+    </div>
+  <?php endif; ?>
+  
+  <?php 
   echo $Lobyprojects->HeroSeccssion();
   //echo $Lobyprojects->HeroSeccssion2();
   ?>
 </section>
-<section class="projects_sec">
+<section class="projects_sec py-5" style="background-color: #EBE8E3">
+  <div class="text-center display-2 fw-semibold rubik mb-4">
+  פרויקטים נוספים
+  </div>
+
   <?php
 $Lobyprojects->GetProject_fetured_mnualy();
 ?>

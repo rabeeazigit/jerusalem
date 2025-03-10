@@ -93,12 +93,29 @@ class Lobyprojects
         $title = $this->project_neighborhood;
 
         $html = "<ul class='nbrhd ps-0 ps-md-5'>";
-        $html .= "<li>{$title->post_title}</li>";
-        $html .= "<li>{$this->tzof_number}</li>";
-        $html .= "<li>{$this->tabaa_number}</li>";
-        $html .= "<li>{$this->project_entrepreneur}</li>";
-        $html .= "<li>{$this->project_lowyer}</li>";
+        
+        if ($title->post_title && !empty($title->post_title)) {
+            $html .= "<li>{$title->post_title}</li>";
+        }
+
+        if ($this->tzof_number && !empty($this->tzof_number)) {
+            $html .= "<li>{$this->tzof_number}</li>";
+        }
+        
+        if ($this->tabaa_number && !empty($this->tabaa_number)) {
+            $html .= "<li>{$this->tabaa_number}</li>";
+        }
+        
+        if ($this->project_entrepreneur && !empty($this->project_entrepreneur)) {
+            $html .= "<li>{$this->project_entrepreneur}</li>";
+        }
+        
+        if ($this->project_lowyer && !empty($this->project_lowyer)) {
+            $html .= "<li>{$this->project_lowyer}</li>";
+        }
+        
         $html .= "</ul>";
+        
         $html .= "<div class='sts_title ms-0 ms-md-5'>התקדמות תהליך</div><div class='Status_pill '><span style='background:{$Status['color']}' class='circle'></span>{$Status['name']}</div>";
 
 
@@ -111,21 +128,23 @@ class Lobyprojects
         $Gallery = [];
         $Gallery_RAW = $this->project_card_image_repeater;
 
-        foreach ($Gallery_RAW as $key => $gal) {
-            $gallery_source = $gal['gallery_source'];
-
-            switch ($gallery_source) {
-                case 'video':
-                    $Gallery[$key]['source'] = 'video';
-                    $Gallery[$key]['video_src'] = $gal['youtube_video'];
-                    $Gallery[$key]['video_title'] = $gal['pg_video_title'];
-                    break;
-
-                case 'image':
-                    $Gallery[$key]['source'] = 'image';
-                    $Gallery[$key]['image_src'] = $gal['gallery_image'];
-                    $Gallery[$key]['image_title'] = $gal['pg_image_title'];
-                    break;
+        if (!empty($Gallery_RAW)) {
+            foreach ($Gallery_RAW as $key => $gal) {
+                $gallery_source = $gal['gallery_source'];
+    
+                switch ($gallery_source) {
+                    case 'video':
+                        $Gallery[$key]['source'] = 'video';
+                        $Gallery[$key]['video_src'] = $gal['youtube_video'];
+                        $Gallery[$key]['video_title'] = $gal['pg_video_title'];
+                        break;
+    
+                    case 'image':
+                        $Gallery[$key]['source'] = 'image';
+                        $Gallery[$key]['image_src'] = $gal['gallery_image'];
+                        $Gallery[$key]['image_title'] = $gal['pg_image_title'];
+                        break;
+                }
             }
         }
         return $Gallery;
@@ -136,8 +155,7 @@ class Lobyprojects
         $html = "";
         $Gallery = $this->ProjectCarousle();
 
-
-        if (!empty($Gallery)) {
+        if ($Gallery && !empty($Gallery)) {
             foreach ($Gallery as $gal) {
 
                 if ($gal['source'] == 'video') {
@@ -148,16 +166,17 @@ class Lobyprojects
             frameborder='0'
             loading='lazy'>
             </iframe>";
-                    $html .= "<div class='image_title '><h6>{$gal['video_title']}</h6></div></div>";
+                    $html .= "<div class='image_title my-3'><h6>{$gal['video_title']}</h6></div></div>";
                 }
 
                 if ($gal['source'] == 'image') {
                     $html .= "<div class='image_gallery'><img class='src_image_gallery' src='{$gal['image_src']}'/>";
-                    $html .= "<div class='image_title '><h6>{$gal['image_title']}</h6></div></div>";
+                    $html .= "<div class='image_title my-3'><h6>{$gal['image_title']}</h6></div></div>";
                 }
             }
-            return $html;
         }
+
+        return $html;
     }
 
 
@@ -166,14 +185,15 @@ class Lobyprojects
         $area_description = get_field("area_description", $this->pid);
         $html = "<h3 class='ps-0 ps-md-5 mt-3'>תיאור המתחם</h3>";
         $html .= "<div class='pro_desc ps-0 ps-md-5'><p>{$area_description}</p></div>";
-        return $html;
+     
+        return $area_description && !empty($area_description) ? $html : "";
     }
 
 
     public function HeroSeccssion()
     {
         $html = '
-    <div class="container-fluid mt-5 secssionBk">
+    <div class="container-fluid mt-5 secssionBk session_bg_vector">
         <div class="hero-section p-4">
             <div class="row align-items-start">
                 
@@ -197,10 +217,11 @@ class Lobyprojects
 
         </div>
 
-        <div class="row align-items-center">
+        <div class="row align-items-start">
 
         <!-- Left Column: Text Content -->
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 about_text order-2 order-md-1">
+        
         <h6 class="ps-0 ps-md-5 display-4 fs-2 fw-bold">מידע חיצוני נוסף</h6>
                 ' . $this->External_Links() . '
         </div>
@@ -224,8 +245,19 @@ class Lobyprojects
         $sexy_numbers = $this->projects_sexy_numbers;
         $html = "";
         $html .= "<div class='row py-5 py-md-0'>";
-        foreach ($sexy_numbers as $sn) {
-            $html .= "<div class='col'><span class='s_number'>{$sn['the_sexy_number']} </span><span class='s_title'>{$sn['project_text_sexy_number']}</span></div>";
+        if ($sexy_numbers && is_array($sexy_numbers) && !empty($sexy_numbers)) {
+            foreach ($sexy_numbers as $sn) {
+                $html .= "
+                <div class='col mainTopicWrapper' data-count='{$sn['the_sexy_number']}'>
+                    <span class='s_number fs-1 rubik mainTopicNumber' >
+                        0
+                    </span>
+                    
+                    <span class='s_title'>
+                        {$sn['project_text_sexy_number']}
+                    </span>
+                </div>";
+            }
         }
         $html .= "</div>";
         return $html;
@@ -241,42 +273,44 @@ class Lobyprojects
 
 
         $html = '<div class="row row-gap-4 ms-0 ms-md-4 ">';
-        foreach ($external as $idx => $e) {
-            $html .= '<div class="col-md-8">
-                    <div class="vstack justify-content-between align-items-center border rounded-4 py-2 px-3 external_links_container">
-                        <div class="hstack align-items-center justify-content-between external_links_toggler collapsed" data-bs-toggle="collapse" data-bs-target="#external_collapse_' . $idx . '">
-                            <div class="hstack gap-2 align-items-center">
-                                <img src="' . get_field("image", $e) . '" alt="" class="external_link_image">
-
-                                <div class="fs-6 fw-semibold">' . get_field("title", $e) . '
+        if ($external && is_array($external) && !empty($external)) {
+            foreach ($external as $idx => $e) {
+                $html .= '<div class="col-md-8">
+                        <div class="vstack justify-content-between align-items-center border rounded-4 py-2 px-3 external_links_container">
+                            <div class="hstack align-items-center justify-content-between external_links_toggler collapsed" data-bs-toggle="collapse" data-bs-target="#external_collapse_' . $idx . '">
+                                <div class="hstack gap-2 align-items-center">
+                                    <img src="' . get_field("image", $e) . '" alt="" class="external_link_image">
+    
+                                    <div class="fs-6 fw-semibold">' . get_field("title", $e) . '
+                                    </div>
+                                </div>
+    
+                                <div class="justify-self-end">
+                                    <img class="external_link_icon" src="' . get_template_directory_uri() . '/assets/images/down-arrow.png" style="width: 24px; height: 24px">
                                 </div>
                             </div>
-
-                            <div class="justify-self-end">
-                                <img class="external_link_icon" src="' . get_template_directory_uri() . '/assets/images/down-arrow.png" style="width: 24px; height: 24px">
+    
+                            <div class="collapse w-100" id="external_collapse_' . $idx . '">
+                                <div class="vstack my-2 gap-3">';
+                foreach (get_field("links", $e) as $link) {
+                    if (isset($link["link"])) :
+                        $html .= '<a class="text-reset text-decoration-none external_link_container" href="' . $link["link"] . '">
+                                                <div class="hstack py-3 gap-4 align-items-center justify-content-between">
+                                                    <img src="' . get_template_directory_uri() . '/assets/images/link.png" style="width: 24px; height: 24px">
+    
+                                                    <div class="fs-6 fw-semibold">' . $link["label"] . '
+                                                    </div>
+    
+                                                    <img src="' . get_template_directory_uri() . '/assets/images/btn-arrow-black.png" style="width: 24px; height: 24px">
+                                                </div>
+                                            </a>';
+                    endif;
+                }
+                $html .= '</div>
                             </div>
                         </div>
-
-                        <div class="collapse w-100" id="external_collapse_' . $idx . '">
-                            <div class="vstack my-2 gap-3">';
-            foreach (get_field("links", $e) as $link) {
-                if (isset($link["link"])) :
-                    $html .= '<a class="text-reset text-decoration-none external_link_container" href="' . $link["link"] . '">
-                                            <div class="hstack py-3 gap-4 align-items-center justify-content-between">
-                                                <img src="' . get_template_directory_uri() . '/assets/images/link.png" style="width: 24px; height: 24px">
-
-                                                <div class="fs-6 fw-semibold">' . $link["label"] . '
-                                                </div>
-
-                                                <img src="' . get_template_directory_uri() . '/assets/images/btn-arrow-black.png" style="width: 24px; height: 24px">
-                                            </div>
-                                        </a>';
-                endif;
+                    </div>';
             }
-            $html .= '</div>
-                        </div>
-                    </div>
-                </div>';
         }
         $html .= '</div>';
 
@@ -293,21 +327,21 @@ class Lobyprojects
 
         $fetured = $this->fetured_projects;
         echo '<div class="container-fluid py-4"><div class="row row-gap-5">';
-        foreach ($fetured as $key => $fet) {
-            $e = $fet->ID;
-            echo '<div class="col-md-3">';
-            get_template_part("template-parts/project-card", null, [
-                "project_address" => get_field("project_address", $e) ?? null,
-                "project_neighborhood" => get_field("project_neighborhood", $e) ?? null,
-                "project_status" => get_field("project_status", $e) ?? null,
-                "project_card_image" => get_field("project_card_image", $e) ?? null,
-                "project_name" => $e->post_title ?? null,
-                "project_link" => get_permalink($e) ?? null,
-            ]);
-            echo '</div>';
+        if ($fetured && is_array($fetured)) {
+            foreach ($fetured as $key => $fet) {
+                $e = $fet->ID;
+                echo '<div class="col-md-3">';
+                get_template_part("template-parts/project-card", null, [
+                    "project_address" => get_field("project_address", $e) ?? null,
+                    "project_neighborhood" => get_field("project_neighborhood", $e) ?? null,
+                    "project_status" => get_field("project_status", $e) ?? null,
+                    "project_card_image" => get_field("project_card_image", $e) ?? null,
+                    "project_name" => $e->post_title ?? null,
+                    "project_link" => get_permalink($e) ?? null,
+                ]);
+                echo '</div>';
+            }
         }
-
-
         echo '</div></div>';
     }
 } //END CLASS

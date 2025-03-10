@@ -1408,3 +1408,10 @@ textarea {
     color: white;
     background: #174a74;
 }
+
+.session_bg_vector {
+    background-image: url(./assets/images/yellow-vector.png);
+    background-repeat: no-repeat;
+    background-position: left 244px;
+    background-size: 560px;
+}
