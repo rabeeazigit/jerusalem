@@ -3,7 +3,7 @@ $navbar = new Navbar();
 $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
 ?>
 
-<div class="d-lg-block d-none sticky-top" style="z-index: 99999;">
+<div class="d-xl-block d-none sticky-top" style="z-index: 99999;">
     <div class="container-fluid <?= $dark_theme ? "text-light navbar_light_mode" : ""; ?> px-5">
         <div class="hstack justify-content-between align-items-center py-1 mb-3" id="top-navbar">
             <?php if ($navbar->social_media_links && is_array($navbar->social_media_links) && count($navbar->social_media_links) > 0) : ?>
@@ -107,7 +107,14 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
             <div class="h-100 col-xl-3">
                 <a href="<?= home_url(); ?>" class="hstack gap-2 align-items-center text-reset text-decoration-none">
                     <?php if ($navbar->brand_logo) : ?>
-                        <img src="<?= $navbar->brand_logo; ?>" class="navbar_brand_logo">
+                        <?php 
+                        $brand_text = get_template_directory_uri() . "/assets/images/ui/" . ($dark_theme ? "white_brand_text.svg" : "blue_brand_text.svg");
+                        ?>
+
+                        <div class="hstack gap-2 align-items-center">
+                            <img src="<?= $navbar->brand_logo; ?>" class="navbar_brand_logo">
+                            <img class="mobile_brand_text" id="desktop_brand_text" src="<?= $brand_text; ?>">
+                        </div>
                     <?php endif; ?>
                 </a>
             </div>
@@ -157,7 +164,8 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
         </div>
     </div>
 </div>
-<div class="d-lg-none d-block">
+
+<div class="d-xl-none d-block">
     <div class="container-fluid px-0">
         <div class="vstack gap-3">
             <div class="hstack px-3 justify-content-between align-items-center py-2 top_navbar_wrapper_mobile">
@@ -199,7 +207,14 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
 
                     <a href="<?= home_url(); ?>" class="hstack gap-2 align-items-center text-reset text-decoration-none">
                         <?php if ($navbar->brand_logo) : ?>
-                            <img src="<?= $navbar->brand_logo; ?>" class="navbar_brand_logo">
+                            <?php 
+                            $brand_text = get_template_directory_uri() . "/assets/images/ui/" . ($dark_theme ? "white_brand_text.svg" : "blue_brand_text.svg");
+                            ?>
+
+                            <div class="hstack gap-2 align-items-center">
+                                <img src="<?= $navbar->brand_logo; ?>" class="navbar_brand_logo">
+                                <img class="mobile_brand_text" src="<?= $brand_text; ?>">
+                            </div>
                         <?php endif; ?>
                     </a>
                 </div>
@@ -254,7 +269,14 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
 
                 <a href="<?= home_url(); ?>" class="hstack gap-2 align-items-center text-reset text-decoration-none">
                     <?php if ($navbar->brand_logo) : ?>
-                        <img src="<?= $navbar->brand_logo; ?>" class="navbar_brand_logo">
+                        <?php 
+                        $brand_text = get_template_directory_uri() . "/assets/images/ui/blue_brand_text.svg";
+                        ?>
+
+                        <div class="hstack gap-2 align-items-center">
+                            <img src="<?= $navbar->brand_logo; ?>" class="navbar_brand_logo">
+                            <img class="mobile_brand_text" src="<?= $brand_text; ?>">
+                        </div>
                     <?php endif; ?>
                 </a>
 

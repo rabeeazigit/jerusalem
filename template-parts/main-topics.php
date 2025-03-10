@@ -42,8 +42,8 @@ $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
                     ?>
 
                     <div class="rs-col-5">
-                        <a class="text-decoration-none text-reset vstack p-3 main_topic_card justify-content-between" href="<?= $main_topic_link; ?>" target="_blank">
-                            <div class="hstack gap-1 align-items-start justify-content-between">
+                        <a class="text-decoration-none text-reset vstack p-3 main_topic_card gap-3 justify-content-between" href="<?= $main_topic_link; ?>" target="_blank">
+                            <div class="hstack gap-2 align-items-start justify-content-between">
                                 <?php if ($main_topic_title) : ?>
                                     <div class="fs-5 fw-semibold rubik">
                                         <?= $main_topic_title; ?>
@@ -59,7 +59,7 @@ $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
 
                             <div class="d-flex justify-content-center align-items-center">
                                 <?php if ($main_topic_image) : ?>
-                                    <img src="<?= $main_topic_image; ?>" class="object-fit-cover main_topic_image">
+                                    <img src="<?= $main_topic_image; ?>" class="img-fluid" style="height: 140px">
                                 <?php endif; ?>
                             </div>
                         </a>
@@ -72,7 +72,7 @@ $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
 
 <script>
     $(function() {
-        if (window.innerWidth <= 678) {
+        if (window.innerWidth <= 765) {
             $(".main_topics_wrapper").slick({
                 slidesToShow: 1.5,
                 slidesToScroll: 1,

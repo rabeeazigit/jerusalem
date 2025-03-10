@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", (event) => {
     // Get the top navbar element
     const topNavbar = document.querySelector("#top-navbar");
-    const navbarBrandText = document.querySelector("#main_menu_navbar_brand");
+    const brandTextLabel = document.querySelector("#desktop_brand_text");
 
     // Listen for user scrolling
     document.addEventListener("scroll", (event) => {
@@ -13,10 +13,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
         // Else they're shown regularly
         if (currentY >= 100) {
             topNavbar.style.top = "-80px";
-            navbarBrandText.style.top = "-160px";
+            brandTextLabel.style.top = "-160px";
         } else {
             topNavbar.style.top = "0";
-            navbarBrandText.style.top = "0";
+            brandTextLabel.style.top = "0";
         }
     });
 

@@ -472,20 +472,35 @@ body {
     flex: 0 0 20%;
     max-width: 20%;
 
-    @media screen and (width <= 768px) {
+    @media screen and (max-width: 992px) { /* lg */
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+
+    @media screen and (max-width: 768px) { /* md */
         flex: inherit;
         max-width: inherit;
         padding: 0 18px;
+    }
+
+    @media screen and (max-width: 576px) { /* sm */
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 0 12px;
     }
 }
 
 .main_topic_card {
     background-color: #ffffff;
     border-radius: 18px;
-    height: 272px;
+    height: 100%;
     transition: transform 350ms ease-in-out;
 
-    @media screen and (width > 768px) {
+    @media screen and (max-width: 768px) {
+        height: 270px;
+    }
+    
+    @media screen and (width > 768px) {        
         &:hover {
             transform: translateY(-20px) rotate(5deg);
             border-radius: var(--border-radius-large, 16px);
@@ -500,7 +515,6 @@ body {
     border: 1px solid var(--border-secondary, #b2aea8);
     background: var(--surface-primary, #fff);
     box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.16);
-    backdrop-filter: blur(5px);
 }
 
 .information_square:first-of-type {
@@ -1222,11 +1236,6 @@ textarea {
     background: white;
 }
 
-#main_menu_navbar_brand {
-    position: relative;
-    transition: all 250ms ease-in-out;
-}
-
 .carousel_play:not(.carousel_paused)::after {
     content: "";
     width: 40px;
@@ -1381,4 +1390,15 @@ textarea {
 
 .hot-fix-ghost-btn:hover {
     background: var(--surface-secondary, #bdab7350) !important;
+}
+
+.mobile_brand_text {
+    @media screen and (max-width: 768px) {
+        width: 56%;
+    }
+}
+
+#desktop_brand_text {
+    position: relative;
+    transition: all 250ms ease-in-out;
 }
