@@ -95,11 +95,13 @@ get_header();
                         </div>
 
                         <?php if (!wp_is_mobile()) : ?>
-                            <div class="col-md-4">
-                                <div class="d-flex justify-content-start">
-                                    <img src="<?= $ctrl->side_image; ?>" class="rounded-circle object-fit-cover" style="height: 180px; width: 180px">
+                            <?php if ($ctrl->side_image) : ?>
+                                <div class="col-md-4">
+                                    <div class="d-flex justify-content-start">
+                                        <img src="<?= $ctrl->side_image; ?>" class="rounded-circle object-fit-cover" style="height: 180px; width: 180px">
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
                         <?php endif; ?>
                     </div>
                 </div>

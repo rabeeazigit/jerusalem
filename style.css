@@ -348,6 +348,7 @@ body {
     border: none;
     font-size: 18px;
     outline: none;
+    background-color: transparent;
 }
 
 .navbar_light_mode {
@@ -1401,4 +1402,9 @@ textarea {
 #desktop_brand_text {
     position: relative;
     transition: all 250ms ease-in-out;
+}
+
+.dark_top_nav {
+    color: white;
+    background: #174a74;
 }

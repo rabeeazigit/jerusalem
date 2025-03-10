@@ -95,7 +95,7 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
                 <?php endif; ?>
 
                 <form action="#" method="get">
-                    <select name="language" id="language" class="form-select top_nav_select">
+                    <select name="language" id="language" class="top_nav_select <?= $dark_theme ? "dark_top_nav" : "form-select"; ?>">
                         <option value="he">עברית</option>
                         <option value="en">English</option>
                     </select>
@@ -192,7 +192,7 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
                 <?php endif; ?>
 
                 <form action="#" method="get">
-                    <select name="language" id="language" class="form-select top_nav_select">
+                    <select name="language" id="language" class="top_nav_select <?= $dark_theme ? "dark_top_nav" : "form-select"; ?>">
                         <option value="he">עברית</option>
                         <option value="en">English</option>
                     </select>
