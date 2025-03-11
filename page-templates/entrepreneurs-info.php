@@ -290,7 +290,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
     </div>
 <?php endif; ?>
 
-<!-- Events And Courses Slider -->
+<!-- אירועים וקורבים Slider -->
 <?php if ($controller->event_slider_items && is_array($controller->event_slider_items) && !empty($controller->event_slider_items)) : ?>
     <div id="event_slider_section" class="container-fluid pt-5 pb-3 my-5">
         <?php get_template_part("template-parts/events-courses-slider", null, [

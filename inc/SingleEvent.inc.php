@@ -8,6 +8,8 @@ class SingleEvent
     public $hero_desc;
     public $post_type;
     public $details_show_gallery;
+    public $event_occurrence_date;
+    public $event_place;
     public $details_side_image;
     public $details_gallery;
     public $detailed_content;
@@ -21,6 +23,8 @@ class SingleEvent
         $this->hero_desc = get_field("event_card_short_description", $this->post);
         $this->post_type = get_post_type($this->post) == "forum" ? "forum" : get_field("event_type", $this->post);
         $this->details_show_gallery = !empty(get_field("details_show_gallery", $this->post)) ? true : false;
+        $this->event_occurrence_date = get_field("event_occurrence_date", $this->post);
+        $this->event_place = get_field("event_place", $this->post);
         $this->details_side_image = get_field("details_side_image", $this->post);
         $this->details_gallery = get_field("details_gallery", $this->post);
         $this->detailed_content = get_field("detailed_content", $this->post);

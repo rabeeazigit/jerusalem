@@ -19,10 +19,22 @@ $controller = new SingleEvent();
         <div class="col-md-6">
             <div class="vstack mb-3">
                 <?php if ($controller->hero_title) : ?>
-                    <div class="display-4 fw-bold">
+                    <div class="display-4 fw-bold rubik">
                         <?= $controller->hero_title; ?>
                     </div>
                 <?php endif; ?>
+
+                <div class="fs-5 rubik mb-4" style="color: #413B32">
+                    <?php if ($controller->event_occurrence_date) : ?>
+                        מתקיים ב - 
+                        <?= $controller->event_occurrence_date; ?>
+                    <?php endif; ?>
+
+                    <?php if ($controller->event_place) : ?>
+                        |
+                        <?= $controller->event_place; ?>
+                    <?php endif; ?>
+                </div>
 
                 <?php if ($controller->hero_desc) : ?>
                     <div class="fs-5">
