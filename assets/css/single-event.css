@@ -22,7 +22,8 @@ main {
     @media screen and (width <= 768px) {
         top: 173px !important;
         scale: 1.4;
-        right: 55px !important;
+        right: 37px !important;
+        width: 110px;
     }
 }
 
@@ -34,6 +35,8 @@ main {
     @media screen and (width <= 768px) {
         top: 173px !important;
         scale: 1.4;
+        width: 110px;
+        left: -25px !important;
     }
 }
 
