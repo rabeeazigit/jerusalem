@@ -114,15 +114,16 @@ class About
     {
         $bk = $this->bk_sec_activities ? $this->bk_sec_activities : '';
         echo "<div id='areas-of-activities'>";
+
         get_template_part('template-parts/main-topics', null, [
             "main_topics_main_topics" => $this->main_topic_options['main_topics'] ?? null,
             "main_topics_title" => $this->aoa_title,
             "main_topics_content" => $this->aoa_content,
             "main_topics_content_class" => "apw",
             "main_topics_link" => [
-                "text" => $this->aoa_link["title"],
-                "url" => $this->aoa_link["url"],
-                "target" => $this->aoa_link["target"]
+                "text" => $this->aoa_link["title"] ?? null,
+                "url" => $this->aoa_link["url"] ?? null,
+                "target" => $this->aoa_link["target"] ?? null
             ]
         ]);
         echo "</div>";

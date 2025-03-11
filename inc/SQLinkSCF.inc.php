@@ -6518,9 +6518,9 @@ class SQLinkSCF
         add_action('init', function () {
             register_post_type('event', array(
                 'labels' => array(
-                    'name' => 'Events And Courses',
+                    'name' => 'אירועים וקורסים',
                     'singular_name' => 'Event/Course',
-                    'menu_name' => 'Events And Courses',
+                    'menu_name' => 'אירועים וקורסים',
                     'all_items' => 'All Events And Courses',
                     'edit_item' => 'Edit Event/Course',
                     'view_item' => 'View Event/Course',

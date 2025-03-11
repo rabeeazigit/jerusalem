@@ -23,10 +23,16 @@ $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
         </div>
     <?php endif; ?>
 
-    <?php if ($main_topics_link) : ?>
+    <?php if ($main_topics_link && isset($main_topics_link["text"]) && $main_topics_link["text"] && isset($main_topics_link["url"]) && $main_topics_link["url"]) : ?>
         <div class="container-fluid mb-5">
             <div class="hstack justify-content-center">
-                <a class="btn sq-primary-button" target="<?= $main_topics_link['target']; ?>" href=" <?= $main_topics_link['url']; ?>"><?= $main_topics_link['text']; ?></a>
+                <a 
+                    class="btn sq-primary-button" 
+                    target="<?= $main_topics_link['target']; ?>" 
+                    href=" <?= $main_topics_link['url']; ?>"
+                >
+                        <?= $main_topics_link['text']; ?>
+                </a>
             </div>
         </div>
     <?php endif; ?>
