@@ -3305,7 +3305,8 @@ class SQLinkSCF
                         'type' => 'true_false',
                         'instructions' => '',
                         'required' => 0,
-                        'conditional_logic' => 0,
+                        // Intentionally hidden
+                        'conditional_logic' => -1,
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',

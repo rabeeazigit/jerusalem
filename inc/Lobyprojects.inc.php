@@ -322,7 +322,10 @@ class Lobyprojects
 
     public function GetProjects_Random() {}
 
-
+    public function should_show_featured_projects()
+    {
+        return $this->fetured_projects && is_array($this->fetured_projects) && count($this->fetured_projects) > 0;
+    }
 
     public function GetProject_fetured_mnualy()
     {

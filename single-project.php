@@ -20,15 +20,17 @@ $Lobyprojects = new Lobyprojects;
   //echo $Lobyprojects->HeroSeccssion2();
   ?>
 </section>
-<section class="projects_sec py-5" style="background-color: #EBE8E3">
-  <div class="text-center display-2 fw-semibold rubik mb-4">
-  פרויקטים נוספים
-  </div>
+<?php if ($Lobyprojects->should_show_featured_projects()) : ?>
+  <section class="projects_sec py-5" style="background-color: #EBE8E3">
+    <div class="text-center display-2 fw-semibold rubik mb-4">
+    פרויקטים נוספים
+    </div>
 
-  <?php
-$Lobyprojects->GetProject_fetured_mnualy();
-?>
-</section>
+    <?php
+  $Lobyprojects->GetProject_fetured_mnualy();
+  ?>
+  </section>
+<?php endif ?>
 
 
 
