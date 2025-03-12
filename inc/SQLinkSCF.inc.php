@@ -8378,7 +8378,7 @@ class SQLinkSCF
                         'return_format' => 'url',
                         'min_size' => '',
                         'max_size' => '',
-                        'mime_types' => 'jpg,jpeg,png,svg',
+                        'mime_types' => '',
                         'allow_in_bindings' => 0,
                         'library' => 'all',
                     ),
