@@ -1417,3 +1417,11 @@ textarea {
         background-size: 560px;
     }
 }
+
+.renewal_stage_submenu {
+    transition: all 250ms ease-in-out;
+}
+
+.renewal_stage_submenu:hover {
+    background-color: var(--primary-hover);
+}

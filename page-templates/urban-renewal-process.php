@@ -162,10 +162,10 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                                         <div class="row">
                                                                             <div class="col-md-1"></div>
                                                                             <div class="col">
-                                                                                <div class="vstack gap-4 p-3">
+                                                                                <div class="vstack p-3">
                                                                                     <?php foreach ($side_process_stages as $e) : ?>
                                                                                         <?php if (get_field("stage_title", $e)) : ?>
-                                                                                            <div class="fs-6">
+                                                                                            <div class="fs-6 px-2 rounded-4 renewal_stage_submenu py-4">
                                                                                                 <?= get_field("stage_title", $e); ?>
                                                                                             </div>
                                                                                         <?php endif; ?>
