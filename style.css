@@ -880,14 +880,17 @@ body {
     border-radius: 100%;
 }
 
-.faq_toggler {
-    cursor: pointer;
+.faq_toggler_wrapper {
     border: 1px solid #bdab73;
     transition: all 250ms ease-in-out;
     background-color: #ebe8e3;
 }
 
-.faq_toggler:hover {
+.faq_toggler {
+    cursor: pointer;
+}
+
+.faq_toggler_wrapper:hover {
     box-shadow: 0 0 16px #00000013;
 }
 

@@ -260,12 +260,12 @@ $resident_rights = $controller->get_resident_rights();
                         <?php $hidden = $idx > 6 ? 'style="display: none"' : ''; ?>
 
                         <div <?= $hidden; ?> class="faq-wrapper">
-                            <div 
-                                class="vstack rounded-4 py-4 px-3 faq_toggler collapsed"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#collapse_<?= $idx; ?>"
-                            >
-                                <div class="hstack align-items-center justify-content-between">
+                            <div class="vstack rounded-4 faq_toggler_wrapper">
+                                <div 
+                                    class="hstack align-items-center py-4 px-3 justify-content-between faq_toggler collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapse_<?= $idx; ?>"
+                                >
                                     <?php if (get_field("question", $faq)): ?>
                                         <div class="fs-5 fw-semibold">
                                             <?= get_field("question", $faq); ?>
@@ -275,7 +275,7 @@ $resident_rights = $controller->get_resident_rights();
                                     <div class="faq_icon"></div>
                                 </div>
 
-                                <div class="collapse my-4" id="collapse_<?= $idx; ?>">
+                                <div class="collapse my-4 px-3" id="collapse_<?= $idx; ?>">
                                     <?= get_field("answer", $faq); ?>
                                 </div>
                             </div>
