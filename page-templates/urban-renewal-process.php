@@ -332,27 +332,48 @@ $urban_category = $_GET["urban_category"] ?? null;
         <?php endif; ?>
 
         <div class="row">
+        <div class="row">
             <!-- FAQs -->
             <div class="col">
                 <div class="vstack gap-4">
                     <?php foreach ($controller->faq_items as $idx => $faq) : ?>
-                        <div class="vstack rounded-4 py-4 px-3 faq_toggler collapsed" data-bs-toggle="collapse" data-bs-target="#collapse_<?= $idx; ?>">
-                            <div class="hstack align-items-center justify-content-between">
-                                <?php if (get_field("question", $faq)): ?>
-                                    <div class="fs-5 fw-semibold">
-                                        <?= get_field("question", $faq); ?>
+                        <?php $hidden = $idx >= 6 ? 'style="display: none"' : ''; ?>
+
+                        <div <?= $hidden; ?> class="faq-wrapper">
+                            <div class="vstack rounded-4 faq_toggler_wrapper">
+                                <div 
+                                    class="hstack align-items-center py-4 px-3 justify-content-between faq_toggler collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapse_<?= $idx; ?>"
+                                >
+                                    <div class="col">
+                                        <?php if (get_field("question", $faq)): ?>
+                                            <div class="fs-5 fw-semibold">
+                                                <?= get_field("question", $faq); ?>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
-                                <?php endif; ?>
 
-                                <div class="faq_icon"></div>
-                            </div>
+                                    <div class="faq_icon"></div>
+                                </div>
 
-                            <div class="collapse my-4" id="collapse_<?= $idx; ?>">
-                                <?= get_field("answer", $faq); ?>
+                                <div class="collapse my-4 px-3" id="collapse_<?= $idx; ?>">
+                                    <?= get_field("answer", $faq); ?>
+                                </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
+
+                <?php if (count($controller->faq_items) > 6) : ?>
+                    <button class="btn btn-sm btn-sq-tertiary rounded-pill mt-4" id="load-more-faq">
+                        טען עוד
+                        
+                        <span>
+                            (<span id="more-faq-count"><?= count($controller->faq_items) - 7; ?></span>)
+                        </span>
+                    </button>
+                <?php endif; ?>
             </div>
 
             <!-- FAQS Side Image -->
@@ -363,6 +384,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                     </div>
                 </div>
             <?php endif; ?>
+        </div>
         </div>
     </div>
 <?php endif; ?>
