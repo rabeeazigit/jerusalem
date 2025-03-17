@@ -225,10 +225,10 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
                             <?php endif; ?>
                         </div>
 
-                        <?php if (isset($e["link"])) : ?>
+                        <?php if (isset($e["link"]) && isset($e["link"]["title"]) && $e["link"]["title"]) : ?>
                             <div class="vstack align-items-start justify-content-end">
-                                <a href="<?= $e["link"]["url"]; ?>" target="<?= $e["link"]["target"]; ?>" class="text-decoration-none fs-5 sq-tertiary-button">
-                                    <?= $e["link"]["title"]; ?>
+                                <a href="<?= $e["link"]["url"] ?? "#"; ?>" target="<?= $e["link"]["target"] ?? ""; ?>" class="text-decoration-none fs-5 sq-tertiary-button">
+                                    <?= $e["link"]["title"] ?? ""; ?>
                                 </a>
                             </div>
                         <?php endif; ?>
