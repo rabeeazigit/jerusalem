@@ -266,11 +266,13 @@ $resident_rights = $controller->get_resident_rights();
                                     data-bs-toggle="collapse"
                                     data-bs-target="#collapse_<?= $idx; ?>"
                                 >
-                                    <?php if (get_field("question", $faq)): ?>
-                                        <div class="fs-5 fw-semibold">
-                                            <?= get_field("question", $faq); ?>
-                                        </div>
-                                    <?php endif; ?>
+                                    <div class="col">
+                                        <?php if (get_field("question", $faq)): ?>
+                                            <div class="fs-5 fw-semibold">
+                                                <?= get_field("question", $faq); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
 
                                     <div class="faq_icon"></div>
                                 </div>
