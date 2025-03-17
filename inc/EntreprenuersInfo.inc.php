@@ -13,7 +13,6 @@ class EntreprenuersInfo
 
     public $resident_rights_title;
     public $resident_rights_link;
-    public $resident_rights_background;
     public $stage_cards;
 
     public $faq_title;
@@ -47,7 +46,6 @@ class EntreprenuersInfo
 
         $this->resident_rights_title = get_field("resident_rights_title") ?? null;
         $this->resident_rights_link = get_field("resident_rights_link") ?? null;
-        $this->resident_rights_background = get_field("resident_rights_background") ?? null;
         $this->stage_cards = get_field("stage_section_cards") ?? null;
 
         $this->faq_title = get_field("faq_title") ?? null;

@@ -13,7 +13,6 @@ class ResidentInfo
 
     public $resident_rights_title;
     public $resident_rights_link;
-    public $resident_rights_background;
 
     public $faq_title;
     public $faq_side_image;
@@ -46,7 +45,6 @@ class ResidentInfo
 
         $this->resident_rights_title = get_field("resident_rights_title") ?? null;
         $this->resident_rights_link = get_field("resident_rights_link") ?? null;
-        $this->resident_rights_background = get_field("resident_rights_background") ?? null;
 
         $this->faq_title = get_field("faq_title") ?? null;
         $this->faq_side_image = get_field("faq_side_image") ?? null;
