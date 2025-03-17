@@ -257,7 +257,7 @@ $resident_rights = $controller->get_resident_rights();
             <div class="col">
                 <div class="vstack gap-4">
                     <?php foreach ($controller->faq_items as $idx => $faq) : ?>
-                        <?php $hidden = $idx > 6 ? 'style="display: none"' : ''; ?>
+                        <?php $hidden = $idx >= 6 ? 'style="display: none"' : ''; ?>
 
                         <div <?= $hidden; ?> class="faq-wrapper">
                             <div class="vstack rounded-4 faq_toggler_wrapper">
