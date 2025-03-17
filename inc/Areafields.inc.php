@@ -33,30 +33,47 @@ class Areafields
 
     public function HeroSeccssion()
     {
-        $html = '
+        // Capture breadcrumbs output
+        $breadcrumbs = "";
+        if (function_exists("yoast_breadcrumb")) {
+            ob_start();
+            ?>
+            <div class="sq_breadcrumbs pb-5 fs-5">
+                <?php yoast_breadcrumb(); ?>
+            </div>
+            <?php
+            $breadcrumbs = ob_get_clean();
+        }
+
+        // Capture the entire HTML output using output buffering
+        ob_start();
+        ?>
         <div class="container-fluid mt-5 secssionBk">
-            <div class="hero-section p-4">
+            <div class="hero-section p-md-4 p-3">
                 <div class="row align-items-start">
                     
+                    <div class="col-12"><?= $breadcrumbs; ?></div>
+
                     <!-- Left Column: Text Content -->
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 about_text">
-                        <h1 class="aboutTitle display-4 fw-bold">' . get_the_title($this->pid) . '</h1>
-                        <span class="fs-5">' . ($this->hero_section['about_content'] ?? '') . '</span>
+                    <div class="col-xl-6 col-lg-12 about_text">
+                        <h1 class="aboutTitle display-4 fw-bold"><?= get_the_title($this->pid); ?></h1>
+                        <span class="fs-5"><?= $this->hero_section['about_content'] ?? ''; ?></span>
                         <br />
                     </div>
-    
+
                     <!-- Right Column: Image -->
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                        <img src="' . ($this->hero_section['hero_image'] ?? '') . '" 
-                             alt="Hero Image" 
-                             class="img-fluid rounded">
-                    </div>
-    
+                     <?php if ($this->hero_section['hero_image']) : ?>
+                        <div class="col-xl-6 col-lg-12">
+                            <img src="<?= $this->hero_section['hero_image'] ?? ''; ?>" 
+                                alt="Hero Image" 
+                                class="img-fluid rounded">
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
-        </div>';
-
-        return $html;
+        </div>
+        <?php
+        return ob_get_clean();
     }
 
 
@@ -228,9 +245,6 @@ class Areafields
         $LayOut['downloads'] = $content[2]['area_files_download'];
         $LayOut['videos'] = $content[3]['area_videos'];
         $LayOut['pid'] = wp_unique_id('slider_');
-
-
-
 
         return $LayOut;
     }

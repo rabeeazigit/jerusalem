@@ -71,7 +71,7 @@ class About
         $html = '
 
     <div class="container-fluid secssionBk">
-            <div class="hero-section p-4">
+            <div class="hero-section p-md-4 p-3">
                 <div class="row align-items-start">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 about_text ">
                         <h1 class="aboutTitle display-4 fw-bold">' . get_the_title(get_the_ID()) . '</h1>
