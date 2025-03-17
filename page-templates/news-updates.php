@@ -45,7 +45,7 @@ get_header();
         $articles = get_posts([
             "post_type" => "article",
             "posts_per_page" => $limit,
-            "paged" => $page,
+            "paged" => $page++,
         ]);
         $remaining = max(0, wp_count_posts("article")->publish - count($articles));
         ?>
@@ -74,8 +74,6 @@ get_header();
                     $image = get_field("article_image", $e) ?? null;
                     $description = get_field("article_description", $e) ?? null;
                     $date = get_field("article_date", $e) ?? null;
-
-
                     ?>
 
                     <?php if (!wp_is_mobile()) : ?>
