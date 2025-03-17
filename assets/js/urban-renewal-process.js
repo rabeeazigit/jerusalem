@@ -48,4 +48,19 @@ $(() => {
             });
         }
     });
+
+    $("#load-more-faq").on("click", function () {
+        const $faqCount = $("#more-faq-count");
+        const currentLength = parseInt($faqCount.html());
+        const updatedCounter = Math.max(0, currentLength - 7);
+        const $faqsToShow = $(".faq-wrapper:hidden").slice(0, 7);
+
+        $faqsToShow.fadeIn();
+
+        $faqCount.html(updatedCounter);
+        
+        if (updatedCounter <= 0) {
+            $(this).hide();
+        }
+    });
 });

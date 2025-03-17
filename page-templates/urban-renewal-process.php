@@ -332,7 +332,6 @@ $urban_category = $_GET["urban_category"] ?? null;
         <?php endif; ?>
 
         <div class="row">
-        <div class="row">
             <!-- FAQs -->
             <div class="col">
                 <div class="vstack gap-4">
@@ -384,7 +383,6 @@ $urban_category = $_GET["urban_category"] ?? null;
                     </div>
                 </div>
             <?php endif; ?>
-        </div>
         </div>
     </div>
 <?php endif; ?>
