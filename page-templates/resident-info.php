@@ -28,7 +28,7 @@ $resident_rights = $controller->get_resident_rights();
 <!-- Hero -->
 <div class="container-fluid px-md-5 px-3 resident_info_head_wrapper">
     <div class="row py-md-5 pt-5 row-gap-4">
-        <div class="col-md-6">
+        <div class="col-xl-6 col-lg-12">
             <div class="vstack gap-3">
                 <?php if (function_exists("yoast_breadcrumb")) : ?>
                     <div class="sq_breadcrumbs fs-5">
@@ -100,16 +100,16 @@ $resident_rights = $controller->get_resident_rights();
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-xl-6 col-lg-12">
             <?php if (!wp_is_mobile() && $controller->hero_side_image) : ?>
-                <div class="d-flex sticky-top align-items-center justify-content-center">
-                    <img class="rosh-ha-aer-sideimage" src="<?= $controller->hero_side_image; ?>" alt="" loading="lazy">
+                <div class="d-flex h-100 sticky-top align-items-center justify-content-center">
+                    <img class="img-fluid rosh-ha-aer-sideimage" src="<?= $controller->hero_side_image; ?>" alt="" loading="lazy">
                 </div>
             <?php endif; ?>
 
             <?php if (wp_is_mobile() && $controller->hero_side_image_mobile) : ?>
                 <div class="d-flex align-items-center justify-content-center">
-                    <img class="rosh-ha-aer-sideimage" src="<?= $controller->hero_side_image_mobile; ?>" alt="" loading="lazy">
+                    <img class="img-fluid rosh-ha-aer-sideimage" src="<?= $controller->hero_side_image_mobile; ?>" alt="" loading="lazy">
                 </div>
             <?php endif; ?>
         </div>

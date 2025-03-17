@@ -24,7 +24,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
 <!-- Hero -->
 <div class="container-fluid px-md-5 px-3 resident_info_head_wrapper">
     <div class="row py-md-5 pt-5 row-gap-4">
-        <div class="col-md-6">
+        <div class="col-xl-6 col-lg-12">
             <div class="vstack gap-3">
                 <?php if (function_exists("yoast_breadcrumb")) : ?>
                     <div class="sq_breadcrumbs fs-5">
@@ -96,10 +96,10 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-xl-6 col-lg-12">
             <?php if (!wp_is_mobile() && $controller->hero_side_image) : ?>
-                <div class="d-flex sticky-top align-items-center justify-content-center">
-                    <img class="rosh-ha-aer-sideimage" src="<?= $controller->hero_side_image; ?>" alt="" loading="lazy">
+                <div class="d-flex h-100 sticky-top align-items-center justify-content-center">
+                    <img class="rosh-ha-aer-sideimage img-fluid" src="<?= $controller->hero_side_image; ?>" alt="" loading="lazy">
                 </div>
             <?php endif; ?>
 
@@ -259,23 +259,43 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
             <div class="col">
                 <div class="vstack gap-4">
                     <?php foreach ($controller->faq_items as $idx => $faq) : ?>
-                        <div class="vstack rounded-4 py-4 px-3 faq_toggler collapsed" data-bs-toggle="collapse" data-bs-target="#collapse_<?= $idx; ?>">
-                            <div class="hstack align-items-center justify-content-between">
-                                <?php if (get_field("question", $faq)): ?>
-                                    <div class="fs-5 fw-semibold">
-                                        <?= get_field("question", $faq); ?>
+                        <?php $hidden = $idx >= 6 ? 'style="display: none"' : ''; ?>
+
+                        <div <?= $hidden; ?> class="faq-wrapper">
+                            <div class="vstack rounded-4 faq_toggler_wrapper">
+                                <div 
+                                    class="hstack align-items-center py-4 px-3 justify-content-between faq_toggler collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapse_<?= $idx; ?>"
+                                >
+                                    <div class="col">
+                                        <?php if (get_field("question", $faq)): ?>
+                                            <div class="fs-5 fw-semibold">
+                                                <?= get_field("question", $faq); ?>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
-                                <?php endif; ?>
 
-                                <div class="faq_icon"></div>
-                            </div>
+                                    <div class="faq_icon"></div>
+                                </div>
 
-                            <div class="collapse my-4" id="collapse_<?= $idx; ?>">
-                                <?= get_field("answer", $faq); ?>
+                                <div class="collapse my-4 px-3" id="collapse_<?= $idx; ?>">
+                                    <?= get_field("answer", $faq); ?>
+                                </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
+
+                <?php if (count($controller->faq_items) > 6) : ?>
+                    <button class="btn btn-sm btn-sq-tertiary rounded-pill mt-4" id="load-more-faq">
+                        טען עוד
+                        
+                        <span>
+                            (<span id="more-faq-count"><?= count($controller->faq_items) - 7; ?></span>)
+                        </span>
+                    </button>
+                <?php endif; ?>
             </div>
 
             <!-- FAQS Side Image -->
