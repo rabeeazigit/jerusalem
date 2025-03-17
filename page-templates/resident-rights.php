@@ -13,7 +13,6 @@ $side_image_mobile = get_field("side_image_mobile") ?? null;
 wp_enqueue_style(
     "resident_rights_css",
     get_template_directory_uri() . "/assets/css/resident-rights.css",
-    ["main_css"],
     filemtime(get_template_directory() . "/assets/css/resident-rights.css"),
     "all"
 );
@@ -24,6 +23,8 @@ wp_enqueue_script(
     [],
     filemtime(get_template_directory() . "/assets/js/resident-rights.js")
 );
+
+$right_category_id = $_GET["right_category_id"] ?? null;
 
 ?>
 

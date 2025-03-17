@@ -31,7 +31,7 @@ $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
                     target="<?= $main_topics_link['target']; ?>" 
                     href=" <?= $main_topics_link['url']; ?>"
                 >
-                        <?= $main_topics_link['text']; ?>
+                    <?= $main_topics_link['text']; ?>
                 </a>
             </div>
         </div>
