@@ -165,7 +165,11 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                                                 <div class="vstack p-3">
                                                                                     <?php foreach ($side_process_stages as $e) : ?>
                                                                                         <?php if (get_field("stage_title", $e)) : ?>
-                                                                                            <div class="fs-6 px-2 rounded-4 renewal_stage_submenu py-4">
+                                                                                            <div 
+                                                                                                class="fs-6 px-2 rounded-4 renewal_stage_submenu py-4" 
+                                                                                                data-parent-target="<?= $process->ID; ?>" 
+                                                                                                data-target="<?= $e->ID; ?>"
+                                                                                            >
                                                                                                 <?= get_field("stage_title", $e); ?>
                                                                                             </div>
                                                                                         <?php endif; ?>
@@ -253,7 +257,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                         </div>
                                     </div>
 
-                                    <div class="collapse stages_collapse_wrapper" id="item_<?= $index; ?>">
+                                    <div id="item_<?= $index; ?>" class="collapse stages_collapse_wrapper">
                                         <?php
                                         $stages_title = get_field("stages_title", $item) ?? null;
                                         $renewal_stages = get_field("renewal_stages", $item) ?? null;
@@ -280,7 +284,15 @@ $urban_category = $_GET["urban_category"] ?? null;
 
                                                 <?php if ($stage_title) : ?>
                                                     <div class="stage_accordion_wrapper py-4 px-4 mb-4">
-                                                        <div class="hstack align-items-center justify-content-between collapsed stage_accordion" data-bs-toggle="collapse" data-bs-target="#stage_<?= $stage_index; ?>">
+                                                        <div
+                                                            class="hstack align-items-center justify-content-between collapsed stage_accordion"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#stage_<?= $stage_index; ?>"
+                                                            data-id="<?= $stage->ID; ?>"
+                                                            data-parent="<?= $item->ID; ?>"
+                                                            data-collapse-parent="item_<?= $index; ?>"
+                                                            data-stage-collapse="stage_<?= $stage_index; ?>"
+                                                        >
                                                             <div class="hstack gap-2 align-items-center">
                                                                 <div class="stage_circle"></div>
 

@@ -1423,6 +1423,7 @@ textarea {
 
 .renewal_stage_submenu {
     transition: all 250ms ease-in-out;
+    cursor: pointer;
 }
 
 .renewal_stage_submenu:hover {
