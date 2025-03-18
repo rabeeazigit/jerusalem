@@ -7,7 +7,7 @@ get_header();
 
 <?php
 $controller = new UrbanRenewal();
-$always_unique = 0;
+
 
 // Setting up renewual items
 $urban_renewal_terms = $controller->get_renewal_categories();
@@ -220,7 +220,11 @@ $urban_category = $_GET["urban_category"] ?? null;
 
                     <!-- Stages Collapseable Elements -->
                     <?php foreach ($urban_renewal_terms as $uc_ind => $urban_category) : ?>
-                        <?php $urban_renewal_items = $controller->get_urban_renewal_processes($urban_category); ?>
+                        <?php
+                        $always_unique = rand(0, 1000) . "_" . time();
+                        $urban_renewal_items = $controller->get_urban_renewal_processes($urban_category); 
+                        ?>
+                        
                         <div class="urban_category_accordion_wrapper py-3 py-md-5 <?= $uc_ind > 0 ? "uc_hidden" : ""; ?>" data-process-category="<?= $urban_category->name; ?>" style="<?= $uc_ind > 0 ? "display:none" : ""; ?>">
                             <?php foreach ($urban_renewal_items as $index => $item) : ?>
                                 <div class="vstack">
@@ -258,7 +262,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                         </div>
                                     </div>
 
-                                    <div id="item_<?= $always_unique++; ?>" class="collapse stages_collapse_wrapper">
+                                    <div id="item_<?= $always_unique; ?>" class="collapse stages_collapse_wrapper">
                                         <?php
                                         $stages_title = get_field("stages_title", $item) ?? null;
                                         $renewal_stages = get_field("renewal_stages", $item) ?? null;
@@ -292,7 +296,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                             data-bs-target="#stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
                                                             data-id="<?= $stage->ID; ?>"
                                                             data-parent="<?= $item->ID; ?>"
-                                                            data-collapse-parent="item_<?= $index; ?>"
+                                                            data-collapse-parent="item_<?= $always_unique; ?>"
                                                             data-stage-collapse="stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
                                                         >
                                                             <div class="hstack gap-2 align-items-center">
