@@ -8,11 +8,10 @@ get_header();
 $About = new About;
 
 ?>
-<section class="hero-section">
-    <?php
-    echo $About->MainHeader();
-    ?>
 
+<?php get_template_part("template-parts/navbar"); ?>
+
+<section class="hero-section">
     <?php if (function_exists("yoast_breadcrumb")) : ?>
         <div class="sq_breadcrumbs pt-5 px-md-5 px-3 fs-5">
             <?php yoast_breadcrumb(); ?>

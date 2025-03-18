@@ -11,9 +11,10 @@ $GetPillsCategories = $Areafields->GetPillsCategories();
 
 ?>
 
+<?php get_template_part("template-parts/navbar"); ?>
+
 <section class="hero-section">
 <?php
-echo $Areafields->MainHeader();
 echo $Areafields->HeroSeccssion();
 $rightsideCats = $Areafields->LeftSideCats();
 ?>

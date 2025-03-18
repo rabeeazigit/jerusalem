@@ -1,8 +1,8 @@
 <?php get_header(); ?>
 
-<div class="container-fluid px-0 pb-5 home_header_wrapper">
-    <?php get_template_part("template-parts/navbar"); ?>
+<?php get_template_part("template-parts/navbar"); ?>
 
+<div class="container-fluid px-0 pb-5 home_header_wrapper">
     <?php
     $main_title = get_field("main_title") ?? null;
     $sub_title = get_field("sub_title") ?? null;

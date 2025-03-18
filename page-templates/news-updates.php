@@ -5,16 +5,17 @@
 get_header();
 ?>
 
-<header class="container-fluid px-0 text-light">
+<?php get_template_part("template-parts/navbar", null, ["dark_theme" => true]); ?>
+
+<main class="container-fluid px-0 text-light">
     <div class="linear_bg_page">
-        <?php get_template_part("template-parts/navbar", null, ["dark_theme" => true]); ?>
         <?php
         $main_title = get_field("main_title") ?? null;
         $sub_title = get_field("sub_title") ?? null;
         ?>
-        <div class="vstack my-3 pt-4 px-md-5 px-3">
+        <div class="vstack  pt-4 px-md-5 px-3">
             <?php if (function_exists("yoast_breadcrumb")) : ?>
-                <div class="sq_breadcrumbs fs-5">
+                <div class="sq_breadcrumbs py-3 fs-5">
                     <?php yoast_breadcrumb(); ?>
                 </div>
             <?php endif; ?>
@@ -34,7 +35,7 @@ get_header();
             "dark_mode" => true
         ]); ?>
     </div>
-</header>
+</main>
 
 <section class="article_wrapper py-5">
     <main class="container px-md-5 px-3">
@@ -281,6 +282,18 @@ get_header();
             });
         });
     });
+
+    document.addEventListener("scroll", (event) => {
+        // Get the current scrollY of the screen
+        const currentY = window.scrollY;
+
+        if (currentY >= 120) {
+            $("#main-sticky-navbar-sticky-section").removeClass("linear_bg_page");
+        } else {
+            $("#main-sticky-navbar-sticky-section").addClass("linear_bg_page");
+        }
+    });
+    
 </script>
 
 <?php get_footer(); ?>

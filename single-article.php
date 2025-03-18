@@ -5,9 +5,9 @@ $controller = new SingleArticle();
 get_header();
 ?>
 
-<div class="single-article-container">
-    <?php get_template_part("template-parts/navbar"); ?>
+<?php get_template_part("template-parts/navbar"); ?>
 
+<div class="single-article-container">
     <header class="container-fluid px-md-5 px-3">
         <?php if (function_exists("yoast_breadcrumb")) : ?>
             <div class="sq_breadcrumbs pt-5 fs-5">

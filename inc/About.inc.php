@@ -48,22 +48,6 @@ class About
         return $html;
     }
 
-
-
-
-    public function MainHeader()
-    {
-
-        $html = '<div class="container-fluid px-0 about-header-wrapper">
-            <div class="row">
-                <div class="col">
-                ' . get_template_part("template-parts/navbar") . ' 
-                </div> 
-        </div>';
-
-        return $html;
-    }
-
     public function HeroSeccssion()
     {
 
