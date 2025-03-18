@@ -103,7 +103,13 @@ $urban_category = $_GET["urban_category"] ?? null;
 
                         <div class="hstack align-items-center border rounded-pill p-1" style="width: fit-content;" role="tablist">
                             <?php foreach ($urban_renewal_terms as $i => $category) : ?>
-                                <button class="btn btn-sq-primary text-dark rounded-pill fs-6 uc_category_btn <?= $i == 0 ? "active" : ""; ?>" data-uc-category="<?= $category->name; ?>" data-bs-toggle="tab" data-bs-target="#tab_<?= $i; ?>">
+                                <button
+                                    class="btn btn-sq-primary text-dark rounded-pill fs-6 uc_category_btn <?= $i == 0 ? "active" : ""; ?>"
+                                    data-uc-category="<?= $category->name; ?>"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#tab_<?= $i; ?>"
+                                    data-uc-category-id="<?= $category->term_id; ?>"
+                                >
                                     <?= $category->name; ?>
                                 </button>
                             <?php endforeach; ?>
@@ -204,15 +210,13 @@ $urban_category = $_GET["urban_category"] ?? null;
                                 תהליך התחדשות עירונית
                             </div>
 
-                            <?php if (false) : ?>
-                                <div class="input-group rounded-pill overflow-hidden border">
-                                    <span class="input-group-text border-none" style=" background-color: white">
-                                        <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
-                                    </span>
+                            <div class="input-group rounded-pill overflow-hidden border">
+                                <span class="input-group-text border-none" style=" background-color: white">
+                                    <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
+                                </span>
 
-                                    <input type="text" class="form-control border-0 stages_search" placeholder="Search">
-                                </div>
-                            <?php endif; ?>
+                                <input type="text" class="form-control border-0 stages_search" placeholder="Search">
+                            </div>
                         </div>
 
                         <hr>

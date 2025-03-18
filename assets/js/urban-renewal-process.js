@@ -1,4 +1,7 @@
 $(() => {
+    // stop the sticky main menu in this page
+    $("#main-sticky-navbar").removeClass("sticky-top");
+    
     $(".uc_category_btn").on("click", function () {
         const ucCategory = $(this).data("uc-category");
         const target = $(
@@ -99,6 +102,19 @@ $(() => {
             $collapseParent,
             $stageCollapseElement,
             stageElementTop
+        });
+    });
+
+    // listen for search field changes
+    $(".stages_search").on("input", function () {
+        const query = $(this).val();
+
+        if (query.length <= 3) {
+            return;
+        }
+
+        console.log({
+            query
         });
     });
 });
