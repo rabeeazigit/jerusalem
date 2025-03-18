@@ -84,12 +84,21 @@ $(() => {
         $collapseParent.collapse("show");
         
         // open the stage it self after opening the collapse
-        $stageCollapseElement.collapse("show");
+        // $stageCollapseElement.collapse("show");
 
         // get the position of the element relative to the document
-        const stageElementTop = $stageCollapseElement.offset().top;
+        const stageElementTop = $stageElement.offset().top;
 
         // scroll to the opened element smoothly
         $("html, body").animate({ scrollTop: stageElementTop - 200 }, 500);
+
+        console.log({
+            stageId,
+            stageParentId,
+            $stageElement,
+            $collapseParent,
+            $stageCollapseElement,
+            stageElementTop
+        });
     });
 });

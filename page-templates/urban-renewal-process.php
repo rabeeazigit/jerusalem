@@ -7,6 +7,7 @@ get_header();
 
 <?php
 $controller = new UrbanRenewal();
+$always_unique = 0;
 
 // Setting up renewual items
 $urban_renewal_terms = $controller->get_renewal_categories();
@@ -231,7 +232,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                         שלב <?= $index + 1; ?>
                                                     </div>
 
-                                                    <button class="btn p-1 stage_btn rounded-circle collapsed" style="background-color: lightgray" data-bs-toggle="collapse" data-bs-target="#item_<?= $index; ?>">
+                                                    <button class="btn p-1 stage_btn rounded-circle collapsed" style="background-color: lightgray" data-bs-toggle="collapse" data-bs-target="#item_<?= $always_unique; ?>">
                                                         <img class="object-fit-cover" style="width: 24px; height: 24px" src="<?= get_template_directory_uri() . "/assets/images/arrow-down.png"; ?>">
                                                     </button>
                                                 </div>
@@ -257,7 +258,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                         </div>
                                     </div>
 
-                                    <div id="item_<?= $index; ?>" class="collapse stages_collapse_wrapper">
+                                    <div id="item_<?= $always_unique++; ?>" class="collapse stages_collapse_wrapper">
                                         <?php
                                         $stages_title = get_field("stages_title", $item) ?? null;
                                         $renewal_stages = get_field("renewal_stages", $item) ?? null;
@@ -278,6 +279,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                         <?php if ($renewal_stages && is_array($renewal_stages) && !empty($renewal_stages)) : ?>
                                             <?php foreach ($renewal_stages as $stage_index => $stage) : ?>
                                                 <?php
+                                                $stage_unique_id = 0;
                                                 $stage_title = get_field("stage_title", $stage) ?? null;
                                                 $stages = get_field("stages", $stage) ?? null;
                                                 ?>
@@ -287,11 +289,11 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                         <div
                                                             class="hstack align-items-center justify-content-between collapsed stage_accordion"
                                                             data-bs-toggle="collapse"
-                                                            data-bs-target="#stage_<?= $stage_index; ?>"
+                                                            data-bs-target="#stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
                                                             data-id="<?= $stage->ID; ?>"
                                                             data-parent="<?= $item->ID; ?>"
                                                             data-collapse-parent="item_<?= $index; ?>"
-                                                            data-stage-collapse="stage_<?= $stage_index; ?>"
+                                                            data-stage-collapse="stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
                                                         >
                                                             <div class="hstack gap-2 align-items-center">
                                                                 <div class="stage_circle"></div>
@@ -304,7 +306,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                             <img src="<?= get_template_directory_uri() . "/assets/images/down-arrow.png"; ?>" class="stage_arrow">
                                                         </div>
 
-                                                        <div class="collapse stage_collapable py-2 py-md-4" id="stage_<?= $stage_index; ?>">
+                                                        <div class="collapse stage_collapable py-2 py-md-4" id="stage_<?= $stage_index . "_" . $stage_unique_id++; ?>">
                                                             <hr>
 
                                                             <?php foreach (get_field("stages", $stage) as $e) : ?>
