@@ -128,25 +128,27 @@ add_action('admin_menu', function () {
 
 function render_csv_import_page()
 {
+    $output = '';
+
+    // ✅ Start capturing output
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && current_user_can('manage_options')) {
+        if (!empty($_FILES['csv_file']['tmp_name'])) {
+            $message = import_projects_from_csv($_FILES['csv_file']['tmp_name']);
+            set_transient('import_projects_message', $message, 60);
+            wp_redirect(admin_url('edit.php?post_type=project&page=import_projects_csv'));
+            exit;
+        }
+    }
+    
+
     ?>
     <div class="wrap">
         <h1>Import Projects from CSV</h1>
 
         <?php
-        // Handle the upload first
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && current_user_can('manage_options')) {
-            if (!empty($_FILES['csv_file']['tmp_name'])) {
-                $file = $_FILES['csv_file']['tmp_name'];
-
-                // Capture output using output buffering
-                ob_start();
-                import_projects_from_csv($file);
-                $output = ob_get_clean();
-
-                echo '<div style="margin-top:20px;">' . $output . '</div>';
-            } else {
-                echo '<div class="notice notice-error"><p>No file was uploaded.</p></div>';
-            }
+        // ✅ Output result above the form
+        if (!empty($output)) {
+            echo $output;
         }
         ?>
 
@@ -157,6 +159,7 @@ function render_csv_import_page()
     </div>
     <?php
 }
+
 
 
 // define('WP_DEBUG', true);
@@ -176,16 +179,10 @@ function import_projects_from_csv($file_path)
 
         foreach ($csv as $index => $row) {
             $data = array_combine($headers, $row);
-            if (!$data) {
-                throw new Exception("Row $index has mismatched columns.");
-            }
-
+            if (!$data) throw new Exception("Row $index has mismatched columns.");
             $title = $data['post_title'] ?? '';
-            if (!$title) {
-                throw new Exception("Missing title on row $index.");
-            }
+            if (!$title) throw new Exception("Missing title on row $index.");
 
-            // Insert or update post
             $existing_post = get_page_by_title($title, OBJECT, 'project');
             $post_id = $existing_post ? $existing_post->ID : wp_insert_post([
                 'post_title'  => $title,
@@ -193,11 +190,8 @@ function import_projects_from_csv($file_path)
                 'post_status' => 'publish',
             ]);
 
-            if (!$post_id || is_wp_error($post_id)) {
-                throw new Exception("Failed to insert/update post: $title");
-            }
+            if (!$post_id || is_wp_error($post_id)) throw new Exception("Failed to insert/update post: $title");
 
-            // Update fields
             update_field('project_address', $data['address'] ?? '', $post_id);
             update_field('tabaa_number', $data['tabaa_number'] ?? '', $post_id);
             update_field('project_entrepreneur', $data['entrepreneur'] ?? '', $post_id);
@@ -205,12 +199,10 @@ function import_projects_from_csv($file_path)
             update_field('area_description', $data['area_description'] ?? '', $post_id);
             update_field('technon_link', $data['technon_link'] ?? '', $post_id);
 
-            // Status (taxonomy)
             if (!empty($data['status'])) {
                 wp_set_object_terms($post_id, $data['status'], 'project-status');
             }
 
-            // Neighborhood (post object)
             if (!empty($data['neighborhood'])) {
                 $neighborhood = get_page_by_title($data['neighborhood'], OBJECT, 'neighborhood');
                 if ($neighborhood) {
@@ -221,8 +213,9 @@ function import_projects_from_csv($file_path)
             }
         }
 
-        echo '<div class="notice notice-success"><p>Projects imported successfully!</p></div>';
+        return '<div class="notice notice-success"><p>Projects imported successfully!</p></div>';
+
     } catch (Exception $e) {
-        echo '<div class="notice notice-error"><p><strong>Error:</strong> ' . esc_html($e->getMessage()) . '</p></div>';
+        return '<div class="notice notice-error"><p><strong>Error:</strong> ' . esc_html($e->getMessage()) . '</p></div>';
     }
 }
