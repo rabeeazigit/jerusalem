@@ -3244,6 +3244,28 @@ class SQLinkSCF
                         ),
                     ),
                     array(
+                        'key' => 'field_technon_link',
+                        'label' => 'קישור לפרוייקט באתר מינהל תכנון',
+                        'name' => 'technon_link',
+                        'aria-label' => '',
+                        'type' => 'text',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'default_value' => '',
+                        'maxlength' => '',
+                        'allow_in_bindings' => 0,
+                        'placeholder' => '',
+                        'prepend' => '',
+                        'append' => '',
+                    ),
+                    
+                    array(
                         'key' => 'field_67ab3fe5ddf53',
                         'label' => 'מידע חיצוני',
                         'name' => 'project_external_link',
