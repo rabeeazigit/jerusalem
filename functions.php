@@ -146,9 +146,9 @@ function render_csv_import_page()
     }
 }
 
-define('WP_DEBUG', true);
-define('WP_DEBUG_LOG', true);
-define('WP_DEBUG_DISPLAY', true); // So error isn't shown to visitors
+// define('WP_DEBUG', true);
+// define('WP_DEBUG_LOG', true);
+// define('WP_DEBUG_DISPLAY', true); // So error isn't shown to visitors
 
 
 function import_projects_from_csv($file_path)
@@ -182,12 +182,12 @@ function import_projects_from_csv($file_path)
     
         // Now update fields (safely)
         if (function_exists('update_field')) {
-            update_field('project_address', $data['כתובות'] ?? '', $post_id);
-            update_field('tabaa_number', $data['מס\' תב"ע'] ?? '', $post_id);
-            update_field('project_entrepreneur', $data['יזם הפרוייקט'] ?? '', $post_id);
-            update_field('project_lowyer', $data['שם עו״ד בעלי דירות'] ?? '', $post_id);
-            update_field('area_description', $data['תיאור המתחם'] ?? '', $post_id);
-            update_field('technon_link', $data['קישור לפרוייקט באתר מינהל תכנון'] ?? '', $post_id);
+            update_field('project_address', $data['address'], $post_id);
+            update_field('tabaa_number', $data['tabaa_number'], $post_id);
+            update_field('project_entrepreneur', $data['entrepreneur'], $post_id);
+            update_field('project_lowyer', $data['lawyer_name'], $post_id);
+            update_field('area_description', $data['area_description'], $post_id);
+            update_field('technon_link', $data['technon_link'], $post_id);            
         }
     
         if (!empty($data['סטטוס התקדמות התהליך'])) {
