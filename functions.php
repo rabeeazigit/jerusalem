@@ -158,37 +158,37 @@ function import_projects_from_csv($file_path)
 
     foreach ($csv as $row) {
         $data = array_combine($headers, $row);
+        if (!$data) continue;
+    
         $title = $data['שם הפרויקט'] ?? '';
-
         if (!$title) continue;
-
-        // Check if post exists
+    
         $existing_post = get_page_by_title($title, OBJECT, 'project');
-
-        if ($existing_post) {
-            $post_id = $existing_post->ID;
-        } else {
-            $post_id = wp_insert_post([
-                'post_title' => $title,
-                'post_type'  => 'project',
-                'post_status' => 'publish',
-            ]);
+        $post_id = $existing_post ? $existing_post->ID : wp_insert_post([
+            'post_title'  => $title,
+            'post_type'   => 'project',
+            'post_status' => 'publish',
+        ]);
+    
+        if (!$post_id || is_wp_error($post_id)) {
+            error_log("Failed to insert/update project: $title");
+            continue;
         }
-
-        // ACF Field Updates
-        update_field('project_address', $data['כתובות'] ?? '', $post_id);
-        update_field('tabaa_number', $data['מס\' תב"ע'] ?? '', $post_id);
-        update_field('project_entrepreneur', $data['יזם הפרוייקט'] ?? '', $post_id);
-        update_field('project_lowyer', $data['שם עו״ד בעלי דירות'] ?? '', $post_id);
-        update_field('area_description', $data['תיאור המתחם'] ?? '', $post_id);
-        update_field('technon_link', $data['קישור לפרוייקט באתר מינהל תכנון'] ?? '', $post_id);
-
-        // Project status (taxonomy)
+    
+        // Now update fields (safely)
+        if (function_exists('update_field')) {
+            update_field('project_address', $data['כתובות'] ?? '', $post_id);
+            update_field('tabaa_number', $data['מס\' תב"ע'] ?? '', $post_id);
+            update_field('project_entrepreneur', $data['יזם הפרוייקט'] ?? '', $post_id);
+            update_field('project_lowyer', $data['שם עו״ד בעלי דירות'] ?? '', $post_id);
+            update_field('area_description', $data['תיאור המתחם'] ?? '', $post_id);
+            update_field('technon_link', $data['קישור לפרוייקט באתר מינהל תכנון'] ?? '', $post_id);
+        }
+    
         if (!empty($data['סטטוס התקדמות התהליך'])) {
             wp_set_object_terms($post_id, $data['סטטוס התקדמות התהליך'], 'project-status');
         }
-
-        // Neighborhood (assuming it exists)
+    
         if (!empty($data['שכונה'])) {
             $neighborhood = get_page_by_title($data['שכונה'], OBJECT, 'neighborhood');
             if ($neighborhood) {
@@ -196,6 +196,7 @@ function import_projects_from_csv($file_path)
             }
         }
     }
+    
 
     echo '<div class="notice notice-success"><p>Projects imported successfully!</p></div>';
 }
