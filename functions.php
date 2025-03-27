@@ -113,3 +113,89 @@ add_filter("wpcf7_form_tag", "populate_cf7_subject", 10, 2);
 new SQLinkSCF();
 new SQLinkEnqueue();
 new AjaxHandler();
+
+
+add_action('admin_menu', function () {
+    add_submenu_page(
+        'edit.php?post_type=project',
+        'Import Projects from CSV',
+        'Import CSV',
+        'manage_options',
+        'import_projects_csv',
+        'render_csv_import_page'
+    );
+});
+
+function render_csv_import_page()
+{
+    ?>
+    <div class="wrap">
+        <h1>Import Projects from CSV</h1>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="csv_file" accept=".csv" required>
+            <?php submit_button('Upload & Import'); ?>
+        </form>
+    </div>
+    <?php
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && current_user_can('manage_options')) {
+        if (!empty($_FILES['csv_file']['tmp_name'])) {
+            $file = $_FILES['csv_file']['tmp_name'];
+            import_projects_from_csv($file);
+        }
+    }
+}
+
+function import_projects_from_csv($file_path)
+{
+    if (!file_exists($file_path)) {
+        echo '<div class="notice notice-error"><p>CSV file not found.</p></div>';
+        return;
+    }
+
+    $csv = array_map('str_getcsv', file($file_path));
+    $headers = array_map('trim', array_shift($csv));
+
+    foreach ($csv as $row) {
+        $data = array_combine($headers, $row);
+        $title = $data['שם הפרויקט'] ?? '';
+
+        if (!$title) continue;
+
+        // Check if post exists
+        $existing_post = get_page_by_title($title, OBJECT, 'project');
+
+        if ($existing_post) {
+            $post_id = $existing_post->ID;
+        } else {
+            $post_id = wp_insert_post([
+                'post_title' => $title,
+                'post_type'  => 'project',
+                'post_status' => 'publish',
+            ]);
+        }
+
+        // ACF Field Updates
+        update_field('project_address', $data['כתובות'] ?? '', $post_id);
+        update_field('tabaa_number', $data['מס\' תב"ע'] ?? '', $post_id);
+        update_field('project_entrepreneur', $data['יזם הפרוייקט'] ?? '', $post_id);
+        update_field('project_lowyer', $data['שם עו״ד בעלי דירות'] ?? '', $post_id);
+        update_field('area_description', $data['תיאור המתחם'] ?? '', $post_id);
+        update_field('technon_link', $data['קישור לפרוייקט באתר מינהל תכנון'] ?? '', $post_id);
+
+        // Project status (taxonomy)
+        if (!empty($data['סטטוס התקדמות התהליך'])) {
+            wp_set_object_terms($post_id, $data['סטטוס התקדמות התהליך'], 'project-status');
+        }
+
+        // Neighborhood (assuming it exists)
+        if (!empty($data['שכונה'])) {
+            $neighborhood = get_page_by_title($data['שכונה'], OBJECT, 'neighborhood');
+            if ($neighborhood) {
+                update_field('project_neighborhood', $neighborhood->ID, $post_id);
+            }
+        }
+    }
+
+    echo '<div class="notice notice-success"><p>Projects imported successfully!</p></div>';
+}
