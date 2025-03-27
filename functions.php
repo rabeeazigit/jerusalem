@@ -131,20 +131,33 @@ function render_csv_import_page()
     ?>
     <div class="wrap">
         <h1>Import Projects from CSV</h1>
+
+        <?php
+        // Handle the upload first
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && current_user_can('manage_options')) {
+            if (!empty($_FILES['csv_file']['tmp_name'])) {
+                $file = $_FILES['csv_file']['tmp_name'];
+
+                // Capture output using output buffering
+                ob_start();
+                import_projects_from_csv($file);
+                $output = ob_get_clean();
+
+                echo '<div style="margin-top:20px;">' . $output . '</div>';
+            } else {
+                echo '<div class="notice notice-error"><p>No file was uploaded.</p></div>';
+            }
+        }
+        ?>
+
         <form method="post" enctype="multipart/form-data">
             <input type="file" name="csv_file" accept=".csv" required>
             <?php submit_button('Upload & Import'); ?>
         </form>
     </div>
     <?php
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && current_user_can('manage_options')) {
-        if (!empty($_FILES['csv_file']['tmp_name'])) {
-            $file = $_FILES['csv_file']['tmp_name'];
-            import_projects_from_csv($file);
-        }
-    }
 }
+
 
 // define('WP_DEBUG', true);
 // define('WP_DEBUG_LOG', true);
