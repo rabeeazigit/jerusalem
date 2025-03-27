@@ -148,7 +148,7 @@ function render_csv_import_page()
 
 define('WP_DEBUG', true);
 define('WP_DEBUG_LOG', true);
-define('WP_DEBUG_DISPLAY', false); // So error isn't shown to visitors
+define('WP_DEBUG_DISPLAY', true); // So error isn't shown to visitors
 
 
 function import_projects_from_csv($file_path)
