@@ -153,55 +153,63 @@ function render_csv_import_page()
 
 function import_projects_from_csv($file_path)
 {
-    if (!file_exists($file_path)) {
-        echo '<div class="notice notice-error"><p>CSV file not found.</p></div>';
-        return;
-    }
+    try {
+        if (!file_exists($file_path)) {
+            throw new Exception('CSV file not found.');
+        }
 
-    $csv = array_map('str_getcsv', file($file_path));
-    $headers = array_map('trim', array_shift($csv));
+        $csv = array_map('str_getcsv', file($file_path));
+        $headers = array_map('trim', array_shift($csv));
 
-    foreach ($csv as $row) {
-        $data = array_combine($headers, $row);
-        if (!$data) continue;
-    
-        $title = $data['שם הפרויקט'] ?? '';
-        if (!$title) continue;
-    
-        $existing_post = get_page_by_title($title, OBJECT, 'project');
-        $post_id = $existing_post ? $existing_post->ID : wp_insert_post([
-            'post_title'  => $title,
-            'post_type'   => 'project',
-            'post_status' => 'publish',
-        ]);
-    
-        if (!$post_id || is_wp_error($post_id)) {
-            error_log("Failed to insert/update project: $title");
-            continue;
-        }
-    
-        // Now update fields (safely)
-        if (function_exists('update_field')) {
-            update_field('project_address', $data['address'], $post_id);
-            update_field('tabaa_number', $data['tabaa_number'], $post_id);
-            update_field('project_entrepreneur', $data['entrepreneur'], $post_id);
-            update_field('project_lowyer', $data['lawyer_name'], $post_id);
-            update_field('area_description', $data['area_description'], $post_id);
-            update_field('technon_link', $data['technon_link'], $post_id);            
-        }
-    
-        if (!empty($data['סטטוס התקדמות התהליך'])) {
-            wp_set_object_terms($post_id, $data['סטטוס התקדמות התהליך'], 'project-status');
-        }
-    
-        if (!empty($data['שכונה'])) {
-            $neighborhood = get_page_by_title($data['שכונה'], OBJECT, 'neighborhood');
-            if ($neighborhood) {
-                update_field('project_neighborhood', $neighborhood->ID, $post_id);
+        foreach ($csv as $index => $row) {
+            $data = array_combine($headers, $row);
+            if (!$data) {
+                throw new Exception("Row $index has mismatched columns.");
+            }
+
+            $title = $data['post_title'] ?? '';
+            if (!$title) {
+                throw new Exception("Missing title on row $index.");
+            }
+
+            // Insert or update post
+            $existing_post = get_page_by_title($title, OBJECT, 'project');
+            $post_id = $existing_post ? $existing_post->ID : wp_insert_post([
+                'post_title'  => $title,
+                'post_type'   => 'project',
+                'post_status' => 'publish',
+            ]);
+
+            if (!$post_id || is_wp_error($post_id)) {
+                throw new Exception("Failed to insert/update post: $title");
+            }
+
+            // Update fields
+            update_field('project_address', $data['address'] ?? '', $post_id);
+            update_field('tabaa_number', $data['tabaa_number'] ?? '', $post_id);
+            update_field('project_entrepreneur', $data['entrepreneur'] ?? '', $post_id);
+            update_field('project_lowyer', $data['lawyer_name'] ?? '', $post_id);
+            update_field('area_description', $data['area_description'] ?? '', $post_id);
+            update_field('technon_link', $data['technon_link'] ?? '', $post_id);
+
+            // Status (taxonomy)
+            if (!empty($data['status'])) {
+                wp_set_object_terms($post_id, $data['status'], 'project-status');
+            }
+
+            // Neighborhood (post object)
+            if (!empty($data['neighborhood'])) {
+                $neighborhood = get_page_by_title($data['neighborhood'], OBJECT, 'neighborhood');
+                if ($neighborhood) {
+                    update_field('project_neighborhood', $neighborhood->ID, $post_id);
+                } else {
+                    throw new Exception("Neighborhood not found: " . $data['neighborhood']);
+                }
             }
         }
-    }
-    
 
-    echo '<div class="notice notice-success"><p>Projects imported successfully!</p></div>';
+        echo '<div class="notice notice-success"><p>Projects imported successfully!</p></div>';
+    } catch (Exception $e) {
+        echo '<div class="notice notice-error"><p><strong>Error:</strong> ' . esc_html($e->getMessage()) . '</p></div>';
+    }
 }
