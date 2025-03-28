@@ -196,19 +196,30 @@ function import_projects_from_csv($file_path) {
             throw new Exception('CSV file not found.');
         }
 
-        $csv = array_map('str_getcsv', file($file_path));
+        // Read and clean CSV lines
+        $raw_lines = file($file_path);
+        $raw_lines[0] = preg_replace('/^\xEF\xBB\xBF/', '', $raw_lines[0]); // Remove BOM
+
+        $csv = array_map('str_getcsv', $raw_lines);
         if (!$csv || count($csv) < 2) {
             throw new Exception('CSV is empty or malformed.');
         }
 
-        $headers = array_map('trim', array_shift($csv));
+        // Normalize headers (lowercase + trim)
+        $headers = array_map(function($h) {
+            return trim(strtolower($h));
+        }, array_shift($csv));
 
         foreach ($csv as $index => $row) {
             $data = array_combine($headers, $row);
             if (!$data) throw new Exception("Row $index has mismatched columns.");
-            $title = $data['post_title'] ?? '';
-            if (!$title) throw new Exception("Missing title on row $index.");
 
+            $title = $data['post_title'] ?? '';
+            if (!$title || trim($title) === '') {
+                throw new Exception("Missing title on row $index.");
+            }
+
+            // Insert or update the post
             $existing_post = get_page_by_title($title, OBJECT, 'project');
             $post_id = $existing_post ? $existing_post->ID : wp_insert_post([
                 'post_title'  => $title,
@@ -216,8 +227,11 @@ function import_projects_from_csv($file_path) {
                 'post_status' => 'publish',
             ]);
 
-            if (!$post_id || is_wp_error($post_id)) throw new Exception("Failed to insert/update post: $title");
+            if (!$post_id || is_wp_error($post_id)) {
+                throw new Exception("Failed to insert/update post: $title");
+            }
 
+            // Update ACF fields
             update_field('project_address', $data['address'] ?? '', $post_id);
             update_field('tabaa_number', $data['tabaa_number'] ?? '', $post_id);
             update_field('project_entrepreneur', $data['entrepreneur'] ?? '', $post_id);
@@ -225,10 +239,12 @@ function import_projects_from_csv($file_path) {
             update_field('area_description', $data['area_description'] ?? '', $post_id);
             update_field('technon_link', $data['technon_link'] ?? '', $post_id);
 
+            // Set taxonomy: project-status
             if (!empty($data['status'])) {
                 wp_set_object_terms($post_id, $data['status'], 'project-status');
             }
 
+            // Link to neighborhood (post object)
             if (!empty($data['neighborhood'])) {
                 $neigh = get_page_by_title($data['neighborhood'], OBJECT, 'neighborhood');
                 if ($neigh) {
@@ -245,6 +261,5 @@ function import_projects_from_csv($file_path) {
         return '<div class="notice notice-error"><p><strong>❌ Error:</strong> ' . esc_html($e->getMessage()) . '</p></div>';
     }
 }
-
 
  
