@@ -210,15 +210,30 @@ function import_projects_from_csv($file_path) {
             return trim(strtolower($h));
         }, array_shift($csv));
 
-        foreach ($csv as $index => $row) {
-            $data = array_combine($headers, $row);
-            if (!$data) throw new Exception("Row $index has mismatched columns.");
 
+        foreach ($csv as $index => $row) {
+            // Skip empty lines
+            if (count(array_filter($row)) === 0) continue;
+        
+            // Make sure row matches header count
+            $row_count = count($row);
+            $header_count = count($headers);
+        
+            if ($row_count < $header_count) {
+                // Fill missing columns with nulls
+                $row = array_pad($row, $header_count, '');
+            } elseif ($row_count > $header_count) {
+                // Trim extra columns
+                $row = array_slice($row, 0, $header_count);
+            }
+        
+            $data = array_combine($headers, $row);
+            if (!$data) throw new Exception("Row $index has mismatched columns even after adjustment.");
+        
             $title = $data['post_title'] ?? '';
             if (!$title || trim($title) === '') {
                 throw new Exception("Missing title on row $index.");
             }
-
             // Insert or update the post
             $existing_post = get_page_by_title($title, OBJECT, 'project');
             $post_id = $existing_post ? $existing_post->ID : wp_insert_post([
