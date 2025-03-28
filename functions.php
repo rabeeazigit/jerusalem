@@ -113,8 +113,10 @@ add_filter("wpcf7_form_tag", "populate_cf7_subject", 10, 2);
 new SQLinkSCF();
 new SQLinkEnqueue();
 new AjaxHandler();
+         
+<?php
 
-
+// 1. Add submenu under Project
 add_action('admin_menu', function () {
     add_submenu_page(
         'edit.php?post_type=project',
@@ -126,29 +128,18 @@ add_action('admin_menu', function () {
     );
 });
 
+// 2. Render CSV Import Page
 function render_csv_import_page()
 {
-    $output = '';
-
-    // ✅ Start capturing output
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && current_user_can('manage_options')) {
-        if (!empty($_FILES['csv_file']['tmp_name'])) {
-            $message = import_projects_from_csv($_FILES['csv_file']['tmp_name']);
-            set_transient('import_projects_message', $message, 60);
-            wp_redirect(admin_url('edit.php?post_type=project&page=import_projects_csv'));
-            exit;
-        }
-    }
-    
-
     ?>
     <div class="wrap">
         <h1>Import Projects from CSV</h1>
 
         <?php
-        // ✅ Output result above the form
-        if (!empty($output)) {
-            echo $output;
+        // Show result from transient
+        if ($message = get_transient('import_projects_message')) {
+            echo $message;
+            delete_transient('import_projects_message');
         }
         ?>
 
@@ -158,15 +149,19 @@ function render_csv_import_page()
         </form>
     </div>
     <?php
+
+    // Handle upload and redirect
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && current_user_can('manage_options')) {
+        if (!empty($_FILES['csv_file']['tmp_name'])) {
+            $message = import_projects_from_csv($_FILES['csv_file']['tmp_name']);
+            set_transient('import_projects_message', $message, 60);
+            wp_redirect(admin_url('edit.php?post_type=project&page=import_projects_csv'));
+            exit;
+        }
+    }
 }
 
-
-
-// define('WP_DEBUG', true);
-// define('WP_DEBUG_LOG', true);
-// define('WP_DEBUG_DISPLAY', true); // So error isn't shown to visitors
-
-
+// 3. Process and Import CSV
 function import_projects_from_csv($file_path)
 {
     try {
@@ -192,6 +187,7 @@ function import_projects_from_csv($file_path)
 
             if (!$post_id || is_wp_error($post_id)) throw new Exception("Failed to insert/update post: $title");
 
+            // Update ACF fields
             update_field('project_address', $data['address'] ?? '', $post_id);
             update_field('tabaa_number', $data['tabaa_number'] ?? '', $post_id);
             update_field('project_entrepreneur', $data['entrepreneur'] ?? '', $post_id);
@@ -199,14 +195,16 @@ function import_projects_from_csv($file_path)
             update_field('area_description', $data['area_description'] ?? '', $post_id);
             update_field('technon_link', $data['technon_link'] ?? '', $post_id);
 
+            // Taxonomy: project_status
             if (!empty($data['status'])) {
                 wp_set_object_terms($post_id, $data['status'], 'project-status');
             }
 
+            // Post Object: neighborhood
             if (!empty($data['neighborhood'])) {
-                $neighborhood = get_page_by_title($data['neighborhood'], OBJECT, 'neighborhood');
-                if ($neighborhood) {
-                    update_field('project_neighborhood', $neighborhood->ID, $post_id);
+                $neigh = get_page_by_title($data['neighborhood'], OBJECT, 'neighborhood');
+                if ($neigh) {
+                    update_field('project_neighborhood', $neigh->ID, $post_id);
                 } else {
                     throw new Exception("Neighborhood not found: " . $data['neighborhood']);
                 }
