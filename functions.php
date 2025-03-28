@@ -113,55 +113,7 @@ add_filter("wpcf7_form_tag", "populate_cf7_subject", 10, 2);
 new SQLinkSCF();
 new SQLinkEnqueue();
 new AjaxHandler();
-         
-<?php
 
-// 1. Add submenu under Project
-add_action('admin_menu', function () {
-    add_submenu_page(
-        'edit.php?post_type=project',
-        'Import Projects from CSV',
-        'Import CSV',
-        'manage_options',
-        'import_projects_csv',
-        'render_csv_import_page'
-    );
-});
-
-// 2. Render CSV Import Page
-function render_csv_import_page()
-{
-    ?>
-    <div class="wrap">
-        <h1>Import Projects from CSV</h1>
-
-        <?php
-        // Show result from transient
-        if ($message = get_transient('import_projects_message')) {
-            echo $message;
-            delete_transient('import_projects_message');
-        }
-        ?>
-
-        <form method="post" enctype="multipart/form-data">
-            <input type="file" name="csv_file" accept=".csv" required>
-            <?php submit_button('Upload & Import'); ?>
-        </form>
-    </div>
-    <?php
-
-    // Handle upload and redirect
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && current_user_can('manage_options')) {
-        if (!empty($_FILES['csv_file']['tmp_name'])) {
-            $message = import_projects_from_csv($_FILES['csv_file']['tmp_name']);
-            set_transient('import_projects_message', $message, 60);
-            wp_redirect(admin_url('edit.php?post_type=project&page=import_projects_csv'));
-            exit;
-        }
-    }
-}
-
-// 3. Process and Import CSV
 function import_projects_from_csv($file_path)
 {
     try {
@@ -170,11 +122,20 @@ function import_projects_from_csv($file_path)
         }
 
         $csv = array_map('str_getcsv', file($file_path));
+
+        if (!$csv || count($csv) < 2) {
+            throw new Exception('CSV content is invalid or too short.');
+        }
+
         $headers = array_map('trim', array_shift($csv));
+        error_log("CSV Headers: " . print_r($headers, true));
 
         foreach ($csv as $index => $row) {
+            error_log("Row $index: " . print_r($row, true));
             $data = array_combine($headers, $row);
+
             if (!$data) throw new Exception("Row $index has mismatched columns.");
+
             $title = $data['post_title'] ?? '';
             if (!$title) throw new Exception("Missing title on row $index.");
 
@@ -185,9 +146,10 @@ function import_projects_from_csv($file_path)
                 'post_status' => 'publish',
             ]);
 
-            if (!$post_id || is_wp_error($post_id)) throw new Exception("Failed to insert/update post: $title");
+            if (!$post_id || is_wp_error($post_id)) {
+                throw new Exception("Failed to insert/update post: $title");
+            }
 
-            // Update ACF fields
             update_field('project_address', $data['address'] ?? '', $post_id);
             update_field('tabaa_number', $data['tabaa_number'] ?? '', $post_id);
             update_field('project_entrepreneur', $data['entrepreneur'] ?? '', $post_id);
@@ -195,12 +157,10 @@ function import_projects_from_csv($file_path)
             update_field('area_description', $data['area_description'] ?? '', $post_id);
             update_field('technon_link', $data['technon_link'] ?? '', $post_id);
 
-            // Taxonomy: project_status
             if (!empty($data['status'])) {
                 wp_set_object_terms($post_id, $data['status'], 'project-status');
             }
 
-            // Post Object: neighborhood
             if (!empty($data['neighborhood'])) {
                 $neigh = get_page_by_title($data['neighborhood'], OBJECT, 'neighborhood');
                 if ($neigh) {
@@ -213,7 +173,9 @@ function import_projects_from_csv($file_path)
 
         return '<div class="notice notice-success"><p>Projects imported successfully!</p></div>';
 
-    } catch (Exception $e) {
+    } catch (Throwable $e) {
+        error_log("Import Error: " . $e->getMessage());
         return '<div class="notice notice-error"><p><strong>Error:</strong> ' . esc_html($e->getMessage()) . '</p></div>';
     }
 }
+
