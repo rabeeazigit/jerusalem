@@ -114,6 +114,8 @@ new SQLinkSCF();
 new SQLinkEnqueue();
 new AjaxHandler();
 
+
+
 add_action('admin_menu', function () {
     add_submenu_page(
         'edit.php?post_type=project',
@@ -136,14 +138,15 @@ function render_ajax_import_page() {
         <div id="csv-import-response" style="margin-top: 20px;"></div>
     </div>
 
-    <script>
+        <script>
     jQuery(document).ready(function($) {
         $('#project-csv-upload-form').on('submit', function(e) {
             e.preventDefault();
             let formData = new FormData(this);
+            formData.append('action', 'import_project_csv_ajax'); // 👈 required for WordPress AJAX
 
             $.ajax({
-                url: ajaxurl,
+                url: ajaxurl, // built-in WordPress global
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -154,15 +157,20 @@ function render_ajax_import_page() {
                 success: function (response) {
                     $('#csv-import-response').html(response.data.message);
                 },
-                error: function () {
-                    $('#csv-import-response').html('<div class="notice notice-error"><p>Unexpected error occurred.</p></div>');
+                error: function (xhr) {
+                    let msg = '<div class="notice notice-error"><p>Unexpected error occurred.</p></div>';
+                    if (xhr.responseJSON?.data?.message) {
+                        msg = '<div class="notice notice-error"><p>' + xhr.responseJSON.data.message + '</p></div>';
+                    }
+                    $('#csv-import-response').html(msg);
                 }
             });
         });
     });
     </script>
-    <?php
-}
+
+        <?php
+    }
 
 
 add_action('wp_ajax_import_project_csv_ajax', 'handle_project_csv_ajax_upload');
