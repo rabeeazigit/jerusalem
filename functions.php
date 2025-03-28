@@ -114,78 +114,93 @@ new SQLinkSCF();
 new SQLinkEnqueue();
 new AjaxHandler();
 
-
-// Add submenu under 'Projects'
 add_action('admin_menu', function () {
     add_submenu_page(
         'edit.php?post_type=project',
-        'Import Projects from CSV',
-        'Import CSV',
-        'edit_others_posts', // Minimum capability (Editor or higher)
-        'import_projects_csv',
-        'render_csv_import_page'
+        'Import Projects via CSV',
+        'Import CSV (AJAX)',
+        'edit_others_posts',
+        'import_projects_ajax',
+        'render_ajax_import_page'
     );
 });
 
-// Render the page and handle import
-function render_csv_import_page()
-{
-    $output = '';
-
-    // Handle form submission
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && current_user_can('edit_others_posts')) {
-        if (!empty($_FILES['csv_file']['tmp_name'])) {
-            $file = $_FILES['csv_file']['tmp_name'];
-            $output = import_projects_from_csv($file);
-        } else {
-            $output = '<div class="notice notice-error"><p>No CSV file uploaded.</p></div>';
-        }
-    }
-
+function render_ajax_import_page() {
     ?>
     <div class="wrap">
-        <h1>Import Projects from CSV</h1>
-
-        <?php
-        // Display success/error message
-        if (!empty($output)) {
-            echo $output;
-        }
-        ?>
-
-        <form method="post" enctype="multipart/form-data">
+        <h1>Import Projects via CSV (AJAX)</h1>
+        <form id="project-csv-upload-form" enctype="multipart/form-data">
             <input type="file" name="csv_file" accept=".csv" required>
-            <?php submit_button('Upload & Import'); ?>
+            <button class="button button-primary" type="submit">Upload & Import</button>
         </form>
+        <div id="csv-import-response" style="margin-top: 20px;"></div>
     </div>
+
+    <script>
+    jQuery(document).ready(function($) {
+        $('#project-csv-upload-form').on('submit', function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: ajaxurl,
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    $('#csv-import-response').html('<p>Importing... please wait.</p>');
+                },
+                success: function (response) {
+                    $('#csv-import-response').html(response.data.message);
+                },
+                error: function () {
+                    $('#csv-import-response').html('<div class="notice notice-error"><p>Unexpected error occurred.</p></div>');
+                }
+            });
+        });
+    });
+    </script>
     <?php
 }
 
-// Process the uploaded CSV file and import data
-function import_projects_from_csv($file_path)
-{
+
+add_action('wp_ajax_import_project_csv_ajax', 'handle_project_csv_ajax_upload');
+
+function handle_project_csv_ajax_upload() {
+    if (!current_user_can('edit_others_posts')) {
+        wp_send_json_error(['message' => 'Permission denied.']);
+    }
+
+    if (empty($_FILES['csv_file']['tmp_name'])) {
+        wp_send_json_error(['message' => 'No file uploaded.']);
+    }
+
+    $file_path = $_FILES['csv_file']['tmp_name'];
+    $message = import_projects_from_csv($file_path);
+
+    wp_send_json_success(['message' => $message]);
+}
+
+function import_projects_from_csv($file_path) {
     try {
         if (!file_exists($file_path)) {
             throw new Exception('CSV file not found.');
         }
 
         $csv = array_map('str_getcsv', file($file_path));
-
         if (!$csv || count($csv) < 2) {
-            throw new Exception('CSV content is invalid or too short.');
+            throw new Exception('CSV is empty or malformed.');
         }
 
-        $headers = array_map('trim', array_shift($csv)); // First row = header
+        $headers = array_map('trim', array_shift($csv));
 
         foreach ($csv as $index => $row) {
             $data = array_combine($headers, $row);
-
             if (!$data) throw new Exception("Row $index has mismatched columns.");
-
             $title = $data['post_title'] ?? '';
             if (!$title) throw new Exception("Missing title on row $index.");
 
-            // Create or update post
             $existing_post = get_page_by_title($title, OBJECT, 'project');
             $post_id = $existing_post ? $existing_post->ID : wp_insert_post([
                 'post_title'  => $title,
@@ -193,11 +208,8 @@ function import_projects_from_csv($file_path)
                 'post_status' => 'publish',
             ]);
 
-            if (!$post_id || is_wp_error($post_id)) {
-                throw new Exception("Failed to insert/update post: $title");
-            }
+            if (!$post_id || is_wp_error($post_id)) throw new Exception("Failed to insert/update post: $title");
 
-            // ACF Fields
             update_field('project_address', $data['address'] ?? '', $post_id);
             update_field('tabaa_number', $data['tabaa_number'] ?? '', $post_id);
             update_field('project_entrepreneur', $data['entrepreneur'] ?? '', $post_id);
@@ -205,12 +217,10 @@ function import_projects_from_csv($file_path)
             update_field('area_description', $data['area_description'] ?? '', $post_id);
             update_field('technon_link', $data['technon_link'] ?? '', $post_id);
 
-            // Taxonomy: project-status
             if (!empty($data['status'])) {
                 wp_set_object_terms($post_id, $data['status'], 'project-status');
             }
 
-            // Post Object: project_neighborhood
             if (!empty($data['neighborhood'])) {
                 $neigh = get_page_by_title($data['neighborhood'], OBJECT, 'neighborhood');
                 if ($neigh) {
@@ -227,3 +237,6 @@ function import_projects_from_csv($file_path)
         return '<div class="notice notice-error"><p><strong>❌ Error:</strong> ' . esc_html($e->getMessage()) . '</p></div>';
     }
 }
+
+
+ 
