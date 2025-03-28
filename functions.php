@@ -114,6 +114,15 @@ new SQLinkSCF();
 new SQLinkEnqueue();
 new AjaxHandler();
 
+add_submenu_page(
+    'edit.php?post_type=project',
+    'Import Projects from CSV',
+    'Import CSV',
+    'edit_others_posts', // או edit_projects
+    'import_projects_csv',
+    'render_csv_import_page'
+);
+
 function import_projects_from_csv($file_path)
 {
     try {
