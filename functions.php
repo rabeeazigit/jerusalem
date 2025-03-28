@@ -247,13 +247,23 @@ function import_projects_from_csv($file_path) {
             // Link to neighborhood (post object)
             if (!empty($data['neighborhood'])) {
                 $neighborhood_name = trim(preg_replace('/\s+/', ' ', $data['neighborhood'])); // Remove extra spaces
-$neigh = get_page_by_title($neighborhood_name, OBJECT, 'neighborhood');
+                $neigh = get_page_by_title($neighborhood_name, OBJECT, 'neighborhood');
 
-                if ($neigh) {
-                    update_field('project_neighborhood', $neigh->ID, $post_id);
+                if (!$neigh) {
+                    // Auto-create the neighborhood post
+                    $neigh_id = wp_insert_post([
+                        'post_title' => $neighborhood_name,
+                        'post_type'  => 'neighborhood',
+                        'post_status'=> 'publish'
+                    ]);
+                    if (is_wp_error($neigh_id)) {
+                        throw new Exception("Could not create neighborhood: $neighborhood_name");
+                    }
                 } else {
-                    throw new Exception("Neighborhood not found: " . $data['neighborhood']);
+                    $neigh_id = $neigh->ID;
                 }
+                update_field('project_neighborhood', $neigh_id, $post_id);
+                
             }
         }
 
