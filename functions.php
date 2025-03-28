@@ -246,7 +246,9 @@ function import_projects_from_csv($file_path) {
 
             // Link to neighborhood (post object)
             if (!empty($data['neighborhood'])) {
-                $neigh = get_page_by_title($data['neighborhood'], OBJECT, 'neighborhood');
+                $neighborhood_name = trim(preg_replace('/\s+/', ' ', $data['neighborhood'])); // Remove extra spaces
+$neigh = get_page_by_title($neighborhood_name, OBJECT, 'neighborhood');
+
                 if ($neigh) {
                     update_field('project_neighborhood', $neigh->ID, $post_id);
                 } else {
