@@ -114,15 +114,53 @@ new SQLinkSCF();
 new SQLinkEnqueue();
 new AjaxHandler();
 
-add_submenu_page(
-    'edit.php?post_type=project',
-    'Import Projects from CSV',
-    'Import CSV',
-    'edit_others_posts', // או edit_projects
-    'import_projects_csv',
-    'render_csv_import_page'
-);
 
+// Add submenu under Project post type
+add_action('admin_menu', function () {
+    add_submenu_page(
+        'edit.php?post_type=project',
+        'Import Projects from CSV',
+        'Import CSV',
+        'edit_others_posts', // Permissions: Editors and up
+        'import_projects_csv',
+        'render_csv_import_page'
+    );
+});
+
+// Render the CSV Import Page
+function render_csv_import_page()
+{
+    ?>
+    <div class="wrap">
+        <h1>Import Projects from CSV</h1>
+
+        <?php
+        // Show result message if any
+        if ($message = get_transient('import_projects_message')) {
+            echo $message;
+            delete_transient('import_projects_message');
+        }
+        ?>
+
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="csv_file" accept=".csv" required>
+            <?php submit_button('Upload & Import'); ?>
+        </form>
+    </div>
+    <?php
+
+    // Handle form submission
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && current_user_can('edit_others_posts')) {
+        if (!empty($_FILES['csv_file']['tmp_name'])) {
+            $message = import_projects_from_csv($_FILES['csv_file']['tmp_name']);
+            set_transient('import_projects_message', $message, 60);
+            wp_redirect(admin_url('edit.php?post_type=project&page=import_projects_csv'));
+            exit;
+        }
+    }
+}
+
+// Import the CSV file and update ACF fields
 function import_projects_from_csv($file_path)
 {
     try {
@@ -131,7 +169,6 @@ function import_projects_from_csv($file_path)
         }
 
         $csv = array_map('str_getcsv', file($file_path));
-
         if (!$csv || count($csv) < 2) {
             throw new Exception('CSV content is invalid or too short.');
         }
@@ -159,6 +196,7 @@ function import_projects_from_csv($file_path)
                 throw new Exception("Failed to insert/update post: $title");
             }
 
+            // Update ACF fields
             update_field('project_address', $data['address'] ?? '', $post_id);
             update_field('tabaa_number', $data['tabaa_number'] ?? '', $post_id);
             update_field('project_entrepreneur', $data['entrepreneur'] ?? '', $post_id);
@@ -166,10 +204,12 @@ function import_projects_from_csv($file_path)
             update_field('area_description', $data['area_description'] ?? '', $post_id);
             update_field('technon_link', $data['technon_link'] ?? '', $post_id);
 
+            // Taxonomy: project-status
             if (!empty($data['status'])) {
                 wp_set_object_terms($post_id, $data['status'], 'project-status');
             }
 
+            // Post Object: neighborhood
             if (!empty($data['neighborhood'])) {
                 $neigh = get_page_by_title($data['neighborhood'], OBJECT, 'neighborhood');
                 if ($neigh) {
@@ -187,4 +227,3 @@ function import_projects_from_csv($file_path)
         return '<div class="notice notice-error"><p><strong>Error:</strong> ' . esc_html($e->getMessage()) . '</p></div>';
     }
 }
-
