@@ -115,7 +115,7 @@ new SQLinkEnqueue();
 new AjaxHandler();
 
 
-add_action('admin_menu', function () {
+ add_action('admin_menu', function () {
     add_submenu_page(
         'edit.php?post_type=project',
         'Import Projects via CSV',
@@ -165,7 +165,7 @@ function render_ajax_import_page() {
                 }
             });
         });
-    });
+    }); 
     </script>
     <?php
 }
@@ -182,18 +182,49 @@ function handle_project_csv_ajax_upload() {
     }
 
     $file_path = $_FILES['csv_file']['tmp_name'];
-    $file_type = mime_content_type($file_path);
+    $message = import_projects_from_csv($file_path);
 
-    if ($file_type !== 'text/csv' && $file_type !== 'application/vnd.ms-excel') {
-        wp_send_json_error(['message' => 'Invalid file format. Please upload a CSV file.']);
+    wp_send_json_success(['message' => $message]);
+}
+
+function get_closest_term_id($value, $taxonomy) {
+    $terms = get_terms([
+        'taxonomy' => $taxonomy,
+        'hide_empty' => false,
+    ]);
+
+    foreach ($terms as $term) {
+        if (trim($value) === $term->name || stripos($term->name, $value) !== false || stripos($value, $term->name) !== false) {
+            return $term->term_id;
+        }
     }
 
-    try {
-        $message = import_projects_from_csv($file_path);
-        wp_send_json_success(['message' => $message]);
-    } catch (Exception $e) {
-        wp_send_json_error(['message' => $e->getMessage()]);
+    $new_term = wp_insert_term($value, $taxonomy, ['slug' => sanitize_title($value)]);
+    if (is_wp_error($new_term)) {
+        throw new Exception("Failed to create term in taxonomy '$taxonomy': $value");
     }
+    return $new_term['term_id'];
+}
+
+function get_or_create_neighborhood($name) {
+    $name = trim(preg_replace('/\s+/', ' ', $name));
+    $existing = get_page_by_title($name, OBJECT, 'neighborhood');
+
+    if ($existing) {
+        return $existing->ID;
+    }
+
+    $new_id = wp_insert_post([
+        'post_title' => $name,
+        'post_type' => 'neighborhood',
+        'post_status' => 'publish'
+    ]);
+
+    if (is_wp_error($new_id)) {
+        throw new Exception("Failed to create neighborhood: $name");
+    }
+
+    return $new_id;
 }
 
 function import_projects_from_csv($file_path) {
@@ -226,7 +257,7 @@ function import_projects_from_csv($file_path) {
 
                 $row = array_pad($row, count($headers), '');
                 $row = array_slice($row, 0, count($headers));
-                $data = array_combine($headers, array_map('sanitize_text_field', $row));
+                $data = array_combine($headers, $row);
 
                 $title = $data['post_title'] ?? '';
                 if (!$title || trim($title) === '') {
@@ -275,45 +306,3 @@ function import_projects_from_csv($file_path) {
         return '<div class="notice notice-error"><p><strong>❌ Error:</strong> ' . esc_html($e->getMessage()) . '</p></div>';
     }
 }
-
-function get_closest_term_id($value, $taxonomy) {
-    $terms = get_terms([
-        'taxonomy' => $taxonomy,
-        'hide_empty' => false,
-    ]);
-
-    foreach ($terms as $term) {
-        if (trim($value) === $term->name || stripos($term->name, $value) !== false || stripos($value, $term->name) !== false) {
-            return $term->term_id;
-        }
-    }
-
-    $new_term = wp_insert_term($value, $taxonomy, ['slug' => sanitize_title($value)]);
-    if (is_wp_error($new_term)) {
-        throw new Exception("Failed to create term in taxonomy '$taxonomy': $value");
-    }
-    return $new_term['term_id'];
-}
-
-function get_or_create_neighborhood($name) {
-    $name = trim(preg_replace('/\s+/', ' ', $name));
-    $existing = get_page_by_title($name, OBJECT, 'neighborhood');
-
-    if ($existing) {
-        return $existing->ID;
-    }
-
-    $new_id = wp_insert_post([
-        'post_title' => $name,
-        'post_type' => 'neighborhood',
-        'post_status' => 'publish'
-    ]);
-
-    if (is_wp_error($new_id)) {
-        throw new Exception("Failed to create neighborhood: $name");
-    }
-
-    return $new_id;
-}
-
-
