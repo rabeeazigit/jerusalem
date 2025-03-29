@@ -267,9 +267,31 @@ function import_projects_from_csv($file_path) {
             update_field('technon_link', $data['technon_link'] ?? '', $post_id);
 
             // Set taxonomy: project-status
+       // Status (taxonomy)
             if (!empty($data['status'])) {
-                wp_set_object_terms($post_id, $data['status'], 'project-status');
+                $status = trim($data['status']); // Trim any extra spaces
+                $status_slug = sanitize_title($status); // Convert to a slug-friendly format
+
+                // Check if the status term exists
+                $term = term_exists($status, 'project-status');
+
+                // If the term does not exist, create it
+                if (!$term) {
+                    $term = wp_insert_term($status, 'project-status', [
+                        'slug' => $status_slug,
+                    ]);
+                    if (is_wp_error($term)) {
+                        throw new Exception("Failed to create status term: $status");
+                    }
+                    $term_id = $term['term_id'];
+                } else {
+                    $term_id = is_array($term) ? $term['term_id'] : $term;
+                }
+
+                // Set the project status
+                wp_set_object_terms($post_id, (int)$term_id, 'project-status');
             }
+
 
             // Set post object: neighborhood
             if (!empty($data['neighborhood'])) {
