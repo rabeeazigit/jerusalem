@@ -142,6 +142,7 @@ function render_ajax_import_page() {
         $('#project-csv-upload-form').on('submit', function(e) {
             e.preventDefault();
             let formData = new FormData(this);
+            formData.append('action', 'import_project_csv_ajax');
 
             $.ajax({
                 url: ajaxurl,
@@ -155,8 +156,12 @@ function render_ajax_import_page() {
                 success: function (response) {
                     $('#csv-import-response').html(response.data.message);
                 },
-                error: function () {
-                    $('#csv-import-response').html('<div class="notice notice-error"><p>Unexpected error occurred.</p></div>');
+                error: function (xhr) {
+                    let msg = '<div class="notice notice-error"><p>Unexpected error occurred.</p></div>';
+                    if (xhr.responseJSON?.data?.message) {
+                        msg = '<div class="notice notice-error"><p>' + xhr.responseJSON.data.message + '</p></div>';
+                    }
+                    $('#csv-import-response').html(msg);
                 }
             });
         });
@@ -223,6 +228,8 @@ function get_or_create_neighborhood($name) {
 }
 
 function import_projects_from_csv($file_path) {
+    $errors = [];
+
     try {
         if (!file_exists($file_path)) {
             throw new Exception('CSV file not found.');
@@ -243,49 +250,58 @@ function import_projects_from_csv($file_path) {
         }, str_getcsv(array_shift($raw_lines)));
 
         foreach ($raw_lines as $index => $line) {
-            $row = str_getcsv($line);
+            try {
+                $row = str_getcsv($line);
 
-            if (count(array_filter($row)) === 0) continue;
+                if (count(array_filter($row)) === 0) continue;
 
-            $row = array_pad($row, count($headers), '');
-            $row = array_slice($row, 0, count($headers));
-            $data = array_combine($headers, $row);
+                $row = array_pad($row, count($headers), '');
+                $row = array_slice($row, 0, count($headers));
+                $data = array_combine($headers, $row);
 
-            $title = $data['post_title'] ?? '';
-            if (!$title || trim($title) === '') {
-                throw new Exception("Missing title on row $index.");
-            }
+                $title = $data['post_title'] ?? '';
+                if (!$title || trim($title) === '') {
+                    throw new Exception("Missing title on row $index.");
+                }
 
-            $existing_post = get_page_by_title($title, OBJECT, 'project');
-            $post_id = $existing_post ? $existing_post->ID : wp_insert_post([
-                'post_title'  => $title,
-                'post_type'   => 'project',
-                'post_status' => 'publish',
-            ]);
+                $existing_post = get_page_by_title($title, OBJECT, 'project');
+                $post_id = $existing_post ? $existing_post->ID : wp_insert_post([
+                    'post_title'  => $title,
+                    'post_type'   => 'project',
+                    'post_status' => 'publish',
+                ]);
 
-            if (!$post_id || is_wp_error($post_id)) {
-                throw new Exception("Failed to insert/update post: $title");
-            }
+                if (!$post_id || is_wp_error($post_id)) {
+                    throw new Exception("Failed to insert/update post: $title");
+                }
 
-            update_field('project_address', $data['address'] ?? '', $post_id);
-            update_field('tabaa_number', $data['tabaa_number'] ?? '', $post_id);
-            update_field('project_entrepreneur', $data['entrepreneur'] ?? '', $post_id);
-            update_field('project_lowyer', $data['lawyer_name'] ?? '', $post_id);
-            update_field('area_description', $data['area_description'] ?? '', $post_id);
-            update_field('technon_link', $data['technon_link'] ?? '', $post_id);
+                update_field('project_address', $data['address'] ?? '', $post_id);
+                update_field('tabaa_number', $data['tabaa_number'] ?? '', $post_id);
+                update_field('project_entrepreneur', $data['entrepreneur'] ?? '', $post_id);
+                update_field('project_lowyer', $data['lawyer_name'] ?? '', $post_id);
+                update_field('area_description', $data['area_description'] ?? '', $post_id);
+                update_field('technon_link', $data['technon_link'] ?? '', $post_id);
 
-            if (!empty($data['status'])) {
-                $term_id = get_closest_term_id($data['status'], 'project-status');
-                wp_set_object_terms($post_id, (int)$term_id, 'project-status');
-            }
+                if (!empty($data['status'])) {
+                    $term_id = get_closest_term_id($data['status'], 'project-status');
+                    wp_set_object_terms($post_id, (int)$term_id, 'project-status');
+                }
 
-            if (!empty($data['neighborhood'])) {
-                $neigh_id = get_or_create_neighborhood($data['neighborhood']);
-                update_field('project_neighborhood', $neigh_id, $post_id);
+                if (!empty($data['neighborhood'])) {
+                    $neigh_id = get_or_create_neighborhood($data['neighborhood']);
+                    update_field('project_neighborhood', $neigh_id, $post_id);
+                }
+            } catch (Throwable $rowError) {
+                $errors[] = "Row $index: " . $rowError->getMessage();
             }
         }
 
+        if (count($errors)) {
+            return '<div class="notice notice-warning"><p>Imported with warnings:</p><ul><li>' . implode('</li><li>', array_map('esc_html', $errors)) . '</li></ul></div>';
+        }
+
         return '<div class="notice notice-success"><p>✅ Projects imported successfully!</p></div>';
+
     } catch (Throwable $e) {
         return '<div class="notice notice-error"><p><strong>❌ Error:</strong> ' . esc_html($e->getMessage()) . '</p></div>';
     }
