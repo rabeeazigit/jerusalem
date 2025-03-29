@@ -228,12 +228,15 @@ function import_projects_from_csv($file_path) {
             }
         
             $data = array_combine($headers, $row);
-            if (!$data) throw new Exception("Row $index has mismatched columns even after adjustment.");
-        
-            $title = $data['post_title'] ?? '';
-            if (!$title || trim($title) === '') {
-                throw new Exception("Missing title on row $index.");
-            }
+if (!$data) throw new Exception("Row $index has mismatched columns even after adjustment.");
+
+error_log("Row $index Data: " . print_r($data, true));
+
+$title = $data['post_title'] ?? '';
+if (!$title || trim($title) === '') {
+    throw new Exception("Missing title on row $index.");
+}
+
             // Insert or update the post
             $existing_post = get_page_by_title($title, OBJECT, 'project');
             $post_id = $existing_post ? $existing_post->ID : wp_insert_post([
