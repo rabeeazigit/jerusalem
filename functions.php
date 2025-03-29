@@ -196,55 +196,57 @@ function import_projects_from_csv($file_path) {
             throw new Exception('CSV file not found.');
         }
 
-        // Read and clean CSV lines
-        // Read and clean CSV lines
-        $raw_lines = file($file_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        $raw_lines[0] = preg_replace('/^\xEF\xBB\xBF/', '', $raw_lines[0]); // Remove BOM
+        $csv = [];
+        
+        // Open the file for reading
+        if (($handle = fopen($file_path, 'r')) !== false) {
+            while (($row = fgetcsv($handle)) !== false) {
+                // Skip empty rows and rows with only empty values
+                if (!empty(array_filter($row))) {
+                    $csv[] = $row;
+                }
+            }
+            fclose($handle);
+        } else {
+            throw new Exception('Unable to open CSV file.');
+        }
 
-        // Filter out any empty or malformed lines
-        $raw_lines = array_filter($raw_lines, function($line) {
-            return trim($line) !== ''; // Skip lines that are just empty
-        });
-
-        $csv = array_map('str_getcsv', $raw_lines);
         if (!$csv || count($csv) < 2) {
             throw new Exception('CSV is empty or malformed.');
         }
 
-
-        // Normalize headers (lowercase + trim)
+        // Normalize headers
         $headers = array_map(function($h) {
-            return trim(strtolower($h));
+            $h = trim($h);                           
+            $h = preg_replace('/\s+/', '_', $h);      
+            $h = preg_replace('/[^a-zA-Z0-9_]/', '', $h); 
+            return strtolower($h);                    
         }, array_shift($csv));
 
+        error_log("Normalized Headers: " . print_r($headers, true));
 
         foreach ($csv as $index => $row) {
             // Skip empty lines
             if (count(array_filter($row)) === 0) continue;
-        
+
             // Make sure row matches header count
             $row_count = count($row);
             $header_count = count($headers);
-        
+
             if ($row_count < $header_count) {
-                // Fill missing columns with nulls
                 $row = array_pad($row, $header_count, '');
             } elseif ($row_count > $header_count) {
-                // Trim extra columns
                 $row = array_slice($row, 0, $header_count);
             }
-        
+
             $data = array_combine($headers, $row);
-if (!$data) throw new Exception("Row $index has mismatched columns even after adjustment.");
+            if (!$data) throw new Exception("Row $index has mismatched columns even after adjustment.");
 
-error_log("Row $index Data: " . print_r($data, true));
+            $title = $data['post_title'] ?? '';
+            if (!$title || trim($title) === '') {
+                throw new Exception("Missing title on row $index.");
+            }
 
-$title = $data['post_title'] ?? '';
-if (!$title || trim($title) === '') {
-    throw new Exception("Missing title on row $index.");
-}
-
-            // Insert or update the post
             $existing_post = get_page_by_title($title, OBJECT, 'project');
             $post_id = $existing_post ? $existing_post->ID : wp_insert_post([
                 'post_title'  => $title,
@@ -269,26 +271,26 @@ if (!$title || trim($title) === '') {
                 wp_set_object_terms($post_id, $data['status'], 'project-status');
             }
 
-            // Link to neighborhood (post object)
+            // Set post object: neighborhood
             if (!empty($data['neighborhood'])) {
-                $neighborhood_name = trim(preg_replace('/\s+/', ' ', $data['neighborhood'])); // Remove extra spaces
+                $neighborhood_name = trim(preg_replace('/\s+/', ' ', $data['neighborhood']));
                 $neigh = get_page_by_title($neighborhood_name, OBJECT, 'neighborhood');
 
                 if (!$neigh) {
-                    // Auto-create the neighborhood post
+                    // Auto-create neighborhood post
                     $neigh_id = wp_insert_post([
-                        'post_title' => $neighborhood_name,
-                        'post_type'  => 'neighborhood',
-                        'post_status'=> 'publish'
+                        'post_title'  => $neighborhood_name,
+                        'post_type'   => 'neighborhood',
+                        'post_status' => 'publish',
                     ]);
                     if (is_wp_error($neigh_id)) {
-                        throw new Exception("Could not create neighborhood: $neighborhood_name");
+                        throw new Exception("Failed to create neighborhood: $neighborhood_name");
                     }
                 } else {
                     $neigh_id = $neigh->ID;
                 }
+
                 update_field('project_neighborhood', $neigh_id, $post_id);
-                
             }
         }
 
