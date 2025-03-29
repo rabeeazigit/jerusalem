@@ -114,6 +114,8 @@ new SQLinkSCF();
 new SQLinkEnqueue();
 new AjaxHandler();
 
+
+
 add_action('admin_menu', function () {
     add_submenu_page(
         'edit.php?post_type=project',
@@ -204,57 +206,50 @@ function import_projects_from_csv($file_path) {
             throw new Exception('CSV file not found.');
         }
 
-        $raw_lines = file($file_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        if (($handle = fopen($file_path, 'r')) !== false) {
+            $headers = fgetcsv($handle);
+            $headers = array_map('trim', $headers);
 
-        if (!$raw_lines || count($raw_lines) < 2) {
-            throw new Exception('CSV is empty or malformed.');
-        }
-
-        $headers = array_map(function($h) {
-            $h = trim($h);
-            $h = preg_replace('/\s+/', '_', $h);
-            $h = preg_replace('/[^a-zA-Z0-9_]/', '', $h);
-            return strtolower($h);
-        }, str_getcsv(array_shift($raw_lines)));
-
-        foreach ($raw_lines as $index => $line) {
-            try {
-                $row = str_getcsv($line);
-
-                if (count(array_filter($row)) === 0) continue;
-
-                $row = array_pad($row, count($headers), '');
-                $row = array_slice($row, 0, count($headers));
-                $data = array_combine($headers, array_map('sanitize_text_field', $row));
-
-                $title = $data['post_title'] ?? '';
-                if (!$title || trim($title) === '') {
-                    throw new Exception("Missing title on row $index. Row Data: " . implode(", ", $row));
-                }
-
-                $existing_post = get_page_by_title($title, OBJECT, 'project');
-                $post_id = $existing_post ? $existing_post->ID : wp_insert_post([
-                    'post_title'  => $title,
-                    'post_type'   => 'project',
-                    'post_status' => 'publish',
-                ]);
-
-                if (!$post_id || is_wp_error($post_id)) {
-                    throw new Exception("Failed to insert/update post: $title. Row Data: " . implode(", ", $row));
-                }
-
-                update_field('project_address', $data['address'] ?? '', $post_id);
-                update_field('tabaa_number', $data['tabaa_number'] ?? '', $post_id);
-                update_field('project_entrepreneur', $data['entrepreneur'] ?? '', $post_id);
-                update_field('project_lowyer', $data['lawyer_name'] ?? '', $post_id);
-                update_field('area_description', $data['area_description'] ?? '', $post_id);
-                update_field('technon_link', $data['technon_link'] ?? '', $post_id);
-
-                $imported++;
-
-            } catch (Throwable $rowError) {
-                $errors[] = "Row $index failed: " . $rowError->getMessage() . " | Row Data: " . implode(", ", $row);
+            if (empty($headers) || count($headers) < 2) {
+                throw new Exception('CSV file has insufficient columns or is malformed.');
             }
+
+            $index = 0;
+            while (($row = fgetcsv($handle)) !== false) {
+                try {
+                    $index++;
+                    if (empty(array_filter($row))) continue;
+                    $data = array_combine($headers, array_map('sanitize_text_field', $row));
+
+                    $title = $data['post_title'] ?? '';
+                    if (!$title || trim($title) === '') {
+                        throw new Exception("Missing title on row $index. Row Data: " . implode(", ", $row));
+                    }
+
+                    $existing_post = get_page_by_title($title, OBJECT, 'project');
+                    $post_id = $existing_post ? $existing_post->ID : wp_insert_post([
+                        'post_title'  => $title,
+                        'post_type'   => 'project',
+                        'post_status' => 'publish',
+                    ]);
+
+                    if (!$post_id || is_wp_error($post_id)) {
+                        throw new Exception("Failed to insert/update post: $title. Row Data: " . implode(", ", $row));
+                    }
+
+                    update_field('project_address', $data['address'] ?? '', $post_id);
+                    update_field('tabaa_number', $data['tabaa_number'] ?? '', $post_id);
+                    update_field('project_entrepreneur', $data['entrepreneur'] ?? '', $post_id);
+                    update_field('project_lowyer', $data['lawyer_name'] ?? '', $post_id);
+                    update_field('area_description', $data['area_description'] ?? '', $post_id);
+                    update_field('technon_link', $data['technon_link'] ?? '', $post_id);
+
+                    $imported++;
+                } catch (Throwable $rowError) {
+                    $errors[] = "Row $index failed: " . $rowError->getMessage() . " | Row Data: " . implode(", ", $row);
+                }
+            }
+            fclose($handle);
         }
 
         $message = "<div class=\"notice notice-success\"><p>✅ Imported $imported project(s) successfully!</p></div>";
@@ -269,4 +264,3 @@ function import_projects_from_csv($file_path) {
         return '<div class="notice notice-error"><p><strong>❌ Error:</strong> ' . esc_html($e->getMessage()) . '</p></div>';
     }
 }
- 
