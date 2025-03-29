@@ -115,7 +115,6 @@ new SQLinkEnqueue();
 new AjaxHandler();
 
 
-
 add_action('admin_menu', function () {
     add_submenu_page(
         'edit.php?post_type=project',
@@ -138,15 +137,14 @@ function render_ajax_import_page() {
         <div id="csv-import-response" style="margin-top: 20px;"></div>
     </div>
 
-        <script>
+    <script>
     jQuery(document).ready(function($) {
         $('#project-csv-upload-form').on('submit', function(e) {
             e.preventDefault();
             let formData = new FormData(this);
-            formData.append('action', 'import_project_csv_ajax'); // 👈 required for WordPress AJAX
 
             $.ajax({
-                url: ajaxurl, // built-in WordPress global
+                url: ajaxurl,
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -157,21 +155,15 @@ function render_ajax_import_page() {
                 success: function (response) {
                     $('#csv-import-response').html(response.data.message);
                 },
-                error: function (xhr) {
-                    let msg = '<div class="notice notice-error"><p>Unexpected error occurred.</p></div>';
-                    if (xhr.responseJSON?.data?.message) {
-                        msg = '<div class="notice notice-error"><p>' + xhr.responseJSON.data.message + '</p></div>';
-                    }
-                    $('#csv-import-response').html(msg);
+                error: function () {
+                    $('#csv-import-response').html('<div class="notice notice-error"><p>Unexpected error occurred.</p></div>');
                 }
             });
         });
     });
     </script>
-
-        <?php
-    }
-
+    <?php
+}
 
 add_action('wp_ajax_import_project_csv_ajax', 'handle_project_csv_ajax_upload');
 
@@ -190,52 +182,44 @@ function handle_project_csv_ajax_upload() {
     wp_send_json_success(['message' => $message]);
 }
 
-
-function get_closest_taxonomy($status, $existing_terms) {
-    foreach ($existing_terms as $term) {
-        // Check for exact match
-        if ($status === $term->name) {
-            return $term->term_id;
-        }
-        
-        // Check for partial match (substring check)
-        if (stripos($term->name, $status) !== false || stripos($status, $term->name) !== false) {
-            return $term->term_id;
-        }
-    }
-
-    // No match found
-    return null;
-}
-
-function handle_project_status($status) {
-    $status = trim($status); // Clean any extra spaces
-    $status_slug = sanitize_title($status); // Convert to slug-friendly format
-
-    // Get all existing terms in the 'project-status' taxonomy
-    $existing_terms = get_terms([
-        'taxonomy' => 'project-status',
+function get_closest_term_id($value, $taxonomy) {
+    $terms = get_terms([
+        'taxonomy' => $taxonomy,
         'hide_empty' => false,
     ]);
 
-    // Try to find the closest matching term
-    $closest_term_id = get_closest_taxonomy($status, $existing_terms);
-
-    // If a match is found, return the term ID
-    if ($closest_term_id) {
-        return $closest_term_id;
+    foreach ($terms as $term) {
+        if (trim($value) === $term->name || stripos($term->name, $value) !== false || stripos($value, $term->name) !== false) {
+            return $term->term_id;
+        }
     }
 
-    // If no match, create the term
-    $new_term = wp_insert_term($status, 'project-status', [
-        'slug' => $status_slug,
+    $new_term = wp_insert_term($value, $taxonomy, ['slug' => sanitize_title($value)]);
+    if (is_wp_error($new_term)) {
+        throw new Exception("Failed to create term in taxonomy '$taxonomy': $value");
+    }
+    return $new_term['term_id'];
+}
+
+function get_or_create_neighborhood($name) {
+    $name = trim(preg_replace('/\s+/', ' ', $name));
+    $existing = get_page_by_title($name, OBJECT, 'neighborhood');
+
+    if ($existing) {
+        return $existing->ID;
+    }
+
+    $new_id = wp_insert_post([
+        'post_title' => $name,
+        'post_type' => 'neighborhood',
+        'post_status' => 'publish'
     ]);
 
-    if (is_wp_error($new_term)) {
-        throw new Exception("Failed to create status term: $status");
+    if (is_wp_error($new_id)) {
+        throw new Exception("Failed to create neighborhood: $name");
     }
 
-    return $new_term['term_id'];
+    return $new_id;
 }
 
 function import_projects_from_csv($file_path) {
@@ -251,12 +235,11 @@ function import_projects_from_csv($file_path) {
             throw new Exception('CSV is empty or malformed.');
         }
 
-        // Normalize headers
         $headers = array_map(function($h) {
-            $h = trim($h);                           
-            $h = preg_replace('/\s+/', '_', $h);       
+            $h = trim($h);
+            $h = preg_replace('/\s+/', '_', $h);
             $h = preg_replace('/[^a-zA-Z0-9_]/', '', $h);
-            return strtolower($h);                    
+            return strtolower($h);
         }, str_getcsv(array_shift($raw_lines)));
 
         foreach ($raw_lines as $index => $line) {
@@ -264,18 +247,9 @@ function import_projects_from_csv($file_path) {
 
             if (count(array_filter($row)) === 0) continue;
 
-            // Adjust row length to match headers
-            $row_count = count($row);
-            $header_count = count($headers);
-
-            if ($row_count < $header_count) {
-                $row = array_pad($row, $header_count, '');
-            } elseif ($row_count > $header_count) {
-                $row = array_slice($row, 0, $header_count);
-            }
-
+            $row = array_pad($row, count($headers), '');
+            $row = array_slice($row, 0, count($headers));
             $data = array_combine($headers, $row);
-            if (!$data) throw new Exception("Row $index has mismatched columns.");
 
             $title = $data['post_title'] ?? '';
             if (!$title || trim($title) === '') {
@@ -293,7 +267,6 @@ function import_projects_from_csv($file_path) {
                 throw new Exception("Failed to insert/update post: $title");
             }
 
-            // Update ACF fields
             update_field('project_address', $data['address'] ?? '', $post_id);
             update_field('tabaa_number', $data['tabaa_number'] ?? '', $post_id);
             update_field('project_entrepreneur', $data['entrepreneur'] ?? '', $post_id);
@@ -301,36 +274,18 @@ function import_projects_from_csv($file_path) {
             update_field('area_description', $data['area_description'] ?? '', $post_id);
             update_field('technon_link', $data['technon_link'] ?? '', $post_id);
 
-            // Set project status using the enhanced function
             if (!empty($data['status'])) {
-                $term_id = handle_project_status($data['status']);
+                $term_id = get_closest_term_id($data['status'], 'project-status');
                 wp_set_object_terms($post_id, (int)$term_id, 'project-status');
             }
 
-            // Set neighborhood
             if (!empty($data['neighborhood'])) {
-                $neighborhood_name = trim(preg_replace('/\s+/', ' ', $data['neighborhood']));
-                $neigh = get_page_by_title($neighborhood_name, OBJECT, 'neighborhood');
-
-                if (!$neigh) {
-                    $neigh_id = wp_insert_post([
-                        'post_title'  => $neighborhood_name,
-                        'post_type'   => 'neighborhood',
-                        'post_status' => 'publish',
-                    ]);
-                    if (is_wp_error($neigh_id)) {
-                        throw new Exception("Failed to create neighborhood: $neighborhood_name");
-                    }
-                } else {
-                    $neigh_id = $neigh->ID;
-                }
-
+                $neigh_id = get_or_create_neighborhood($data['neighborhood']);
                 update_field('project_neighborhood', $neigh_id, $post_id);
             }
         }
 
         return '<div class="notice notice-success"><p>✅ Projects imported successfully!</p></div>';
-
     } catch (Throwable $e) {
         return '<div class="notice notice-error"><p><strong>❌ Error:</strong> ' . esc_html($e->getMessage()) . '</p></div>';
     }
