@@ -197,39 +197,30 @@ function import_projects_from_csv($file_path) {
         }
 
         $csv = [];
-        
-        // Open the file for reading
-        if (($handle = fopen($file_path, 'r')) !== false) {
-            while (($row = fgetcsv($handle)) !== false) {
-                // Skip empty rows and rows with only empty values
-                if (!empty(array_filter($row))) {
-                    $csv[] = $row;
-                }
-            }
-            fclose($handle);
-        } else {
-            throw new Exception('Unable to open CSV file.');
-        }
+        $raw_lines = file($file_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
-        if (!$csv || count($csv) < 2) {
+        if (!$raw_lines || count($raw_lines) < 2) {
             throw new Exception('CSV is empty or malformed.');
         }
 
         // Normalize headers
         $headers = array_map(function($h) {
             $h = trim($h);                           
-            $h = preg_replace('/\s+/', '_', $h);      
-            $h = preg_replace('/[^a-zA-Z0-9_]/', '', $h); 
+            $h = preg_replace('/\s+/', '_', $h);       
+            $h = preg_replace('/[^a-zA-Z0-9_]/', '', $h);
             return strtolower($h);                    
-        }, array_shift($csv));
+        }, str_getcsv(array_shift($raw_lines)));
 
         error_log("Normalized Headers: " . print_r($headers, true));
 
-        foreach ($csv as $index => $row) {
+        foreach ($raw_lines as $index => $line) {
+            // Use str_getcsv to properly parse the line into fields
+            $row = str_getcsv($line);
+
             // Skip empty lines
             if (count(array_filter($row)) === 0) continue;
 
-            // Make sure row matches header count
+            // Match row with header count
             $row_count = count($row);
             $header_count = count($headers);
 
@@ -266,11 +257,10 @@ function import_projects_from_csv($file_path) {
             update_field('area_description', $data['area_description'] ?? '', $post_id);
             update_field('technon_link', $data['technon_link'] ?? '', $post_id);
 
-            // Set taxonomy: project-status
-       // Status (taxonomy)
+            // Status (taxonomy)
             if (!empty($data['status'])) {
-                $status = trim($data['status']); // Trim any extra spaces
-                $status_slug = sanitize_title($status); // Convert to a slug-friendly format
+                $status = trim($data['status']); 
+                $status_slug = sanitize_title($status);
 
                 // Check if the status term exists
                 $term = term_exists($status, 'project-status');
@@ -291,7 +281,6 @@ function import_projects_from_csv($file_path) {
                 // Set the project status
                 wp_set_object_terms($post_id, (int)$term_id, 'project-status');
             }
-
 
             // Set post object: neighborhood
             if (!empty($data['neighborhood'])) {
@@ -322,5 +311,3 @@ function import_projects_from_csv($file_path) {
         return '<div class="notice notice-error"><p><strong>❌ Error:</strong> ' . esc_html($e->getMessage()) . '</p></div>';
     }
 }
-
- 
