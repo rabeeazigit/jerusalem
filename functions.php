@@ -219,7 +219,6 @@ function import_projects_from_csv($file_path) {
                     $index++;
                     if (empty(array_filter($row))) continue;
 
-                    // Ensure proper encoding
                     $row = array_map(function($value) {
                         return mb_convert_encoding(trim($value), 'UTF-8', 'auto');
                     }, $row);
@@ -232,11 +231,15 @@ function import_projects_from_csv($file_path) {
                     }
 
                     $existing_post = get_page_by_title($title, OBJECT, 'project');
-                    $post_id = $existing_post ? $existing_post->ID : wp_insert_post([
-                        'post_title'  => $title,
-                        'post_type'   => 'project',
-                        'post_status' => 'publish',
-                    ]);
+                    if ($existing_post) {
+                        $post_id = $existing_post->ID;
+                    } else {
+                        $post_id = wp_insert_post([
+                            'post_title' => $title,
+                            'post_type' => 'project',
+                            'post_status' => 'publish',
+                        ]);
+                    }
 
                     if (!$post_id || is_wp_error($post_id)) {
                         throw new Exception("Failed to insert/update post: $title. Row Data: " . implode(", ", $row));
