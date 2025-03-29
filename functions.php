@@ -114,6 +114,7 @@ new SQLinkSCF();
 new SQLinkEnqueue();
 new AjaxHandler();
 
+
 add_action('admin_menu', function () {
     add_submenu_page(
         'edit.php?post_type=project',
@@ -272,3 +273,5 @@ function import_projects_from_csv($file_path) {
         return '<div class="notice notice-error"><p><strong>❌ Error:</strong> ' . esc_html($e->getMessage()) . '</p></div>';
     }
 }
+
+
