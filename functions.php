@@ -114,7 +114,6 @@ new SQLinkSCF();
 new SQLinkEnqueue();
 new AjaxHandler();
 
-
 add_action('admin_menu', function () {
     add_submenu_page(
         'edit.php?post_type=project',
@@ -182,26 +181,32 @@ function handle_project_csv_ajax_upload() {
     }
 
     $file_path = $_FILES['csv_file']['tmp_name'];
-    $message = import_projects_from_csv($file_path);
+    $file_type = mime_content_type($file_path);
 
-    wp_send_json_success(['message' => $message]);
+    if ($file_type !== 'text/csv' && $file_type !== 'application/vnd.ms-excel') {
+        wp_send_json_error(['message' => 'Invalid file format. Please upload a CSV file.']);
+    }
+
+    try {
+        $message = import_projects_from_csv($file_path);
+        wp_send_json_success(['message' => $message]);
+    } catch (Exception $e) {
+        wp_send_json_error(['message' => $e->getMessage()]);
+    }
 }
 
 function get_closest_term_id($value, $taxonomy) {
-    $terms = get_terms([
-        'taxonomy' => $taxonomy,
-        'hide_empty' => false,
-    ]);
+    $terms = get_terms(['taxonomy' => $taxonomy, 'hide_empty' => false]);
 
     foreach ($terms as $term) {
-        if (trim($value) === $term->name || stripos($term->name, $value) !== false || stripos($value, $term->name) !== false) {
+        if (strcasecmp(trim($value), $term->name) == 0) {
             return $term->term_id;
         }
     }
 
     $new_term = wp_insert_term($value, $taxonomy, ['slug' => sanitize_title($value)]);
     if (is_wp_error($new_term)) {
-        throw new Exception("Failed to create term in taxonomy '$taxonomy': $value");
+        throw new Exception("Failed to create term: " . $value);
     }
     return $new_term['term_id'];
 }
@@ -221,66 +226,50 @@ function get_or_create_neighborhood($name) {
     ]);
 
     if (is_wp_error($new_id)) {
-        throw new Exception("Failed to create neighborhood: $name");
+        throw new Exception("Failed to create neighborhood: " . $name);
     }
 
     return $new_id;
 }
 
 function import_projects_from_csv($file_path) {
-    $errors = [];
-
     try {
         if (!file_exists($file_path)) {
             throw new Exception('CSV file not found.');
         }
 
         $csv = [];
-        $raw_lines = file($file_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        if (($handle = fopen($file_path, 'r')) !== false) {
+            while (($row = fgetcsv($handle)) !== false) {
+                if (!empty(array_filter($row))) {
+                    $csv[] = array_map('sanitize_text_field', $row);
+                }
+            }
+            fclose($handle);
+        }
 
-        if (!$raw_lines || count($raw_lines) < 2) {
+        if (count($csv) < 2) {
             throw new Exception('CSV is empty or malformed.');
         }
 
-        $headers = array_map(function($h) {
-            $h = trim($h);
-            $h = preg_replace('/\s+/', '_', $h);
-            $h = preg_replace('/[^a-zA-Z0-9_]/', '', $h);
-            return strtolower($h);
-        }, str_getcsv(array_shift($raw_lines)));
+        $headers = array_map('trim', array_shift($csv));
 
-        foreach ($raw_lines as $index => $line) {
+        foreach ($csv as $index => $row) {
             try {
-                $row = str_getcsv($line);
-
-                if (count(array_filter($row)) === 0) continue;
-
-                $row = array_pad($row, count($headers), '');
-                $row = array_slice($row, 0, count($headers));
                 $data = array_combine($headers, $row);
+                $title = sanitize_text_field($data['post_title'] ?? '');
 
-                $title = $data['post_title'] ?? '';
-                if (!$title || trim($title) === '') {
-                    throw new Exception("Missing title on row $index.");
-                }
+                if (!$title) throw new Exception("Missing title on row " . ($index + 1) . ".");
 
                 $existing_post = get_page_by_title($title, OBJECT, 'project');
                 $post_id = $existing_post ? $existing_post->ID : wp_insert_post([
-                    'post_title'  => $title,
-                    'post_type'   => 'project',
+                    'post_title' => $title,
+                    'post_type' => 'project',
                     'post_status' => 'publish',
                 ]);
 
-                if (!$post_id || is_wp_error($post_id)) {
-                    throw new Exception("Failed to insert/update post: $title");
-                }
-
-                update_field('project_address', $data['address'] ?? '', $post_id);
-                update_field('tabaa_number', $data['tabaa_number'] ?? '', $post_id);
-                update_field('project_entrepreneur', $data['entrepreneur'] ?? '', $post_id);
-                update_field('project_lowyer', $data['lawyer_name'] ?? '', $post_id);
-                update_field('area_description', $data['area_description'] ?? '', $post_id);
-                update_field('technon_link', $data['technon_link'] ?? '', $post_id);
+                update_field('project_address', sanitize_text_field($data['address'] ?? ''), $post_id);
+                update_field('tabaa_number', sanitize_text_field($data['tabaa_number'] ?? ''), $post_id);
 
                 if (!empty($data['status'])) {
                     $term_id = get_closest_term_id($data['status'], 'project-status');
@@ -291,17 +280,12 @@ function import_projects_from_csv($file_path) {
                     $neigh_id = get_or_create_neighborhood($data['neighborhood']);
                     update_field('project_neighborhood', $neigh_id, $post_id);
                 }
-            } catch (Throwable $rowError) {
-                $errors[] = "Row $index: " . $rowError->getMessage();
+            } catch (Exception $ex) {
+                error_log("Row " . ($index + 1) . " failed: " . $ex->getMessage());
             }
         }
 
-        if (count($errors)) {
-            return '<div class="notice notice-warning"><p>Imported with warnings:</p><ul><li>' . implode('</li><li>', array_map('esc_html', $errors)) . '</li></ul></div>';
-        }
-
         return '<div class="notice notice-success"><p>✅ Projects imported successfully!</p></div>';
-
     } catch (Throwable $e) {
         return '<div class="notice notice-error"><p><strong>❌ Error:</strong> ' . esc_html($e->getMessage()) . '</p></div>';
     }
