@@ -190,6 +190,54 @@ function handle_project_csv_ajax_upload() {
     wp_send_json_success(['message' => $message]);
 }
 
+
+function get_closest_taxonomy($status, $existing_terms) {
+    foreach ($existing_terms as $term) {
+        // Check for exact match
+        if ($status === $term->name) {
+            return $term->term_id;
+        }
+        
+        // Check for partial match (substring check)
+        if (stripos($term->name, $status) !== false || stripos($status, $term->name) !== false) {
+            return $term->term_id;
+        }
+    }
+
+    // No match found
+    return null;
+}
+
+function handle_project_status($status) {
+    $status = trim($status); // Clean any extra spaces
+    $status_slug = sanitize_title($status); // Convert to slug-friendly format
+
+    // Get all existing terms in the 'project-status' taxonomy
+    $existing_terms = get_terms([
+        'taxonomy' => 'project-status',
+        'hide_empty' => false,
+    ]);
+
+    // Try to find the closest matching term
+    $closest_term_id = get_closest_taxonomy($status, $existing_terms);
+
+    // If a match is found, return the term ID
+    if ($closest_term_id) {
+        return $closest_term_id;
+    }
+
+    // If no match, create the term
+    $new_term = wp_insert_term($status, 'project-status', [
+        'slug' => $status_slug,
+    ]);
+
+    if (is_wp_error($new_term)) {
+        throw new Exception("Failed to create status term: $status");
+    }
+
+    return $new_term['term_id'];
+}
+
 function import_projects_from_csv($file_path) {
     try {
         if (!file_exists($file_path)) {
@@ -211,16 +259,12 @@ function import_projects_from_csv($file_path) {
             return strtolower($h);                    
         }, str_getcsv(array_shift($raw_lines)));
 
-        error_log("Normalized Headers: " . print_r($headers, true));
-
         foreach ($raw_lines as $index => $line) {
-            // Use str_getcsv to properly parse the line into fields
             $row = str_getcsv($line);
 
-            // Skip empty lines
             if (count(array_filter($row)) === 0) continue;
 
-            // Match row with header count
+            // Adjust row length to match headers
             $row_count = count($row);
             $header_count = count($headers);
 
@@ -231,7 +275,7 @@ function import_projects_from_csv($file_path) {
             }
 
             $data = array_combine($headers, $row);
-            if (!$data) throw new Exception("Row $index has mismatched columns even after adjustment.");
+            if (!$data) throw new Exception("Row $index has mismatched columns.");
 
             $title = $data['post_title'] ?? '';
             if (!$title || trim($title) === '') {
@@ -257,38 +301,18 @@ function import_projects_from_csv($file_path) {
             update_field('area_description', $data['area_description'] ?? '', $post_id);
             update_field('technon_link', $data['technon_link'] ?? '', $post_id);
 
-            // Status (taxonomy)
+            // Set project status using the enhanced function
             if (!empty($data['status'])) {
-                $status = trim($data['status']); 
-                $status_slug = sanitize_title($status);
-
-                // Check if the status term exists
-                $term = term_exists($status, 'project-status');
-
-                // If the term does not exist, create it
-                if (!$term) {
-                    $term = wp_insert_term($status, 'project-status', [
-                        'slug' => $status_slug,
-                    ]);
-                    if (is_wp_error($term)) {
-                        throw new Exception("Failed to create status term: $status");
-                    }
-                    $term_id = $term['term_id'];
-                } else {
-                    $term_id = is_array($term) ? $term['term_id'] : $term;
-                }
-
-                // Set the project status
+                $term_id = handle_project_status($data['status']);
                 wp_set_object_terms($post_id, (int)$term_id, 'project-status');
             }
 
-            // Set post object: neighborhood
+            // Set neighborhood
             if (!empty($data['neighborhood'])) {
                 $neighborhood_name = trim(preg_replace('/\s+/', ' ', $data['neighborhood']));
                 $neigh = get_page_by_title($neighborhood_name, OBJECT, 'neighborhood');
 
                 if (!$neigh) {
-                    // Auto-create neighborhood post
                     $neigh_id = wp_insert_post([
                         'post_title'  => $neighborhood_name,
                         'post_type'   => 'neighborhood',
