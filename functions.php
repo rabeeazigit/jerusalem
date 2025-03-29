@@ -114,8 +114,6 @@ new SQLinkSCF();
 new SQLinkEnqueue();
 new AjaxHandler();
 
-
-
 add_action('admin_menu', function () {
     add_submenu_page(
         'edit.php?post_type=project',
@@ -208,18 +206,25 @@ function import_projects_from_csv($file_path) {
 
         if (($handle = fopen($file_path, 'r')) !== false) {
             $headers = fgetcsv($handle);
-            $headers = array_map('trim', $headers);
-
-            if (empty($headers) || count($headers) < 2) {
-                throw new Exception('CSV file has insufficient columns or is malformed.');
-            }
+            $headers = array_map(function($h) {
+                $h = trim($h);
+                $h = preg_replace('/\s+/', '_', $h);
+                $h = preg_replace('/[^a-zA-Z0-9_]/', '', $h);
+                return strtolower($h);
+            }, $headers);
 
             $index = 0;
             while (($row = fgetcsv($handle)) !== false) {
                 try {
                     $index++;
                     if (empty(array_filter($row))) continue;
-                    $data = array_combine($headers, array_map('sanitize_text_field', $row));
+
+                    // Ensure proper encoding
+                    $row = array_map(function($value) {
+                        return mb_convert_encoding(trim($value), 'UTF-8', 'auto');
+                    }, $row);
+
+                    $data = array_combine($headers, $row);
 
                     $title = $data['post_title'] ?? '';
                     if (!$title || trim($title) === '') {
