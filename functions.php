@@ -197,13 +197,20 @@ function import_projects_from_csv($file_path) {
         }
 
         // Read and clean CSV lines
-        $raw_lines = file($file_path);
+        // Read and clean CSV lines
+        $raw_lines = file($file_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         $raw_lines[0] = preg_replace('/^\xEF\xBB\xBF/', '', $raw_lines[0]); // Remove BOM
+
+        // Filter out any empty or malformed lines
+        $raw_lines = array_filter($raw_lines, function($line) {
+            return trim($line) !== ''; // Skip lines that are just empty
+        });
 
         $csv = array_map('str_getcsv', $raw_lines);
         if (!$csv || count($csv) < 2) {
             throw new Exception('CSV is empty or malformed.');
         }
+
 
         // Normalize headers (lowercase + trim)
         $headers = array_map(function($h) {
