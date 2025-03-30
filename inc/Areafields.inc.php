@@ -17,7 +17,7 @@ class Areafields
         $this->bk_sec_about = get_field('bk_sec_about', $this->pid);
         $this->hero_section = get_field('area_fields_hero_section', $this->pid);
         $this->main_area_fields = get_field('main_area_fields', $this->pid);
-        $this->community_field_title = get_field('community_field_title', $this->pid);
+        $this->community_field_title = get_the_title();
         $this->community_field_content = get_field('community_field_content', $this->pid);
         $this->arie_fields_connection =  get_field('arie_fields_connection', $this->pid);
         $this->community_field_title_accotdion =  get_field('community_field_title_accotdion', $this->pid);
