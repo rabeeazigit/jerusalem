@@ -253,17 +253,17 @@ class Areafields
             $pid = $GroupContent['pid'];
 
             // Display post title and content without accordion
-            $html .= '<div class="card mb-3">';
-            $html .= '<div class="card-header fw-bold fs-3">' . $post->post_title . '</div>';
-            $html .= '<div class="card-body">' . $GroupContent['area_content'] . '</div>';
-            $html .= '</div>';
+            $html .= '<div class=" mb-3">';
+            $html .= '<div class=" fw-bold fs-3">' . $post->post_title . '</div>';
+            $html .= '<div class=""style="font-weight:400">' . $GroupContent['area_content'] . '</div>';
+        
 
             // Repeater Field Accordion
             if (!empty($GroupContent['all_fields']) && is_array($GroupContent['all_fields'])) {
                 $html .= '<div class="accordion" id="accordionRepeater' . $post->ID . '">';
 
                 foreach ($GroupContent['all_fields'] as $index => $field) {
-                    $field_title = $field['title'] ?? 'No Title';
+                    $field_title = $field['title'] ?? '';
                     $field_desc = $field['desc'] ?? '';
 
                     $html .= '<div class="accordion-item">';
