@@ -6,28 +6,28 @@ class Areafields
     private $hero_image;
     private $hero_section;
     private $main_area_fields;
-    private $arie_fields_connection ;
+    private $arie_fields_connection;
     private $community_field_title;
     private $community_field_content;
-    private $community_field_title_accotdion ;
+    private $community_field_title_accotdion;
     private $pid;
     public function __construct()
     {
-        $this->pid = get_the_ID() ;
+        $this->pid = get_the_ID();
         $this->bk_sec_about = get_field('bk_sec_about', $this->pid);
         $this->hero_section = get_field('area_fields_hero_section', $this->pid);
         $this->main_area_fields = get_field('main_area_fields', $this->pid);
         $this->community_field_title = get_field('community_field_title', $this->pid);
         $this->community_field_content = get_field('community_field_content', $this->pid);
-        $this->arie_fields_connection =  get_field('arie_fields_connection', $this->pid);
-        $this->community_field_title_accotdion =  get_field('community_field_title_accotdion', $this->pid);
+        $this->arie_fields_connection = get_field('arie_fields_connection', $this->pid);
+        $this->community_field_title_accotdion = get_field('community_field_title_accotdion', $this->pid);
 
 
     }
 
     public function LeftSideCats()
     {
-        return  $this->hero_section['bk_sec_about'];
+        return $this->hero_section['bk_sec_about'];
     }
 
 
@@ -51,7 +51,7 @@ class Areafields
         <div class="container-fluid mt-5 secssionBk">
             <div class="hero-section p-md-4 p-3">
                 <div class="row align-items-start">
-                    
+
                     <div class="col-12"><?= $breadcrumbs; ?></div>
 
                     <!-- Left Column: Text Content -->
@@ -62,11 +62,9 @@ class Areafields
                     </div>
 
                     <!-- Right Column: Image -->
-                     <?php if ($this->hero_section['hero_image']) : ?>
+                    <?php if ($this->hero_section['hero_image']): ?>
                         <div class="col-xl-6 col-lg-12">
-                            <img src="<?= $this->hero_section['hero_image'] ?? ''; ?>" 
-                                alt="Hero Image" 
-                                class="img-fluid rounded">
+                            <img src="<?= $this->hero_section['hero_image'] ?? ''; ?>" alt="Hero Image" class="img-fluid rounded">
                         </div>
                     <?php endif; ?>
                 </div>
@@ -81,10 +79,10 @@ class Areafields
     {
 
         $html =
-                '<div class="container-fluid px-0">
+            '<div class="container-fluid px-0">
                     <div class="row">
                         <div class="col">
-                        '. get_template_part("template-parts/navbar") . ' 
+                        ' . get_template_part("template-parts/navbar") . ' 
                     </div> 
                  </div>';
 
@@ -97,9 +95,9 @@ class Areafields
     public function Get_AreaFieldsPosts()
     {
         $args = array(
-            'post_type'      => 'area-fields', // Custom post type name
-            'numberposts'    => -1,            // Retrieve all posts
-            'post_status'    => 'publish',     // Only published posts
+            'post_type' => 'area-fields', // Custom post type name
+            'numberposts' => -1,            // Retrieve all posts
+            'post_status' => 'publish',     // Only published posts
         );
         $posts = get_posts($args);
         return $posts;
@@ -108,17 +106,17 @@ class Areafields
     public function FetchAreaFiedlsCategories()
     {
         $categories = get_terms([
-            'taxonomy'   => 'category', // Default WordPress category taxonomy
+            'taxonomy' => 'category', // Default WordPress category taxonomy
             'hide_empty' => false,      // Show all categories, even if they have no posts
-            'orderby'    => 'date',     // You can also use 'id' or 'term_id' for numerical ordering
-            'order'      => 'ASC',     // Order categories in descending order
+            'orderby' => 'date',     // You can also use 'id' or 'term_id' for numerical ordering
+            'order' => 'ASC',     // Order categories in descending order
             'object_ids' => get_posts([
-                'post_type'      => 'area-fields',
+                'post_type' => 'area-fields',
                 'posts_per_page' => -1,
-                'fields'         => 'ids', // Fetch only post IDs
+                'fields' => 'ids', // Fetch only post IDs
             ]),
         ]);
-        return  $categories ;
+        return $categories;
     }
 
 
@@ -126,14 +124,14 @@ class Areafields
     {
 
         $html =
-                '<div class="container px-0">
+            '<div class="container px-0">
            
-                <h2>'.  $this->community_field_title .'<h2>
+                <h2>' . $this->community_field_title . '<h2>
                 
-                <div class="community_field_content">'.  $this->community_field_content .'</div>
+                <div class="community_field_content">' . $this->community_field_content . '</div>
                
            
-         </div><p>'.$this->community_field_title_accotdion.'</p>';
+         </div><p>' . $this->community_field_title_accotdion . '</p>';
 
         return $html;
     }
@@ -144,15 +142,15 @@ class Areafields
 
         $posts_raw = [];
         $args = array(
-            'post_type'      => 'area-fields',
-            'orderby'        => 'date',
-            'order'          => 'DESC', 
+            'post_type' => 'area-fields',
+            'orderby' => 'date',
+            'order' => 'DESC',
             'posts_per_page' => -1, // Fetch all posts
-            'tax_query'      => array(
+            'tax_query' => array(
                 array(
                     'taxonomy' => 'category', // Replace with your actual taxonomy name
-                    'field'    => 'term_id',
-                    'terms'    => $term_id,
+                    'field' => 'term_id',
+                    'terms' => $term_id,
                 ),
             ),
         );
@@ -163,72 +161,130 @@ class Areafields
 
 
 
+    // private function BootsrapAccordion($terms)
+    // {
+    //     //$terms Needs to be an array....
+
+    //     $html = '<div class="accordion" id="accordionPanelsfields">';
+
+
+    //     foreach ($terms as $post) {
+
+    //         $GroupContent = $this->GetAccordionContent($post->ID);
+
+
+    //         //area_sticky_image
+    //         $sticky =  $GroupContent['area_sticky_image']  == 1 ? 'class="img-fluid position-sticky" style="top: 20px;" ' : 'style="width:100%;"';
+    //         $sec1Args = array(
+    //             'all_fields'=>$GroupContent['all_fields'] ,
+    //             'area_title' => $GroupContent['area_title'] ,
+    //             'area_content' => $GroupContent['area_content'] ,
+    //             'area_image' => $GroupContent['area_image'] ,
+    //             'area_more_btn' => $GroupContent['area_more_btn'] ?? '' ,
+    //             'sticky' => $sticky);
+
+    //         $sec2Args = array($GroupContent['area_table'], $GroupContent['table_title']);
+    //         $sec3Args = $GroupContent['downloads'] ;
+    //         $pid = $GroupContent['pid'];
+    //         $sec_videos_Args = $GroupContent['videos'] ;
+
+
+
+
+    //         $html .= ' 
+    //             <div class="accordion-item">
+    //                 <h2 class="accordion-header">
+    //                 <button class="accordion-button" 
+    //                             type="button" 
+    //                             data-bs-toggle="collapse" 
+    //                             data-bs-target="#panelsStayOpen-collapse'.$post->ID.'" 
+    //                             aria-expanded="true" 
+    //                             aria-controls="panelsStayOpen-collapse'.$post->ID.'" >
+    //                     '.$post->post_title.'
+    //                 </button>
+    //                 </h2>
+    //                 <div id="panelsStayOpen-collapse'.$post->ID.'"  class="accordion-collapse collapse" data-bs-parent="#accordionPanelsfields">
+    //              <div class="accordion-body">';
+
+    //              ob_start();
+
+    //         get_template_part("template-parts/area-fields/acc-section1", null, $sec1Args);
+    //         get_template_part("template-parts/area-fields/acc-section2", null, $sec2Args);
+    //         get_template_part("template-parts/area-fields/acc-section3", null, $sec3Args);
+
+
+
+    //      include(get_template_directory(). "/template-parts/area-fields/acc-section_video.php");
+    //         $html .= ob_get_clean();
+
+    //         $html .= '</div></div></div>';
+
+    //     }
+
+
+
+    //     $html .= '</div>' ; //Closer Accordion
+
+    //     return $html;
+    // }
+
+
     private function BootsrapAccordion($terms)
     {
         //$terms Needs to be an array....
 
         $html = '<div class="accordion" id="accordionPanelsfields">';
 
-
         foreach ($terms as $post) {
 
             $GroupContent = $this->GetAccordionContent($post->ID);
 
-
             //area_sticky_image
-            $sticky =  $GroupContent['area_sticky_image']  == 1 ? 'class="img-fluid position-sticky" style="top: 20px;" ' : 'style="width:100%;"';
+            $sticky = $GroupContent['area_sticky_image'] == 1 ? 'class="img-fluid position-sticky" style="top: 20px;" ' : 'style="width:100%;"';
             $sec1Args = array(
-                'area_title' => $GroupContent['area_title'] ,
-                'area_content' => $GroupContent['area_content'] ,
-                'area_image' => $GroupContent['area_image'] ,
-                'area_more_btn' => $GroupContent['area_more_btn'] ?? '' ,
-                'sticky' => $sticky);
+                'all_fields' => $GroupContent['all_fields'],
+                'area_title' => $GroupContent['area_title'],
+                'area_content' => $GroupContent['area_content'],
+                'area_image' => $GroupContent['area_image'],
+                'area_more_btn' => $GroupContent['area_more_btn'] ?? '',
+                'sticky' => $sticky
+            );
 
-            $sec2Args = array($GroupContent['area_table'], $GroupContent['table_title']);
-            $sec3Args = $GroupContent['downloads'] ;
             $pid = $GroupContent['pid'];
-            $sec_videos_Args = $GroupContent['videos'] ;
-             
 
+            $html .= '<div class="accordion-item">';
+            $html .= '<h2 class="accordion-header">';
+            $html .= '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse' . $post->ID . '" aria-expanded="true" aria-controls="panelsStayOpen-collapse' . $post->ID . '">';
+            $html .= $post->post_title;
+            $html .= '</button></h2>';
 
+            $html .= '<div id="panelsStayOpen-collapse' . $post->ID . '" class="accordion-collapse collapse" data-bs-parent="#accordionPanelsfields">';
+            $html .= '<div class="accordion-body">';
 
-            $html .= ' 
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                    <button class="accordion-button" 
-                                type="button" 
-                                data-bs-toggle="collapse" 
-                                data-bs-target="#panelsStayOpen-collapse'.$post->ID.'" 
-                                aria-expanded="true" 
-                                aria-controls="panelsStayOpen-collapse'.$post->ID.'" >
-                        '.$post->post_title.'
-                    </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapse'.$post->ID.'"  class="accordion-collapse collapse" data-bs-parent="#accordionPanelsfields">
-                 <div class="accordion-body">';
-                
-                 ob_start();
-                
-            get_template_part("template-parts/area-fields/acc-section1", null, $sec1Args);
-            get_template_part("template-parts/area-fields/acc-section2", null, $sec2Args);
-            get_template_part("template-parts/area-fields/acc-section3", null, $sec3Args);
+            // Repeater Field Accordion
+            if (!empty($GroupContent['all_fields']) && is_array($GroupContent['all_fields'])) {
+                foreach ($GroupContent['all_fields'] as $index => $field) {
+                    $field_title = $field['title'] ?? 'No Title';
+                    $field_desc = $field['desc'] ?? 'No Description';
 
-           
-        
-         include(get_template_directory(). "/template-parts/area-fields/acc-section_video.php");
-            $html .= ob_get_clean();
-            
-            $html .= '</div></div></div>';
-           
+                    $html .= '<div class="accordion-item">';
+                    $html .= '<h2 class="accordion-header">';
+                    $html .= '<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#repeater-collapse' . $post->ID . '-' . $index . '" aria-expanded="false">';
+                    $html .= $field_title;
+                    $html .= '</button></h2>';
+
+                    $html .= '<div id="repeater-collapse' . $post->ID . '-' . $index . '" class="accordion-collapse collapse">';
+                    $html .= '<div class="accordion-body">' . $field_desc . '</div>';
+                    $html .= '</div></div>';
+                }
+            }
+
+            $html .= '</div></div></div>'; // End of main accordion item
         }
 
-
-
-        $html .= '</div>' ; //Closer Accordion
-
+        $html .= '</div>'; // Close accordion container
         return $html;
     }
-
 
 
     private function GetAccordionContent($pid)
@@ -238,6 +294,7 @@ class Areafields
 
         $LayOut['area_title'] = $content[0]['area_title'];
         $LayOut['area_content'] = $content[0]['area_content'];
+        $LayOut['all_fields'] = $content[0]['all_fields'];
         $LayOut['area_image'] = $content[0]['area_image']['url'];
         $LayOut['area_sticky_image'] = $content[0]['area_sticky_image'];
         $LayOut['area_more_btn'] = $content[0]['area_more_btn'];
@@ -274,10 +331,10 @@ class Areafields
 
             $html .= ' <li class="nav-item" 
                             role="presentation">
-                            <button class="small-button activeFieldLink rounded-pill '.$active_class.'  m-2" id="pills-'.$term_id.'-tab" 
-                            data-bs-toggle="pill" data-bs-target="#pills-'.  $term_id . '" 
-                            type="button" role="tab" aria-controls="pills-'.  $term_id . '" 
-                            aria-selected="true">'.$cat->name.'</button>
+                            <button class="small-button activeFieldLink rounded-pill ' . $active_class . '  m-2" id="pills-' . $term_id . '-tab" 
+                            data-bs-toggle="pill" data-bs-target="#pills-' . $term_id . '" 
+                            type="button" role="tab" aria-controls="pills-' . $term_id . '" 
+                            aria-selected="true">' . $cat->name . '</button>
                         </li>';
 
             $terms[$term_id] = $this->GET_AreaFieldsTermsPosts($term_id);
@@ -305,7 +362,7 @@ class Areafields
             } else {
                 $active_class = '';
             }
-            $html .= ' <div class="tab-pane fade '.$active_class.'" id="pills-'.$key.'" role="tabpanel" aria-labelledby="pills-'.$key.'-tab" tabindex="0">';
+            $html .= ' <div class="tab-pane fade ' . $active_class . '" id="pills-' . $key . '" role="tabpanel" aria-labelledby="pills-' . $key . '-tab" tabindex="0">';
             $html .= $this->BootsrapAccordion($terminis);
 
             $html .= '</div>';

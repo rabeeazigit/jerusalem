@@ -5,6 +5,7 @@ $area_content = $args['area_content'];
 $area_image = $args['area_image'];
 $sticky = $args['sticky'];
 $area_more_btn = $args['area_more_btn'];
+$all_fields=$args['all_fields'];
 ?>
 
 <div class="fw-bold fs-3"><?= $area_title; ?></div>
