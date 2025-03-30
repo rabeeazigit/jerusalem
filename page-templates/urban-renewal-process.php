@@ -215,7 +215,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                     <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
                                 </span>
 
-                                <input type="text" class="form-control border-0 stages_search" placeholder="Search">
+                                <input type="text" class="form-control border-0 stages_search" placeholder="חיפוש מידע בתהליך">
                             </div>
                         </div>
 
@@ -227,7 +227,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                         <?php
                         $always_unique = rand(0, 1000) . "_" . time();
                         $urban_renewal_items = $controller->get_urban_renewal_processes($urban_category); 
-                        ?>
+                        ?>      
                         
                         <div class="urban_category_accordion_wrapper py-3 py-md-5 <?= $uc_ind > 0 ? "uc_hidden" : ""; ?>" data-process-category="<?= $urban_category->name; ?>" style="<?= $uc_ind > 0 ? "display:none" : ""; ?>">
                             <?php foreach ($urban_renewal_items as $index => $item) : ?>
@@ -326,9 +326,10 @@ $urban_category = $_GET["urban_category"] ?? null;
                                             <?php endforeach; ?>
                                         <?php endif; ?>
                                     </div>
+                                    <hr class="mt-3 mt-md-5" style="border-width: 4px">
                                 </div>
 
-                                <hr class="mt-3 mt-md-5" style="border-width: 4px">
+                               
                             <?php endforeach; ?>
                         </div>
                     <?php endforeach; ?>
