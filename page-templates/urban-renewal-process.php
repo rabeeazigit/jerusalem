@@ -240,7 +240,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                         שלב <?= $index + 1; ?>
                                                     </div>
 
-                                                    <button class="btn p-1 stage_btn rounded-circle collapsed" style="background-color: lightgray" data-bs-toggle="collapse" data-bs-target="#item_<?= $index; ?>">
+                                                    <button class="btn p-1 stage_btn rounded-circle collapsed" style="background-color: lightgray" data-bs-toggle="collapse" data-bs-target="#item_<?= $uc_ind.$index; ?>">
                                                         <img class="object-fit-cover" style="width: 24px; height: 24px" src="<?= get_template_directory_uri() . "/assets/images/arrow-down.png"; ?>">
                                                     </button>
                                                 </div>
@@ -266,7 +266,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                         </div>
                                     </div>
 
-                                    <div id="item_<?= $index; ?>" class="collapse stages_collapse_wrapper">
+                                    <div id="item_<?= $uc_ind.$index; ?>" class="collapse stages_collapse_wrapper">
                                         <?php
                                         $stages_title = get_field("stages_title", $item) ?? null;
                                         $renewal_stages = get_field("renewal_stages", $item) ?? null;
@@ -300,7 +300,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                             data-bs-target="#stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
                                                             data-id="<?= $stage->ID; ?>"
                                                             data-parent="<?= $item->ID; ?>"
-                                                            data-collapse-parent="item_<?= $index; ?>"
+                                                            data-collapse-parent="item_<?= $uc_ind.$index; ?>"
                                                             data-stage-collapse="stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
                                                         >
                                                             <div class="hstack gap-2 align-items-center">
