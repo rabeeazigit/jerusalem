@@ -231,7 +231,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                         
                         <div class="urban_category_accordion_wrapper py-3 py-md-5 <?= $uc_ind > 0 ? "uc_hidden" : ""; ?>" data-process-category="<?= $urban_category->name; ?>" style="<?= $uc_ind > 0 ? "display:none" : ""; ?>">
                             <?php foreach ($urban_renewal_items as $index => $item) : ?>
-                                <div class="vstack">
+                                <div class="vstack vitemWrapper">
                                     <div class="row">
                                         <div class="col-md-7">
                                             <div class="vstack gap-3">

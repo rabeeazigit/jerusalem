@@ -124,7 +124,7 @@ $(() => {
         if (query.length === 0) {
             // If input is cleared, show all items
             $('.urban_category_accordion_wrapper').show();
-            $('.vstack').show();
+            $('.vitemWrapper').show();
             $('.stages_collapse_wrapper').collapse('hide');
             return;
         }
@@ -139,7 +139,7 @@ $(() => {
             const categoryWrapper = $(this);
             let found = false;
     
-            categoryWrapper.find('.vstack').each(function () {
+            categoryWrapper.find('.vitemWrapper').each(function () {
                 const itemWrapper = $(this);
                 const title = itemWrapper.find('.fs-2').text().toLowerCase();
                 const description = itemWrapper.find('.fs-6').text().toLowerCase();
