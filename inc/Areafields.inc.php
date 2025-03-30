@@ -145,6 +145,8 @@ class Areafields
         $posts_raw = [];
         $args = array(
             'post_type'      => 'area-fields',
+            'orderby'        => 'date',
+            'order'          => 'DESC', 
             'posts_per_page' => -1, // Fetch all posts
             'tax_query'      => array(
                 array(
