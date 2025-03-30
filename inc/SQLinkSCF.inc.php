@@ -7013,7 +7013,10 @@ class SQLinkSCF
                 return;
             }
 
-            acf_add_local_field_group(array(
+            
+
+
+            acf_add_local_field_group( array(
                 'key' => 'group_679a2ee974d29',
                 'title' => 'Area Fields',
                 'fields' => array(
@@ -7080,6 +7083,75 @@ class SQLinkSCF
                                         'toolbar' => 'full',
                                         'media_upload' => 1,
                                         'delay' => 0,
+                                    ),
+                                    array(
+                                        'key' => 'field_67e926314e9af',
+                                        'label' => 'תחומי הפעילות העיקריים',
+                                        'name' => 'all_fields',
+                                        'aria-label' => '',
+                                        'type' => 'repeater',
+                                        'instructions' => '',
+                                        'required' => 0,
+                                        'conditional_logic' => 0,
+                                        'wrapper' => array(
+                                            'width' => '',
+                                            'class' => '',
+                                            'id' => '',
+                                        ),
+                                        'acfe_repeater_stylised_button' => 0,
+                                        'layout' => 'table',
+                                        'min' => 0,
+                                        'max' => 0,
+                                        'collapsed' => '',
+                                        'button_label' => 'Add Row',
+                                        'rows_per_page' => 20,
+                                        'sub_fields' => array(
+                                            array(
+                                                'key' => 'field_67e926464e9b0',
+                                                'label' => 'כותרת',
+                                                'name' => 'title',
+                                                'aria-label' => '',
+                                                'type' => 'text',
+                                                'instructions' => '',
+                                                'required' => 0,
+                                                'conditional_logic' => 0,
+                                                'wrapper' => array(
+                                                    'width' => '',
+                                                    'class' => '',
+                                                    'id' => '',
+                                                ),
+                                                'default_value' => '',
+                                                'maxlength' => '',
+                                                'allow_in_bindings' => 0,
+                                                'placeholder' => '',
+                                                'prepend' => '',
+                                                'append' => '',
+                                                'parent_repeater' => 'field_67e926314e9af',
+                                            ),
+                                            array(
+                                                'key' => 'field_67e926504e9b1',
+                                                'label' => 'תוכן',
+                                                'name' => 'desc',
+                                                'aria-label' => '',
+                                                'type' => 'textarea',
+                                                'instructions' => '',
+                                                'required' => 0,
+                                                'conditional_logic' => 0,
+                                                'wrapper' => array(
+                                                    'width' => '',
+                                                    'class' => '',
+                                                    'id' => '',
+                                                ),
+                                                'default_value' => '',
+                                                'acfe_textarea_code' => 0,
+                                                'maxlength' => '',
+                                                'allow_in_bindings' => 0,
+                                                'rows' => '',
+                                                'placeholder' => '',
+                                                'new_lines' => '',
+                                                'parent_repeater' => 'field_67e926314e9af',
+                                            ),
+                                        ),
                                     ),
                                     array(
                                         'key' => 'field_679a30fa6dd03',
@@ -7518,9 +7590,12 @@ class SQLinkSCF
                         'acfe_flexible_layouts_placeholder' => false,
                         'acfe_flexible_layouts_thumbnails' => false,
                         'acfe_flexible_layouts_settings' => false,
-                        'acfe_flexible_async' => array(),
-                        'acfe_flexible_add_actions' => array(),
-                        'acfe_flexible_remove_button' => array(),
+                        'acfe_flexible_async' => array(
+                        ),
+                        'acfe_flexible_add_actions' => array(
+                        ),
+                        'acfe_flexible_remove_button' => array(
+                        ),
                         'acfe_flexible_layouts_state' => false,
                         'acfe_flexible_modal_edit' => array(
                             'acfe_flexible_modal_edit_enabled' => false,
@@ -7550,14 +7625,12 @@ class SQLinkSCF
                 'label_placement' => 'left',
                 'instruction_placement' => 'label',
                 'hide_on_screen' => array(
-                    0 => 'block_editor',
-                    1 => 'the_content',
-                    2 => 'excerpt',
-                    3 => 'discussion',
-                    4 => 'comments',
-                    5 => 'slug',
-                    6 => 'format',
-                    7 => 'send-trackbacks',
+                    0 => 'excerpt',
+                    1 => 'discussion',
+                    2 => 'comments',
+                    3 => 'slug',
+                    4 => 'format',
+                    5 => 'send-trackbacks',
                 ),
                 'active' => true,
                 'description' => '',
@@ -7567,7 +7640,10 @@ class SQLinkSCF
                 'acfe_form' => 0,
                 'acfe_meta' => '',
                 'acfe_note' => '',
-            ));
+            ) );
+            
+            
+            
         });
     }
 
