@@ -243,6 +243,7 @@ class Areafields
             $sticky = $GroupContent['area_sticky_image'] == 1 ? 'class="img-fluid position-sticky" style="top: 20px;" ' : 'style="width:100%;"';
             $sec1Args = array(
                 'all_fields' => $GroupContent['all_fields'],
+                'all_fields_title' => $GroupContent['all_fields_title'],
                 'area_title' => $GroupContent['area_title'],
                 'area_content' => $GroupContent['area_content'],
                 'area_image' => $GroupContent['area_image'],
@@ -262,7 +263,7 @@ class Areafields
             if (!empty($GroupContent['all_fields']) && is_array($GroupContent['all_fields'])) {
 
                 $html .= '<div class="accordion" id="accordionRepeater' . $post->ID . '">';
-                 $html .= '<div class=" fw-bold fs-2 mt-4 mb-3">' . 'תחומי הפעילות העיקריים'. '</div>';
+                 $html .= '<div class=" fw-bold fs-5 mt-4 mb-3">' . $GroupContent['all_fields_title']. '</div>';
                 foreach ($GroupContent['all_fields'] as $index => $field) {
                     $field_title = $field['title'] ?? 'No Title';
                     $field_desc = $field['desc'] ?? 'No Description';
@@ -274,7 +275,7 @@ class Areafields
                     $html .= '</button></h2>';
     
                     $html .= '<div id="repeater-collapse' . $post->ID . '-' . $index . '" class="accordion-collapse collapse">';
-                    $html .= '<div class="accordion-body">' . $field_desc . '</div>';
+                    $html .= '<div class="accordion-body"style="font-weight:400">' . $field_desc . '</div>';
                     $html .= '</div></div>';
                 }
     
