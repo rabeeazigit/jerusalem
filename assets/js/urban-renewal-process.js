@@ -121,15 +121,17 @@ $(() => {
         const query = $(this).val().toLowerCase().trim();
     
         if (query.length === 0) {
-            // If input is cleared, show all items
-            $('.urban_category_accordion_wrapper').show();
+            // If input is cleared, show only the active category
+            $('.urban_category_accordion_wrapper.uc_hidden').hide();
+            $('.urban_category_accordion_wrapper:not(.uc_hidden)').show();
             $('.vitemWrapper').show();
             $('.stages_collapse_wrapper').collapse('hide');
             return;
         }
     
         if (query.length <= 2) {
-            $('.urban_category_accordion_wrapper').show();
+            $('.urban_category_accordion_wrapper.uc_hidden').hide();
+            $('.urban_category_accordion_wrapper:not(.uc_hidden)').show();
             $('.stages_collapse_wrapper').collapse('hide');
             return;
         }
@@ -183,5 +185,6 @@ $(() => {
             }
         });
     });
+    
     
 });
