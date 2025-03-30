@@ -279,7 +279,7 @@ class Areafields
                         $html .= $field_title;
                         $html .= '</button>';
                         $html .= '<div id="repeater-collapse' . $post->ID . '-' . $index . '" class="accordion-collapse collapse">';
-                        $html .= '<div class="accordion-body" style="font-weight:400">' . $field_desc . '</div>';
+                        $html .= '<div class="accordion-body" style="font-size:20px;font-weight:400">' . $field_desc . '</div>';
                         $html .= '</div>';
                     }
                     $html .= '</h2></div>'; // Close accordion-item
