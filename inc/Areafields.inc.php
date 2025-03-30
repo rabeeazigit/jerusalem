@@ -102,34 +102,23 @@ class Areafields
         $posts = get_posts($args);
         return $posts;
     }
+
     public function FetchAreaFiedlsCategories()
     {
-        // Fetch the posts ordered by oldest date first
-        $posts = get_posts([
-            'post_type'      => 'area-fields',
-            'posts_per_page' => -1,
-            'orderby'        => 'date',
-            'order'          => 'DESC', // Oldest first
-            'fields'         => 'ids', // Fetch only post IDs
-        ]);
-    
-        // Get terms associated with those posts
         $categories = get_terms([
-            'taxonomy'   => 'category',
-            'hide_empty' => false,
-            'object_ids' => $posts,
+            'taxonomy' => 'category', // Default WordPress category taxonomy
+            'hide_empty' => false,      // Show all categories, even if they have no posts
+            'orderby'    => 'term_order', // Order categories as per admin panel order
+            'order'      => 'ASC',   // Order categories in descending order
+            'object_ids' => get_posts([
+                'post_type' => 'area-fields',
+                'posts_per_page' => -1,
+                'fields' => 'ids', // Fetch only post IDs
+            ]),
         ]);
-    
-        // Sort categories by the oldest post date
-        usort($categories, function ($a, $b) use ($posts) {
-            $a_date = get_the_date('U', $posts[array_search($a->term_id, wp_get_post_terms($posts[0], 'category', ['fields' => 'ids']))]);
-            $b_date = get_the_date('U', $posts[array_search($b->term_id, wp_get_post_terms($posts[0], 'category', ['fields' => 'ids']))]);
-            return $a_date - $b_date;
-        });
-    
         return $categories;
     }
-    
+
 
     public function Get_Pills_Content()
     {
