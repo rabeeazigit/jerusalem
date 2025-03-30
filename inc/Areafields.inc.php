@@ -299,6 +299,7 @@ class Areafields
         $LayOut['area_title'] = $content[0]['area_title'];
         $LayOut['area_content'] = $content[0]['area_content'];
         $LayOut['all_fields'] = $content[0]['all_fields'];
+        $LayOut['all_fields_title'] = $content[0]['all_fields_title'];
         $LayOut['area_image'] = $content[0]['area_image']['url'];
         $LayOut['area_sticky_image'] = $content[0]['area_sticky_image'];
         $LayOut['area_more_btn'] = $content[0]['area_more_btn'];
