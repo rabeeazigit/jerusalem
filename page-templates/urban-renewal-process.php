@@ -240,7 +240,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                         שלב <?= $index + 1; ?>
                                                     </div>
 
-                                                    <button class="btn p-1 stage_btn rounded-circle collapsed" style="background-color: lightgray" data-bs-toggle="collapse" data-bs-target="#item_<?= $always_unique; ?>">
+                                                    <button class="btn p-1 stage_btn rounded-circle collapsed" style="background-color: lightgray" data-bs-toggle="collapse" data-bs-target="#item_<?= $index; ?>">
                                                         <img class="object-fit-cover" style="width: 24px; height: 24px" src="<?= get_template_directory_uri() . "/assets/images/arrow-down.png"; ?>">
                                                     </button>
                                                 </div>
