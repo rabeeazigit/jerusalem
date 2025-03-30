@@ -232,13 +232,13 @@ class Areafields
     private function BootsrapAccordion($terms)
     {
         //$terms Needs to be an array....
-    
+
         $html = '<div class="" id="accordionPanelsfields">';
-    
+
         foreach ($terms as $post) {
-    
+
             $GroupContent = $this->GetAccordionContent($post->ID);
-    
+
             //area_sticky_image
             $sticky = $GroupContent['area_sticky_image'] == 1 ? 'class="img-fluid position-sticky" style="top: 20px;" ' : 'style="width:100%;"';
             $sec1Args = array(
@@ -250,24 +250,24 @@ class Areafields
                 'area_more_btn' => $GroupContent['area_more_btn'] ?? '',
                 'sticky' => $sticky
             );
-    
+
             $pid = $GroupContent['pid'];
-    
+
             // Display post title and content without accordion
             $html .= '<div class=" mb-3">';
             $html .= '<div class=" fw-bold fs-3">' . $post->post_title . '</div>';
             $html .= '<div class=""style="font-size:18px;font-weight:400">' . $GroupContent['area_content'] . '</div>';
 
-    
+
             // Repeater Field Accordion
             if (!empty($GroupContent['all_fields']) && is_array($GroupContent['all_fields'])) {
 
                 $html .= '<div class="accordion" id="accordionRepeater' . $post->ID . '">';
-                 $html .= '<div class=" fw-bold fs-5 mt-4 mb-3">' . $GroupContent['all_fields_title']. '</div>';
+                $html .= '<div class=" fw-bold fs-5 mt-4 mb-3">' . $GroupContent['all_fields_title'] . '</div>';
                 foreach ($GroupContent['all_fields'] as $index => $field) {
                     $field_title = $field['title'] ?? '';
                     $field_desc = $field['desc'] ?? '';
-    
+
                     $html .= '<div class="accordion-item">';
                     $html .= '<h2 class="accordion-header">';
                     if (empty(trim($field_desc))) {
@@ -284,17 +284,17 @@ class Areafields
                     }
                     $html .= '</h2></div>'; // Close accordion-item
                 }
-    
+
                 $html .= '</div>'; // End of repeater accordion
             }
-    
+
             $html .= '</div>'; // End of main item
         }
-    
+
         $html .= '</div>'; // Close accordion container
         return $html;
     }
-    
+
 
 
     private function GetAccordionContent($pid)
@@ -327,7 +327,7 @@ class Areafields
     public function GetPillsCategories()
     {
         $cats = $this->FetchAreaFiedlsCategories();
-        $html = '<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">';
+        $html = '<ul class="nav nav-pills mb-3" id="pills-tab" style="direction:ltr;"role="tablist">';
         $terms = [];
         $cnt = 0;
         foreach ($cats as $cat) {
