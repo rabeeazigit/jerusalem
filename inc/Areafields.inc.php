@@ -268,6 +268,8 @@ class Areafields
                     $field_title = $field['title'] ?? 'No Title';
                     $field_desc = $field['desc'] ?? 'No Description';
     
+                    $html .= '<div class="accordion-item">';
+                    $html .= '<h2 class="accordion-header">';
                     if (empty(trim($field_desc))) {
                         // Show header without collapse button
                         $html .= '<div class="accordion-button disabled">' . $field_title . '</div>';
@@ -280,7 +282,7 @@ class Areafields
                         $html .= '<div class="accordion-body" style="font-weight:400">' . $field_desc . '</div>';
                         $html .= '</div>';
                     }
-           
+                    $html .= '</h2></div>'; // Close accordion-item
                 }
     
                 $html .= '</div>'; // End of repeater accordion
