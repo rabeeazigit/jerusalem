@@ -121,6 +121,14 @@ $(() => {
     $('.stages_search').on('input', function () {
         const query = $(this).val().toLowerCase().trim();
     
+        if (query.length === 0) {
+            // If input is cleared, show all items
+            $('.urban_category_accordion_wrapper').show();
+            $('.vstack').show();
+            $('.stages_collapse_wrapper').collapse('hide');
+            return;
+        }
+    
         if (query.length <= 2) {
             $('.urban_category_accordion_wrapper').show();
             $('.stages_collapse_wrapper').collapse('hide');
@@ -174,4 +182,5 @@ $(() => {
             }
         });
     });
+    
 });
