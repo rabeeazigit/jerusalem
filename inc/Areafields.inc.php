@@ -253,9 +253,9 @@ class Areafields
             $pid = $GroupContent['pid'];
     
             // Display post title and content without accordion
-            $html .= '<div class="card mb-3">';
-            $html .= '<div class="card-header fw-bold fs-3">' . $post->post_title . '</div>';
-            $html .= '<div class="card-body">' . $GroupContent['area_content'] . '</div>';
+            $html .= '<div class=" mb-3">';
+            $html .= '<div class=" fw-bold fs-3">' . $post->post_title . '</div>';
+            $html .= '<div class=""style="font-weight:400">' . $GroupContent['area_content'] . '</div>';
 
     
             // Repeater Field Accordion
