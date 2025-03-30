@@ -233,7 +233,7 @@ class Areafields
     {
         //$terms Needs to be an array....
     
-        $html = '<div class="accordion" id="accordionPanelsfields">';
+        $html = '<div class="" id="accordionPanelsfields">';
     
         foreach ($terms as $post) {
     
@@ -256,7 +256,7 @@ class Areafields
             $html .= '<div class="card mb-3">';
             $html .= '<div class="card-header fw-bold fs-3">' . $post->post_title . '</div>';
             $html .= '<div class="card-body">' . $GroupContent['area_content'] . '</div>';
-            $html .= '</div>';
+
     
             // Repeater Field Accordion
             if (!empty($GroupContent['all_fields']) && is_array($GroupContent['all_fields'])) {
