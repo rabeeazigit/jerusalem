@@ -117,14 +117,13 @@ $(() => {
     //         query
     //     });
     // });
-
     $('.stages_search').on('input', function () {
         const query = $(this).val().toLowerCase().trim();
     
         if (query.length === 0) {
             // If input is cleared, show all items
             $('.urban_category_accordion_wrapper').show();
-            $('.vitemWrapper').show();
+            $('.vstack').show();
             $('.stages_collapse_wrapper').collapse('hide');
             return;
         }
@@ -135,11 +134,11 @@ $(() => {
             return;
         }
     
-        $('.urban_category_accordion_wrapper').each(function () {
+        $('.urban_category_accordion_wrapper:not(.uc_hidden)').each(function () {
             const categoryWrapper = $(this);
             let found = false;
     
-            categoryWrapper.find('.vitemWrapper').each(function () {
+            categoryWrapper.find('.vstack').each(function () {
                 const itemWrapper = $(this);
                 const title = itemWrapper.find('.fs-2').text().toLowerCase();
                 const description = itemWrapper.find('.fs-6').text().toLowerCase();
@@ -164,6 +163,8 @@ $(() => {
                         stageWrapper.find('.stage_accordion').removeClass('collapsed');
                         stageWrapper.find('.stage_collapable').collapse('show');
                         itemWrapper.show();
+                        // Open parent item accordion as well
+                        itemWrapper.closest('.stages_collapse_wrapper').collapse('show');
                     } else {
                         stageWrapper.find('.stage_accordion').addClass('collapsed');
                         stageWrapper.find('.stage_collapable').collapse('hide');
