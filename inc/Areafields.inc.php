@@ -108,8 +108,7 @@ class Areafields
         $categories = get_terms([
             'taxonomy' => 'category', // Default WordPress category taxonomy
             'hide_empty' => false,      // Show all categories, even if they have no posts
-            'orderby'    => 'term_order', // Order categories as per admin panel order
-            'order'      => 'ASC',   // Order categories in descending order
+ 
             'object_ids' => get_posts([
                 'post_type' => 'area-fields',
                 'posts_per_page' => -1,
