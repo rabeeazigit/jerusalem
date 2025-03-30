@@ -266,7 +266,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                         </div>
                                     </div>
 
-                                    <div id="item_<?= $always_unique; ?>" class="collapse stages_collapse_wrapper">
+                                    <div id="item_<?= $index; ?>" class="collapse stages_collapse_wrapper">
                                         <?php
                                         $stages_title = get_field("stages_title", $item) ?? null;
                                         $renewal_stages = get_field("renewal_stages", $item) ?? null;
@@ -300,7 +300,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                             data-bs-target="#stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
                                                             data-id="<?= $stage->ID; ?>"
                                                             data-parent="<?= $item->ID; ?>"
-                                                            data-collapse-parent="item_<?= $always_unique; ?>"
+                                                            data-collapse-parent="item_<?= $index; ?>"
                                                             data-stage-collapse="stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
                                                         >
                                                             <div class="hstack gap-2 align-items-center">
