@@ -232,63 +232,70 @@ class Areafields
     private function BootsrapAccordion($terms)
     {
         //$terms Needs to be an array....
-    
-        $html = '<div class="" id="accordionPanelsfields">';
-    
+
+        $html = '<div class="accordion" id="accordionPanelsfields">';
+
         foreach ($terms as $post) {
-    
+
             $GroupContent = $this->GetAccordionContent($post->ID);
-    
+
             //area_sticky_image
             $sticky = $GroupContent['area_sticky_image'] == 1 ? 'class="img-fluid position-sticky" style="top: 20px;" ' : 'style="width:100%;"';
             $sec1Args = array(
                 'all_fields' => $GroupContent['all_fields'],
-                'all_fields_title' => $GroupContent['all_fields_title'],
                 'area_title' => $GroupContent['area_title'],
                 'area_content' => $GroupContent['area_content'],
                 'area_image' => $GroupContent['area_image'],
                 'area_more_btn' => $GroupContent['area_more_btn'] ?? '',
                 'sticky' => $sticky
             );
-    
-            $pid = $GroupContent['pid'];
-    
-            // Display post title and content without accordion
-            $html .= '<div class=" mb-3">';
-            $html .= '<div class=" fw-bold fs-3">' . $post->post_title . '</div>';
-            $html .= '<div class=""style="font-weight:400">' . $GroupContent['area_content'] . '</div>';
 
-    
+            $pid = $GroupContent['pid'];
+
+            // Display post title and content without accordion
+            $html .= '<div class="card mb-3">';
+            $html .= '<div class="card-header fw-bold fs-3">' . $post->post_title . '</div>';
+            $html .= '<div class="card-body">' . $GroupContent['area_content'] . '</div>';
+            $html .= '</div>';
+
             // Repeater Field Accordion
             if (!empty($GroupContent['all_fields']) && is_array($GroupContent['all_fields'])) {
-
                 $html .= '<div class="accordion" id="accordionRepeater' . $post->ID . '">';
-                 $html .= '<div class=" fw-bold fs-5 mt-4 mb-3">' . $GroupContent['all_fields_title']. '</div>';
+
                 foreach ($GroupContent['all_fields'] as $index => $field) {
                     $field_title = $field['title'] ?? 'No Title';
-                    $field_desc = $field['desc'] ?? 'No Description';
-    
+                    $field_desc = $field['desc'] ?? '';
+
                     $html .= '<div class="accordion-item">';
                     $html .= '<h2 class="accordion-header">';
-                    $html .= '<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#repeater-collapse' . $post->ID . '-' . $index . '" aria-expanded="false">';
-                    $html .= $field_title;
-                    $html .= '</button></h2>';
-    
-                    $html .= '<div id="repeater-collapse' . $post->ID . '-' . $index . '" class="accordion-collapse collapse">';
-                    $html .= '<div class="accordion-body"style="font-weight:400">' . $field_desc . '</div>';
-                    $html .= '</div></div>';
+
+                    // Check if the accordion body is empty
+                    if (empty(trim($field_desc))) {
+                        // Show header without collapse button
+                        $html .= '<div class="accordion-button disabled">' . $field_title . '</div>';
+                    } else {
+                        // Show header with collapse button
+                        $html .= '<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#repeater-collapse' . $post->ID . '-' . $index . '" aria-expanded="false">';
+                        $html .= $field_title;
+                        $html .= '</button>';
+                        $html .= '<div id="repeater-collapse' . $post->ID . '-' . $index . '" class="accordion-collapse collapse">';
+                        $html .= '<div class="accordion-body" style="font-weight:400">' . $field_desc . '</div>';
+                        $html .= '</div>';
+                    }
+
+                    $html .= '</h2></div>'; // Close accordion-item
                 }
-    
+
                 $html .= '</div>'; // End of repeater accordion
             }
-    
+
             $html .= '</div>'; // End of main item
         }
-    
+
         $html .= '</div>'; // Close accordion container
         return $html;
     }
-    
+
 
 
     private function GetAccordionContent($pid)
