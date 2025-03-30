@@ -260,8 +260,9 @@ class Areafields
     
             // Repeater Field Accordion
             if (!empty($GroupContent['all_fields']) && is_array($GroupContent['all_fields'])) {
+
                 $html .= '<div class="accordion" id="accordionRepeater' . $post->ID . '">';
-    
+                 $html .= '<div class=" fw-bold fs-2 mt-4 mb-3">' . 'תחומי הפעילות העיקריים'. '</div>';
                 foreach ($GroupContent['all_fields'] as $index => $field) {
                     $field_title = $field['title'] ?? 'No Title';
                     $field_desc = $field['desc'] ?? 'No Description';
