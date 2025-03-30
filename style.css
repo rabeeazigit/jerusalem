@@ -410,6 +410,12 @@ body {
     }
 }
 
+.activeFieldLink.active 
+{
+    background-color: #0C263C;
+    color:#fff;
+}
+
 .carousel_play,
 .carousel_prev,
 .carousel_next {

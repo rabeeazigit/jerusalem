@@ -109,7 +109,7 @@ class Areafields
     {
         $categories = get_terms([
             'taxonomy'   => 'category', // Default WordPress category taxonomy
-            'hide_empty' => true, // Show all categories, even if they have no posts
+            'hide_empty' => false, // Show all categories, even if they have no posts
             'object_ids' => get_posts([
                 'post_type'      => 'area-fields',
                 'posts_per_page' => -1,
@@ -270,7 +270,7 @@ class Areafields
 
             $html .= ' <li class="nav-item" 
                             role="presentation">
-                            <button class="small-button rounded-pill '.$active_class.'  m-2" id="pills-'.$term_id.'-tab" 
+                            <button class="small-button activeFieldLink rounded-pill '.$active_class.'  m-2" id="pills-'.$term_id.'-tab" 
                             data-bs-toggle="pill" data-bs-target="#pills-'.  $term_id . '" 
                             type="button" role="tab" aria-controls="pills-'.  $term_id . '" 
                             aria-selected="true">'.$cat->name.'</button>
