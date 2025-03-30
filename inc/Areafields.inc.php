@@ -256,7 +256,7 @@ class Areafields
             // Display post title and content without accordion
             $html .= '<div class=" mb-3">';
             $html .= '<div class=" fw-bold fs-3">' . $post->post_title . '</div>';
-            $html .= '<div class=""style="font-weight:400">' . $GroupContent['area_content'] . '</div>';
+            $html .= '<div class=""style="font-size:18px;font-weight:400">' . $GroupContent['area_content'] . '</div>';
 
     
             // Repeater Field Accordion
@@ -265,8 +265,8 @@ class Areafields
                 $html .= '<div class="accordion" id="accordionRepeater' . $post->ID . '">';
                  $html .= '<div class=" fw-bold fs-5 mt-4 mb-3">' . $GroupContent['all_fields_title']. '</div>';
                 foreach ($GroupContent['all_fields'] as $index => $field) {
-                    $field_title = $field['title'] ?? 'No Title';
-                    $field_desc = $field['desc'] ?? 'No Description';
+                    $field_title = $field['title'] ?? '';
+                    $field_desc = $field['desc'] ?? '';
     
                     $html .= '<div class="accordion-item">';
                     $html .= '<h2 class="accordion-header">';
@@ -279,7 +279,7 @@ class Areafields
                         $html .= $field_title;
                         $html .= '</button>';
                         $html .= '<div id="repeater-collapse' . $post->ID . '-' . $index . '" class="accordion-collapse collapse">';
-                        $html .= '<div class="accordion-body" style="font-size:20px;font-weight:400">' . $field_desc . '</div>';
+                        $html .= '<div class="accordion-body" style="font-size:18px;font-weight:400">' . $field_desc . '</div>';
                         $html .= '</div>';
                     }
                     $html .= '</h2></div>'; // Close accordion-item
