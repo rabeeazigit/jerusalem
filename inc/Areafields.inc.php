@@ -109,7 +109,7 @@ class Areafields
             'post_type'      => 'area-fields',
             'posts_per_page' => -1,
             'orderby'        => 'date',
-            'order'          => 'ASC', // Oldest first
+            'order'          => 'DESC', // Oldest first
             'fields'         => 'ids', // Fetch only post IDs
         ]);
     
