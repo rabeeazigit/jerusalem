@@ -113,7 +113,7 @@ class Areafields
             'object_ids' => get_posts([
                 'post_type'      => 'area-fields',
                 'orderby'        => 'date',
-                'order'          => 'DESC', 
+                'order'          => 'ASC', 
                 'posts_per_page' => -1,
                 'fields'         => 'ids', // Fetch only post IDs
             ]),
