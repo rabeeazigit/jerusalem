@@ -273,7 +273,7 @@ class Areafields
                     $html .= '</button></h2>';
     
                     $html .= '<div id="repeater-collapse' . $post->ID . '-' . $index . '" class="accordion-collapse collapse">';
-                    $html .= '<div class="accordion-body"style="font-weight:400">' . $field_desc . '</div>';
+                    $html .= '<div class="accordion-body">' . $field_desc . '</div>';
                     $html .= '</div></div>';
                 }
     
@@ -287,6 +287,7 @@ class Areafields
         return $html;
     }
     
+
 
     private function GetAccordionContent($pid)
     {
