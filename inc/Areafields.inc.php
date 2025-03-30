@@ -110,9 +110,10 @@ class Areafields
         $categories = get_terms([
             'taxonomy'   => 'category', // Default WordPress category taxonomy
             'hide_empty' => false, // Show all categories, even if they have no posts
-            'order'=>'DESC',
             'object_ids' => get_posts([
                 'post_type'      => 'area-fields',
+                'orderby'        => 'date',
+                'order'          => 'DESC', 
                 'posts_per_page' => -1,
                 'fields'         => 'ids', // Fetch only post IDs
             ]),
