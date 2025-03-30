@@ -106,15 +106,72 @@ $(() => {
     });
 
     // listen for search field changes
-    $(".stages_search").on("input", function () {
-        const query = $(this).val();
+    // $(".stages_search").on("input", function () {
+    //     const query = $(this).val();
 
-        if (query.length <= 3) {
+    //     if (query.length <= 3) {
+    //         return;
+    //     }
+
+    //     console.log({
+    //         query
+    //     });
+    // });
+
+    $('.stages_search').on('input', function () {
+        const query = $(this).val().toLowerCase().trim();
+    
+        if (query.length <= 2) {
+            $('.urban_category_accordion_wrapper').show();
+            $('.stages_collapse_wrapper').collapse('hide');
             return;
         }
-
-        console.log({
-            query
+    
+        $('.urban_category_accordion_wrapper').each(function () {
+            const categoryWrapper = $(this);
+            let found = false;
+    
+            categoryWrapper.find('.vstack').each(function () {
+                const itemWrapper = $(this);
+                const title = itemWrapper.find('.fs-2').text().toLowerCase();
+                const description = itemWrapper.find('.fs-6').text().toLowerCase();
+                let stageFound = false;
+    
+                // Check title and description
+                if (title.includes(query) || description.includes(query)) {
+                    found = true;
+                    itemWrapper.show();
+                    return;
+                }
+    
+                // Check inside each stage accordion
+                itemWrapper.find('.stage_accordion_wrapper').each(function () {
+                    const stageWrapper = $(this);
+                    const stageTitle = stageWrapper.find('.fs-5').text().toLowerCase();
+                    const stageContent = stageWrapper.find('.stage_collapable').text().toLowerCase();
+    
+                    if (stageTitle.includes(query) || stageContent.includes(query)) {
+                        stageFound = true;
+                        found = true;
+                        stageWrapper.find('.stage_accordion').removeClass('collapsed');
+                        stageWrapper.find('.stage_collapable').collapse('show');
+                        itemWrapper.show();
+                    } else {
+                        stageWrapper.find('.stage_accordion').addClass('collapsed');
+                        stageWrapper.find('.stage_collapable').collapse('hide');
+                    }
+                });
+    
+                if (!stageFound) {
+                    itemWrapper.hide();
+                }
+            });
+    
+            if (found) {
+                categoryWrapper.show();
+            } else {
+                categoryWrapper.hide();
+            }
         });
     });
 });
