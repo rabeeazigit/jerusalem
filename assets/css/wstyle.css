@@ -36,6 +36,7 @@
 
 .staff_photo img {
     object-position: center;
+    object-fit: fill;
     height: 280px;
 }
 

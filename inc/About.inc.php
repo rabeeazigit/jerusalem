@@ -125,7 +125,7 @@ class About
                     <div class="col-xl-3 col-md-4 col-12 mb-5">
                         <div class="staff_photo">
                             <?php if ($member['staff_member_photo']) : ?>
-                                <img class="img-fluid w-100 object-fit-cover" src="<?= $member['staff_member_photo']; ?>" loading="lazy"/>
+                                <img class="img-fluid w-100" src="<?= $member['staff_member_photo']; ?>" loading="lazy"/>
                             <?php endif; ?>
                         </div>
 
