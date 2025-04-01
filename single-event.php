@@ -104,7 +104,7 @@ $controller = new SingleEvent();
                 <?php endforeach; ?>
             <?php endif; ?>
 
-            <?php if (in_array($controller->post_type, ["course", "event"])) : ?>
+            <?php if (in_array($controller->post_type, ["course", "event"]) && $controller->external_form_link && is_array($controller->external_form_link)) : ?>
                 <div class="vstack">
                     <div class="my-4 p-5 pt-4 rounded-4" style="background-color: #EBE8E3;">
                         <div class="mb-5">
@@ -129,15 +129,10 @@ $controller = new SingleEvent();
                         <?php elseif (false && $controller->post_type == "event") : ?>
                             <?= do_shortcode('[contact-form-7 id="a5ae09f" title="Event Form"]'); ?>
                         <?php endif; ?>
-
-                        <?php
-                        // New external form link 
-                        ?>
-                        <?php if ($controller->external_form_link && is_array($controller->external_form_link)) : ?>
-                            <a href="<?= $controller->external_form_link["url"]; ?>" target="<?= $controller->external_form_link["target"]; ?>" class="btn sq-primary-button">
-                                <?= $controller->external_form_link["title"]; ?>
-                            </a>
-                        <?php endif; ?>
+                        
+                        <a href="<?= $controller->external_form_link["url"]; ?>" target="<?= $controller->external_form_link["target"]; ?>" class="btn sq-primary-button">
+                            <?= $controller->external_form_link["title"]; ?>
+                        </a>
                     </div>
                 </div>
             <?php endif; ?>
