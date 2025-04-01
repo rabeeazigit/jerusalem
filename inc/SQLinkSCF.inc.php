@@ -1090,7 +1090,7 @@ class SQLinkSCF
                                 'name' => 'staff_member_photo',
                                 'aria-label' => '',
                                 'type' => 'image',
-                                'instructions' => '',
+                                'instructions' => 'גודל מומלץ (1700x1700)',
                                 'required' => 0,
                                 'conditional_logic' => 0,
                                 'wrapper' => array(
