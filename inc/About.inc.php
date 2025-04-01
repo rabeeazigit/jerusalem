@@ -115,38 +115,37 @@ class About
 
     public function OurStaff()
     {
-        $Staff =  $this->our_staff;
+        $Staff = $this->our_staff;
 
-        $html = '
- <div id="our-staff" class="container">
-       <div class="row align-items-center justify-content-center py-5 my-2">
-';
-        foreach ($Staff as $Staff) {
-            $html .=
-                '<div class="col-xl-3 col-md-4 col-12 mb-5">
-                    <div class="staff_photo">
-                        <img class="img-fluid w-100 object-fit-cover" src="' . $Staff['staff_member_photo'] . '" loading="lazy"/>
-                    </div>
+        ob_start();
+        ?>
+        <div id="our-staff" class="container">
+            <div class="row align-items-center justify-content-center py-5 my-2">
+                <?php foreach ($Staff as $member): ?>
+                    <div class="col-xl-3 col-md-4 col-12 mb-5">
+                        <div class="staff_photo">
+                            <?php if ($member['staff_member_photo']) : ?>
+                                <img class="img-fluid w-100 object-fit-cover" src="<?= $member['staff_member_photo']; ?>" loading="lazy"/>
+                            <?php endif; ?>
+                        </div>
 
-                    <div class="container cont_det">
-                        <div class="row">
-                            <div class="col-12 fs-5 fw-bold">' . $Staff['staff_member_name'] . '</div>
-                            
-                            <div class="col-12">' . $Staff['staff_member_role'] . '</div>
-
-                            <div class="col-12">
-                                <a href="mailto: ' . $Staff['staff_member_email'] . '" class="hstack gap-2 align-items-center text-reset text-decoration-none">
-                                    <img src="' . get_template_directory_uri() . '/assets/images/about/email-icon.png" />
-                                    <div class="fs-6">' . $Staff['staff_member_email'] . '</div>
-                                </a>
+                        <div class="container cont_det">
+                            <div class="row">
+                                <div class="col-12 fs-5 fw-bold"><?= $member['staff_member_name']; ?></div>
+                                <div class="col-12"><?= $member['staff_member_role']; ?></div>
+                                <div class="col-12">
+                                    <a href="mailto:<?= $member['staff_member_email']; ?>" class="hstack gap-2 align-items-center text-reset text-decoration-none">
+                                        <img src="<?= get_template_directory_uri(); ?>/assets/images/about/email-icon.png" />
+                                        <div class="fs-6"><?= $member['staff_member_email']; ?></div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-            </div>';
-        }
-
-        $html .= '</div></div>';
-
-        return $html;
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php
+        return ob_get_clean();
     }
 }//END OF CLASS

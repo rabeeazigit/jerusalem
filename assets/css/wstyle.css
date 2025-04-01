@@ -31,6 +31,7 @@
     border-radius: 20px;
     overflow: hidden;
     margin: 5px;
+    height: 400px;
 }
 
 .staff_photo img {
