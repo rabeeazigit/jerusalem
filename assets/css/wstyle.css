@@ -31,12 +31,12 @@
     border-radius: 20px;
     overflow: hidden;
     margin: 5px;
-    height: 400px;
+    height: 280px;
 }
 
 .staff_photo img {
     object-position: center;
-    height: 400px;
+    height: 280px;
 }
 
 section {
