@@ -106,17 +106,6 @@ $(() => {
     });
 
     // listen for search field changes
-    // $(".stages_search").on("input", function () {
-    //     const query = $(this).val();
-
-    //     if (query.length <= 3) {
-    //         return;
-    //     }
-
-    //     console.log({
-    //         query
-    //     });
-    // });
     $('.stages_search').on('input', function () {
         const query = $(this).val().toLowerCase().trim();
     

@@ -29,16 +29,13 @@
 .staff_photo {
     border: solid 2px #f1e1c1;
     border-radius: 20px;
+    overflow: hidden;
     margin: 5px;
 }
 
 .staff_photo img {
     object-position: center;
-    height: 28dvh;
-
-    @media screen and (width <= 768px) {
-        height: 38dvh;
-    }
+    height: 400px;
 }
 
 section {
