@@ -1076,12 +1076,12 @@ class SQLinkSCF
                             'id' => '',
                         ),
                         'acfe_repeater_stylised_button' => 0,
-                        'layout' => 'table',
+                        'layout' => 'block',
                         'pagination' => 0,
                         'min' => 0,
                         'max' => 0,
                         'collapsed' => '',
-                        'button_label' => 'Add Row',
+                        'button_label' => 'הוספה לצוות',
                         'rows_per_page' => 20,
                         'sub_fields' => array(
                             array(
