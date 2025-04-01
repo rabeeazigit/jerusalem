@@ -173,7 +173,7 @@ $right_category_id = $_GET["right_category_id"] ?? null;
                     <?php if (!wp_is_mobile() && $list_side_image) : ?>
                         <div class="col-md-5">
                             <div class="sticky-top">
-                                <div class="d-flex w-100 h-100 align-items-center justify-content-start">
+                                <div class="d-flex w-100 h-100 align-items-center justify-content-start" style="padding-right: 100px;">
                                     <img src="<?= $list_side_image; ?>" class="article_list_side_image">
                                     <img src="<?= get_template_directory_uri() . "/assets/images/cube.png"; ?>" class="article_list_side_cube">
                                 </div>
