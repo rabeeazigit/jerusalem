@@ -91,7 +91,7 @@ $urban_category = $_GET["urban_category"] ?? null;
     </div>
 
     <!-- The Main Row And Columns -->
-    <div class="container-fluid px-3 px-md-5">
+    <div class="container-fluid px-3 px-md-5" style="position:relative;z-index:0">
         <div class="row text-dark row-gap-3" id="urban_renewal_process_section">
             <!-- Stage Selector -->
             <div class="col-md-4">
