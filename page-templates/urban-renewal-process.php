@@ -1,6 +1,6 @@
 <?php
 
-// Template Name: Urban Renewal Process
+// Template Name: תבנית תהליך
 
 get_header();
 ?>
@@ -56,31 +56,43 @@ $urban_category = $_GET["urban_category"] ?? null;
 
                             <?php if (wp_is_mobile()) : ?>
                                 <div class="hstack flex-wrap pb-3 px-2 gap-3">
-                                    <a href="#urban_renewal_process_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
-                                        תהליך התחדשות עירונית
-                                    </a>
+                                    <?php if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_renewal_terms)) : ?>
+                                        <a href="#urban_renewal_process_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
+                                            תהליך התחדשות עירונית
+                                        </a>
+                                    <?php endif; ?>
 
-                                    <a href="#faq_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
-                                        שאלות נפוצות
-                                    </a>
+                                    <?php if ($controller->faq_items && is_array($controller->faq_items) && !empty($controller->faq_items)) :?>
+                                        <a href="#faq_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
+                                            שאלות נפוצות
+                                        </a>
+                                    <?php endif; ?>
 
-                                    <a href="#external_links_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
-                                        קישורים חיצוניים
-                                    </a>
+                                    <?php if ($controller->external_links_items && is_array($controller->external_links_items) && !empty($controller->external_links_items)) :?>
+                                        <a href="#external_links_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
+                                            קישורים חיצוניים
+                                        </a>
+                                    <?php endif; ?>
                                 </div>
                             <?php else : ?>
                                 <div class="hstack pb-3 gap-4">
-                                    <a href="#urban_renewal_process_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
-                                        תהליך התחדשות עירונית
-                                    </a>
+                                    <?php if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_renewal_terms)) : ?>
+                                        <a href="#urban_renewal_process_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
+                                            תהליך התחדשות עירונית
+                                        </a>
+                                    <?php endif; ?>
 
-                                    <a href="#faq_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
-                                        שאלות נפוצות
-                                    </a>
+                                    <?php if ($controller->faq_items && is_array($controller->faq_items) && !empty($controller->faq_items)) :?>
+                                        <a href="#faq_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
+                                            שאלות נפוצות
+                                        </a>
+                                    <?php endif; ?>
 
-                                    <a href="#external_links_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
-                                        קישורים חיצוניים
-                                    </a>
+                                    <?php if ($controller->external_links_items && is_array($controller->external_links_items) && !empty($controller->external_links_items)) :?>
+                                        <a href="#external_links_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
+                                            קישורים חיצוניים
+                                        </a>
+                                    <?php endif; ?>
                                 </div>
                             <?php endif; ?>
                         </div>
@@ -91,252 +103,254 @@ $urban_category = $_GET["urban_category"] ?? null;
     </div>
 
     <!-- The Main Row And Columns -->
-    <div class="container-fluid px-3 px-md-5" style="position:relative;z-index:0">
-        <div class="row text-dark row-gap-3" id="urban_renewal_process_section">
-            <!-- Stage Selector -->
-            <div class="col-md-4">
-                <div class="rounded-4 bg-white p-4 sticky-top">
-                    <div class="hstack align-items-center justify-content-between">
-                        <div class="fs-6 fw-semibold">
-                            שלבים
-                        </div>
-
-                        <div class="hstack align-items-center border rounded-pill p-1" style="width: fit-content;" role="tablist">
-                            <?php foreach ($urban_renewal_terms as $i => $category) : ?>
-                                <button
-                                    class="btn btn-sq-primary text-dark rounded-pill fs-6 uc_category_btn <?= $i == 0 ? "active" : ""; ?>"
-                                    data-uc-category="<?= $category->name; ?>"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#tab_<?= $i; ?>"
-                                    data-uc-category-id="<?= $category->term_id; ?>"
-                                >
-                                    <?= $category->name; ?>
-                                </button>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <!-- Stages -->
-                    <div class="tab-content">
-                        <?php $side_stage_count = 0; ?>
-                        <?php foreach ($urban_renewal_terms as $i => $category) : ?>
-                            <?php $urban_renewal_grouped_items = $controller->get_urban_renewal_processes_grouped_by_stages($category); ?>
-
-                            <?php if ($urban_renewal_grouped_items && is_array($urban_renewal_grouped_items) && !empty($urban_renewal_grouped_items)) : ?>
-                                <div class="tab-pane fade <?= $i == 0 ? "active show" : ""; ?>" id="tab_<?= $side_stage_count++; ?>">
-                                    <?php foreach ($urban_renewal_grouped_items as $stage => $proccesses) : ?>
-                                        <?php
-                                        if (!$proccesses || !is_array($proccesses) || empty($proccesses)) {
-                                            continue;
-                                        }
-                                        ?>
-
-                                        <div class="vstack gap-2 mb-3">
-                                            <div class="row px-0 rounded-4 border">
-                                                <div class="col-2 col-md-1" style="background-color: #EBE8E3">
-                                                    <div class="d-flex text-center align-items-center justify-content-center h-100 fw-semibold">
-                                                        <?= $stage; ?>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col">
-                                                    <div class="vstack py-2 gap-2">
-                                                        <?php foreach ($proccesses as $index => $process) : ?>
-                                                            <div class="vstack">
-                                                                <!-- Collapse Anchor -->
-                                                                <div class="hstack align-items-center justify-content-between p-3 stage_side_wrapper collapsed" data-bs-toggle="collapse" data-bs-target="#stage_col_<?= $process->ID; ?>">
-                                                                    <div class="hstack fs-5 gap-3">
-                                                                        <?= ($index + 1 < 10) ? ("0" . $index + 1) : ($index + 1); ?>
-
-                                                                        <div class="vr"></div>
-
-                                                                        <div class="fs-6 fw-semibold">
-                                                                            <?= $process->post_title; ?>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <img class="stage_side_arrows" src="<?= get_template_directory_uri() . "/assets/images/arrow-down.png"; ?>" />
-                                                                </div>
-
-                                                                <?php
-                                                                $side_process_stages = get_field("renewal_stages", $process);
-                                                                ?>
-
-                                                                <?php if ($side_process_stages && is_array($side_process_stages) && !empty($side_process_stages)) : ?>
-                                                                    <div class="collapse stage_side_collapse" id="stage_col_<?= $process->ID; ?>">
-                                                                        <div class="row">
-                                                                            <div class="col-md-1"></div>
-                                                                            <div class="col">
-                                                                                <div class="vstack p-3">
-                                                                                    <?php foreach ($side_process_stages as $e) : ?>
-                                                                                        <?php if (get_field("stage_title", $e)) : ?>
-                                                                                            <div 
-                                                                                                class="fs-6 px-2 rounded-4 renewal_stage_submenu py-4" 
-                                                                                                data-parent-target="<?= $process->ID; ?>" 
-                                                                                                data-target="<?= $e->ID; ?>"
-                                                                                            >
-                                                                                                <?= get_field("stage_title", $e); ?>
-                                                                                            </div>
-                                                                                        <?php endif; ?>
-                                                                                    <?php endforeach; ?>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                <?php endif; ?>
-                                                            </div>
-                                                        <?php endforeach; ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Stages Display -->
-            <div class="col-md-8">
-                <div class="rounded-4 bg-white p-4 px-3 px-md-5">
-                    <!-- Sticky Title And Search -->
-                    <div class="sticky-top bg-white">
-                        <div class="hstack align-items-center justify-content-between ">
+    <?php if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_renewal_terms)) : ?>
+        <div class="container-fluid px-3 px-md-5" style="position:relative;z-index:0">
+            <div class="row text-dark row-gap-3" id="urban_renewal_process_section">
+                <!-- Stage Selector -->
+                <div class="col-md-4">
+                    <div class="rounded-4 bg-white p-4 sticky-top">
+                        <div class="hstack align-items-center justify-content-between">
                             <div class="fs-6 fw-semibold">
-                                תהליך התחדשות עירונית
+                                שלבים
                             </div>
 
-                            <div class="input-group rounded-pill overflow-hidden border">
-                                <span class="input-group-text border-none" style=" background-color: white">
-                                    <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
-                                </span>
-
-                                <input type="text" class="form-control border-0 stages_search" placeholder="חיפוש מידע בתהליך">
+                            <div class="hstack align-items-center border rounded-pill p-1" style="width: fit-content;" role="tablist">
+                                <?php foreach ($urban_renewal_terms as $i => $category) : ?>
+                                    <button
+                                        class="btn btn-sq-primary text-dark rounded-pill fs-6 uc_category_btn <?= $i == 0 ? "active" : ""; ?>"
+                                        data-uc-category="<?= $category->name; ?>"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#tab_<?= $i; ?>"
+                                        data-uc-category-id="<?= $category->term_id; ?>"
+                                    >
+                                        <?= $category->name; ?>
+                                    </button>
+                                <?php endforeach; ?>
                             </div>
                         </div>
 
                         <hr>
-                    </div>
 
-                    <!-- Stages Collapseable Elements -->
-                    <?php foreach ($urban_renewal_terms as $uc_ind => $urban_category) : ?>
-                        <?php
-                        $always_unique = rand(0, 1000) . "_" . time();
-                        $urban_renewal_items = $controller->get_urban_renewal_processes($urban_category); 
-                        ?>      
-                        
-                        <div class="urban_category_accordion_wrapper py-3 py-md-5 <?= $uc_ind > 0 ? "uc_hidden" : ""; ?>" data-process-category="<?= $urban_category->name; ?>" style="<?= $uc_ind > 0 ? "display:none" : ""; ?>">
-                            <?php foreach ($urban_renewal_items as $index => $item) : ?>
-                                <div class="vstack vitemWrapper">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <div class="vstack gap-3">
-                                                <div class="hstack align-items-center justify-content-between">
-                                                    <div class="fs-3 fw-light opacity-50">
-                                                        שלב <?= $index + 1; ?>
+                        <!-- Stages -->
+                        <div class="tab-content">
+                            <?php $side_stage_count = 0; ?>
+                            <?php foreach ($urban_renewal_terms as $i => $category) : ?>
+                                <?php $urban_renewal_grouped_items = $controller->get_urban_renewal_processes_grouped_by_stages($category); ?>
+
+                                <?php if ($urban_renewal_grouped_items && is_array($urban_renewal_grouped_items) && !empty($urban_renewal_grouped_items)) : ?>
+                                    <div class="tab-pane fade <?= $i == 0 ? "active show" : ""; ?>" id="tab_<?= $side_stage_count++; ?>">
+                                        <?php foreach ($urban_renewal_grouped_items as $stage => $proccesses) : ?>
+                                            <?php
+                                            if (!$proccesses || !is_array($proccesses) || empty($proccesses)) {
+                                                continue;
+                                            }
+                                            ?>
+
+                                            <div class="vstack gap-2 mb-3">
+                                                <div class="row px-0 rounded-4 border">
+                                                    <div class="col-2 col-md-1" style="background-color: #EBE8E3">
+                                                        <div class="d-flex text-center align-items-center justify-content-center h-100 fw-semibold">
+                                                            <?= $stage; ?>
+                                                        </div>
                                                     </div>
 
-                                                    <button class="btn p-1 stage_btn rounded-circle collapsed" style="background-color: lightgray" data-bs-toggle="collapse" data-bs-target="#item_<?= $uc_ind.$index; ?>">
-                                                        <img class="object-fit-cover" style="width: 24px; height: 24px" src="<?= get_template_directory_uri() . "/assets/images/arrow-down.png"; ?>">
-                                                    </button>
+                                                    <div class="col">
+                                                        <div class="vstack py-2 gap-2">
+                                                            <?php foreach ($proccesses as $index => $process) : ?>
+                                                                <div class="vstack">
+                                                                    <!-- Collapse Anchor -->
+                                                                    <div class="hstack align-items-center justify-content-between p-3 stage_side_wrapper collapsed" data-bs-toggle="collapse" data-bs-target="#stage_col_<?= $process->ID; ?>">
+                                                                        <div class="hstack fs-5 gap-3">
+                                                                            <?= ($index + 1 < 10) ? ("0" . $index + 1) : ($index + 1); ?>
+
+                                                                            <div class="vr"></div>
+
+                                                                            <div class="fs-6 fw-semibold">
+                                                                                <?= $process->post_title; ?>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <img class="stage_side_arrows" src="<?= get_template_directory_uri() . "/assets/images/arrow-down.png"; ?>" />
+                                                                    </div>
+
+                                                                    <?php
+                                                                    $side_process_stages = get_field("renewal_stages", $process);
+                                                                    ?>
+
+                                                                    <?php if ($side_process_stages && is_array($side_process_stages) && !empty($side_process_stages)) : ?>
+                                                                        <div class="collapse stage_side_collapse" id="stage_col_<?= $process->ID; ?>">
+                                                                            <div class="row">
+                                                                                <div class="col-md-1"></div>
+                                                                                <div class="col">
+                                                                                    <div class="vstack p-3">
+                                                                                        <?php foreach ($side_process_stages as $e) : ?>
+                                                                                            <?php if (get_field("stage_title", $e)) : ?>
+                                                                                                <div 
+                                                                                                    class="fs-6 px-2 rounded-4 renewal_stage_submenu py-4" 
+                                                                                                    data-parent-target="<?= $process->ID; ?>" 
+                                                                                                    data-target="<?= $e->ID; ?>"
+                                                                                                >
+                                                                                                    <?= get_field("stage_title", $e); ?>
+                                                                                                </div>
+                                                                                            <?php endif; ?>
+                                                                                        <?php endforeach; ?>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    <?php endif; ?>
+                                                                </div>
+                                                            <?php endforeach; ?>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
 
-                                            <div class="fs-2 fw-semibold">
-                                                <?= $item->post_title; ?>
+                <!-- Stages Display -->
+                <div class="col-md-8">
+                    <div class="rounded-4 bg-white p-4 px-3 px-md-5">
+                        <!-- Sticky Title And Search -->
+                        <div class="sticky-top bg-white">
+                            <div class="hstack align-items-center justify-content-between ">
+                                <div class="fs-6 fw-semibold">
+                                    תהליך התחדשות עירונית
+                                </div>
+
+                                <div class="input-group rounded-pill overflow-hidden border">
+                                    <span class="input-group-text border-none" style=" background-color: white">
+                                        <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
+                                    </span>
+
+                                    <input type="text" class="form-control border-0 stages_search" placeholder="חיפוש מידע בתהליך">
+                                </div>
+                            </div>
+
+                            <hr>
+                        </div>
+
+                        <!-- Stages Collapseable Elements -->
+                        <?php foreach ($urban_renewal_terms as $uc_ind => $urban_category) : ?>
+                            <?php
+                            $always_unique = rand(0, 1000) . "_" . time();
+                            $urban_renewal_items = $controller->get_urban_renewal_processes($urban_category); 
+                            ?>      
+                            
+                            <div class="urban_category_accordion_wrapper py-3 py-md-5 <?= $uc_ind > 0 ? "uc_hidden" : ""; ?>" data-process-category="<?= $urban_category->name; ?>" style="<?= $uc_ind > 0 ? "display:none" : ""; ?>">
+                                <?php foreach ($urban_renewal_items as $index => $item) : ?>
+                                    <div class="vstack vitemWrapper">
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <div class="vstack gap-3">
+                                                    <div class="hstack align-items-center justify-content-between">
+                                                        <div class="fs-3 fw-light opacity-50">
+                                                            שלב <?= $index + 1; ?>
+                                                        </div>
+
+                                                        <button class="btn p-1 stage_btn rounded-circle collapsed" style="background-color: lightgray" data-bs-toggle="collapse" data-bs-target="#item_<?= $uc_ind.$index; ?>">
+                                                            <img class="object-fit-cover" style="width: 24px; height: 24px" src="<?= get_template_directory_uri() . "/assets/images/arrow-down.png"; ?>">
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="fs-2 fw-semibold">
+                                                    <?= $item->post_title; ?>
+                                                </div>
+
+                                                <?php if (!wp_is_mobile() && get_field("paragraph", $item)) : ?>
+                                                    <div class="fs-6 my-3">
+                                                        <?= get_field("paragraph", $item); ?>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
 
-                                            <?php if (!wp_is_mobile() && get_field("paragraph", $item)) : ?>
+                                            <div class="col-md-5">
+                                                <?php if (get_field("displayed_image", $item)) : ?>
+                                                    <div class="d-flex px-4 py-2 align-items-center justify-content-center">
+                                                        <img class="rounded-3 object-fit-cover stage_displayd_image" src="<?= get_field("displayed_image", $item); ?>">
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+
+                                        <div id="item_<?= $uc_ind.$index; ?>" class="collapse stages_collapse_wrapper">
+                                            <?php
+                                            $stages_title = get_field("stages_title", $item) ?? null;
+                                            $renewal_stages = get_field("renewal_stages", $item) ?? null;
+                                            ?>
+
+                                            <?php if (wp_is_mobile() && get_field("paragraph", $item)) : ?>
                                                 <div class="fs-6 my-3">
                                                     <?= get_field("paragraph", $item); ?>
                                                 </div>
                                             <?php endif; ?>
-                                        </div>
 
-                                        <div class="col-md-5">
-                                            <?php if (get_field("displayed_image", $item)) : ?>
-                                                <div class="d-flex px-4 py-2 align-items-center justify-content-center">
-                                                    <img class="rounded-3 object-fit-cover stage_displayd_image" src="<?= get_field("displayed_image", $item); ?>">
+                                            <?php if ($stages_title) : ?>
+                                                <div class="fs-6 fw-semibold mb-4">
+                                                    <?= $stages_title; ?>
                                                 </div>
                                             <?php endif; ?>
-                                        </div>
-                                    </div>
 
-                                    <div id="item_<?= $uc_ind.$index; ?>" class="collapse stages_collapse_wrapper">
-                                        <?php
-                                        $stages_title = get_field("stages_title", $item) ?? null;
-                                        $renewal_stages = get_field("renewal_stages", $item) ?? null;
-                                        ?>
+                                            <?php if ($renewal_stages && is_array($renewal_stages) && !empty($renewal_stages)) : ?>
+                                                <?php foreach ($renewal_stages as $stage_index => $stage) : ?>
+                                                    <?php
+                                                    $stage_unique_id = 0;
+                                                    $stage_title = get_field("stage_title", $stage) ?? null;
+                                                    $stages = get_field("stages", $stage) ?? null;
+                                                    ?>
 
-                                        <?php if (wp_is_mobile() && get_field("paragraph", $item)) : ?>
-                                            <div class="fs-6 my-3">
-                                                <?= get_field("paragraph", $item); ?>
-                                            </div>
-                                        <?php endif; ?>
+                                                    <?php if ($stage_title) : ?>
+                                                        <div class="stage_accordion_wrapper py-4 px-4 mb-4">
+                                                            <div
+                                                                class="hstack align-items-center justify-content-between collapsed stage_accordion"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
+                                                                data-id="<?= $stage->ID; ?>"
+                                                                data-parent="<?= $item->ID; ?>"
+                                                                data-collapse-parent="item_<?= $uc_ind.$index; ?>"
+                                                                data-stage-collapse="stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
+                                                            >
+                                                                <div class="hstack gap-2 align-items-center">
+                                                                    <div class="stage_circle"></div>
 
-                                        <?php if ($stages_title) : ?>
-                                            <div class="fs-6 fw-semibold mb-4">
-                                                <?= $stages_title; ?>
-                                            </div>
-                                        <?php endif; ?>
-
-                                        <?php if ($renewal_stages && is_array($renewal_stages) && !empty($renewal_stages)) : ?>
-                                            <?php foreach ($renewal_stages as $stage_index => $stage) : ?>
-                                                <?php
-                                                $stage_unique_id = 0;
-                                                $stage_title = get_field("stage_title", $stage) ?? null;
-                                                $stages = get_field("stages", $stage) ?? null;
-                                                ?>
-
-                                                <?php if ($stage_title) : ?>
-                                                    <div class="stage_accordion_wrapper py-4 px-4 mb-4">
-                                                        <div
-                                                            class="hstack align-items-center justify-content-between collapsed stage_accordion"
-                                                            data-bs-toggle="collapse"
-                                                            data-bs-target="#stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
-                                                            data-id="<?= $stage->ID; ?>"
-                                                            data-parent="<?= $item->ID; ?>"
-                                                            data-collapse-parent="item_<?= $uc_ind.$index; ?>"
-                                                            data-stage-collapse="stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
-                                                        >
-                                                            <div class="hstack gap-2 align-items-center">
-                                                                <div class="stage_circle"></div>
-
-                                                                <div class="fs-5">
-                                                                    <?= $stage_title; ?>
+                                                                    <div class="fs-5">
+                                                                        <?= $stage_title; ?>
+                                                                    </div>
                                                                 </div>
+
+                                                                <img src="<?= get_template_directory_uri() . "/assets/images/down-arrow.png"; ?>" class="stage_arrow">
                                                             </div>
 
-                                                            <img src="<?= get_template_directory_uri() . "/assets/images/down-arrow.png"; ?>" class="stage_arrow">
-                                                        </div>
+                                                            <div class="collapse stage_collapable py-2 py-md-4" id="stage_<?= $stage_index . "_" . $stage_unique_id++; ?>">
+                                                                <hr>
 
-                                                        <div class="collapse stage_collapable py-2 py-md-4" id="stage_<?= $stage_index . "_" . $stage_unique_id++; ?>">
-                                                            <hr>
-
-                                                            <?php foreach (get_field("stages", $stage) as $e) : ?>
-                                                                <?= $controller->get_dynamic_template($e); ?>
-                                                            <?php endforeach; ?>
+                                                                <?php foreach (get_field("stages", $stage) as $e) : ?>
+                                                                    <?= $controller->get_dynamic_template($e); ?>
+                                                                <?php endforeach; ?>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        <?php endif; ?>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </div>
+                                        <hr class="mt-3 mt-md-5" style="border-width: 4px">
                                     </div>
-                                    <hr class="mt-3 mt-md-5" style="border-width: 4px">
-                                </div>
 
-                               
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endforeach; ?>
+                                
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php endif; ?>
 </div>
 
 <!-- FAQ -->

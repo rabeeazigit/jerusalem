@@ -46,6 +46,15 @@ class UrbanRenewal
 
     public function get_renewal_categories()
     {
+        // CLIENT REQUEST
+        // Change code to fetch manually whatever is picked in the custom fields
+        $custom_categories = get_field("urban_renewal_page_urp_category") ?? [];
+        
+        return $custom_categories;
+
+        // OLD CODE
+        // This function returns all the urban renewal process categories
+        // that are not empty
         return get_terms([
             "taxonomy" => "urban-renewal-process-category",
             "hide_empty" => true,
