@@ -48,7 +48,7 @@ $main_topics_content_class =  $args["main_topics_content_class"] ?? null;
                     ?>
 
                     <div class="rs-col-5">
-                        <a class="text-decoration-none text-reset vstack p-3 main_topic_card gap-3 justify-content-between" href="<?= $main_topic_link; ?>" target="_blank">
+                        <a class="text-decoration-none text-reset vstack p-3 main_topic_card gap-3 justify-content-between" href="<?= $main_topic_link; ?>">
                             <div class="hstack gap-2 align-items-start justify-content-between">
                                 <?php if ($main_topic_title) : ?>
                                     <div class="fs-5 fw-semibold rubik">

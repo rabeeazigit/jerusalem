@@ -26,3 +26,8 @@ div:has(.generic-template-sideimage) {
     background-repeat: repeat-y;
     background-size: auto;
 }
+
+td {
+    border-width: 1px;
+    padding: 10px;
+}

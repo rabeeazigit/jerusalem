@@ -91,12 +91,12 @@ class Lobyprojects
     private function Neighborhoods()
     {
 
-        $Status = $this->GetProjectStatus();
-        $title = $this->project_neighborhood;
+        $Status = $this->GetProjectStatus() ?? null;
+        $title = $this->project_neighborhood ?? null;
 
         $html = "<ul class='nbrhd ps-0 ps-md-5'>";
         
-        if ($title->post_title && !empty($title->post_title)) {
+        if ($title && $title->post_title && !empty($title->post_title)) {
             $html .= "<li>{$title->post_title}</li>";
         }
 
@@ -118,7 +118,20 @@ class Lobyprojects
         
         $html .= "</ul>";
         
-        $html .= "<div class='sts_title ms-0 ms-md-5'>התקדמות תהליך</div><div class='Status_pill '><span style='background:{$Status['color']}' class='circle'></span>{$Status['name']}</div>";
+        $status_color = $Status['color'] ?? null;
+        $status_name = $Status['name'] ?? null;
+        
+        
+        if ($status_color && $status_name) {
+            $html .= "<div class='sts_title ms-0 ms-md-5'>
+                התקדמות תהליך
+            </div>
+            
+            <div class='Status_pill'>
+                <span style='background:{$status_color}' class='circle'></span>
+                {$status_name}
+            </div>";
+        }
 
 
         return $html;
