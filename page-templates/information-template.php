@@ -1,18 +1,19 @@
 <?php
 
-// Template Name: Entrepreneurs Info
+// Template Name: מידע
 
-get_header(); ?>
+get_header(); 
+?>
 
 <?php get_template_part("template-parts/navbar"); ?>
 
 <?php
-$controller = new EntreprenuersInfo();
+$controller = new InformationTemplate();
 
 // Setting up renewual items
-$urban_renewal_terms = $controller->get_renewal_categories();
+$urban_renewal_terms = $controller->renewal_stages;
 $urban_renewal_items = [];
-$stages_page = get_page_by_template("page-templates/urban-renewal-process.php");
+$stages_page = $controller->urban_renewal_stage_page;
 
 if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_renewal_terms)) {
     foreach ($urban_renewal_terms as $term) {
@@ -77,7 +78,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
                         </div>
                     <?php endif; ?>
 
-                    <?php if ($controller->downloadable_files_title) : ?>
+                    <?php if ($controller->file_categories_to_show && is_array($controller->file_categories_to_show) && !empty($controller->file_categories_to_show)) : ?>
                         <div class="">
                             <a href="#downloads_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
                                 <?= $controller->downloadable_files_title; ?>
@@ -114,7 +115,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
 
 <!-- Urban Renewal -->
 <?php if ($urban_renewal_items && is_array($urban_renewal_items) && !empty($urban_renewal_items)) : ?>
-    <div class="container-fluid py-5 mb-4" style="background-color: #174A75;" id="urban_renewal_section">
+    <div class="container-fluid py-5 pb-4" style="background-color: #174A75;" id="urban_renewal_section">
         <?php if ($controller->urban_renewal_title) : ?>
             <div class="display-5 text-center text-white fw-semibold mb-4 rubik">
                 <?= $controller->urban_renewal_title; ?>
@@ -142,7 +143,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
                             <div class="tab-pane fade" role="tabpanel" id="tab_<?= $category_index++; ?>">
                                 <div class="vstack gap-4">
                                     <?php foreach ($items as $item_index => $item) : ?>
-                                        <a href="<?= get_permalink($stages_page); ?>" class="text-reset text-decoration-none hstack align-items-start justify-content-between border rounded-4 p-3 resident_accordion" data-image="<?= get_field("card_image", $item); ?>">
+                                        <a href="<?= $stages_page ?>" class="text-reset text-decoration-none hstack align-items-start justify-content-between border rounded-4 p-3 resident_accordion" data-image="<?= get_field("card_image", $item); ?>">
                                             <div class="hstack gap-3 align-items-center justify-content-start">
                                                 <div class="fs-1 text-white opacity-75">
                                                     <?= $item_index + 1 < 10 ? "0" . ($item_index + 1) : $item_index + 1 ?>
@@ -192,56 +193,58 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
 
 <!-- Stage Cards -->
 <?php if ($controller->stage_cards && is_array($controller->stage_cards) && !empty($controller->stage_cards)) : ?>
-    <div id="resident_rights_section" class="container" style="background-image: url(<?= $controller->hero_background_image; ?>); background-size: cover; background-position: center; background-repeat: no-repeat;">
-        <?php if ($controller->resident_rights_title) : ?>
-            <div class="text-center display-4 rubik fw-semibold mb-3">
-                <?= $controller->resident_rights_title; ?>
-            </div>
-        <?php endif; ?>
+    <div class="container-fluid resident_rights_container px-0 py-5">
+        <div id="resident_rights_section" class="container">
+            <?php if ($controller->resident_rights_title) : ?>
+                <div class="text-center display-4 rubik fw-semibold mb-3">
+                    <?= $controller->resident_rights_title; ?>
+                </div>
+            <?php endif; ?>
 
-        <?php if ($controller->resident_rights_link) : ?>
-            <div class="d-flex justify-content-center align-items-center mb-4">
-                <a href="<?= $controller->resident_rights_link["url"]; ?>" target="<?= $controller->resident_rights_link["target"]; ?>" class="text-decoration-none fs-5 sq-primary-button">
-                    <?= $controller->resident_rights_link["title"]; ?>
-                </a>
-            </div>
-        <?php endif; ?>
+            <?php if ($controller->resident_rights_link) : ?>
+                <div class="d-flex justify-content-center align-items-center mb-4">
+                    <a href="<?= $controller->resident_rights_link["url"]; ?>" target="<?= $controller->resident_rights_link["target"]; ?>" class="text-decoration-none fs-5 sq-primary-button">
+                        <?= $controller->resident_rights_link["title"]; ?>
+                    </a>
+                </div>
+            <?php endif; ?>
 
-        <div class="row row-gap-4 justify-content-center">
-            <?php foreach ($controller->stage_cards as $e) : ?>
-                <div class="col-md-3">
-                    <div class="vstack h-100 align-items-start justify-content-between border rounded-5 p-4 mb-5 bg-white">
-                        <div>
-                            <?php if (isset($e["title"])) : ?>
-                                <div class="fs-3 fw-bold mb-3">
-                                    <?= $e["title"]; ?>
-                                </div>
-                            <?php endif; ?>
+            <div class="row row-gap-4 justify-content-center">
+                <?php foreach ($controller->stage_cards as $e) : ?>
+                    <div class="col-md-3">
+                        <div class="vstack h-100 align-items-start justify-content-between border rounded-5 p-4 mb-5 bg-white">
+                            <div>
+                                <?php if (isset($e["title"])) : ?>
+                                    <div class="fs-3 fw-bold mb-3">
+                                        <?= $e["title"]; ?>
+                                    </div>
+                                <?php endif; ?>
 
-                            <?php if (isset($e["paragraph"])) : ?>
-                                <div class="fs-6">
-                                    <?= $e["paragraph"]; ?>
+                                <?php if (isset($e["paragraph"])) : ?>
+                                    <div class="fs-6">
+                                        <?= $e["paragraph"]; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+
+                            <?php if (isset($e["link"]) && isset($e["link"]["title"]) && $e["link"]["title"]) : ?>
+                                <div class="vstack align-items-start justify-content-end">
+                                    <a href="<?= $e["link"]["url"] ?? "#"; ?>" target="<?= $e["link"]["target"] ?? ""; ?>" class="text-decoration-none fs-5 sq-tertiary-button">
+                                        <?= $e["link"]["title"] ?? ""; ?>
+                                    </a>
                                 </div>
                             <?php endif; ?>
                         </div>
-
-                        <?php if (isset($e["link"]) && isset($e["link"]["title"]) && $e["link"]["title"]) : ?>
-                            <div class="vstack align-items-start justify-content-end">
-                                <a href="<?= $e["link"]["url"] ?? "#"; ?>" target="<?= $e["link"]["target"] ?? ""; ?>" class="text-decoration-none fs-5 sq-tertiary-button">
-                                    <?= $e["link"]["title"] ?? ""; ?>
-                                </a>
-                            </div>
-                        <?php endif; ?>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
 <?php endif; ?>
 
 <!-- FAQ -->
 <?php if ($controller->faq_items && is_array($controller->faq_items) && !empty($controller->faq_items)) : ?>
-    <div id="faq_section" class="container-fluid my-4 p-md-5 p-3" style="background-image: url(<?= $controller->faq_background_image; ?>); background-size: cover; background-repeat: no-repeat; background-position: center">
+    <div id="faq_section" class="container-fluid py-4 p-md-5 p-3" style="background-image: url(<?= $controller->faq_background_image; ?>); background-size: cover; background-repeat: no-repeat; background-position: center">
         <?php if ($controller->faq_title) : ?>
             <?php if (wp_is_mobile()) : ?>
                 <div class="display-4 text-center fw-semibold mb-4">
@@ -323,107 +326,109 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
 <?php endif; ?>
 
 <!-- Downloadable Files -->
-<div id="downloads_section" class="container-fluid p-md-5 p-3 my-4" style="background-color: #EBE8E3;">
-    <?php if ($controller->downloadable_files_title) : ?>
-        <?php if (wp_is_mobile()) : ?>
-            <div class="display-4 text-center fw-semibold mb-2">
-                <?= $controller->downloadable_files_title; ?>
-            </div>
-        <?php else : ?>
-            <div class="display-4 fw-semibold mb-2 rubik">
-                <?= $controller->downloadable_files_title; ?>
-            </div>
-        <?php endif; ?>
-    <?php endif; ?>
-
-    <?php if ($controller->downloadable_files_subtitle) : ?>
-        <?php if (wp_is_mobile()) : ?>
-            <div class="fs-6 text-center mb-4">
-                <?= $controller->downloadable_files_subtitle; ?>
-            </div>
-        <?php else : ?>
-            <div class="fs-6 mb-4">
-                <?= $controller->downloadable_files_subtitle; ?>
-            </div>
-        <?php endif; ?>
-    <?php endif; ?>
-
-    <?php if ($controller->file_categories_to_show && is_array($controller->file_categories_to_show) && !empty($controller->file_categories_to_show)) : ?>
-        <?php if (!wp_is_mobile()) : ?>
-            <div class="hstack align-items-center justify-content-start gap-3" role="tablist">
-                <?php foreach ($controller->file_categories_to_show as $idx => $file_category) : ?>
-                    <button class="btn btn-sq-secondary rounded-pill px-4 <?= $idx == 0 ? "active show" : ""; ?>" data-bs-toggle="tab" data-bs-target="#file_tab_<?= $file_category->term_id; ?>">
-                        <?= $file_category->name; ?>
-                    </button>
-                <?php endforeach; ?>
-
-                <div class="input-group rounded-pill overflow-hidden ">
-                    <span class="input-group-text border-none" style=" background-color: white">
-                        <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
-                    </span>
-
-                    <input type="text" class="form-control border-0 downloadable_file_search" placeholder="Search">
+<?php if ($controller->file_categories_to_show && is_array($controller->file_categories_to_show) && !empty($controller->file_categories_to_show)) : ?>
+    <div id="downloads_section" class="container-fluid p-md-5 p-3 my-4" style="background-color: #EBE8E3;">
+        <?php if ($controller->downloadable_files_title) : ?>
+            <?php if (wp_is_mobile()) : ?>
+                <div class="display-4 text-center fw-semibold mb-2">
+                    <?= $controller->downloadable_files_title; ?>
                 </div>
-            </div>
-        <?php else : ?>
-            <div class="vstack" role="tablist">
-                <div class="input-group rounded-pill overflow-hidden">
-                    <span class="input-group-text border-none" style=" background-color: white">
-                        <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
-                    </span>
-
-                    <input type="text" class="form-control border-0 downloadable_file_search" placeholder="Search">
+            <?php else : ?>
+                <div class="display-4 fw-semibold mb-2 rubik">
+                    <?= $controller->downloadable_files_title; ?>
                 </div>
+            <?php endif; ?>
+        <?php endif; ?>
 
-                <div class="hstack gap-4 overflow-auto py-3 my-3">
+        <?php if ($controller->downloadable_files_subtitle) : ?>
+            <?php if (wp_is_mobile()) : ?>
+                <div class="fs-6 text-center mb-4">
+                    <?= $controller->downloadable_files_subtitle; ?>
+                </div>
+            <?php else : ?>
+                <div class="fs-6 mb-4">
+                    <?= $controller->downloadable_files_subtitle; ?>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+
+        <?php if ($controller->file_categories_to_show && is_array($controller->file_categories_to_show) && !empty($controller->file_categories_to_show)) : ?>
+            <?php if (!wp_is_mobile()) : ?>
+                <div class="hstack align-items-center justify-content-start gap-3" role="tablist">
                     <?php foreach ($controller->file_categories_to_show as $idx => $file_category) : ?>
-                        <button style="white-space: nowrap" class="btn btn-sq-secondary rounded-pill px-4 <?= $idx == 0 ? "active show" : ""; ?>" data-bs-toggle="tab" data-bs-target="#file_tab_<?= $file_category->term_id; ?>" style="width: fit-content">
+                        <button class="btn btn-sq-secondary rounded-pill px-4 <?= $idx == 0 ? "active show" : ""; ?>" data-bs-toggle="tab" data-bs-target="#file_tab_<?= $file_category->term_id; ?>">
                             <?= $file_category->name; ?>
                         </button>
                     <?php endforeach; ?>
+
+                    <div class="input-group rounded-pill overflow-hidden ">
+                        <span class="input-group-text border-none" style=" background-color: white">
+                            <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
+                        </span>
+
+                        <input type="text" class="form-control border-0 downloadable_file_search" placeholder="Search">
+                    </div>
                 </div>
-            </div>
+            <?php else : ?>
+                <div class="vstack" role="tablist">
+                    <div class="input-group rounded-pill overflow-hidden">
+                        <span class="input-group-text border-none" style=" background-color: white">
+                            <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
+                        </span>
+
+                        <input type="text" class="form-control border-0 downloadable_file_search" placeholder="Search">
+                    </div>
+
+                    <div class="hstack gap-4 overflow-auto py-3 my-3">
+                        <?php foreach ($controller->file_categories_to_show as $idx => $file_category) : ?>
+                            <button style="white-space: nowrap" class="btn btn-sq-secondary rounded-pill px-4 <?= $idx == 0 ? "active show" : ""; ?>" data-bs-toggle="tab" data-bs-target="#file_tab_<?= $file_category->term_id; ?>" style="width: fit-content">
+                                <?= $file_category->name; ?>
+                            </button>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
         <?php endif; ?>
-    <?php endif; ?>
 
-    <div class="tab-content">
-        <?php foreach ($controller->file_categories_to_show as $idx => $file_category) : ?>
-            <?php $files = $controller->get_files_by_category($file_category); ?>
+        <div class="tab-content">
+            <?php foreach ($controller->file_categories_to_show as $idx => $file_category) : ?>
+                <?php $files = $controller->get_files_by_category($file_category); ?>
 
-            <div class="tab-pane fade <?= $idx == 0 ? "active show" : ""; ?>" role="tabpanel" id="file_tab_<?= $file_category->term_id; ?>">
-                <div class="row row-gap-4 my-5">
-                    <?php foreach ($files as $e) : ?>
-                        <?php
-                        $file_link = "";
-                        if (get_field("is_external_file", $e)) {
-                            $file_link = get_field("file_url", $e);
-                        } else {
-                            $file_link = get_field("file", $e);
-                        }
-                        ?>
-                        <div class="col-md-3">
-                            <a data-search="<?= (get_field("short_description", $e) ?? "") . "," . (get_field("display_name", $e)); ?>" download target="_blank" href="<?= $file_link; ?>" class="text-decoration-none text-reset hstack gap-2 align-items-center downloadable_file_item rounded-4 p-3">
-                                <img src="<?= get_template_directory_uri() . "/assets/images/doc.png"; ?>" style="width: 32px; height: 32px; align-self: flex-start">
+                <div class="tab-pane fade <?= $idx == 0 ? "active show" : ""; ?>" role="tabpanel" id="file_tab_<?= $file_category->term_id; ?>">
+                    <div class="row row-gap-4 my-5">
+                        <?php foreach ($files as $e) : ?>
+                            <?php
+                            $file_link = "";
+                            if (get_field("is_external_file", $e)) {
+                                $file_link = get_field("file_url", $e);
+                            } else {
+                                $file_link = get_field("file", $e);
+                            }
+                            ?>
+                            <div class="col-md-3">
+                                <a data-search="<?= (get_field("short_description", $e) ?? "") . "," . (get_field("display_name", $e)); ?>" download target="_blank" href="<?= $file_link; ?>" class="text-decoration-none text-reset hstack gap-2 align-items-center downloadable_file_item rounded-4 p-3">
+                                    <img src="<?= get_template_directory_uri() . "/assets/images/doc.png"; ?>" style="width: 32px; height: 32px; align-self: flex-start">
 
-                                <div class="vstack gap-2">
-                                    <div class="fs-5 fw-bold">
-                                        <?= get_field("display_name", $e); ?>
+                                    <div class="vstack gap-2">
+                                        <div class="fs-5 fw-bold">
+                                            <?= get_field("display_name", $e); ?>
+                                        </div>
+
+                                        <div class="fs-6">
+                                            <?= truncate_sentence(get_field("short_description", $e) ?? "", 80); ?>
+                                        </div>
                                     </div>
 
-                                    <div class="fs-6">
-                                        <?= truncate_sentence(get_field("short_description", $e) ?? "", 80); ?>
-                                    </div>
-                                </div>
-
-                                <img src="<?= get_template_directory_uri() . "/assets/images/download.png"; ?>" style="width: 32px; height: 32px; align-self: flex-end">
-                            </a>
-                        </div>
-                    <?php endforeach; ?>
+                                    <img src="<?= get_template_directory_uri() . "/assets/images/download.png"; ?>" style="width: 32px; height: 32px; align-self: flex-end">
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        </div>
     </div>
-</div>
+<?php endif; ?>
 
 <!-- External Links -->
 <?php if ($controller->external_links_items && is_array($controller->external_links_items) && !empty($controller->external_links_items)) : ?>

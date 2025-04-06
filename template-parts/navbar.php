@@ -27,7 +27,12 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
             <div class="hstack gap-4">
                 <?php if ($navbar->about_management_label && $navbar->about_management_links && is_array($navbar->about_management_links) && count($navbar->about_management_links) > 0) : ?>
                     <div class="dropdown">
-                        <button class=" dropdown-toggle management_dropdown_toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button
+                            class="dropdown-toggle management_dropdown_toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside"
+                        >
                             <?= $navbar->about_management_label; ?>
                         </button>
 
