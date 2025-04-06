@@ -16,7 +16,7 @@ $urban_category = $_GET["urban_category"] ?? null;
 ?>
 
 <!-- COLORED HERO -->
-<div class="container-fluid px-0 py-5 text-light linear_bg_page">
+<div class="container-fluid px-0 pb-5 text-light linear_bg_page">
     <?php get_template_part("template-parts/navbar", null, ["dark_theme" => true]); ?>
 
     <!-- HERO HEADER -->
