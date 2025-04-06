@@ -5,7 +5,12 @@ $menu_links = $args["menu_links"] ?? null;
 ?>
 
 <div class="dropdown-center">
-    <button class="dropdown-toggle mega_menu_toggle main_nav_item fs-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <button
+        class="dropdown-toggle mega_menu_toggle main_nav_item fs-5"
+        type="button"
+        data-bs-toggle="dropdown"
+        data-bs-auto-close="outside"
+    >
         <?= $label; ?>
     </button>
 
