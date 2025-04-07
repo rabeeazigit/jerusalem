@@ -14422,7 +14422,7 @@ class SQLinkSCF
                     'add_term' => 1,
                     'save_terms' => 1,
                     'load_terms' => 1,
-                    'return_format' => 'id',
+                    'return_format' => 'object',
                     'field_type' => 'select',
                     'allow_null' => 0,
                     'acfe_bidirectional' => array(

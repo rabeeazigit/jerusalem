@@ -5,15 +5,18 @@ $project_link = $args["project_link"] ?? "#";
 $project_neighborhood = $args["project_neighborhood"] ?? null;
 $project_status = $args["project_status"] ?? null;
 $project_card_image = $args["project_card_image"] ?? null;
+// print_r($project_status);
 ?>
 
 <a href="<?= $project_link; ?>" class="text-reset text-decoration-none vstack project_card_wrapper px-3 gap-2">
     <div class="d-flex align-items-start justify-content-start project_card_image" style="background-image: url(<?= $project_card_image; ?>);">
-        <?php if ($project_status && is_array($project_status) && !empty($project_status)) : ?>
+        <?php if ($project_status && !empty($project_status)) : ?>
             <div class="hstack gap-2 align-items-start project_status_wrapper">
                 <?php
-                $status_color = get_field("project_status_color", $project_status[0]);
-                $status_name = $project_status[0]->name;
+                $status_color = get_field("project_status_color", $project_status);
+                $status_name = $project_status->name;
+                // print_r($status_name);
+                // print_r($status_color);
                 ?>
 
                 <?php if ($status_color) : ?>
