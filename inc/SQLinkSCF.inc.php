@@ -14194,6 +14194,7 @@ class SQLinkSCF
     }
 
     public function updated_project_fieldgroup() {
+        
         add_action( 'acf/include_fields', function() {
             if ( ! function_exists( 'acf_add_local_field_group' ) ) {
                 return;
@@ -14228,7 +14229,7 @@ class SQLinkSCF
                     'aria-label' => '',
                     'type' => 'image',
                     'instructions' => 'גודל מומלץ
-                         500x280',
+                                                         500x280',
                     'required' => 0,
                     'conditional_logic' => 0,
                     'wrapper' => array(
@@ -14419,8 +14420,8 @@ class SQLinkSCF
                     ),
                     'taxonomy' => 'project-status',
                     'add_term' => 1,
-                    'save_terms' => 0,
-                    'load_terms' => 0,
+                    'save_terms' => 1,
+                    'load_terms' => 1,
                     'return_format' => 'id',
                     'field_type' => 'select',
                     'allow_null' => 0,
@@ -14458,7 +14459,7 @@ class SQLinkSCF
                     'aria-label' => '',
                     'type' => 'repeater',
                     'instructions' => 'גודל מומלץ: 
-                        500x280',
+                                                        500x280',
                     'required' => 0,
                     'conditional_logic' => 0,
                     'wrapper' => array(
@@ -14965,6 +14966,7 @@ class SQLinkSCF
             'acfe_note' => '',
         ) );
         } );
+        
         
         
     }
