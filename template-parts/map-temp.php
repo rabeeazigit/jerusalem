@@ -121,7 +121,7 @@
             `);
         });
 
-        setTimeout(() => {
+        document.addEventListener("DOMContentLoaded", () => {
             map.invalidateSize();
-        }, 100);
+        });
 </script>
