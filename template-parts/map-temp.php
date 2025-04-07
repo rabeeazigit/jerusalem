@@ -21,6 +21,7 @@
                 $allDataForMap,
                 [
                     'name' => $proj->post_title,
+                    'image' => get_field('project_card_image', $proj->ID),
                     'address' => get_field('project_address', $proj->ID),
                     'lng' => get_field('project_lan', $proj->ID) ?? null,
                     'lat' => get_field('project_lat', $proj->ID) ?? null,
@@ -48,6 +49,10 @@
     .leaflet-marker-icon {
         background-color: transparent;
         border: none;
+    }
+
+    .leaflet-popup-content {
+        margin: 10px;
     }
 </style>
 
@@ -92,14 +97,26 @@
                     direction: rtl;
                     display: flex;
                     flex-flow: column nowrap;
-                    align-items: flex-start;
+                    align-items: center;
                     background-color: transparent;
                 ">
-                    <b>${point.name}</b> 
-                    
-                    <hr/> 
-                    
-                    <small>${point.address}</small>
+                    <img
+                        src="${point.image}"
+                        style="
+                            border-radius: 10px;
+                            width: 150px;
+                            height: 100px;
+                            margin: 10px 0;
+                            object-fit: cover;
+                            object-position: center;
+                        "
+                    />
+                
+                    <div class="fw-bold fs-6">${point.name}</div>
+                    <div class="fs-6">${point.address}</div>
+
+                    <hr class="w-100 my-1" />
+                    <div class="fs-6">${point.status.name}</div>
                 </div>
             `);
         });
