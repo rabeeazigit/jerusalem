@@ -31,7 +31,7 @@ wp_localize_script("renewed_neighborhoods_js", "ajaxObject", [
 // getting section scf
 $header_title = get_field("header_title") ?? null;
 $header_description = get_field("header_description") ?? null;
-$map_placeholder_image = get_field("map_placeholder_image") ?? null;
+// $map_placeholder_image = get_field("map_placeholder_image") ?? null;
 ?>
 
 <?php get_template_part("template-parts/navbar"); ?>
@@ -109,9 +109,12 @@ $map_placeholder_image = get_field("map_placeholder_image") ?? null;
 
             <!-- Map -->
             <div class="col project_map_wrapper">
-                <?php if ($map_placeholder_image) : ?>
+                <?php
+                    get_template_part('template-parts/map-temp');
+                ?>
+                <!-- <?php if ($map_placeholder_image) : ?>
                     <img src="<?= $map_placeholder_image; ?>" class="project_map_placeholder w-100">
-                <?php endif; ?>
+                <?php endif; ?> -->
             </div>
         </div>
 
