@@ -48,49 +48,61 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
                 <div class="hstack anchor_tags_container gap-3 flex-wrap">
                     <?php if ($urban_renewal_items && is_array($urban_renewal_items) && !empty($urban_renewal_items)) : ?>
                         <div class="">
-                            <a href="#urban_renewal_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
-                                <?= $controller->urban_renewal_title; ?>
-                            </a>
+                            <?php if ($controller->urban_renewal_title) : ?>
+                                <a href="#urban_renewal_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
+                                    <?= $controller->urban_renewal_title; ?>
+                                </a>
+                            <?php endif; ?>
                         </div>
                     <?php endif; ?>
 
                     <?php if ($controller->stage_cards && is_array($controller->stage_cards) && !empty($controller->stage_cards)) : ?>
                         <div class="">
-                            <a href="#resident_rights_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
-                                <?= $controller->resident_rights_title; ?>
-                            </a>
+                            <?php if ($controller->resident_rights_title) : ?>
+                                <a href="#resident_rights_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
+                                    <?= $controller->resident_rights_title; ?>
+                                </a>
+                                <?php endif; ?>
                         </div>
                     <?php endif; ?>
 
                     <?php if ($controller->faq_items && is_array($controller->faq_items) && !empty($controller->faq_items)) : ?>
                         <div class="">
-                            <a href="#faq_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
-                                <?= $controller->faq_title; ?>
-                            </a>
+                            <?php if ($controller->faq_title) : ?>
+                                <a href="#faq_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
+                                    <?= $controller->faq_title; ?>
+                                </a>
+                            <?php endif; ?>
                         </div>
                     <?php endif; ?>
 
                     <?php if ($controller->event_slider_items && is_array($controller->event_slider_items) && !empty($controller->event_slider_items)) : ?>
                         <div class="">
-                            <a href="#event_slider_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
-                                <?= $controller->event_slider_title; ?>
-                            </a>
+                            <?php if ($controller->event_slider_title) : ?>
+                                <a href="#event_slider_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
+                                    <?= $controller->event_slider_title; ?>
+                                </a>
+                            <?php endif; ?>
                         </div>
                     <?php endif; ?>
 
                     <?php if ($controller->file_categories_to_show && is_array($controller->file_categories_to_show) && !empty($controller->file_categories_to_show)) : ?>
                         <div class="">
-                            <a href="#downloads_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
-                                <?= $controller->downloadable_files_title; ?>
-                            </a>
+                            <?php if ($controller->downloadable_files_title) : ?>
+                                <a href="#downloads_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
+                                    <?= $controller->downloadable_files_title; ?>
+                                </a>
+                            <?php endif; ?>
                         </div>
                     <?php endif; ?>
 
                     <?php if ($controller->external_links_items && is_array($controller->external_links_items) && !empty($controller->external_links_items)) : ?>
                         <div class="">
-                            <a href="#external_links_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
-                                <?= $controller->external_links_title; ?>
-                            </a>
+                            <?php if ($controller->external_links_title) : ?>
+                                <a href="#external_links_section" class="btn btn-sq-ghost fs-5 text-decoration-none rounded-pill text-reset">
+                                    <?= $controller->external_links_title; ?>
+                                </a>
+                            <?php endif; ?>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -327,7 +339,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
 
 <!-- Downloadable Files -->
 <?php if ($controller->file_categories_to_show && is_array($controller->file_categories_to_show) && !empty($controller->file_categories_to_show)) : ?>
-    <div id="downloads_section" class="container-fluid p-md-5 p-3 my-4" style="background-color: #EBE8E3;">
+    <div id="downloads_section" class="container-fluid p-md-5 p-3 py-4" style="background-color: #EBE8E3;">
         <?php if ($controller->downloadable_files_title) : ?>
             <?php if (wp_is_mobile()) : ?>
                 <div class="display-4 text-center fw-semibold mb-2">
