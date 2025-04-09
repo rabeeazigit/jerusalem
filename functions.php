@@ -1,5 +1,8 @@
 <?php
 
+// Set the time zone to Israel
+date_default_timezone_set('Asia/Jerusalem');
+
 // Auto load all of our php classes
 spl_autoload_register(function ($class_name) {
     $file = get_template_directory() . "/inc/" . $class_name . ".inc.php";

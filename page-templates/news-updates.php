@@ -43,11 +43,23 @@ get_header();
         $articles_title = get_field("articles_title") ?? null;
         $limit = 7;
         $page = 1;
-        $articles = get_posts([
+        $args = [
             "post_type" => "article",
             "posts_per_page" => $limit,
             "paged" => $page++,
-        ]);
+            "meta_key" => "article_date", 
+            "orderby" => "meta_value_num", 
+            "order" => "DESC",
+            "meta_query" => [
+                [
+                    "key" => "article_date", 
+                    "compare" => "EXISTS", 
+                ],
+            ],
+        ];
+        
+        $articles_query = new WP_Query($args);
+        $articles = $articles_query->posts;
         $remaining = max(0, wp_count_posts("article")->publish - count($articles));
         ?>
 

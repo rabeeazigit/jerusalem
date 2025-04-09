@@ -143,10 +143,20 @@ class AjaxHandler
             "post_type" => "article",
             "posts_per_page" => $limit,
             "paged" => $page,
-            "post_status" => "publish",
+            "meta_key" => "article_date", 
+            "orderby" => "meta_value_num", 
+            "order" => "DESC",
+            "meta_query" => [
+                [
+                    "key" => "article_date", 
+                    "compare" => "EXISTS", 
+                ],
+            ],
         ];
+        
+        $articles_query = new WP_Query($args);
+        $articles = $articles_query->posts;
 
-        $articles = get_posts($args);
         ob_start(); ?>
         <?php foreach ($articles as $e) : ?>
                 <?php
