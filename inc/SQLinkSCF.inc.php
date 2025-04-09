@@ -7706,11 +7706,11 @@ class SQLinkSCF
 
             acf_add_local_field_group(array(
                 'key' => 'group_679a426a94dbc',
-                'title' => 'Area Fields Page',
+                'title' => 'שדות דף תחומי פעילות',
                 'fields' => array(
                     array(
                         'key' => 'field_679b477a630ff',
-                        'label' => 'Hero Section',
+                        'label' => 'הירו',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -7728,7 +7728,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_679b479e63100',
-                        'label' => 'Hero',
+                        'label' => 'הירו',
                         'name' => 'area_fields_hero_section',
                         'aria-label' => '',
                         'type' => 'clone',
