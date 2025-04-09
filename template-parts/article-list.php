@@ -32,7 +32,13 @@ $article_list_side_image = $article_list_options["article_list_side_image"] ?? n
             <div class="col-md-5">
                 <div class="d-flex w-100 h-100 align-items-center justify-content-start" style="padding-right: 100px;">
                     <img src="<?= $article_list_side_image; ?>" class="article_list_side_image">
-                    <img src="<?= get_template_directory_uri() . "/assets/images/cube.png"; ?>" class="article_list_side_cube">
+
+                    <?php if (false) : ?>
+                        <img
+                            src="<?= get_template_directory_uri() . "/assets/images/cube.png"; ?>"
+                            class="article_list_side_cube"
+                        />
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endif; ?>

@@ -23,7 +23,13 @@ $GetPillsCategories =  $article_list_options['GetPillsCategories'] ?? null;
             <div class="col-6">
                 <div class="d-flex w-100 h-100 align-items-center justify-content-end">
                     <img src="<?= $article_list_side_image; ?>" class="article_list_side_image">
-                    <img src="<?= get_template_directory_uri() . "/assets/images/cube.png"; ?>" class="article_list_side_cube">
+                    
+                    <?php if (false) : ?>
+                        <img 
+                            src="<?= get_template_directory_uri() . "/assets/images/cube.png"; ?>"
+                            class="article_list_side_cube"
+                        />
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endif; ?>
