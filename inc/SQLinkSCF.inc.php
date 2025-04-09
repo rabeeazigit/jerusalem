@@ -4858,7 +4858,7 @@ class SQLinkSCF
                             'class' => '',
                             'id' => '',
                         ),
-                        'display_format' => 'd/m/Y H:i',
+                        'display_format' => 'Y/m/d H:i',
                         'return_format' => 'd/m/Y H:i',
                         'first_day' => 1,
                         'allow_in_bindings' => 0,
