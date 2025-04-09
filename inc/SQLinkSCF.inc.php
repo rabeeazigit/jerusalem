@@ -13,7 +13,6 @@ class SQLinkSCF
         $this->carousel_fieldgroup();
         $this->home_page_fieldgroup();
         $this->main_navbar_fieldgroup();
-        // $this->project_fieldgroup();
         $this->top_navbar_fieldgroup();
         $this->article_fieldgroup();
         $this->how_can_we_help_fieldgroup();
@@ -1937,11 +1936,11 @@ class SQLinkSCF
 
             acf_add_local_field_group(array(
                 'key' => 'group_6790dccd0780a',
-                'title' => 'Main Navbar',
+                'title' => 'תפריט ראשי',
                 'fields' => array(
                     array(
                         'key' => 'field_6790dccdf24ae',
-                        'label' => 'Brand',
+                        'label' => 'לוגואים',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -1959,7 +1958,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790dcfef24af',
-                        'label' => 'Logo',
+                        'label' => 'לוגו',
                         'name' => 'brand_logo',
                         'aria-label' => '',
                         'type' => 'image',
@@ -1987,7 +1986,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790dd4bf24b5',
-                        'label' => 'Residents Menu',
+                        'label' => 'תפריט ראשון',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -2005,7 +2004,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790e39c9ed97',
-                        'label' => 'Label',
+                        'label' => 'תווית',
                         'name' => 'residents_menu_label',
                         'aria-label' => '',
                         'type' => 'text',
@@ -2026,7 +2025,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790e15a17d37',
-                        'label' => 'Menu Cards',
+                        'label' => 'כרטיסיות',
                         'name' => 'residents_menu_cards',
                         'aria-label' => '',
                         'type' => 'repeater',
@@ -2049,7 +2048,7 @@ class SQLinkSCF
                         'sub_fields' => array(
                             array(
                                 'key' => 'field_6790e18f17d38',
-                                'label' => 'Image',
+                                'label' => 'תמונה',
                                 'name' => 'image',
                                 'aria-label' => '',
                                 'type' => 'image',
@@ -2078,7 +2077,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_6790e19c17d39',
-                                'label' => 'Title',
+                                'label' => 'כותרת',
                                 'name' => 'title',
                                 'aria-label' => '',
                                 'type' => 'text',
@@ -2100,7 +2099,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_6790e1aa17d3a',
-                                'label' => 'Paragraph',
+                                'label' => 'פסקה קצרה',
                                 'name' => 'paragraph',
                                 'aria-label' => '',
                                 'type' => 'textarea',
@@ -2123,7 +2122,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_6790e1ba17d3b',
-                                'label' => 'Link',
+                                'label' => 'קישור',
                                 'name' => 'link',
                                 'aria-label' => '',
                                 'type' => 'link',
@@ -2143,7 +2142,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790e29b7f5ea',
-                        'label' => 'Menu Links',
+                        'label' => 'קישורים',
                         'name' => 'residents_menu_links',
                         'aria-label' => '',
                         'type' => 'repeater',
@@ -2166,7 +2165,7 @@ class SQLinkSCF
                         'sub_fields' => array(
                             array(
                                 'key' => 'field_6790e2b67f5eb',
-                                'label' => 'Label',
+                                'label' => 'תווית',
                                 'name' => 'label',
                                 'aria-label' => '',
                                 'type' => 'text',
@@ -2188,7 +2187,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_6790e2bd7f5ec',
-                                'label' => 'Sub Label',
+                                'label' => 'טקסט קצר',
                                 'name' => 'sub_label',
                                 'aria-label' => '',
                                 'type' => 'text',
@@ -2210,7 +2209,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_6790e2d07f5ed',
-                                'label' => 'Link',
+                                'label' => 'קישור',
                                 'name' => 'link',
                                 'aria-label' => '',
                                 'type' => 'link',
@@ -2230,7 +2229,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790dd66f24b6',
-                        'label' => 'Entrepreneurs Menu',
+                        'label' => 'תפריט שני',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -2248,7 +2247,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790ef0894284',
-                        'label' => 'Label',
+                        'label' => 'תווית',
                         'name' => 'entrepreneurs_menu_label',
                         'aria-label' => '',
                         'type' => 'text',
@@ -2269,7 +2268,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790eedc0c260',
-                        'label' => 'Menu Cards',
+                        'label' => 'כרטיסיות',
                         'name' => 'entrepreneurs_menu_cards',
                         'aria-label' => '',
                         'type' => 'repeater',
@@ -2292,7 +2291,7 @@ class SQLinkSCF
                         'sub_fields' => array(
                             array(
                                 'key' => 'field_6790eedd0c261',
-                                'label' => 'Image',
+                                'label' => 'תמונה',
                                 'name' => 'image',
                                 'aria-label' => '',
                                 'type' => 'image',
@@ -2321,7 +2320,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_6790eedd0c262',
-                                'label' => 'Title',
+                                'label' => 'כותרת',
                                 'name' => 'title',
                                 'aria-label' => '',
                                 'type' => 'text',
@@ -2343,7 +2342,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_6790eedd0c263',
-                                'label' => 'Paragraph',
+                                'label' => 'פסקה קצרה',
                                 'name' => 'paragraph',
                                 'aria-label' => '',
                                 'type' => 'textarea',
@@ -2366,7 +2365,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_6790eedd0c264',
-                                'label' => 'Link',
+                                'label' => 'קישור',
                                 'name' => 'link',
                                 'aria-label' => '',
                                 'type' => 'link',
@@ -2386,7 +2385,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790eee10c265',
-                        'label' => 'Menu Links',
+                        'label' => 'קישורים',
                         'name' => 'entrepreneurs_menu_links',
                         'aria-label' => '',
                         'type' => 'repeater',
@@ -2409,7 +2408,7 @@ class SQLinkSCF
                         'sub_fields' => array(
                             array(
                                 'key' => 'field_6790eee10c266',
-                                'label' => 'Label',
+                                'label' => 'תווית',
                                 'name' => 'label',
                                 'aria-label' => '',
                                 'type' => 'text',
@@ -2431,7 +2430,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_6790eee10c267',
-                                'label' => 'Sub Label',
+                                'label' => 'טקסט קצר',
                                 'name' => 'sub_label',
                                 'aria-label' => '',
                                 'type' => 'text',
@@ -2453,7 +2452,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_6790eee10c268',
-                                'label' => 'Link',
+                                'label' => 'קישור',
                                 'name' => 'link',
                                 'aria-label' => '',
                                 'type' => 'link',
@@ -2473,7 +2472,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790f1f10800a',
-                        'label' => 'Renewing Neighborhoods',
+                        'label' => 'שכונות מתחדשות',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -2491,7 +2490,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790f2110800b',
-                        'label' => 'Label',
+                        'label' => 'תווית',
                         'name' => 'renewing_neighborhoods_label',
                         'aria-label' => '',
                         'type' => 'text',
@@ -2512,7 +2511,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790f2200800c',
-                        'label' => 'Link',
+                        'label' => 'קישור',
                         'name' => 'renewing_neighborhoods_link',
                         'aria-label' => '',
                         'type' => 'link',
@@ -2529,7 +2528,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790f35875d75',
-                        'label' => 'Search Bar',
+                        'label' => 'חיפוש',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -2547,7 +2546,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790f35f75d76',
-                        'label' => 'Placeholder Text',
+                        'label' => 'טקסט מציין מיקום של שורת חיפוש',
                         'name' => 'searchbar_placeholder',
                         'aria-label' => '',
                         'type' => 'text',
@@ -2568,7 +2567,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790f7a8800d4',
-                        'label' => 'Contact Us',
+                        'label' => 'צור קשר',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -2586,7 +2585,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790f7b2800d5',
-                        'label' => 'Label',
+                        'label' => 'תווית',
                         'name' => 'contact_us_label',
                         'aria-label' => '',
                         'type' => 'text',
@@ -2607,7 +2606,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67c840bc74c12',
-                        'label' => 'Mobile Label',
+                        'label' => 'תווית למובייל',
                         'name' => 'contact_us_label_mobile',
                         'aria-label' => '',
                         'type' => 'text',
@@ -3423,11 +3422,11 @@ class SQLinkSCF
 
             acf_add_local_field_group(array(
                 'key' => 'group_6790ba2f75952',
-                'title' => 'Top Navbar',
+                'title' => 'תפריט עליון',
                 'fields' => array(
                     array(
                         'key' => 'field_6790ba2f65560',
-                        'label' => 'Social Media Bar',
+                        'label' => 'סרגל רשתות חברתיות',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -3445,7 +3444,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790ba4565561',
-                        'label' => 'Social Media Links',
+                        'label' => 'קישורים לרשתות חברתיות',
                         'name' => 'social_media_links',
                         'aria-label' => '',
                         'type' => 'repeater',
@@ -3462,13 +3461,13 @@ class SQLinkSCF
                         'min' => 0,
                         'max' => 0,
                         'collapsed' => '',
-                        'button_label' => 'Add Social Media Link',
+                        'button_label' => 'הוסף קישור לרשת חברתית',
                         'rows_per_page' => 20,
                         'acfe_repeater_stylised_button' => 0,
                         'sub_fields' => array(
                             array(
                                 'key' => 'field_6790ba4e65562',
-                                'label' => 'Icon',
+                                'label' => 'איקון',
                                 'name' => 'icon',
                                 'aria-label' => '',
                                 'type' => 'image',
@@ -3497,7 +3496,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_67bc5e43e8f53',
-                                'label' => 'Icon White',
+                                'label' => 'איקון לבן',
                                 'name' => 'icon_dark',
                                 'aria-label' => '',
                                 'type' => 'image',
@@ -3526,7 +3525,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_6790ba6a65563',
-                                'label' => 'Link',
+                                'label' => 'קישור',
                                 'name' => 'link',
                                 'aria-label' => '',
                                 'type' => 'link',
@@ -3546,7 +3545,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790bd6527b37',
-                        'label' => 'About Managmenet Menu',
+                        'label' => 'תפריט',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -3564,7 +3563,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790c308bc9ae',
-                        'label' => 'Label',
+                        'label' => 'תווית',
                         'name' => 'about_management_label',
                         'aria-label' => '',
                         'type' => 'text',
@@ -3585,7 +3584,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790c11f27b38',
-                        'label' => 'Side Image',
+                        'label' => 'תמונת צד',
                         'name' => 'about_management_image',
                         'aria-label' => '',
                         'type' => 'image',
@@ -3613,7 +3612,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790c15527b39',
-                        'label' => 'Links',
+                        'label' => 'קישורים',
                         'name' => 'about_management_links',
                         'aria-label' => '',
                         'type' => 'repeater',
@@ -3630,13 +3629,13 @@ class SQLinkSCF
                         'min' => 0,
                         'max' => 0,
                         'collapsed' => '',
-                        'button_label' => 'Add Link',
+                        'button_label' => 'הוספת קישור',
                         'rows_per_page' => 20,
                         'acfe_repeater_stylised_button' => 0,
                         'sub_fields' => array(
                             array(
                                 'key' => 'field_6790c1c7e362a',
-                                'label' => 'Link',
+                                'label' => 'קישור',
                                 'name' => 'link',
                                 'aria-label' => '',
                                 'type' => 'link',
@@ -3656,7 +3655,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790c4c013bb7',
-                        'label' => 'אירועים וקורבים',
+                        'label' => 'אירועים וקורסים',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -3674,7 +3673,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790c53c13bb9',
-                        'label' => 'Label',
+                        'label' => 'תווית',
                         'name' => 'events_courses_label',
                         'aria-label' => '',
                         'type' => 'text',
@@ -3695,7 +3694,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790c4c913bb8',
-                        'label' => 'Link',
+                        'label' => 'קישור',
                         'name' => 'events_courses_link',
                         'aria-label' => '',
                         'type' => 'link',
@@ -3712,7 +3711,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790c5847acf7',
-                        'label' => 'News And Updates',
+                        'label' => 'קישור',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -3730,7 +3729,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790c58e7acf8',
-                        'label' => 'Label',
+                        'label' => 'תווית',
                         'name' => 'news_update_label',
                         'aria-label' => '',
                         'type' => 'text',
@@ -3751,7 +3750,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790c5a57acf9',
-                        'label' => 'Link',
+                        'label' => 'קישור',
                         'name' => 'news_update_link',
                         'aria-label' => '',
                         'type' => 'link',
@@ -3768,7 +3767,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790c5f99e1e4',
-                        'label' => 'Owner\'s Login',
+                        'label' => 'כניסה לבעלי דירה',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -3786,7 +3785,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790c6179e1e6',
-                        'label' => 'Label',
+                        'label' => 'תווית',
                         'name' => 'owner_login_label',
                         'aria-label' => '',
                         'type' => 'text',
@@ -3807,7 +3806,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790c6069e1e5',
-                        'label' => 'Logo',
+                        'label' => 'אייקון',
                         'name' => 'owner_login_logo',
                         'aria-label' => '',
                         'type' => 'image',
@@ -3835,7 +3834,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790c62a9e1e7',
-                        'label' => 'Link',
+                        'label' => 'קישור',
                         'name' => 'owner_login_link',
                         'aria-label' => '',
                         'type' => 'link',
@@ -3852,7 +3851,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790c83b0aa27',
-                        'label' => 'Accessibility',
+                        'label' => 'נגישות',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -3870,7 +3869,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790c8630aa29',
-                        'label' => 'Label',
+                        'label' => 'תווית',
                         'name' => 'accessibility_label',
                         'aria-label' => '',
                         'type' => 'text',
@@ -3891,7 +3890,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6790c84c0aa28',
-                        'label' => 'Link',
+                        'label' => 'קישור',
                         'name' => 'accessibility_link',
                         'aria-label' => '',
                         'type' => 'link',
@@ -5659,7 +5658,7 @@ class SQLinkSCF
 
             acf_add_local_field_group(array(
                 'key' => 'group_67975b26ef565',
-                'title' => 'How We Can Help',
+                'title' => 'באנר צור קשר',
                 'fields' => array(
                     array(
                         'key' => 'field_67975bab0bbbc',
@@ -6157,11 +6156,11 @@ class SQLinkSCF
 
             acf_add_local_field_group(array(
                 'key' => 'group_6799f5ae1c451',
-                'title' => 'Footer',
+                'title' => 'פוטר',
                 'fields' => array(
                     array(
                         'key' => 'field_6799f7cb24762',
-                        'label' => 'Gallery',
+                        'label' => 'גלרייה',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -6179,7 +6178,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6799f5ae044a8',
-                        'label' => 'Footer Logos Gallery',
+                        'label' => 'לוגואים',
                         'name' => 'footer_logos_gallery',
                         'aria-label' => '',
                         'type' => 'gallery',
@@ -6207,7 +6206,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6799f7d424763',
-                        'label' => 'Logo',
+                        'label' => 'לוגו',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -6225,7 +6224,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6799f87b24764',
-                        'label' => 'Footer Brand Logo',
+                        'label' => 'לוגו',
                         'name' => 'footer_brand_logo',
                         'aria-label' => '',
                         'type' => 'image',
@@ -6253,7 +6252,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6799f8b224765',
-                        'label' => 'Footer Menus',
+                        'label' => 'תפריטים',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -6271,7 +6270,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6799f8c124766',
-                        'label' => 'Footer Menus',
+                        'label' => 'תפריטים',
                         'name' => 'footer_menus',
                         'aria-label' => '',
                         'type' => 'repeater',
@@ -6294,7 +6293,7 @@ class SQLinkSCF
                         'sub_fields' => array(
                             array(
                                 'key' => 'field_6799f8d324767',
-                                'label' => 'Menu Title',
+                                'label' => 'כותרת',
                                 'name' => 'menu_title',
                                 'aria-label' => '',
                                 'type' => 'text',
@@ -6316,7 +6315,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_6799f8dc24768',
-                                'label' => 'Menu Items',
+                                'label' => 'פריטים',
                                 'name' => 'menu_items',
                                 'aria-label' => '',
                                 'type' => 'repeater',
@@ -6339,7 +6338,7 @@ class SQLinkSCF
                                 'sub_fields' => array(
                                     array(
                                         'key' => 'field_6799f8fe24769',
-                                        'label' => 'Menu Link',
+                                        'label' => 'קישור',
                                         'name' => 'menu_link',
                                         'aria-label' => '',
                                         'type' => 'link',
@@ -6357,7 +6356,7 @@ class SQLinkSCF
                                     ),
                                     array(
                                         'key' => 'field_6799f90e2476a',
-                                        'label' => 'Menu Icon',
+                                        'label' => 'איקון',
                                         'name' => 'menu_icon',
                                         'aria-label' => '',
                                         'type' => 'image',
@@ -6392,7 +6391,7 @@ class SQLinkSCF
                     // NEW CONTACT INFO FIELD GOES HERE
                     array(
                         'key' => 'field_679a2c0d27a1a',
-                        'label' => 'Contact Information',
+                        'label' => 'יצירת קשר',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -6410,7 +6409,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_679a2c8c27a1b',
-                        'label' => 'Footer Contact Title',
+                        'label' => 'כותרת',
                         'name' => 'footer_contact_title',
                         'aria-label' => '',
                         'type' => 'text',
@@ -6431,7 +6430,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_679a315927a26',
-                        'label' => 'Footer Contact Information Row',
+                        'label' => 'פריט יצירת קשר',
                         'name' => 'footer_contact_information_row',
                         'aria-label' => '',
                         'type' => 'repeater',
@@ -6454,7 +6453,7 @@ class SQLinkSCF
                         'sub_fields' => array(
                             array(
                                 'key' => 'field_679a317327a27',
-                                'label' => 'Label',
+                                'label' => 'תווית',
                                 'name' => 'label',
                                 'aria-label' => '',
                                 'type' => 'text',
@@ -6476,7 +6475,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_679a31c527a29',
-                                'label' => 'Value Type',
+                                'label' => 'סוג',
                                 'name' => 'value_type',
                                 'aria-label' => '',
                                 'type' => 'radio',
@@ -6504,7 +6503,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_679a318227a28',
-                                'label' => 'Paragraph',
+                                'label' => 'פסקה קצרה',
                                 'name' => 'paragraph',
                                 'aria-label' => '',
                                 'type' => 'textarea',
@@ -6535,7 +6534,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_679a322627a2a',
-                                'label' => 'WhatsApp Value',
+                                'label' => 'וואטסאפ',
                                 'name' => 'whatsapp_value',
                                 'aria-label' => '',
                                 'type' => 'text',
@@ -6565,7 +6564,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_679a327127a2b',
-                                'label' => 'Email Value',
+                                'label' => 'דוא"ל',
                                 'name' => 'email_value',
                                 'aria-label' => '',
                                 'type' => 'text',
@@ -6597,7 +6596,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_679a497513df8',
-                        'label' => 'Copyright',
+                        'label' => 'זכויות יוצרים',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -6615,7 +6614,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_679a492745628',
-                        'label' => 'Footer Copyright Text',
+                        'label' => 'טקסט זכויות יוצרים',
                         'name' => 'footer_copyright_text',
                         'aria-label' => '',
                         'type' => 'text',
@@ -6993,7 +6992,7 @@ class SQLinkSCF
     {
         add_action('acf/init', function () {
             acf_add_options_page(array(
-                'page_title' => 'Site Settings',
+                'page_title' => 'הגדרות האתר',
                 'menu_slug' => 'site-settings',
                 'position' => 2,
                 'redirect' => false,
@@ -7005,7 +7004,6 @@ class SQLinkSCF
             ));
         });
     }
-
 
     public function area_activities_fieldgroup()
     {
@@ -13818,7 +13816,7 @@ class SQLinkSCF
 
             acf_add_local_field_group(array(
                 'key' => 'group_67b3583edb93c',
-                'title' => 'Contact Us - Options Page',
+                'title' => 'הגדרות שדות צור קשר',
                 'fields' => array(
                     array(
                         'key' => 'field_67b3583f21c23',
@@ -13858,12 +13856,12 @@ class SQLinkSCF
                         'min' => 0,
                         'max' => 0,
                         'collapsed' => '',
-                        'button_label' => 'Add Property Type',
+                        'button_label' => 'הוספת סוג פרויקט',
                         'rows_per_page' => 20,
                         'sub_fields' => array(
                             array(
                                 'key' => 'field_67b3589321c25',
-                                'label' => 'Type',
+                                'label' => 'סוג פרויקט',
                                 'name' => 'type',
                                 'aria-label' => '',
                                 'type' => 'text',
@@ -13923,12 +13921,12 @@ class SQLinkSCF
                         'min' => 0,
                         'max' => 0,
                         'collapsed' => '',
-                        'button_label' => 'Add Subject Type',
+                        'button_label' => 'הוספת נושא הפנייה',
                         'rows_per_page' => 20,
                         'sub_fields' => array(
                             array(
                                 'key' => 'field_67b358c821c28',
-                                'label' => 'Subject',
+                                'label' => 'סוג הפנייה',
                                 'name' => 'subject',
                                 'aria-label' => '',
                                 'type' => 'text',
