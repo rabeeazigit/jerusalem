@@ -380,6 +380,7 @@ body {
 
 .carousel_media_container img,
 .carousel_media_container video {
+    min-height: 650px;
     height: 66dvh;
     /* height: 606px; */
 
