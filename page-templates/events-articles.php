@@ -145,7 +145,11 @@ get_header();
 
 <script>
     $(() => {
-        $("#search_form").on("change", function(event) {
+        $("#search_form").on("submit", function (ev) {
+            ev.preventDefault();
+        });
+        
+        $("#search_form").on("input", function(event) {
             event.preventDefault();
 
             const formData = new FormData(event.currentTarget);
