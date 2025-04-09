@@ -1,16 +1,12 @@
 .generic-template-sideimage {
     height: 570px;
     width: 35dvw;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
-    border-bottom-left-radius: 24px;
-    border-bottom-right-radius: 24px;
 
     @media screen and (width <= 768px) {
         height: auto;
         width: 100dvw;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
     }
 }
 

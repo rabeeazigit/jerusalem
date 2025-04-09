@@ -40,7 +40,7 @@ $controller = new GenericTemplate();
         <div class="col-md-6">
             <?php if (!wp_is_mobile() && $controller->side_image) : ?>
                 <div class="d-flex sticky-top align-items-center justify-content-center">
-                    <img class="generic-template-sideimage" src="<?= $controller->side_image; ?>" alt="" loading="lazy">
+                    <img class="generic-template-sideimage rounded-5" src="<?= $controller->side_image; ?>" alt="" loading="lazy">
                 </div>
             <?php endif; ?>
 
