@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     );
                     element.target.querySelector(
                         ".mainTopicNumber"
-                    ).textContent = currentCount;
+                    ).textContent = currentCount.toLocaleString();
                     requestAnimationFrame(updateCounter);
                 }
             };
