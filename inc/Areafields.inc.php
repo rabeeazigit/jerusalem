@@ -341,7 +341,7 @@ class Areafields
 
             $html .= ' <li class="nav-item" 
                             role="presentation">
-                            <button class="small-button activeFieldLink rounded-pill ' . $active_class . '  m-2" id="pills-' . $term_id . '-tab" 
+                            <button class=" small-button activeFieldLink rounded-pill ' . $active_class . '  m-2" id="pills-' . $term_id . '-tab" 
                             data-bs-toggle="pill" data-bs-target="#pills-' . $term_id . '" 
                             type="button" role="tab" aria-controls="pills-' . $term_id . '" 
                             aria-selected="true">' . $cat->name . '</button>
