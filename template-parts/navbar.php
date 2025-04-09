@@ -112,7 +112,7 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
 
         <div class=" hstack align-items-center justify-content-between main_menu_wrapper mt-4" id="main-menu">
             <div class="h-100 col-xl-3">
-                <a href="<?= home_url(); ?>" class="hstack gap-2 align-items-center text-reset text-decoration-none">
+                <a href="<?= home_url(); ?>" class="h-100 hstack gap-2 align-items-center text-reset text-decoration-none">
                     <?php if ($navbar->brand_logo) : ?>
                         <?php 
                         $brand_text = get_template_directory_uri() . "/assets/images/ui/" . ($dark_theme ? "white_brand_text.svg" : "blue_brand_text.svg");

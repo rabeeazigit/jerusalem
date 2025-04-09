@@ -112,7 +112,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
         <div class="col-xl-6 col-lg-12">
             <?php if (!wp_is_mobile() && $controller->hero_side_image) : ?>
                 <div class="d-flex h-100 sticky-top align-items-center justify-content-center">
-                    <img class="rosh-ha-aer-sideimage img-fluid" src="<?= $controller->hero_side_image; ?>" alt="" loading="lazy">
+                    <img class="rosh-ha-aer-sideimage img-fluid rounded-5" src="<?= $controller->hero_side_image; ?>" alt="" loading="lazy">
                 </div>
             <?php endif; ?>
 
