@@ -160,7 +160,7 @@ class SQLinkSCF
                         'name' => 'article_list_side_image',
                         'aria-label' => '',
                         'type' => 'image',
-                        'instructions' => 'Recommended Size: 450x450',
+                        'instructions' => 'גודל מומלץ: 450x450',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -331,7 +331,7 @@ class SQLinkSCF
                                 'name' => 'side_image',
                                 'aria-label' => '',
                                 'type' => 'image',
-                                'instructions' => 'Recommended Size: 200x232',
+                                'instructions' => 'גודל מומלץ: 200x232',
                                 'required' => 0,
                                 'conditional_logic' => 0,
                                 'wrapper' => array(
@@ -724,7 +724,7 @@ class SQLinkSCF
 
             acf_add_local_field_group(array(
                 'key' => 'group_67975027ef2fe',
-                'title' => 'About',
+                'title' => 'שדות דף אודות',
                 'fields' => array(
                     array(
                         'key' => 'field_6797502833197',
@@ -746,7 +746,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_679787e4be7f8',
-                        'label' => 'Hero Image',
+                        'label' => 'תמונת צד',
                         'name' => 'hero_image',
                         'aria-label' => '',
                         'type' => 'image',
@@ -1595,7 +1595,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6795f14e4efe4',
-                        'label' => 'Main Topics',
+                        'label' => 'נושאים עיקריים',
                         'name' => 'main_topics_options',
                         'aria-label' => '',
                         'type' => 'clone',
@@ -2688,7 +2688,7 @@ class SQLinkSCF
                         'name' => 'project_card_image',
                         'aria-label' => '',
                         'type' => 'image',
-                        'instructions' => 'Recommended Size: 500x280',
+                        'instructions' => 'גודל מומלץ: 500x280',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -2876,7 +2876,7 @@ class SQLinkSCF
                         'name' => 'project_card_image_repeater',
                         'aria-label' => '',
                         'type' => 'repeater',
-                        'instructions' => 'Recommended Size: 500x280',
+                        'instructions' => 'גודל מומלץ: 500x280',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -4875,7 +4875,7 @@ class SQLinkSCF
                         'name' => 'event_card_image',
                         'aria-label' => '',
                         'type' => 'image',
-                        'instructions' => 'Recommended Size: 500x280',
+                        'instructions' => 'גודל מומלץ: 500x280',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -5831,11 +5831,11 @@ class SQLinkSCF
 
             acf_add_local_field_group(array(
                 'key' => 'group_6795f05ff30d3',
-                'title' => 'Main Topics',
+                'title' => 'נושאים עיקריים',
                 'fields' => array(
                     array(
                         'key' => 'field_6797848ecd099',
-                        'label' => 'Main Topics',
+                        'label' => 'נושאים עיקריים',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -5853,7 +5853,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6795f0f43cc9c',
-                        'label' => 'Main Topics Title',
+                        'label' => 'כותרת',
                         'name' => 'main_topics_title',
                         'aria-label' => '',
                         'type' => 'text',
@@ -5874,7 +5874,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_6795f0ca3cc9b',
-                        'label' => 'Main Topics',
+                        'label' => 'נושאים עיקריים',
                         'name' => 'main_topics',
                         'aria-label' => '',
                         'type' => 'repeater',
@@ -5897,7 +5897,7 @@ class SQLinkSCF
                         'sub_fields' => array(
                             array(
                                 'key' => 'field_6795f0603cc98',
-                                'label' => 'Main Topic Title',
+                                'label' => 'כותרת',
                                 'name' => 'main_topic_title',
                                 'aria-label' => '',
                                 'type' => 'text',
@@ -5919,7 +5919,7 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_6795f0b73cc9a',
-                                'label' => 'Main Topic Link',
+                                'label' => 'קישור',
                                 'name' => 'main_topic_link',
                                 'aria-label' => '',
                                 'type' => 'link',
@@ -5937,11 +5937,11 @@ class SQLinkSCF
                             ),
                             array(
                                 'key' => 'field_6795f0883cc99',
-                                'label' => 'Main Topic Image',
+                                'label' => 'תמונת',
                                 'name' => 'main_topic_image',
                                 'aria-label' => '',
                                 'type' => 'image',
-                                'instructions' => 'Recommended Size 132x140',
+                                'instructions' => 'גודל מומלץ 132x140',
                                 'required' => 0,
                                 'conditional_logic' => 0,
                                 'wrapper' => array(
@@ -6182,7 +6182,7 @@ class SQLinkSCF
                         'name' => 'footer_logos_gallery',
                         'aria-label' => '',
                         'type' => 'gallery',
-                        'instructions' => 'Recommended Size: 170x100',
+                        'instructions' => 'גודל מומלץ: 170x100',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -6228,7 +6228,7 @@ class SQLinkSCF
                         'name' => 'footer_brand_logo',
                         'aria-label' => '',
                         'type' => 'image',
-                        'instructions' => 'Recommended Size: 230x85',
+                        'instructions' => 'גודל מומלץ: 230x85',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -6360,7 +6360,7 @@ class SQLinkSCF
                                         'name' => 'menu_icon',
                                         'aria-label' => '',
                                         'type' => 'image',
-                                        'instructions' => 'Recommended Size:	32x32',
+                                        'instructions' => 'גודל מומלץ:	32x32',
                                         'required' => 0,
                                         'conditional_logic' => 0,
                                         'wrapper' => array(
