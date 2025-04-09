@@ -56,7 +56,7 @@ switch ($post_type) {
                 <div class="vr"></div>
             <?php endif; ?>
 
-            <?php if ($event_time) : ?>
+            <?php if ($event_time && $event_time !== "00:00") : ?>
                 <div class="rubik">
                     <?= $event_time; ?>
                 </div>
