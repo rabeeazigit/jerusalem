@@ -110,8 +110,8 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
             </div>
         </div>
 
-        <div class=" hstack align-items-center justify-content-between main_menu_wrapper mt-4" id="main-menu">
-            <div class="h-100 col-xl-3">
+        <div class="hstack align-items-center justify-content-between main_menu_wrapper mt-4" id="main-menu">
+            <div class="h-100 ">
                 <a href="<?= home_url(); ?>" class="h-100 hstack gap-2 align-items-center text-reset text-decoration-none">
                     <?php if ($navbar->brand_logo) : ?>
                         <?php 
@@ -126,7 +126,7 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
                 </a>
             </div>
 
-            <div class="h-100 col">
+            <div class="h-100 ">
                 <div class="hstack h-100 align-items-center main_menu gap-4 rounded-pill shadow px-4 main_menu_nav">
                     <?php if ($navbar->residents_menu_label) : ?>
                         <?php get_template_part("template-parts/mega-menu", null, [
@@ -159,7 +159,7 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
                 </div>
             </div>
 
-            <div class="h-100 col-xl-3">
+            <div class="h-100">
                 <div class="d-flex align-items-center justify-content-end">
                     <?php if ($navbar->contact_us_label) : ?>
                         <a href="<?= $navbar->contact_us_link; ?>" class="sq-secondary-button text-decoration-none shadow contact_us_btn" style="<?= $dark_theme ? "background-color: #235d8d" : ""; ?>">

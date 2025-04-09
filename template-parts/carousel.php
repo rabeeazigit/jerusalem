@@ -114,7 +114,7 @@ $dark_mode = $args["dark_mode"] ?? false;
 
         $(".carousel_wrapper").slick({
             autoplay: true,
-            autoplaySpeed: 2000,
+            autoplaySpeed: 6000,
             slidesToShow: 1.3,
             slidesToScroll: 1,
             infinite: false,
