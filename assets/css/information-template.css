@@ -47,7 +47,7 @@
     background-size: 23dvh;
 }
 
-.container-fluid.resident_rights_container {
+.container-fluid.resident_rights_container.has_bg_image {
     background-image: url(../images/ui/yellow-diamond.svg);
     background-size: 850px;
     background-repeat: no-repeat;

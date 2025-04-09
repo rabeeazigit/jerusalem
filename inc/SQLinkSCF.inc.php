@@ -9051,7 +9051,7 @@ class SQLinkSCF
                     'aria-label' => '',
                     'type' => 'taxonomy',
                     'instructions' => 'ניתן לבחור מספר שלבים.
-        לבחירת מספר אפשרויות, נא ללחוץ על מקש CTRL.',
+                        לבחירת מספר אפשרויות, נא ללחוץ על מקש CTRL.',
                     'required' => 0,
                     'conditional_logic' => 0,
                     'wrapper' => array(
@@ -9092,6 +9092,27 @@ class SQLinkSCF
                     'placement' => 'top',
                     'endpoint' => 0,
                     'selected' => 0,
+                ),
+                array(
+                    'key' => 'field_67f656793d0d5',
+                    'label' => 'הצגת תמונת רקע',
+                    'name' => 'rights_show_bg_image',
+                    'aria-label' => '',
+                    'type' => 'true_false',
+                    'instructions' => '',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'message' => 'להציג תמונת רקע?',
+                    'default_value' => 0,
+                    'allow_in_bindings' => 0,
+                    'ui' => 0,
+                    'ui_on_text' => '',
+                    'ui_off_text' => '',
                 ),
                 array(
                     'key' => 'field_67a85d877e27f',

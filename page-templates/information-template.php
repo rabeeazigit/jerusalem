@@ -205,7 +205,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
 
 <!-- Stage Cards -->
 <?php if ($controller->stage_cards && is_array($controller->stage_cards) && !empty($controller->stage_cards)) : ?>
-    <div class="container-fluid resident_rights_container px-0 py-5">
+    <div class="container-fluid resident_rights_container px-0 py-5 <?= $controller->rights_show_bg_image ? "has_bg_image" : ""; ?>">
         <div id="resident_rights_section" class="container">
             <?php if ($controller->resident_rights_title) : ?>
                 <div class="text-center display-4 rubik fw-semibold mb-3">

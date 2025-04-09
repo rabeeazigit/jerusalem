@@ -10,6 +10,7 @@ class InformationTemplate {
     public $urban_renewal_title;
     public $urban_renewal_link;
 
+    public $rights_show_bg_image;
     public $resident_rights_title;
     public $resident_rights_link;
     public $stage_cards;
@@ -45,6 +46,7 @@ class InformationTemplate {
         $this->urban_renewal_title = get_field("urban_renewal_title") ?? null;
         $this->urban_renewal_link = get_field("urban_renewal_link") ?? null;
 
+        $this->rights_show_bg_image = get_field("rights_show_bg_image") ?? false;
         $this->resident_rights_title = get_field("resident_rights_title") ?? null;
         $this->resident_rights_link = get_field("resident_rights_link") ?? null;
         $this->stage_cards = get_field("stage_section_cards") ?? null;
