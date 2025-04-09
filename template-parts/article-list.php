@@ -7,6 +7,28 @@ $article_list_side_image = $article_list_options["article_list_side_image"] ?? n
 ?>
 
 <?php if ($article_list_items && is_array($article_list_items) && !empty($article_list_items)) : ?>
+    <?php
+    usort($article_list_items, function ($a, $b) {
+        $date_a = get_field("article_date", $a) ?? null;
+        $date_b = get_field("article_date", $b) ?? null;
+
+        if ($date_a) {
+            $date_part = explode(" | ", $date_a);
+            $date_a = $date_part[0];
+        }
+
+        if ($date_b) {
+            $date_part = explode(" | ", $date_b);
+            $date_b = $date_part[0];
+        }
+
+        $date_a = DateTime::createFromFormat('d/m/Y', $date_a)->format('Y-m-d');
+        $date_b = DateTime::createFromFormat('d/m/Y', $date_b)->format('Y-m-d');
+        
+        return strtotime($date_b) - strtotime($date_a);
+    });
+    ?>
+    
     <div class="row">
         <?php if ($article_list_title) : ?>
             <div class="col-md-12">
