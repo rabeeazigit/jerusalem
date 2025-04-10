@@ -161,10 +161,6 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                                     <!-- Collapse Anchor -->
                                                                     <div class="hstack align-items-center justify-content-between p-3 stage_side_wrapper collapsed" data-bs-toggle="collapse" data-bs-target="#stage_col_<?= $process->ID; ?>">
                                                                         <div class="hstack fs-5 gap-3">
-                                                                            <?= ($index + 1 < 10) ? ("0" . $index + 1) : ($index + 1); ?>
-
-                                                                            <div class="vr"></div>
-
                                                                             <div class="fs-6 fw-semibold">
                                                                                 <?= $process->post_title; ?>
                                                                             </div>
