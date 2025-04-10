@@ -99,15 +99,15 @@ class Lobyprojects
         }
         
         if ($this->tabaa_number && !empty($this->tabaa_number)) {
-            $html .= "<li>{$this->tabaa_number}</li>";
+            $html .= '<li>מספר התב"ע: ' . $this->tabaa_number . '</li>';
         }
         
         if ($this->project_entrepreneur && !empty($this->project_entrepreneur)) {
-            $html .= "<li>{$this->project_entrepreneur}</li>";
+            $html .= '<li>יזם הפרויקט: ' . $this->project_entrepreneur . '</li>';
         }
         
         if ($this->project_lowyer && !empty($this->project_lowyer)) {
-            $html .= "<li>{$this->project_lowyer}</li>";
+            $html .= "<li> עורך דין: {$this->project_lowyer}</li>";
         }
         
         $html .= "</ul>";
