@@ -1,6 +1,7 @@
 $(() => {
     // handles the filtering logic
-    $("#neighborhoods_search").on("change", function (event) {
+    $("#neighborhoods_search")
+        .on("input", function (event) {
         const formData = new FormData(event.currentTarget);
 
         const data = {
@@ -39,7 +40,10 @@ $(() => {
                 $(this).prop("disabled", false);
             },
         });
-    });
+        })
+        .on("submit", function (event) {
+            event.preventDefault();
+        });
 
     // Handles the load more functionallity
     $("#loadMoreProjects").on("click", function () {

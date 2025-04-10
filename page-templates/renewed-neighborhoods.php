@@ -184,7 +184,7 @@ $projects_numbers = get_field("projects_numbers") ?? null;
     <?php if ($projects_numbers && is_array($projects_numbers) && !empty($projects_numbers)) : ?>
         <hr>
 
-        <div class="row justify-content-center justify-content-md-start row-gap-4 py-2">
+        <div class="row justify-content-center row-gap-4 py-2">
             <?php foreach ($projects_numbers as $e) : ?>
                 <?php
                 $label = $e["label"] ?? null;
