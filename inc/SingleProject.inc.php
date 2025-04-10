@@ -95,19 +95,19 @@ class SingleProject
         $html = "<ul class='nbrhd ps-0 ps-md-5'>";
         
         if ($title && $title->post_title && !empty($title->post_title)) {
-            $html .= "<li>{$title->post_title}</li>";
+            $html .= "<li>שם שכונה: {$title->post_title}</li>";
         }
         
         if ($this->tabaa_number && !empty($this->tabaa_number)) {
-            $html .= '<li>מספר התב"ע: ' . $this->tabaa_number . '</li>';
+            $html .= '<li>מספר תוכנית: ' . $this->tabaa_number . '</li>';
         }
         
         if ($this->project_entrepreneur && !empty($this->project_entrepreneur)) {
-            $html .= '<li>יזם הפרויקט: ' . $this->project_entrepreneur . '</li>';
+            $html .= '<li>שם היזם: ' . $this->project_entrepreneur . '</li>';
         }
         
         if ($this->project_lowyer && !empty($this->project_lowyer)) {
-            $html .= "<li> עורך דין: {$this->project_lowyer}</li>";
+            $html .= "<li> עו\"ד בעלי הדירות: {$this->project_lowyer}</li>";
         }
         
         $html .= "</ul>";
@@ -118,7 +118,7 @@ class SingleProject
         
         if ($status_color && $status_name) {
             $html .= "<div class='sts_title ms-0 ms-md-5'>
-                התקדמות תהליך
+                סטטוס
             </div>
             
             <div class='Status_pill'>
@@ -132,7 +132,7 @@ class SingleProject
     }
 
 
-    private function ProjectCarousle()
+    private function ProjectCarousel()
     {
         $Gallery = [];
         $Gallery_RAW = $this->project_card_image_repeater;
@@ -162,7 +162,7 @@ class SingleProject
     private function HTMLGallery()
     {
         $html = "";
-        $Gallery = $this->ProjectCarousle();
+        $Gallery = $this->ProjectCarousel();
 
         if ($Gallery && !empty($Gallery)) {
             foreach ($Gallery as $gal) {
