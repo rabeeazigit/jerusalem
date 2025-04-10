@@ -109,12 +109,6 @@ function populate_cf7_subject($tag)
 
 add_filter("wpcf7_form_tag", "populate_cf7_subject", 10, 2);
 
-
-new SQLinkSCF();
-new SQLinkEnqueue();
-new AjaxHandler();
-
-
 add_action('admin_menu', function () {
     add_submenu_page(
         'edit.php?post_type=project',
@@ -274,4 +268,6 @@ function import_projects_from_csv($file_path) {
     }
 }
 
-
+new SQLinkSCF();
+new SQLinkEnqueue();
+new AjaxHandler();
