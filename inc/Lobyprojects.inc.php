@@ -214,7 +214,7 @@ class Lobyprojects
                 
                 <!-- Left Column: Text Content -->
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 about_text">
-                    <h1 class="aboutTitle ps-0 ps-md-5 display-4 fw-bold">' . get_the_title($this->pid) . '</h1>
+                    <h1 class="aboutTitle ps-0 ps-md-5 display-5 fw-bold">' . get_the_title($this->pid) . '</h1>
                         <div class="list-first">
                         ' . $this->Neighborhoods() . '
                         </div>
