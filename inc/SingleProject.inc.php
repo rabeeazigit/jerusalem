@@ -237,7 +237,7 @@ class SingleProject
 
         <!-- Right Column: Image -->
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 order-1 order-md-2">
-               ' . $this->Sexeual_Numbers() . '
+               ' . $this->RunningNumbers() . '
         </div>
 
         </div>
@@ -249,7 +249,7 @@ class SingleProject
     }
 
 
-    private function Sexeual_Numbers()
+    private function RunningNumbers()
     {
         $sexy_numbers = $this->projects_sexy_numbers;
         $html = "";
