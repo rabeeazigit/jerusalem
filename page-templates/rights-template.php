@@ -41,37 +41,55 @@ $right_category_id = $_GET["right_category_id"] ?? null;
     <?php endif; ?>
 
     <div class="row my-3 row-gap-4">
-        <!-- Information Column -->
-        <div class="col-md-6">
-            <div class="vstack gap-3">
-                <?php if ($main_title) : ?>
-                    <div class="display-3 fw-bold rubik">
-                        <?= $main_title; ?>
+        <?php if ($side_image) : ?>
+            <!-- Information Column -->
+            <div class="col-md-6">
+                <div class="vstack gap-3">
+                    <?php if ($main_title) : ?>
+                        <div class="display-3 fw-bold rubik">
+                            <?= $main_title; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($main_paragraph) : ?>
+                        <div class="fs-5">
+                            <?= $main_paragraph; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <!-- Image Column -->
+            <div class="col-md-6">
+                <?php if (!wp_is_mobile() && $side_image) : ?>
+                    <div class="d-flex sticky-top align-items-center justify-content-center">
+                        <img class="img-fluid" src="<?= $side_image; ?>" alt="" loading="lazy">
                     </div>
                 <?php endif; ?>
 
-                <?php if ($main_paragraph) : ?>
-                    <div class="fs-5">
-                        <?= $main_paragraph; ?>
+                <?php if (wp_is_mobile() && $side_image_mobile) : ?>
+                    <div class="d-flex sticky-top align-items-center justify-content-center">
+                        <img class="img-fluid" src="<?= $side_image_mobile; ?>" alt="" loading="lazy">
                     </div>
                 <?php endif; ?>
             </div>
-        </div>
+        <?php else : ?>
+            <div class="col-md-12">
+                <div class="vstack gap-3">
+                    <?php if ($main_title) : ?>
+                        <div class="display-3 fw-bold rubik">
+                            <?= $main_title; ?>
+                        </div>
+                    <?php endif; ?>
 
-        <!-- Image Column -->
-        <div class="col-md-6">
-            <?php if (!wp_is_mobile() && $side_image) : ?>
-                <div class="d-flex sticky-top align-items-center justify-content-center">
-                    <img class="img-fluid" src="<?= $side_image; ?>" alt="" loading="lazy">
+                    <?php if ($main_paragraph) : ?>
+                        <div class="fs-5">
+                            <?= $main_paragraph; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
-            <?php endif; ?>
-
-            <?php if (wp_is_mobile() && $side_image_mobile) : ?>
-                <div class="d-flex sticky-top align-items-center justify-content-center">
-                    <img class="img-fluid" src="<?= $side_image_mobile; ?>" alt="" loading="lazy">
-                </div>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php endif; ?>
     </div>
 </header>
 
