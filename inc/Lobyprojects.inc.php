@@ -7,7 +7,6 @@ class Lobyprojects
 
     //Neighborhoods tab
     public $project_neighborhood;
-    public $tzof_number;
     public $tabaa_number;
     public $project_entrepreneur;
     public $project_lowyer;
@@ -34,7 +33,6 @@ class Lobyprojects
 
         //Neighborhoods tab
         $this->project_neighborhood = get_field("project_neighborhood", $this->pid);
-        $this->tzof_number = get_field("tzof_number", $this->pid);
         $this->tabaa_number = get_field("tabaa_number", $this->pid);
         $this->project_entrepreneur = get_field("project_entrepreneur", $this->pid);
         $this->project_lowyer = get_field("project_lowyer", $this->pid);
@@ -98,10 +96,6 @@ class Lobyprojects
         
         if ($title && $title->post_title && !empty($title->post_title)) {
             $html .= "<li>{$title->post_title}</li>";
-        }
-
-        if ($this->tzof_number && !empty($this->tzof_number)) {
-            $html .= "<li>{$this->tzof_number}</li>";
         }
         
         if ($this->tabaa_number && !empty($this->tabaa_number)) {
