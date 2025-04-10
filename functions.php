@@ -112,74 +112,76 @@ add_filter("wpcf7_form_tag", "populate_cf7_subject", 10, 2);
 add_action('admin_menu', function () {
     add_submenu_page(
         'edit.php?post_type=project',
-        'Import Projects via CSV',
-        'Import CSV (AJAX)',
+        'ייבוא פרויקטים באמצעות CSV',
+        'ייבוא CSV (AJAX)',
         'edit_others_posts',
         'import_projects_ajax',
         'render_ajax_import_page'
     );
 });
 
-function render_ajax_import_page() {
-    ?>
+function render_ajax_import_page()
+{
+?>
     <div class="wrap">
-        <h1>Import Projects via CSV (AJAX)</h1>
+        <h1>ייבוא פרויקטים באמצעות CSV (AJAX)</h1>
         <form id="project-csv-upload-form" enctype="multipart/form-data">
             <input type="file" name="csv_file" accept=".csv" required>
-            <button class="button button-primary" type="submit">Upload & Import</button>
+            <button class="button button-primary" type="submit">העלאה וייבוא</button>
         </form>
         <div id="csv-import-response" style="margin-top: 20px;"></div>
     </div>
 
     <script>
-    jQuery(document).ready(function($) {
-        $('#project-csv-upload-form').on('submit', function(e) {
-            e.preventDefault();
-            let formData = new FormData(this);
-            formData.append('action', 'import_project_csv_ajax');
+        jQuery(document).ready(function($) {
+            $('#project-csv-upload-form').on('submit', function(e) {
+                e.preventDefault();
+                let formData = new FormData(this);
+                formData.append('action', 'import_project_csv_ajax');
 
-            $.ajax({
-                url: ajaxurl,
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                beforeSend: function () {
-                    $('#csv-import-response').html('<p>Importing... please wait.</p>');
-                },
-                success: function (response) {
-                    $('#csv-import-response').html(response.data.message);
-                },
-                error: function (xhr) {
-                    let msg = '<div class="notice notice-error"><p>Unexpected error occurred.</p></div>';
-                    if (xhr.responseJSON?.data?.message) {
-                        msg = '<div class="notice notice-error"><p>' + xhr.responseJSON.data.message + '</p></div>';
+                $.ajax({
+                    url: ajaxurl,
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $('#csv-import-response').html('<p>ייבוא... אנא המתן.</p>');
+                    },
+                    success: function(response) {
+                        $('#csv-import-response').html(response.data.message);
+                    },
+                    error: function(xhr) {
+                        let msg = '<div class="notice notice-error"><p>אירעה שגיאה בלתי צפויה.</p></div>';
+                        if (xhr.responseJSON?.data?.message) {
+                            msg = '<div class="notice notice-error"><p>' + xhr.responseJSON.data.message + '</p></div>';
+                        }
+                        $('#csv-import-response').html(msg);
                     }
-                    $('#csv-import-response').html(msg);
-                }
+                });
             });
         });
-    });
     </script>
-    <?php
+<?php
 }
 
 add_action('wp_ajax_import_project_csv_ajax', 'handle_project_csv_ajax_upload');
 
-function handle_project_csv_ajax_upload() {
+function handle_project_csv_ajax_upload()
+{
     if (!current_user_can('edit_others_posts')) {
-        wp_send_json_error(['message' => 'Permission denied.']);
+        wp_send_json_error(['message' => 'אין לך הרשאות לבצע פעולה זו.']);
     }
 
     if (empty($_FILES['csv_file']['tmp_name'])) {
-        wp_send_json_error(['message' => 'No file uploaded.']);
+        wp_send_json_error(['message' => 'לא הועלה קובץ.']);
     }
 
     $file_path = $_FILES['csv_file']['tmp_name'];
     $file_type = mime_content_type($file_path);
 
     if ($file_type !== 'text/csv' && $file_type !== 'application/vnd.ms-excel') {
-        wp_send_json_error(['message' => 'Invalid file format. Please upload a CSV file.']);
+        wp_send_json_error(['message' => 'פורמט קובץ לא תקין. יש להעלות קובץ CSV.']);
     }
 
     try {
@@ -190,18 +192,20 @@ function handle_project_csv_ajax_upload() {
     }
 }
 
-function import_projects_from_csv($file_path) {
+
+function import_projects_from_csv($file_path)
+{
     $errors = [];
     $imported = 0;
 
     try {
         if (!file_exists($file_path)) {
-            throw new Exception('CSV file not found.');
+            throw new Exception('קובץ לא נמצא.');
         }
 
         if (($handle = fopen($file_path, 'r')) !== false) {
             $headers = fgetcsv($handle);
-            $headers = array_map(function($h) {
+            $headers = array_map(function ($h) {
                 $h = trim($h);
                 $h = preg_replace('/\s+/', '_', $h);
                 $h = preg_replace('/[^a-zA-Z0-9_]/', '', $h);
@@ -214,7 +218,7 @@ function import_projects_from_csv($file_path) {
                     $index++;
                     if (empty(array_filter($row))) continue;
 
-                    $row = array_map(function($value) {
+                    $row = array_map(function ($value) {
                         return mb_convert_encoding(trim($value), 'UTF-8', 'auto');
                     }, $row);
 
@@ -222,7 +226,7 @@ function import_projects_from_csv($file_path) {
 
                     $title = $data['post_title'] ?? '';
                     if (!$title || trim($title) === '') {
-                        throw new Exception("Missing title on row $index. Row Data: " . implode(", ", $row));
+                        throw new Exception("חסר כותרת בשורה " . "$index. " . "נתוני שורה: " . implode(", ", $row));
                     }
 
                     $existing_post = get_page_by_title($title, OBJECT, 'project');
@@ -237,7 +241,7 @@ function import_projects_from_csv($file_path) {
                     }
 
                     if (!$post_id || is_wp_error($post_id)) {
-                        throw new Exception("Failed to insert/update post: $title. Row Data: " . implode(", ", $row));
+                        throw new Exception("נכשל ניסיון ההוספה/עדכון של הפוסט: $title. נתוני שורה: " . implode(", ", $row));
                     }
 
                     update_field('project_address', $data['address'] ?? '', $post_id);
@@ -249,22 +253,21 @@ function import_projects_from_csv($file_path) {
 
                     $imported++;
                 } catch (Throwable $rowError) {
-                    $errors[] = "Row $index failed: " . $rowError->getMessage() . " | Row Data: " . implode(", ", $row);
+                    $errors[] = $errors[] = "השורה מספר $index נכשלה: " . $rowError->getMessage() . " | נתוני שורה: " . implode(", ", $row);
                 }
             }
             fclose($handle);
         }
 
-        $message = "<div class=\"notice notice-success\"><p>✅ Imported $imported project(s) successfully!</p></div>";
+        $message = "<div class=\"notice notice-success\"><p>✅ ייבוא $imported פרויקט(ים) הושלם בהצלחה!</p></div>";
 
         if (count($errors)) {
-            $message .= '<div class="notice notice-warning"><p>Some rows failed to import:</p><ul><li>' . implode('</li><li>', array_map('esc_html', $errors)) . '</li></ul></div>';
+            $message .= '<div class="notice notice-warning"><p>חלק מהשורות נכשלו בייבוא:</p><ul><li>' . implode('</li><li>', array_map('esc_html', $errors)) . '</li></ul></div>';
         }
 
         return $message;
-
     } catch (Throwable $e) {
-        return '<div class="notice notice-error"><p><strong>❌ Error:</strong> ' . esc_html($e->getMessage()) . '</p></div>';
+        return '<div class="notice notice-error"><p><strong>❌ שגיאה:</strong> ' . esc_html($e->getMessage()) . '</p></div>';
     }
 }
 
