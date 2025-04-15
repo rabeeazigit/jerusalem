@@ -22,7 +22,12 @@ class Areafields
         $this->arie_fields_connection = get_field('arie_fields_connection', $this->pid);
         $this->community_field_title_accotdion = get_field('community_field_title_accotdion', $this->pid);
 
-
+        wp_enqueue_script(
+            "area-fields-js",
+            get_template_directory_uri() . "/assets/js/area-fields.js",
+            [],
+            filemtime(get_template_directory() . "/assets/js/area-fields.js")
+        );
     }
 
     public function LeftSideCats()
@@ -144,10 +149,10 @@ class Areafields
             'post_type' => 'area-fields',
             'orderby' => 'date',
             'order' => 'DESC',
-            'posts_per_page' => -1, // Fetch all posts
+            'posts_per_page' => -1,
             'tax_query' => array(
                 array(
-                    'taxonomy' => 'category', // Replace with your actual taxonomy name
+                    'taxonomy' => 'category',
                     'field' => 'term_id',
                     'terms' => $term_id,
                 ),
@@ -158,80 +163,8 @@ class Areafields
         return $posts;
     }
 
-
-
-    // private function BootsrapAccordion($terms)
-    // {
-    //     //$terms Needs to be an array....
-
-    //     $html = '<div class="accordion" id="accordionPanelsfields">';
-
-
-    //     foreach ($terms as $post) {
-
-    //         $GroupContent = $this->GetAccordionContent($post->ID);
-
-
-    //         //area_sticky_image
-    //         $sticky =  $GroupContent['area_sticky_image']  == 1 ? 'class="img-fluid position-sticky" style="top: 20px;" ' : 'style="width:100%;"';
-    //         $sec1Args = array(
-    //             'all_fields'=>$GroupContent['all_fields'] ,
-    //             'area_title' => $GroupContent['area_title'] ,
-    //             'area_content' => $GroupContent['area_content'] ,
-    //             'area_image' => $GroupContent['area_image'] ,
-    //             'area_more_btn' => $GroupContent['area_more_btn'] ?? '' ,
-    //             'sticky' => $sticky);
-
-    //         $sec2Args = array($GroupContent['area_table'], $GroupContent['table_title']);
-    //         $sec3Args = $GroupContent['downloads'] ;
-    //         $pid = $GroupContent['pid'];
-    //         $sec_videos_Args = $GroupContent['videos'] ;
-
-
-
-
-    //         $html .= ' 
-    //             <div class="accordion-item">
-    //                 <h2 class="accordion-header">
-    //                 <button class="accordion-button" 
-    //                             type="button" 
-    //                             data-bs-toggle="collapse" 
-    //                             data-bs-target="#panelsStayOpen-collapse'.$post->ID.'" 
-    //                             aria-expanded="true" 
-    //                             aria-controls="panelsStayOpen-collapse'.$post->ID.'" >
-    //                     '.$post->post_title.'
-    //                 </button>
-    //                 </h2>
-    //                 <div id="panelsStayOpen-collapse'.$post->ID.'"  class="accordion-collapse collapse" data-bs-parent="#accordionPanelsfields">
-    //              <div class="accordion-body">';
-
-    //              ob_start();
-
-    //         get_template_part("template-parts/area-fields/acc-section1", null, $sec1Args);
-    //         get_template_part("template-parts/area-fields/acc-section2", null, $sec2Args);
-    //         get_template_part("template-parts/area-fields/acc-section3", null, $sec3Args);
-
-
-
-    //      include(get_template_directory(). "/template-parts/area-fields/acc-section_video.php");
-    //         $html .= ob_get_clean();
-
-    //         $html .= '</div></div></div>';
-
-    //     }
-
-
-
-    //     $html .= '</div>' ; //Closer Accordion
-
-    //     return $html;
-    // }
-
-
     private function BootsrapAccordion($terms)
     {
-        //$terms Needs to be an array....
-    
         $html = '<div class="" id="accordionPanelsfields">';
     
         foreach ($terms as $post) {
@@ -341,10 +274,10 @@ class Areafields
 
             $html .= ' <li class="nav-item" 
                             role="presentation">
-                            <button class=" small-button activeFieldLink rounded-pill ' . $active_class . '  m-2" id="pills-' . $term_id . '-tab" 
+                            <button class=" small-button area_field_tab_btn activeFieldLink rounded-pill ' . $active_class . '  m-2" id="pills-' . $term_id . '-tab" 
                             data-bs-toggle="pill" data-bs-target="#pills-' . $term_id . '" 
                             type="button" role="tab" aria-controls="pills-' . $term_id . '" 
-                            aria-selected="true">' . $cat->name . '</button>
+                            aria-selected="true" data-term-id="' . $term_id . '">' . $cat->name . '</button>
                         </li>';
 
             $terms[$term_id] = $this->GET_AreaFieldsTermsPosts($term_id);
