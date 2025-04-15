@@ -32,7 +32,7 @@ class Areafields
 
     public function LeftSideCats()
     {
-        return $this->hero_section['bk_sec_about'];
+        return $this->hero_section['bk_sec_about'] ?? null;
     }
 
 
