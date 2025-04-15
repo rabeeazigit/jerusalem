@@ -3215,11 +3215,11 @@ class SQLinkSCF
 
             acf_add_local_field_group(array(
                 'key' => 'group_67989983c1deb',
-                'title' => 'Article',
+                'title' => 'שדות מאמר',
                 'fields' => array(
                     array(
                         'key' => 'field_67989ae8479c1',
-                        'label' => 'Card Information',
+                        'label' => 'כרטיסיה',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -3237,7 +3237,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67af3a505c884',
-                        'label' => 'Displayed Image',
+                        'label' => 'תמונת כרטיסיה',
                         'name' => 'article_image',
                         'aria-label' => '',
                         'type' => 'image',
@@ -3265,7 +3265,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_679899b6479be',
-                        'label' => 'Article Date',
+                        'label' => 'תאריך',
                         'name' => 'article_date',
                         'aria-label' => '',
                         'type' => 'date_picker',
@@ -3284,7 +3284,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67989983479bd',
-                        'label' => 'Article Description',
+                        'label' => 'תיאור קצר',
                         'name' => 'article_description',
                         'aria-label' => '',
                         'type' => 'textarea',
@@ -3306,7 +3306,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67989b1e479c3',
-                        'label' => 'Content',
+                        'label' => 'תכנים',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -3324,7 +3324,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67b31c050dce6',
-                        'label' => 'Detailed Content',
+                        'label' => 'תכנים',
                         'name' => 'detailed_content',
                         'aria-label' => '',
                         'type' => 'flexible_content',
@@ -3341,12 +3341,12 @@ class SQLinkSCF
                             'layout_67aa0ea5cfd44' => array(
                                 'key' => 'layout_67aa0ea5cfd44',
                                 'name' => 'title_and_description',
-                                'label' => 'Title And Description',
+                                'label' => 'כותרת ותוכן',
                                 'display' => 'block',
                                 'sub_fields' => array(
                                     array(
                                         'key' => 'field_67b31c050dcec',
-                                        'label' => 'Value',
+                                        'label' => '',
                                         'name' => 'value',
                                         'aria-label' => '',
                                         'type' => 'group',
@@ -3367,7 +3367,7 @@ class SQLinkSCF
                                         'sub_fields' => array(
                                             array(
                                                 'key' => 'field_67b31c050dced',
-                                                'label' => 'Title',
+                                                'label' => 'כותרת',
                                                 'name' => 'title',
                                                 'aria-label' => '',
                                                 'type' => 'text',
@@ -3388,7 +3388,7 @@ class SQLinkSCF
                                             ),
                                             array(
                                                 'key' => 'field_67b31c050dcee',
-                                                'label' => 'Description',
+                                                'label' => 'תוכן',
                                                 'name' => 'description',
                                                 'aria-label' => '',
                                                 'type' => 'wysiwyg',
@@ -3421,15 +3421,84 @@ class SQLinkSCF
                                 'acfe_flexible_modal_edit_size' => false,
                                 'acfe_flexible_category' => false,
                             ),
+                            'layout_67fe139f92960' => array(
+                                'key' => 'layout_67fe139f92960',
+                                'name' => 'single-image',
+                                'label' => 'תמונה',
+                                'display' => 'block',
+                                'sub_fields' => array(
+                                    array(
+                                        'key' => 'field_67fe13ac92962',
+                                        'label' => '',
+                                        'name' => 'value',
+                                        'aria-label' => '',
+                                        'type' => 'group',
+                                        'instructions' => '',
+                                        'required' => 0,
+                                        'conditional_logic' => 0,
+                                        'wrapper' => array(
+                                            'width' => '',
+                                            'class' => '',
+                                            'id' => '',
+                                        ),
+                                        'layout' => 'block',
+                                        'acfe_seamless_style' => 0,
+                                        'acfe_group_modal' => 0,
+                                        'sub_fields' => array(
+                                            array(
+                                                'key' => 'field_67fe13b292963',
+                                                'label' => 'תמונה',
+                                                'name' => 'image',
+                                                'aria-label' => '',
+                                                'type' => 'image',
+                                                'instructions' => '',
+                                                'required' => 1,
+                                                'conditional_logic' => 0,
+                                                'wrapper' => array(
+                                                    'width' => '',
+                                                    'class' => '',
+                                                    'id' => '',
+                                                ),
+                                                'uploader' => '',
+                                                'return_format' => 'array',
+                                                'library' => 'all',
+                                                'acfe_thumbnail' => 0,
+                                                'min_width' => '',
+                                                'min_height' => '',
+                                                'min_size' => '',
+                                                'max_width' => '',
+                                                'max_height' => '',
+                                                'max_size' => '',
+                                                'mime_types' => '',
+                                                'allow_in_bindings' => 0,
+                                                'preview_size' => 'thumbnail',
+                                            ),
+                                        ),
+                                        'acfe_group_modal_close' => 0,
+                                        'acfe_group_modal_button' => '',
+                                        'acfe_group_modal_size' => 'large',
+                                    ),
+                                ),
+                                'min' => '',
+                                'max' => '',
+                                'acfe_flexible_render_template' => false,
+                                'acfe_flexible_render_style' => false,
+                                'acfe_flexible_render_script' => false,
+                                'acfe_flexible_thumbnail' => false,
+                                'acfe_flexible_settings' => false,
+                                'acfe_flexible_settings_size' => 'medium',
+                                'acfe_flexible_modal_edit_size' => false,
+                                'acfe_flexible_category' => false,
+                            ),
                             'layout_67aa0f12cfd4b' => array(
                                 'key' => 'layout_67aa0f12cfd4b',
                                 'name' => 'data_table',
-                                'label' => 'Data Table',
+                                'label' => 'טבלת נתונים',
                                 'display' => 'block',
                                 'sub_fields' => array(
                                     array(
                                         'key' => 'field_67b31c050dcf3',
-                                        'label' => 'Value',
+                                        'label' => '',
                                         'name' => 'value',
                                         'aria-label' => '',
                                         'type' => 'group',
@@ -3450,7 +3519,7 @@ class SQLinkSCF
                                         'sub_fields' => array(
                                             array(
                                                 'key' => 'field_67b31c050dcf4',
-                                                'label' => 'Title',
+                                                'label' => 'כותרת',
                                                 'name' => 'title',
                                                 'aria-label' => '',
                                                 'type' => 'text',
@@ -3471,11 +3540,11 @@ class SQLinkSCF
                                             ),
                                             array(
                                                 'key' => 'field_67b31c050dcf5',
-                                                'label' => 'Table Data',
+                                                'label' => 'נתונים',
                                                 'name' => 'table_data',
                                                 'aria-label' => '',
                                                 'type' => 'repeater',
-                                                'instructions' => 'The first row acts as a header',
+                                                'instructions' => 'השורה הראשונה משמשת ככותרת',
                                                 'required' => 0,
                                                 'conditional_logic' => 0,
                                                 'wrapper' => array(
@@ -3489,12 +3558,12 @@ class SQLinkSCF
                                                 'min' => 1,
                                                 'max' => 0,
                                                 'collapsed' => '',
-                                                'button_label' => 'Add Table Row',
+                                                'button_label' => 'הוספת שורה',
                                                 'rows_per_page' => 20,
                                                 'sub_fields' => array(
                                                     array(
                                                         'key' => 'field_67b31c050dcf6',
-                                                        'label' => 'Column 1',
+                                                        'label' => 'עמודה 1',
                                                         'name' => 'column_1',
                                                         'aria-label' => '',
                                                         'type' => 'text',
@@ -3516,7 +3585,7 @@ class SQLinkSCF
                                                     ),
                                                     array(
                                                         'key' => 'field_67b31c050dcf7',
-                                                        'label' => 'Column 2',
+                                                        'label' => 'עמודה 2',
                                                         'name' => 'column_2',
                                                         'aria-label' => '',
                                                         'type' => 'text',
@@ -3538,7 +3607,7 @@ class SQLinkSCF
                                                     ),
                                                     array(
                                                         'key' => 'field_67b31c050dcf8',
-                                                        'label' => 'Column 3',
+                                                        'label' => 'עמודה 3',
                                                         'name' => 'column_3',
                                                         'aria-label' => '',
                                                         'type' => 'text',
@@ -3560,7 +3629,7 @@ class SQLinkSCF
                                                     ),
                                                     array(
                                                         'key' => 'field_67b31c050dcf9',
-                                                        'label' => 'Column 4',
+                                                        'label' => 'עמודה 4',
                                                         'name' => 'column_4',
                                                         'aria-label' => '',
                                                         'type' => 'text',
@@ -3599,12 +3668,12 @@ class SQLinkSCF
                             'layout_67aa0ff0cfd59' => array(
                                 'key' => 'layout_67aa0ff0cfd59',
                                 'name' => 'youtube_videos',
-                                'label' => 'YouTube Videos',
+                                'label' => 'סרטוני יוטוב',
                                 'display' => 'block',
                                 'sub_fields' => array(
                                     array(
                                         'key' => 'field_67b31c050dcfd',
-                                        'label' => 'Value',
+                                        'label' => '',
                                         'name' => 'value',
                                         'aria-label' => '',
                                         'type' => 'group',
@@ -3625,7 +3694,7 @@ class SQLinkSCF
                                         'sub_fields' => array(
                                             array(
                                                 'key' => 'field_67b31c050dcfe',
-                                                'label' => 'Title',
+                                                'label' => 'כותרת',
                                                 'name' => 'title',
                                                 'aria-label' => '',
                                                 'type' => 'text',
@@ -3646,7 +3715,7 @@ class SQLinkSCF
                                             ),
                                             array(
                                                 'key' => 'field_67b31c050dcff',
-                                                'label' => 'YouTube Ids',
+                                                'label' => 'מזזהי סרטונים',
                                                 'name' => 'youtube_ids',
                                                 'aria-label' => '',
                                                 'type' => 'repeater',
@@ -3664,12 +3733,12 @@ class SQLinkSCF
                                                 'min' => 0,
                                                 'max' => 0,
                                                 'collapsed' => '',
-                                                'button_label' => 'Add YouTube Id',
+                                                'button_label' => 'הוספת מזהה',
                                                 'rows_per_page' => 20,
                                                 'sub_fields' => array(
                                                     array(
                                                         'key' => 'field_67b31c050dd00',
-                                                        'label' => 'Video Id',
+                                                        'label' => 'מזהה',
                                                         'name' => 'video_id',
                                                         'aria-label' => '',
                                                         'type' => 'text',
@@ -3708,12 +3777,12 @@ class SQLinkSCF
                             'layout_67b32a9f85503' => array(
                                 'key' => 'layout_67b32a9f85503',
                                 'name' => 'image_gallery',
-                                'label' => 'Image Gallery',
+                                'label' => 'גלרייה',
                                 'display' => 'block',
                                 'sub_fields' => array(
                                     array(
                                         'key' => 'field_67b32aa685505',
-                                        'label' => 'Value',
+                                        'label' => '',
                                         'name' => 'value',
                                         'aria-label' => '',
                                         'type' => 'group',
@@ -3734,7 +3803,7 @@ class SQLinkSCF
                                         'sub_fields' => array(
                                             array(
                                                 'key' => 'field_67b32ab085506',
-                                                'label' => 'Gallery',
+                                                'label' => 'גלרייה',
                                                 'name' => 'gallery',
                                                 'aria-label' => '',
                                                 'type' => 'gallery',
@@ -3762,7 +3831,7 @@ class SQLinkSCF
                                             ),
                                             array(
                                                 'key' => 'field_67b32c01f58fe',
-                                                'label' => 'Subtitle',
+                                                'label' => 'תת כותרת',
                                                 'name' => 'subtitle',
                                                 'aria-label' => '',
                                                 'type' => 'textarea',
@@ -3819,6 +3888,9 @@ class SQLinkSCF
                                         'layout' => 'block',
                                         'acfe_seamless_style' => 0,
                                         'acfe_group_modal' => 0,
+                                        'acfe_group_modal_close' => 0,
+                                        'acfe_group_modal_button' => '',
+                                        'acfe_group_modal_size' => 'large',
                                         'sub_fields' => array(
                                             array(
                                                 'key' => 'field_67d04404fe1a2',
@@ -3865,9 +3937,6 @@ class SQLinkSCF
                                                 'save_other_choice' => 0,
                                             ),
                                         ),
-                                        'acfe_group_modal_close' => 0,
-                                        'acfe_group_modal_button' => '',
-                                        'acfe_group_modal_size' => 'large',
                                     ),
                                 ),
                                 'min' => '',
@@ -3884,7 +3953,7 @@ class SQLinkSCF
                         ),
                         'min' => '',
                         'max' => '',
-                        'button_label' => 'Add Row',
+                        'button_label' => 'הוספת תוכן',
                         'acfe_flexible_stylised_button' => false,
                         'acfe_flexible_hide_empty_message' => false,
                         'acfe_flexible_empty_message' => '',
@@ -3911,7 +3980,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67b32f1e61667',
-                        'label' => 'Related Articles',
+                        'label' => 'מאמרים נוספים',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -3929,7 +3998,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67b32f732eaf4',
-                        'label' => 'Related Articles Title',
+                        'label' => 'כותרת',
                         'name' => 'related_articles_title',
                         'aria-label' => '',
                         'type' => 'text',
@@ -3950,7 +4019,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67b32f2661668',
-                        'label' => 'Related Articles',
+                        'label' => 'מאמרים נוספים',
                         'name' => 'related_articles',
                         'aria-label' => '',
                         'type' => 'relationship',
