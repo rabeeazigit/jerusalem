@@ -233,29 +233,35 @@ class Areafields
     {
         $LayOut = [];
         $content = get_field('main_area_fields', $pid); //GROUP ACF
-
-        $LayOut['area_title'] = $content[0]['area_title'];
-        $LayOut['area_content'] = $content[0]['area_content'];
-        $LayOut['all_fields'] = $content[0]['all_fields'];
-        $LayOut['all_fields_title'] = $content[0]['all_fields_title'];
-        $LayOut['area_image'] = $content[0]['area_image']['url'];
-        $LayOut['area_sticky_image'] = $content[0]['area_sticky_image'];
-        $LayOut['area_more_btn'] = $content[0]['area_more_btn'];
-        //================================================================
-        $LayOut['area_table'] = $content[1]['area_table'];
-        $LayOut['table_title'] = $content[1]['table_title'];
-        //================================================================
-
-        $LayOut['downloads'] = $content[2]['area_files_download'];
-        $LayOut['videos'] = $content[3]['area_videos'];
+    
+        if (isset($content[0])) {
+            $LayOut['area_title'] = $content[0]['area_title'] ?? '';
+            $LayOut['area_content'] = $content[0]['area_content'] ?? '';
+            $LayOut['all_fields'] = $content[0]['all_fields'] ?? [];
+            $LayOut['all_fields_title'] = $content[0]['all_fields_title'] ?? '';
+            $LayOut['area_image'] = $content[0]['area_image']['url'] ?? '';
+            $LayOut['area_sticky_image'] = $content[0]['area_sticky_image'] ?? '';
+            $LayOut['area_more_btn'] = $content[0]['area_more_btn'] ?? '';
+        }
+    
+        if (isset($content[1])) {
+            $LayOut['area_table'] = $content[1]['area_table'] ?? [];
+            $LayOut['table_title'] = $content[1]['table_title'] ?? '';
+        }
+    
+        if (isset($content[2]['area_files_download'])) {
+            $LayOut['downloads'] = $content[2]['area_files_download'];
+        }
+    
+        if (isset($content[3]['area_videos'])) {
+            $LayOut['videos'] = $content[3]['area_videos'];
+        }
+    
         $LayOut['pid'] = wp_unique_id('slider_');
-
+    
         return $LayOut;
     }
-
-
-
-
+    
     public function GetPillsCategories()
     {
         $cats = $this->FetchAreaFiedlsCategories();
@@ -297,8 +303,6 @@ class Areafields
         $cnt = 0;
         $active_class = '';
         foreach ($terms as $key => $terminis) {
-
-            $randomNumber = mt_rand(5221, 1000000);
 
             if ($cnt == 0) {
                 $active_class = 'show active';
