@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     // Get the top navbar element
     const topNavbar = document.querySelector("#top-navbar");
     const brandTextLabel = document.querySelector("#desktop_brand_text");
+    const mainMenu = document.querySelector("#main-menu");
 
     // Listen for user scrolling
     document.addEventListener("scroll", (event) => {
@@ -9,14 +10,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const currentY = window.scrollY;
 
         // If the user is at 100px on the y-axis
-        // The top navbar and brand text should be hidden
-        // Else they're shown regularly
         if (currentY >= 100) {
+            // The top navbar and brand text should be hidden
             topNavbar.style.top = "-80px";
             brandTextLabel.style.top = "-160px";
-        } else {
+
+            // Add -42px top to the main menu
+            mainMenu.style.top = "-42px";
+        }
+        // Else they're shown regularly
+        else {
             topNavbar.style.top = "0";
             brandTextLabel.style.top = "0";
+
+            // Add 0 top to the main menu
+            mainMenu.style.top = "0";
         }
     });
 

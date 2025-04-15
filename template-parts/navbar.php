@@ -110,7 +110,7 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
             </div>
         </div>
 
-        <div class="hstack align-items-center justify-content-between main_menu_wrapper mt-4" id="main-menu">
+        <div class="hstack align-items-center justify-content-between main_menu_wrapper mt-4 position-relative" id="main-menu">
             <div class="h-100 ">
                 <a href="<?= home_url(); ?>" class="h-100 hstack gap-2 align-items-center text-reset text-decoration-none">
                     <?php if ($navbar->brand_logo) : ?>

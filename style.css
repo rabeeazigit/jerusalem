@@ -177,10 +177,6 @@ body {
     height: 16px;
 }
 
-#top-navbar {
-    border-bottom: 1px solid;
-}
-
 .about_managment_menu {
     top: 10px !important;
 }
@@ -1162,6 +1158,7 @@ textarea {
 }
 
 #top-navbar {
+    border-bottom: 1px solid;
     position: relative;
     transition: all 250ms ease-in-out;
 }
@@ -1434,4 +1431,8 @@ textarea {
 
 .renewal_stage_submenu:hover {
     background-color: var(--primary-hover);
+}
+
+#main-menu {
+    transition: all 250ms ease-in-out;
 }
