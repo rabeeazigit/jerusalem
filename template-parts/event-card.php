@@ -15,18 +15,6 @@ if (!empty($event_occurrence_date) && strpos($event_occurrence_date, ' ') !== fa
     $event_date = null;
     $event_time = null;
 }
-
-switch ($post_type) {
-    case "event":
-        $post_type = "כנס";
-        break;
-    case "forum":
-        $post_type = "פורום";
-        break;
-    case "course":
-        $post_type = "קורס";
-        break;
-}
 ?>
 
 <a href="<?= $permalink; ?>" class="vstack event_card_wrapper px-3 gap-2 h-100 text-decoration-none text-reset">

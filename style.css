@@ -47,6 +47,10 @@ body {
     direction: rtl;
 }
 
+.sq-text-primary {
+    color: var(--primary);
+}
+
 .linear_bg_page {
     background: linear-gradient(70deg, #174a74 85%, #376a93);
 }

@@ -59,6 +59,15 @@ get_header();
             </div>
         <?php endif; ?>
 
+        <?php 
+        // get the categories that are not empty
+        // so we can filter using them
+        $media_categories = get_terms([
+            'taxonomy' => 'event-category',
+            'hide_empty' => true
+        ]);
+        ?>
+        
         <?php if (wp_is_mobile()) : ?>
             <form id="search_form" class="row row-gap-3 mb-5 px-3">
                 <div class="col-12">
@@ -70,17 +79,16 @@ get_header();
                         <input type="text" id="query_search" class="form-control border-0" name="query" placeholder="חיפוש">
                     </div>
                 </div>
-
+                
                 <div class="col-12 hstack gap-3 justify-content-center flex-wrap">
-                    <div>
-                        <input type="checkbox" class="btn-check event_filter_btn" name="event" id="event">
-                        <label for="event" class="btn btn-outline-sq-primary rounded-pill">כנסים</label>
-                    </div>
-
-                    <div>
-                        <input type="checkbox" class="btn-check event_filter_btn" name="course" id="course">
-                        <label for="course" class="btn btn-outline-sq-primary rounded-pill">קורסים</label>
-                    </div>
+                    <?php foreach ($media_categories as $e) : ?>
+                        <div>
+                            <input type="checkbox" class="btn-check event_filter_btn" name="<?= $term->slug; ?>" id="<?= $term->slug; ?>">
+                            <label for="<?= $term->slug; ?>" class="btn btn-outline-sq-primary rounded-pill">
+                                <?= $term->name; ?>
+                            </label>
+                        </div>
+                    <?php endforeach; ?>
 
                     <div>
                         <input type="checkbox" class="btn-check event_filter_btn" name="done" id="done">
@@ -89,12 +97,13 @@ get_header();
                 </div>
             </form>
         <?php else : ?>
-            <form id="search_form" class="hstack gap-4 align-items-center justify-content-center mb-5">
-                <input type="checkbox" class="btn-check event_filter_btn" name="event" id="event">
-                <label for="event" class="btn btn-outline-sq-primary rounded-pill">כנסים</label>
-
-                <input type="checkbox" class="btn-check event_filter_btn" name="course" id="course">
-                <label for="course" class="btn btn-outline-sq-primary rounded-pill">קורסים</label>
+            <form id="search_form" class="hstack gap-2 align-items-center justify-content-center mb-5">
+                <?php foreach ($media_categories as $e) : ?>
+                    <input type="checkbox" class="btn-check event_filter_btn" name="event_category" id="<?= $e->slug; ?>" data-term-id="<?= $e->term_id; ?>">
+                    <label for="<?= $e->slug; ?>" class="btn btn-outline-sq-primary rounded-pill">
+                        <?= $e->name; ?>
+                    </label>
+                <?php endforeach; ?>
 
                 <input type="checkbox" class="btn-check event_filter_btn" name="done" id="done">
                 <label for="done" class="btn btn-outline-sq-primary rounded-pill">התקיימו</label>
@@ -121,7 +130,7 @@ get_header();
                             "event_card_short_description" => get_field("event_card_short_description", $e),
                             "event_card_short_button_text" => get_field("event_card_short_button_text", $e),
                             "permalink" => get_permalink($e),
-                            "post_type" => get_post_type($e) == "forum" ? "forum" : get_field("event_type", $e)
+                            "post_type" => get_field("event_type", $e) ? get_field("event_type", $e)->name : null
                         ]) ?>
                     </div>
                 <?php endforeach; ?>
@@ -145,6 +154,19 @@ get_header();
 
 <script>
     $(() => {
+        // listen for scroll
+        // hide blue background when navbar is sticky
+        $(window).on("scroll", function () {
+            // Get the current scrollY of the screen
+            const currentY = window.scrollY;
+
+            if (currentY >= 120) {
+                $("#main-sticky-navbar-sticky-section").removeClass("linear_bg_page");
+            } else {
+                $("#main-sticky-navbar-sticky-section").addClass("linear_bg_page");
+            }
+        });
+        
         $("#search_form").on("submit", function (ev) {
             ev.preventDefault();
         });
@@ -152,10 +174,15 @@ get_header();
         $("#search_form").on("input", function(event) {
             event.preventDefault();
 
+            const eventCategory = [];
+
+            $("input[name=event_category]:checked").each(function () {
+                eventCategory.push($(this).data("term-id"));
+            });
+            
             const formData = new FormData(event.currentTarget);
             const data = {
-                course: formData.get("course") ? true : false,
-                event: formData.get("event") ? true : false,
+                eventCategory,
                 done: formData.get("done") ? true : false,
                 query: formData.get("query"),
                 nonce: "<?= wp_create_nonce("filter_events_nonce"); ?>",
@@ -167,6 +194,17 @@ get_header();
                 method: "POST",
                 data,
                 dataType: "json",
+                beforeSend: function () {
+                    $("#load-more-events").hide();
+
+                    $("#events-container").html(`
+                        <div class="d-flex justify-content-center py-5">
+                            <div class="spinner-border sq-text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>  
+                        </div>
+                    `);
+                },
                 success: function(response) {
                     const events = response.events ?? null;
 
@@ -225,19 +263,6 @@ get_header();
                 },
             });
         });
-    });
-</script>
-
-<script>
-    document.addEventListener("scroll", (event) => {
-        // Get the current scrollY of the screen
-        const currentY = window.scrollY;
-
-        if (currentY >= 120) {
-            $("#main-sticky-navbar-sticky-section").removeClass("linear_bg_page");
-        } else {
-            $("#main-sticky-navbar-sticky-section").addClass("linear_bg_page");
-        }
     });
 </script>
 

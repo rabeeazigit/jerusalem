@@ -63,6 +63,7 @@ class SQLinkSCF
         $this->external_links_category_taxonomy();
         $this->faq_category_taxonomy();
         $this->renewal_process_stage_taxonmy();
+        $this->event_category_taxonomy();
 
         // options page goes here
         $this->site_settings_options();
@@ -4093,7 +4094,7 @@ class SQLinkSCF
                 'fields' => array(
                     array(
                         'key' => 'field_67a0d0e586692',
-                        'label' => 'טיפוסים',
+                        'label' => 'טיפוס פריט',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -4111,10 +4112,10 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67a0d10086693',
-                        'label' => 'טיפוס פוסט',
+                        'label' => 'טיפוס פריט',
                         'name' => 'event_type',
                         'aria-label' => '',
-                        'type' => 'radio',
+                        'type' => 'taxonomy',
                         'instructions' => '',
                         'required' => 0,
                         'conditional_logic' => 0,
@@ -4123,17 +4124,20 @@ class SQLinkSCF
                             'class' => '',
                             'id' => '',
                         ),
-                        'choices' => array(
-                            'event' => 'אירוע',
-                            'course' => 'קורס',
-                        ),
-                        'default_value' => 'event',
-                        'return_format' => 'value',
+                        'taxonomy' => 'event-category',
+                        'add_term' => 1,
+                        'save_terms' => 1,
+                        'load_terms' => 1,
+                        'return_format' => 'object',
+                        'field_type' => 'select',
                         'allow_null' => 0,
-                        'other_choice' => 0,
-                        'allow_in_bindings' => 0,
-                        'layout' => 'horizontal',
-                        'save_other_choice' => 0,
+                        'acfe_bidirectional' => array(
+                            'acfe_bidirectional_enabled' => '0',
+                        ),
+                        'allow_in_bindings' => 1,
+                        'bidirectional' => 0,
+                        'multiple' => 0,
+                        'bidirectional_target' => array(),
                     ),
                     array(
                         'key' => 'field_67978caac511a',
@@ -6008,35 +6012,35 @@ class SQLinkSCF
         add_action('init', function () {
             register_post_type('event', array(
                 'labels' => array(
-                    'name' => 'אירועים וקורסים',
-                    'singular_name' => 'אירוע/קורס',
-                    'menu_name' => 'אירועים וקורסים',
-                    'all_items' => 'כל האירועים והקורסים',
-                    'edit_item' => 'עריכת אירוע/קורס',
-                    'view_item' => 'צפייה באירוע/קורס',
-                    'view_items' => 'צפייה באירועים וקורסים',
-                    'add_new_item' => 'הוספת אירוע/קורס חדש',
-                    'add_new' => 'הוספת אירוע/קורס',
-                    'new_item' => 'אירוע/קורס חדש',
-                    'parent_item_colon' => 'אירוע/קורס אב:',
-                    'search_items' => 'חיפוש אירועים/קורסים',
-                    'not_found' => 'לא נמצאו אירועים/קורסים',
-                    'not_found_in_trash' => 'לא נמצאו אירועים/קורסים באשפה',
-                    'archives' => 'ארכיון אירועים/קורסים',
-                    'attributes' => 'מאפייני אירוע/קורס',
-                    'insert_into_item' => 'הוסף לתוך אירוע/קורס',
-                    'uploaded_to_this_item' => 'הועלה לאירוע/קורס זה',
-                    'filter_items_list' => 'סינון רשימת אירועים/קורסים',
-                    'filter_by_date' => 'סנן אירועים/קורסים לפי תאריך',
-                    'items_list_navigation' => 'ניווט ברשימת האירועים/קורסים',
-                    'items_list' => 'רשימת האירועים/קורסים',
-                    'item_published' => 'האירוע/קורס פורסם.',
-                    'item_published_privately' => 'האירוע/קורס פורסם באופן פרטי.',
-                    'item_reverted_to_draft' => 'האירוע/קורס חזר לטיוטה.',
-                    'item_scheduled' => 'האירוע/קורס נקבע לפרסום.',
-                    'item_updated' => 'האירוע/קורס עודכן.',
-                    'item_link' => 'קישור לאירוע/קורס',
-                    'item_link_description' => 'קישור לאירוע/קורס.',
+                    'name' => 'מדיה כללית',
+                    'singular_name' => 'פריט מדיה',
+                    'menu_name' => 'מדיה כללית',
+                    'all_items' => 'כל פריטי המדיה',
+                    'edit_item' => 'עריכת פריט מדיה',
+                    'view_item' => 'צפייה בפריט מדיה',
+                    'view_items' => 'צפייה בפריטי מדיה',
+                    'add_new_item' => 'הוספת פריט מדיה חדש',
+                    'add_new' => 'הוספת פריט מדיה',
+                    'new_item' => 'פריט מדיה חדש',
+                    'parent_item_colon' => 'פריט מדיה אב:',
+                    'search_items' => 'חיפוש פריטי מדיה',
+                    'not_found' => 'לא נמצאו פריטי מדיה',
+                    'not_found_in_trash' => 'לא נמצאו פריטי מדיה באשפה',
+                    'archives' => 'ארכיון מדיה כללית',
+                    'attributes' => 'מאפייני פריט מדיה',
+                    'insert_into_item' => 'הכנס לתוך פריט מדיה',
+                    'uploaded_to_this_item' => 'הועלה לפריט מדיה זה',
+                    'filter_items_list' => 'סינון רשימת פריטי מדיה',
+                    'filter_by_date' => 'סינון מדיה לפי תאריך',
+                    'items_list_navigation' => 'ניווט ברשימת פריטי המדיה',
+                    'items_list' => 'רשימת פריטי המדיה',
+                    'item_published' => 'פריט המדיה פורסם.',
+                    'item_published_privately' => 'פריט המדיה פורסם באופן פרטי.',
+                    'item_reverted_to_draft' => 'פריט המדיה הוחזר לטיוטה.',
+                    'item_scheduled' => 'פריט המדיה נקבע לפרסום.',
+                    'item_updated' => 'פריט המדיה עודכן.',
+                    'item_link' => 'קישור לפריט מדיה',
+                    'item_link_description' => 'קישור לפריט מדיה.',
                 ),
                 'public' => true,
                 'has_archive' => true,
@@ -14245,6 +14249,42 @@ class SQLinkSCF
                 'acfe_form' => 0,
                 'acfe_meta' => '',
                 'acfe_note' => '',
+            ));
+        });
+    }
+
+    public function event_category_taxonomy()
+    {
+        add_action('init', function () {
+            register_taxonomy('event-category', array(
+                0 => 'event',
+            ), array(
+                'labels' => array(
+                    'name' => 'סוגי מדיה',
+                    'singular_name' => 'סוג מדיה',
+                    'menu_name' => 'סוגי מדיה',
+                    'all_items' => 'כל סוגי המדיה',
+                    'edit_item' => 'עריכת סוג מדיה',
+                    'view_item' => 'צפייה בסוג מדיה',
+                    'update_item' => 'עדכון סוג מדיה',
+                    'add_new_item' => 'הוספת סוג מדיה חדש',
+                    'new_item_name' => 'שם סוג מדיה חדש',
+                    'search_items' => 'חיפוש סוגי מדיה',
+                    'popular_items' => 'סוגי מדיה פופולריים',
+                    'separate_items_with_commas' => 'הפרד סוגי מדיה באמצעות פסיקים',
+                    'add_or_remove_items' => 'הוסף או הסר סוגי מדיה',
+                    'choose_from_most_used' => 'בחר מהנפוצים ביותר',
+                    'not_found' => 'לא נמצאו סוגי מדיה',
+                    'no_terms' => 'אין סוגי מדיה',
+                    'items_list_navigation' => 'ניווט ברשימת סוגי המדיה',
+                    'items_list' => 'רשימת סוגי המדיה',
+                    'back_to_items' => '← חזרה לסוגי המדיה',
+                    'item_link' => 'קישור לסוג מדיה',
+                    'item_link_description' => 'קישור לסוג מדיה',
+                ),
+                'public' => true,
+                'show_in_menu' => true,
+                'show_in_rest' => true,
             ));
         });
     }

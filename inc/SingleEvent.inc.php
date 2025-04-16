@@ -21,7 +21,7 @@ class SingleEvent
 
         $this->hero_title = $this->post->post_title;
         $this->hero_desc = get_field("event_card_short_description", $this->post);
-        $this->post_type = get_post_type($this->post) == "forum" ? "forum" : get_field("event_type", $this->post);
+        $this->post_type = get_field("event_type", $this->post) ? get_field("event_type", $this->post)->name : null;
         $this->details_show_gallery = !empty(get_field("details_show_gallery", $this->post)) ? true : false;
         $this->event_occurrence_date = get_field("event_occurrence_date", $this->post);
         $this->event_place = get_field("event_place", $this->post);

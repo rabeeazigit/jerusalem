@@ -463,31 +463,16 @@ class AjaxHandler
     public function filter_events()
     {
         check_ajax_referer("filter_events_nonce", "nonce");
-
-        $event = isset($_POST["event"]) && $_POST["event"] == "true";
-        $course = isset($_POST["course"]) && $_POST["course"] == "true";
+        
+        $event_categories = $_POST["eventCategory"] ?? [];
         $query = $_POST["query"] ?? "";
         $done = isset($_POST["done"]) && $_POST["done"] == "true";
         $meta_query = [
             "relation" => "OR",
         ];
+        $tax_query = [];
 
-        if ($event) {
-            $meta_query[] = [
-                "key" => "event_type",
-                "value" => "event",
-                "compare" => "="
-            ];
-        }
-
-        if ($course) {
-            $meta_query[] = [
-                "key" => "event_type",
-                "value" => "course",
-                "compare" => "="
-            ];
-        }
-
+        // filter with short description and query string
         if ($query) {
             $meta_query[] = [
                 "key" => "event_card_short_description",
@@ -496,6 +481,20 @@ class AjaxHandler
             ];
         }
 
+        // filter with event categories if provided
+        // event_categories may be only one item and not an array!
+        // each item is a taxonomy id
+        if ($event_categories) {
+            $term_ids = is_array($event_categories) ? $event_categories : [$event_categories];
+            
+            $tax_query[] = [
+                'taxonomy' => 'event-category',
+                'field' => 'term_id',
+                'terms' => $term_ids
+            ];
+        }
+
+        // filter using the is done attribute
         if ($done) {
             $meta_query[] = [
                 "key" => "event_occurrence_date",
@@ -505,6 +504,7 @@ class AjaxHandler
             ];
         }
 
+        // if not filters are sent
         if (empty($meta_query)) {
             $meta_query[] = [
                 "key" => "event_type",
@@ -516,7 +516,8 @@ class AjaxHandler
             "post_type" => ["event", "forum"],
             "posts_per_page" => -1,
             "post_status" => "publish",
-            "meta_query" => $meta_query
+            "meta_query" => $meta_query,
+            'tax_query' => $tax_query
         ];
         $result_1 = get_posts($args);
 
@@ -526,6 +527,7 @@ class AjaxHandler
             "post_status" => "publish",
             "exclude" => array_map(fn($e) => $e->ID, $result_1),
             "s" => $query,
+            'tax_query' => $tax_query
         ];
         $result_2 = get_posts($args);
 
@@ -542,7 +544,7 @@ class AjaxHandler
                     "event_card_short_description" => get_field("event_card_short_description", $e),
                     "event_card_short_button_text" => get_field("event_card_short_button_text", $e),
                     "permalink" => get_permalink($e),
-                    "post_type" => get_post_type($e) == "forum" ? "forum" : get_field("event_type", $e)
+                    "post_type" => get_field("event_type", $e) ? get_field("event_type", $e)->name : null
                 ]) ?>
             </div>
         <?php endforeach; ?>
@@ -551,6 +553,7 @@ class AjaxHandler
 
         wp_send_json([
             "events" => $events_html,
+            'query' => $tax_query,
         ]);
     }
 
@@ -617,7 +620,7 @@ class AjaxHandler
                     </div>
                 <?php endif; ?>
             </div>
-<?php
+        <?php
             wp_send_json([
                 "data" => ob_get_clean(),
                 "error" => null

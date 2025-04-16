@@ -230,17 +230,25 @@ get_header();
                 method: "POST",
                 data,
                 dataType: "json",
-                beforeSend: function() {
+                beforeSend: function () {
                     $(this).prop("disabled", true);
+                    $("#loadMoreArticles").hide();
+
+                    $("#articles-container").html(`
+                        <div class="d-flex justify-content-center py-5">
+                            <div class="spinner-border sq-text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>  
+                        </div>
+                    `);
                 },
-                success: function(response) {
-                    console.log(response);
+                success: function (response) {
                     const articles = response.articles ?? null;
 
                     $("#articles-container").html(articles);
                     $("#loadMoreArticles").fadeOut();
                 },
-                error: function(error) {
+                error: function (error) {
                     console.error(error);
                 },
                 complete: function() {
