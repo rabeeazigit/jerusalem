@@ -64,6 +64,7 @@ class SQLinkSCF
         $this->faq_category_taxonomy();
         $this->renewal_process_stage_taxonmy();
         $this->event_category_taxonomy();
+        $this->event_audience_taxonomy();
 
         // options page goes here
         $this->site_settings_options();
@@ -4094,7 +4095,7 @@ class SQLinkSCF
                 'fields' => array(
                     array(
                         'key' => 'field_67a0d0e586692',
-                        'label' => 'טיפוס פריט',
+                        'label' => 'הגדרות',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -4130,6 +4131,35 @@ class SQLinkSCF
                         'load_terms' => 1,
                         'return_format' => 'object',
                         'field_type' => 'select',
+                        'allow_null' => 0,
+                        'acfe_bidirectional' => array(
+                            'acfe_bidirectional_enabled' => '0',
+                        ),
+                        'allow_in_bindings' => 1,
+                        'bidirectional' => 0,
+                        'multiple' => 0,
+                        'bidirectional_target' => array(),
+                    ),
+                    array(
+                        'key' => 'field_67ff999c03390',
+                        'label' => 'קהל יעד',
+                        'name' => 'event_audience',
+                        'aria-label' => '',
+                        'type' => 'taxonomy',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'taxonomy' => 'event-audience',
+                        'add_term' => 1,
+                        'save_terms' => 1,
+                        'load_terms' => 1,
+                        'return_format' => 'object',
+                        'field_type' => 'multi_select',
                         'allow_null' => 0,
                         'acfe_bidirectional' => array(
                             'acfe_bidirectional_enabled' => '0',
@@ -14281,6 +14311,42 @@ class SQLinkSCF
                     'back_to_items' => '← חזרה לסוגי המדיה',
                     'item_link' => 'קישור לסוג מדיה',
                     'item_link_description' => 'קישור לסוג מדיה',
+                ),
+                'public' => true,
+                'show_in_menu' => true,
+                'show_in_rest' => true,
+            ));
+        });
+    }
+
+    public function event_audience_taxonomy()
+    {
+        add_action('init', function () {
+            register_taxonomy('event-audience', array(
+                0 => 'event',
+            ), array(
+                'labels' => array(
+                    'name' => 'קהל יעד',
+                    'singular_name' => 'קהל יעד',
+                    'menu_name' => 'קהל יעד',
+                    'all_items' => 'כל קהלי היעד',
+                    'edit_item' => 'עריכת קהל יעד',
+                    'view_item' => 'צפייה בקהל יעד',
+                    'update_item' => 'עדכון קהל יעד',
+                    'add_new_item' => 'הוספת קהל יעד חדש',
+                    'new_item_name' => 'שם קהל יעד חדש',
+                    'search_items' => 'חיפוש קהלי יעד',
+                    'popular_items' => 'קהלי יעד פופולריים',
+                    'separate_items_with_commas' => 'הפרד קהלי יעד באמצעות פסיקים',
+                    'add_or_remove_items' => 'הוסף או הסר קהלי יעד',
+                    'choose_from_most_used' => 'בחר מהקהלים הנפוצים ביותר',
+                    'not_found' => 'לא נמצאו קהלי יעד',
+                    'no_terms' => 'אין קהלי יעד',
+                    'items_list_navigation' => 'ניווט ברשימת קהלי היעד',
+                    'items_list' => 'רשימת קהלי יעד',
+                    'back_to_items' => '← חזרה לקהלי יעד',
+                    'item_link' => 'קישור לקהל יעד',
+                    'item_link_description' => 'קישור לקהל יעד',
                 ),
                 'public' => true,
                 'show_in_menu' => true,
