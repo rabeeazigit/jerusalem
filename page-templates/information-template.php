@@ -368,7 +368,12 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
             <?php if (!wp_is_mobile()) : ?>
                 <div class="hstack align-items-center justify-content-start gap-3" role="tablist">
                     <?php foreach ($controller->file_categories_to_show as $idx => $file_category) : ?>
-                        <button class="btn btn-sq-secondary rounded-pill px-4 <?= $idx == 0 ? "active show" : ""; ?>" data-bs-toggle="tab" data-bs-target="#file_tab_<?= $file_category->term_id; ?>">
+                        <button 
+                            class="btn btn-sq-secondary rounded-pill px-4 df_tab_btn <?= $idx == 0 ? "active show" : ""; ?>"
+                            data-bs-toggle="tab"
+                            data-bs-target="#file_tab_<?= $file_category->term_id; ?>"
+                            data-term-id="<?= $file_category->term_id; ?>"
+                        >
                             <?= $file_category->name; ?>
                         </button>
                     <?php endforeach; ?>

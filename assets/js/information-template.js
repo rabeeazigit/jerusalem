@@ -5,6 +5,25 @@ $(function () {
 
     // Setting the first tab
     $(".tab-pane").first().addClass("show active");
+    
+    // check if the request has any url params
+    // open correct tab
+    const url = new URL(window.location.href);
+    const selectedTab = url.searchParams.get("dt");
+    
+    if (selectedTab) {
+        $(`.df_tab_btn[data-term-id=${selectedTab}]`).trigger("click");
+    }
+    
+    // intercept the tab switching event
+    // set correct url params
+    $(".df_tab_btn").on("shown.bs.tab", function () {
+        const termId = $(this).data("term-id");
+
+        url.searchParams.set("dt", termId);
+
+        window.history.pushState({}, "", url);
+    });
 
     // listening to resident_accordion hover events
     // changing side image according to it
