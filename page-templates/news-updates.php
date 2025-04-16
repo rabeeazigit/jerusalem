@@ -7,6 +7,16 @@ get_header();
 
 <?php get_template_part("template-parts/navbar", null, ["dark_theme" => true]); ?>
 
+<style>
+    .top-nav-bar {
+        background: linear-gradient(70deg, #174a74 85%, #376a93);   
+    }
+
+    .text-mb-white {
+        color: white !important;
+    }
+</style>
+
 <main class="container-fluid px-0 text-light">
     <div class="linear_bg_page">
         <?php

@@ -7,6 +7,16 @@ get_header();
 
 <?php get_template_part("template-parts/navbar", null, ["dark_theme" => true]); ?>
 
+<style>
+    .top-nav-bar {
+        background: linear-gradient(70deg, #174a74 85%, #376a93);   
+    }
+
+    .text-mb-white {
+        color: white !important;
+    }
+</style>
+
 <main class="container-fluid px-0 text-light">
     <div class="linear_bg_page">
         <?php
@@ -66,6 +76,13 @@ get_header();
             'taxonomy' => 'event-category',
             'hide_empty' => true
         ]);
+
+        // get the target audiences that are not empty
+        // so we can filter using them
+        $media_audiences = get_terms([
+            'taxonomy' => 'event-audience',
+            'hide_empty' => true
+        ]);
         ?>
         
         <?php if (wp_is_mobile()) : ?>
@@ -81,9 +98,31 @@ get_header();
                 </div>
                 
                 <div class="col-12 hstack gap-3 justify-content-center flex-wrap">
-                    <?php foreach ($media_categories as $e) : ?>
+                    <?php foreach ($media_audiences as $term) : ?>
                         <div>
-                            <input type="checkbox" class="btn-check event_filter_btn" name="<?= $term->slug; ?>" id="<?= $term->slug; ?>">
+                            <input type="checkbox" class="btn-check event_filter_btn" name="event_audience" id="<?= $term->slug; ?>" data-term-id="<?= $term->term_id; ?>">
+                            <label for="<?= $term->slug; ?>" class="btn btn-outline-sq-primary rounded-pill">
+                                <?= $term->name; ?>
+                            </label>
+                        </div>
+                    <?php endforeach; ?>
+                    
+                    <?php if (false) : ?>
+                        <div>
+                            <input type="checkbox" class="btn-check event_filter_btn" name="done" id="done">
+                            <label for="done" class="btn btn-outline-sq-primary rounded-pill">התקיימו</label>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                    
+                <?php if ($media_audiences && is_array($media_audiences) && !empty($media_audiences)) : ?>
+                    <hr class="my-0" />
+                <?php endif; ?>
+                
+                <div class="col-12 hstack gap-3 justify-content-center flex-wrap">
+                    <?php foreach ($media_categories as $term) : ?>
+                        <div>
+                            <input type="checkbox" class="btn-check event_filter_btn" name="event_category" id="<?= $term->slug; ?>" data-term-id="<?= $term->term_id; ?>">
                             <label for="<?= $term->slug; ?>" class="btn btn-outline-sq-primary rounded-pill">
                                 <?= $term->name; ?>
                             </label>
@@ -99,25 +138,40 @@ get_header();
                 </div>
             </form>
         <?php else : ?>
-            <form id="search_form" class="hstack gap-2 align-items-center justify-content-center mb-5">
-                <?php foreach ($media_categories as $e) : ?>
-                    <input type="checkbox" class="btn-check event_filter_btn" name="event_category" id="<?= $e->slug; ?>" data-term-id="<?= $e->term_id; ?>">
-                    <label for="<?= $e->slug; ?>" class="btn btn-outline-sq-primary rounded-pill">
-                        <?= $e->name; ?>
-                    </label>
-                <?php endforeach; ?>
+            <form id="search_form" class="vstack gap-2">
+                <div class="hstack gap-2 align-items-center justify-content-center mb-5">
+                    <?php foreach ($media_audiences as $term) : ?>
+                        <div>
+                            <input type="checkbox" class="btn-check event_filter_btn" name="event_audience" id="<?= $term->slug; ?>" data-term-id="<?= $term->term_id; ?>">
+                            <label for="<?= $term->slug; ?>" class="btn btn-outline-sq-primary rounded-pill">
+                                <?= $term->name; ?>
+                            </label>
+                        </div>
+                    <?php endforeach; ?>
 
-                <?php if (false) : ?>
-                    <input type="checkbox" class="btn-check event_filter_btn" name="done" id="done">
-                    <label for="done" class="btn btn-outline-sq-primary rounded-pill">התקיימו</label>
-                <?php endif; ?>
+                    <?php if ($media_audiences && is_array($media_audiences) && !empty($media_audiences)) : ?>
+                        <div class="vr"></div>
+                    <?php endif; ?>
+                    
+                    <?php foreach ($media_categories as $e) : ?>
+                        <input type="checkbox" class="btn-check event_filter_btn" name="event_category" id="<?= $e->slug; ?>" data-term-id="<?= $e->term_id; ?>">
+                        <label for="<?= $e->slug; ?>" class="btn btn-outline-sq-primary rounded-pill">
+                            <?= $e->name; ?>
+                        </label>
+                    <?php endforeach; ?>
 
-                <div class="input-group bg-white rounded-pill border overflow-hidden event_searchbar">
-                    <span class="input-group-text border-0" style="background-color: transparent;">
-                        <i class="bi bi-search"></i>
-                    </span>
+                    <?php if (false) : ?>
+                        <input type="checkbox" class="btn-check event_filter_btn" name="done" id="done">
+                        <label for="done" class="btn btn-outline-sq-primary rounded-pill">התקיימו</label>
+                    <?php endif; ?>
 
-                    <input type="text" id="query_search" class="form-control border-0" name="query" placeholder="חיפוש">
+                    <div class="input-group bg-white rounded-pill border overflow-hidden event_searchbar">
+                        <span class="input-group-text border-0" style="background-color: transparent;">
+                            <i class="bi bi-search"></i>
+                        </span>
+
+                        <input type="text" id="query_search" class="form-control border-0" name="query" placeholder="חיפוש">
+                    </div>
                 </div>
             </form>
         <?php endif; ?>
@@ -179,20 +233,28 @@ get_header();
             event.preventDefault();
 
             const eventCategory = [];
+            const eventAudience = [];
 
             $("input[name=event_category]:checked").each(function () {
                 eventCategory.push($(this).data("term-id"));
+            });
+
+            $("input[name=event_audience]:checked").each(function () {
+                eventAudience.push($(this).data("term-id"));
             });
             
             const formData = new FormData(event.currentTarget);
             const data = {
                 eventCategory,
+                eventAudience,
                 done: formData.get("done") ? true : false,
                 query: formData.get("query"),
                 nonce: "<?= wp_create_nonce("filter_events_nonce"); ?>",
                 action: "filter_events",
             };
 
+            console.log(data);
+            
             $.ajax({
                 url: "<?= admin_url("admin-ajax.php"); ?>",
                 method: "POST",

@@ -28,7 +28,7 @@ $dark_mode = $args["dark_mode"] ?? false;
 <?php endif; ?>
 
 <div class="vstack">
-    <div class="carousel-controls mb-3 px-5">
+    <div class="carousel-controls my-3 px-5">
         <div class="hstack gap-4 justify-content-end">
             <div class="carousel_play"></div>
             <div class="carousel_prev"></div>

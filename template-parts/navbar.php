@@ -174,10 +174,10 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
 
 <div class="d-xl-none d-block">
     <div class="container-fluid px-0">
-        <div class="vstack gap-3">
+        <div class="vstack gap-3 top-nav-bar">
             <div class="hstack px-3 justify-content-between align-items-center py-2 top_navbar_wrapper_mobile">
                 <?php if ($navbar->owner_login_link && $navbar->owner_login_label) : ?>
-                    <a href="<?= $navbar->owner_login_link; ?>" target="_blank" class="fs-6 hstack gap-2 text-reset text-decoration-none">
+                    <a href="<?= $navbar->owner_login_link; ?>" target="_blank" class="fs-6 hstack gap-2 text-reset text-decoration-none text-mb-white">
                         <?php if ($navbar->owner_login_logo) : ?>
                             <img src="<?= $navbar->owner_login_logo; ?>" class="navbar_owner_logo">
                         <?php endif; ?>
@@ -193,7 +193,7 @@ $dark_theme = isset($args["dark_theme"]) && $args["dark_theme"] === true;
                 </div>
 
                 <?php if ($navbar->accessibility_link && $navbar->accessibility_label) : ?>
-                    <a href="<?= $navbar->accessibility_link["url"]; ?>" target="<?= $navbar->accessibility_link["target"]; ?>" class="fs-5 text-reset text-decoration-none">
+                    <a href="<?= $navbar->accessibility_link["url"]; ?>" target="<?= $navbar->accessibility_link["target"]; ?>" class="text-mb-white fs-5 text-reset text-decoration-none">
                         <?= $navbar->accessibility_label; ?>
                     </a>
                 <?php endif; ?>

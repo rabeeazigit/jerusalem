@@ -465,6 +465,7 @@ class AjaxHandler
         check_ajax_referer("filter_events_nonce", "nonce");
         
         $event_categories = $_POST["eventCategory"] ?? [];
+        $event_audiences = $_POST["eventAudience"] ?? [];
         $query = $_POST["query"] ?? "";
         $done = isset($_POST["done"]) && $_POST["done"] == "true";
         $meta_query = [
@@ -489,6 +490,19 @@ class AjaxHandler
             
             $tax_query[] = [
                 'taxonomy' => 'event-category',
+                'field' => 'term_id',
+                'terms' => $term_ids
+            ];
+        }
+
+        // filter with event audience if provided
+        // event_audience may be only one item and not an array!
+        // each item is a taxonomy id
+        if ($event_audiences) {
+            $term_ids = is_array($event_audiences) ? $event_audiences : [$event_audiences];
+            
+            $tax_query[] = [
+                'taxonomy' => 'event-audience',
                 'field' => 'term_id',
                 'terms' => $term_ids
             ];

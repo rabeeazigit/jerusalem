@@ -385,6 +385,7 @@ body {
     /* height: 606px; */
 
     @media screen and (width <= 768px) {
+        min-height: auto;
         height: 200px;
     }
 }
