@@ -90,10 +90,12 @@ get_header();
                         </div>
                     <?php endforeach; ?>
 
-                    <div>
-                        <input type="checkbox" class="btn-check event_filter_btn" name="done" id="done">
-                        <label for="done" class="btn btn-outline-sq-primary rounded-pill">התקיימו</label>
-                    </div>
+                    <?php if (false) : ?>
+                        <div>
+                            <input type="checkbox" class="btn-check event_filter_btn" name="done" id="done">
+                            <label for="done" class="btn btn-outline-sq-primary rounded-pill">התקיימו</label>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </form>
         <?php else : ?>
@@ -105,8 +107,10 @@ get_header();
                     </label>
                 <?php endforeach; ?>
 
-                <input type="checkbox" class="btn-check event_filter_btn" name="done" id="done">
-                <label for="done" class="btn btn-outline-sq-primary rounded-pill">התקיימו</label>
+                <?php if (false) : ?>
+                    <input type="checkbox" class="btn-check event_filter_btn" name="done" id="done">
+                    <label for="done" class="btn btn-outline-sq-primary rounded-pill">התקיימו</label>
+                <?php endif; ?>
 
                 <div class="input-group bg-white rounded-pill border overflow-hidden event_searchbar">
                     <span class="input-group-text border-0" style="background-color: transparent;">

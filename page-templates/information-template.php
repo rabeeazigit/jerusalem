@@ -378,7 +378,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
                             <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
                         </span>
 
-                        <input type="text" class="form-control border-0 downloadable_file_search" placeholder="Search">
+                        <input type="text" class="form-control border-0 downloadable_file_search" placeholder="חיפוש...">
                     </div>
                 </div>
             <?php else : ?>
@@ -388,7 +388,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
                             <img src="<?= get_template_directory_uri() . "/assets/images/search-glass.png"; ?>" class="navbar_searchglass">
                         </span>
 
-                        <input type="text" class="form-control border-0 downloadable_file_search" placeholder="Search">
+                        <input type="text" class="form-control border-0 downloadable_file_search" placeholder="חיפוש...">
                     </div>
 
                     <div class="hstack gap-4 overflow-auto py-3 my-3">
