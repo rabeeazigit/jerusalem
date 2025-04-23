@@ -19,10 +19,16 @@ if (!empty($event_occurrence_date) && strpos($event_occurrence_date, ' ') !== fa
 
 <a href="<?= $permalink; ?>" class="vstack event_card_wrapper px-3 gap-2 h-100 text-decoration-none text-reset">
     <div class="d-flex align-items-start justify-content-start event_card_image" style="background-image: url(<?= $event_card_image; ?>);">
-        <div class="hstack gap-2 align-items-start event_status_wrapper">
+        <div class="hstack gap-2 p-3 align-items-start ">
             <?php if ($post_type) : ?>
-                <div class="fs-6">
+                <div class="fs-6 event_status_wrapper">
                     <?= $post_type; ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (DateTime::createFromFormat('d/m/Y H:i', $event_occurrence_date) < new DateTime()) : ?>
+                <div class="fs-6 event_status_wrapper done_label">
+                    הסתיים
                 </div>
             <?php endif; ?>
         </div>

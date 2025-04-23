@@ -107,12 +107,10 @@ get_header();
                         </div>
                     <?php endforeach; ?>
                     
-                    <?php if (false) : ?>
-                        <div>
-                            <input type="checkbox" class="btn-check event_filter_btn" name="done" id="done">
-                            <label for="done" class="btn btn-outline-sq-primary rounded-pill">התקיימו</label>
-                        </div>
-                    <?php endif; ?>
+                    <div>
+                        <input type="checkbox" class="btn-check event_filter_btn" name="done" id="done">
+                        <label for="done" class="btn btn-outline-sq-primary rounded-pill">התקיימו</label>
+                    </div>
                 </div>
                     
                 <?php if ($media_audiences && is_array($media_audiences) && !empty($media_audiences)) : ?>
@@ -129,12 +127,10 @@ get_header();
                         </div>
                     <?php endforeach; ?>
 
-                    <?php if (false) : ?>
-                        <div>
-                            <input type="checkbox" class="btn-check event_filter_btn" name="done" id="done">
-                            <label for="done" class="btn btn-outline-sq-primary rounded-pill">התקיימו</label>
-                        </div>
-                    <?php endif; ?>
+                    <div>
+                        <input type="checkbox" class="btn-check event_filter_btn" name="done" id="done">
+                        <label for="done" class="btn btn-outline-sq-primary rounded-pill">התקיימו</label>
+                    </div>
                 </div>
             </form>
         <?php else : ?>
@@ -160,10 +156,8 @@ get_header();
                         </label>
                     <?php endforeach; ?>
 
-                    <?php if (false) : ?>
-                        <input type="checkbox" class="btn-check event_filter_btn" name="done" id="done">
-                        <label for="done" class="btn btn-outline-sq-primary rounded-pill">התקיימו</label>
-                    <?php endif; ?>
+                    <input type="checkbox" class="btn-check event_filter_btn" name="done" id="done">
+                    <label for="done" class="btn btn-outline-sq-primary rounded-pill">התקיימו</label>
 
                     <div class="input-group bg-white rounded-pill border overflow-hidden event_searchbar">
                         <span class="input-group-text border-0" style="background-color: transparent;">

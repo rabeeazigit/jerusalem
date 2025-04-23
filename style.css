@@ -620,7 +620,6 @@ body {
     border-radius: 24px;
     padding: 5px 10px;
     height: fit-content;
-    margin: 10px;
 }
 
 .project_slider_control,
@@ -1447,4 +1446,9 @@ textarea {
 .custom-marquee .js-marquee {
     display: flex;
     flex-flow: row nowrap;
+}
+
+.done_label {
+    background-color: #174a75;
+    color: #fff;
 }
