@@ -13565,7 +13565,7 @@ class SQLinkSCF
                         'aria-label' => '',
                         'type' => 'image',
                         'instructions' => 'גודל מומלץ
-                                                                                                                         500x280',
+                                                                                                                                                                                                                                                         500x280',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -13793,7 +13793,7 @@ class SQLinkSCF
                         'aria-label' => '',
                         'type' => 'repeater',
                         'instructions' => 'גודל מומלץ: 
-                                                                                                                        500x280',
+                                                                                                                                                                                                                                                        500x280',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -14178,6 +14178,9 @@ class SQLinkSCF
                         'layout' => 'block',
                         'acfe_seamless_style' => 0,
                         'acfe_group_modal' => 0,
+                        'acfe_group_modal_close' => 0,
+                        'acfe_group_modal_button' => '',
+                        'acfe_group_modal_size' => 'large',
                         'sub_fields' => array(
                             array(
                                 'key' => 'field_6808e1a5a9f2d',
@@ -14225,9 +14228,6 @@ class SQLinkSCF
                                 'allow_in_bindings' => 0,
                             ),
                         ),
-                        'acfe_group_modal_close' => 0,
-                        'acfe_group_modal_button' => '',
-                        'acfe_group_modal_size' => 'large',
                     ),
                     array(
                         'key' => 'field_67f3a97fb38d1',
@@ -14253,7 +14253,7 @@ class SQLinkSCF
                         'name' => 'fetured_projects',
                         'aria-label' => '',
                         'type' => 'relationship',
-                        'instructions' => '',
+                        'instructions' => 'אם לא נבחרו פרויקטים, מוצגים ארבעת הפרויקטים האחרונים מאותו שכונה.',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(

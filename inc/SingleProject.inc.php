@@ -52,11 +52,27 @@ class SingleProject
         $this->auto_featured_project_selector = get_field("auto_featured_project_selector", $this->pid); // true\false
         $this->fetured_projects = get_field("fetured_projects", $this->pid); //post object
 
-
+        // If no projects are selected
+        // Get the latest 4 projects from the same neighborhood
+        if (
+            (!is_array($this->fetured_projects)) 
+            || 
+            (empty($this->fetured_projects) && isset($this->project_neighborhood) && isset($this->project_neighborhood->ID))
+        ) {
+            $this->fetured_projects = get_posts([
+                'post_type' => 'project',
+                'posts_per_page' => 4,
+                'exclude' => [$this->pid],
+                'meta_query' => [
+                    [
+                        'key' => 'project_neighborhood',
+                        'value' => $this->project_neighborhood->ID,
+                        'compare' => '='
+                    ]
+                ]
+            ]);
+        }
     }
-
-
-
 
     public function MainHeader()
     {
@@ -332,21 +348,17 @@ class SingleProject
         return $html;
     }
 
-
     public function GetProjects_Random() {}
-
-    public function should_show_featured_projects()
+    
+    public function GetProjectsToDisplay()
     {
-        return $this->fetured_projects && is_array($this->fetured_projects) && count($this->fetured_projects) > 0;
-    }
-
-    public function GetProject_fetured_mnualy()
-    {
-
-        $fetured = $this->fetured_projects;
+        if (count($this->fetured_projects) <= 0) {
+            return;
+        }
+        
         echo '<div class="container-fluid py-4"><div class="row row-gap-5">';
-        if ($fetured && is_array($fetured)) {
-            foreach ($fetured as $key => $fet) {
+        if ($this->fetured_projects && is_array($this->fetured_projects)) {
+            foreach ($this->fetured_projects as $key => $fet) {
                 $e = $fet->ID;
                 echo '<div class="col-md-3">';
                 get_template_part("template-parts/project-card", null, [
