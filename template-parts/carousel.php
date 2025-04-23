@@ -51,7 +51,9 @@ $dark_mode = $args["dark_mode"] ?? false;
                 <div class="col-md-10">
                     <div class="carousel_media_container overflow-hidden">
                         <?php if ($media_type == "video") : ?>
-                            <video class="img-fluid object-fit-cover w-100" src="<?= $video; ?>" autoplay muted loop></video>
+                            <div class="img-fluid object-fit-cover w-100">
+                                <?= $video; ?>
+                            </div>
                         <?php elseif ($media_type == "image") : ?>
                             <img class="img-fluid object-fit-cover w-100" src="<?= $image; ?>">
                         <?php endif; ?>

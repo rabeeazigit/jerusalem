@@ -379,7 +379,8 @@ body {
 }
 
 .carousel_media_container img,
-.carousel_media_container video {
+.carousel_media_container iframe {
+    width: 100%;
     min-height: 650px;
     height: 66dvh;
     /* height: 606px; */
@@ -404,10 +405,10 @@ body {
     backdrop-filter: blur(5px);
 
     z-index: 999;
-    height: 341px;
+    min-height: 341px;
 
     @media screen and (width <= 768px) {
-        height: 220px;
+        min-height: 220px;
         height: auto;
     }
 }
@@ -1440,4 +1441,9 @@ textarea {
 
 #main-menu {
     transition: all 250ms ease-in-out;
+}
+
+.custom-marquee .js-marquee {
+    display: flex;
+    flex-flow: row nowrap;
 }

@@ -31,43 +31,51 @@
     ?>
 
     <?php if ($news_slider && is_array($news_slider) && !empty($news_slider)) : ?>
-        <div class="carousel_news_sliders hstack align-items-center justify-content-start overflow-hidden">
+        <div class="hstack custom-marquee align-items-center gap-5" style="max-width: 100%; overflow: hidden">
             <?php foreach ($news_slider as $e) : ?>
-                <?php if (isset($e["news"]) && !empty($e["news"]) && is_array($e["news"])) : ?>
-                    <div>
-                        <a
-                            href="<?= $e["news"]["url"]; ?>"
-                            target="<?= $e["news"]["target"]; ?>"
-                            class="w-100 hstack gap-1 px-4 align-items-start justify-content-center 
-                            carousel_news_item text-reset text-decoration-none">
-                            <div class="fs-5" style="white-space: nowrap; overflow:hidden; width:max-content"><?= $e["news"]["title"]; ?></div>
-                            <img src="<?= get_template_directory_uri() . "/assets/images/btn-arrow-black.png"; ?>">
-                        </a>
+                <a
+                    href="<?= $e["news"]["url"]; ?>"
+                    target="<?= $e["news"]["target"]; ?>"
+                    class="w-100 hstack gap-1 px-4 align-items-start justify-content-center 
+                    carousel_news_item text-reset text-decoration-none"
+                >
+                    <div class="fs-5" style="white-space: nowrap; width: max-content;">
+                        <?= $e["news"]["title"]; ?>
                     </div>
-                <?php endif; ?>
+
+                    <img src="<?= get_template_directory_uri() . "/assets/images/btn-arrow-black.png"; ?>" />
+                </a>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
 </div>
 
 <script>
-    $(".carousel_news_sliders").slick({
-        slidesToShow: 3.6,
-        autoplay: true,
-        autoplaySpeed: 0,
-        swipe: false,
-        focusOnSelect: false,
-        speed: 5000,
-        rtl: true,
-        dots: false,
-        arrows: false,
-        cssEase: "linear",
-        responsive: [{
-            breakpoint: 768,
-            settings: {
-                slidesToShow: 1
-            }
-        }]
+    $(function () {
+        $(".carousel_news_sliders").slick({
+            slidesToShow: 3.6,
+            autoplay: true,
+            autoplaySpeed: 0,
+            swipe: false,
+            focusOnSelect: false,
+            speed: 5000,
+            rtl: true,
+            dots: false,
+            arrows: false,
+            cssEase: "linear",
+            responsive: [{
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1
+                }
+            }]
+        });
+
+        $(".custom-marquee").marquee({
+            pauseOnHover: true,
+            speed: 150,
+            delayBeforeStart: 0
+        });
     });
 </script>
 
