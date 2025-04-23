@@ -4229,7 +4229,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67978cb8c511b',
-                        'label' => 'כרטיסייה',
+                        'label' => 'תמונה ראשית כרטיסייה',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -4318,7 +4318,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67b1d3e6819a7',
-                        'label' => 'תוכן',
+                        'label' => 'תמונת צד',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -4520,7 +4520,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67b1ad2deb16b',
-                        'label' => 'תוכן צד',
+                        'label' => 'תוכן',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -4957,7 +4957,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67bf1ea58bb57',
-                        'label' => 'פורם מיקרוסופט',
+                        'label' => 'טופס רישום',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
