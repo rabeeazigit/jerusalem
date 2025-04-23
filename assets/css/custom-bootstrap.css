@@ -146,3 +146,26 @@
     background-color: #bdab73;
     border-color: #bdab73;
 }
+
+.btn-outline-sq-gold {
+    --bs-btn-color: #fff;
+    --bs-btn-border-color: #BDAB73;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #BDAB73;
+    --bs-btn-hover-border-color: #d1b768;
+    --bs-btn-focus-shadow-rgb: 13, 110, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #174a75;
+    --bs-btn-active-border-color: #BDAB73;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #BDAB73;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #BDAB73;
+    --bs-gradient: none;
+    --bs-btn-bg: #BDAB73;
+}
+
+.btn-outline-sq-gold:hover,
+.btn-outline-sq-gold:focus {
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.16);
+}

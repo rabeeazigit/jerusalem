@@ -101,7 +101,7 @@ get_header();
                     <?php foreach ($media_audiences as $term) : ?>
                         <div>
                             <input type="checkbox" class="btn-check event_filter_btn" name="event_audience" id="<?= $term->slug; ?>" data-term-id="<?= $term->term_id; ?>">
-                            <label for="<?= $term->slug; ?>" class="btn btn-outline-sq-primary rounded-pill">
+                            <label for="<?= $term->slug; ?>" class="btn btn-outline-sq-gold rounded-pill">
                                 <?= $term->name; ?>
                             </label>
                         </div>
@@ -143,8 +143,8 @@ get_header();
                     <?php foreach ($media_audiences as $term) : ?>
                         <div>
                             <input type="checkbox" class="btn-check event_filter_btn" name="event_audience" id="<?= $term->slug; ?>" data-term-id="<?= $term->term_id; ?>">
-                            <label for="<?= $term->slug; ?>" class="btn btn-outline-sq-primary rounded-pill">
-                                <?= $term->name; ?>
+                            <label for="<?= $term->slug; ?>" class="btn btn-outline-sq-gold rounded-pill">
+                                <?= $term->name; ?> 
                             </label>
                         </div>
                     <?php endforeach; ?>
