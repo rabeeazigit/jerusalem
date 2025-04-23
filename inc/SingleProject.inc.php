@@ -285,7 +285,9 @@ class SingleProject
         ob_start(); ?>
 
         <?php if ($link) : ?>
-            <h6 class="ps-0 ps-md-5 display-4 my-4 fs-2 fw-bold">מידע חיצוני נוסף</h6>
+            <h6 class="ps-0 ps-md-5 display-4 my-4 fs-2 fw-bold">
+                מידע חיצוני נוסף
+            </h6>
             
             <a
                 class="hstack pro_desc align-items-center justify-content-between ms-md-5 ms-0
