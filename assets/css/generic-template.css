@@ -2,7 +2,7 @@
     height: 570px;
     width: 35dvw;
     object-fit: cover;
-    object-position: center;
+    object-position: top;
 
     @media screen and (width <= 768px) {
         height: auto;
