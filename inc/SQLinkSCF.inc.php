@@ -7399,7 +7399,7 @@ class SQLinkSCF
                         'aria-label' => '',
                         'type' => 'image',
                         'instructions' => 'גודל מומלץ:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        620X570',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        620X570',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -7408,7 +7408,7 @@ class SQLinkSCF
                             'id' => '',
                         ),
                         'uploader' => '',
-                        'return_format' => 'url',
+                        'return_format' => 'array',
                         'library' => 'all',
                         'acfe_thumbnail' => 0,
                         'min_width' => '',
@@ -7428,7 +7428,7 @@ class SQLinkSCF
                         'aria-label' => '',
                         'type' => 'image',
                         'instructions' => 'גודל מומלץ:
-                                                        400X360',
+                                                                                                                        400X360',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -7437,7 +7437,7 @@ class SQLinkSCF
                             'id' => '',
                         ),
                         'uploader' => '',
-                        'return_format' => 'url',
+                        'return_format' => 'array',
                         'library' => 'all',
                         'acfe_thumbnail' => 0,
                         'min_width' => '',
