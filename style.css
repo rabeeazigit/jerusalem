@@ -520,7 +520,7 @@ body {
     }
 }
 
-.information_square {
+.information_square .info_box {
     border-radius: 30px;
     border: 1px solid var(--border-secondary, #b2aea8);
     background: var(--surface-primary, #fff);
@@ -558,7 +558,7 @@ body {
 }
 
 .information_square_wrapper {
-    height: 650px;
+    height: 90vh;
 
     @media screen and (width <= 768px) {
         height: auto;

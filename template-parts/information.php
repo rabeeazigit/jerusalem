@@ -14,75 +14,78 @@ $information_banner_link = $information_options["information_banner_link"] ?? nu
         <div class="row justify-content-center information_square_wrapper px-md-5 px-3">
             <?php foreach ($information_sqaures as $i => $e) : ?>
                 <div class="col-md-6">
-                    <div class="information_square shadow p-4 <?= $i == 1 ? "information_square_second" : ""; ?>">
-                        <div class="d-none d-md-block">
-                            <div class="row h-100">
-                                <div class="col-md-8">
-                                    <?php if (isset($e["information_title"])) : ?>
-                                        <div class="fs-1 fw-bold mb-2 rubik">
-                                            <?= $e["information_title"]; ?>
-                                        </div>
-                                    <?php endif; ?>
-                                    <?php if (isset($e["information_description"])) : ?>
-                                        <div class="fs-5">
-                                            <?= $e["information_description"]; ?>
-                                        </div>
-                                    <?php endif; ?>
-                                    <div class="hstack gap-2 mt-5">
-                                        <?php if ($e["white_link"]) : ?>
-                                            <a href="<?= $e["white_link"]["url"]; ?>" target="<?= $e["white_link"]["target"]; ?>" class="fs-6 text-decoration-none sq-tertiary-button">
-                                                <?= $e["white_link"]["title"]; ?>
-                                            </a>
+                    <div class="information_square  <?= $i == 1 ? "information_square_second" : ""; ?>">
+                        <div class="" style="height: 140px"></div>
+                        <div class="info_box shadow p-4">
+                            <div class="d-none d-md-block">
+                                <div class="row h-100">
+                                    <div class="col-md-8">
+                                        <?php if (isset($e["information_title"])) : ?>
+                                            <div class="fs-1 fw-bold mb-2 rubik">
+                                                <?= $e["information_title"]; ?>
+                                            </div>
                                         <?php endif; ?>
-                                        <?php if ($e["yellow_link"]) : ?>
-                                            <a href="<?= $e["yellow_link"]["url"]; ?>" target="<?= $e["yellow_link"]["target"]; ?>" class="fs-6 text-decoration-none sq-primary-button">
-                                                <?= $e["yellow_link"]["title"]; ?>
-                                            </a>
+                                        <?php if (isset($e["information_description"])) : ?>
+                                            <div class="fs-5">
+                                                <?= $e["information_description"]; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                        <div class="hstack gap-2 mt-5">
+                                            <?php if ($e["white_link"]) : ?>
+                                                <a href="<?= $e["white_link"]["url"]; ?>" target="<?= $e["white_link"]["target"]; ?>" class="fs-6 text-decoration-none sq-tertiary-button">
+                                                    <?= $e["white_link"]["title"]; ?>
+                                                </a>
+                                            <?php endif; ?>
+                                            <?php if ($e["yellow_link"]) : ?>
+                                                <a href="<?= $e["yellow_link"]["url"]; ?>" target="<?= $e["yellow_link"]["target"]; ?>" class="fs-6 text-decoration-none sq-primary-button">
+                                                    <?= $e["yellow_link"]["title"]; ?>
+                                                </a>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <?php if (isset($e["side_image"]) && $e["side_image"]) : ?>
+                                            <div class="d-flex h-100 align-items-end justify-content-end">
+                                                <img src="<?= $e["side_image"]; ?>" class="information_square_image object-fit-cover">
+                                            </div>
                                         <?php endif; ?>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <?php if (isset($e["side_image"]) && $e["side_image"]) : ?>
-                                        <div class="d-flex h-100 align-items-end justify-content-end">
-                                            <img src="<?= $e["side_image"]; ?>" class="information_square_image object-fit-cover">
-                                        </div>
-                                    <?php endif; ?>
-                                </div>
                             </div>
-                        </div>
 
-                        <div class="d-block d-md-none">
-                            <div class="row h-100">
-                                <div class="col-md-12">
-                                    <?php if (isset($e["side_image"]) && $e["side_image"]) : ?>
-                                        <div class="d-flex h-100 align-items-center justify-content-center">
-                                            <img src="<?= $e["side_image"]; ?>" class="information_square_image object-fit-cover">
-                                        </div>
-                                    <?php endif; ?>
-                                </div>
+                            <div class="d-block d-md-none">
+                                <div class="row h-100">
+                                    <div class="col-md-12">
+                                        <?php if (isset($e["side_image"]) && $e["side_image"]) : ?>
+                                            <div class="d-flex h-100 align-items-center justify-content-center">
+                                                <img src="<?= $e["side_image"]; ?>" class="information_square_image object-fit-cover">
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
 
-                                <div class="col-md-8">
-                                    <?php if (isset($e["information_title"])) : ?>
-                                        <div class="fs-1 text-center fw-bold mt-4 mb-2">
-                                            <?= $e["information_title"]; ?>
-                                        </div>
-                                    <?php endif; ?>
-                                    <?php if (isset($e["information_description"])) : ?>
-                                        <div class="fs-5 text-center">
-                                            <?= $e["information_description"]; ?>
-                                        </div>
-                                    <?php endif; ?>
-                                    <div class="hstack justify-content-center gap-2 mt-5">
-                                        <?php if ($e["white_link"]) : ?>
-                                            <a href="<?= $e["white_link"]["url"]; ?>" target="<?= $e["white_link"]["target"]; ?>" class="fs-6 text-decoration-none sq-tertiary-button">
-                                                <?= $e["white_link"]["title"]; ?>
-                                            </a>
+                                    <div class="col-md-8">
+                                        <?php if (isset($e["information_title"])) : ?>
+                                            <div class="fs-1 text-center fw-bold mt-4 mb-2">
+                                                <?= $e["information_title"]; ?>
+                                            </div>
                                         <?php endif; ?>
-                                        <?php if ($e["yellow_link"]) : ?>
-                                            <a href="<?= $e["yellow_link"]["url"]; ?>" target="<?= $e["yellow_link"]["target"]; ?>" class="fs-6 text-decoration-none sq-primary-button">
-                                                <?= $e["yellow_link"]["title"]; ?>
-                                            </a>
+                                        <?php if (isset($e["information_description"])) : ?>
+                                            <div class="fs-5 text-center">
+                                                <?= $e["information_description"]; ?>
+                                            </div>
                                         <?php endif; ?>
+                                        <div class="hstack justify-content-center gap-2 mt-5">
+                                            <?php if ($e["white_link"]) : ?>
+                                                <a href="<?= $e["white_link"]["url"]; ?>" target="<?= $e["white_link"]["target"]; ?>" class="fs-6 text-decoration-none sq-tertiary-button">
+                                                    <?= $e["white_link"]["title"]; ?>
+                                                </a>
+                                            <?php endif; ?>
+                                            <?php if ($e["yellow_link"]) : ?>
+                                                <a href="<?= $e["yellow_link"]["url"]; ?>" target="<?= $e["yellow_link"]["target"]; ?>" class="fs-6 text-decoration-none sq-primary-button">
+                                                    <?= $e["yellow_link"]["title"]; ?>
+                                                </a>
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
