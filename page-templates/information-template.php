@@ -486,10 +486,12 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
                                     <?php if (isset($link["link"])) : ?>
                                         <a class="text-reset text-decoration-none external_link_container" href="<?= $link["link"]; ?>">
                                             <div class="hstack py-3 gap-4 align-items-center justify-content-between">
-                                                <img src="<?= get_template_directory_uri() . "/assets/images/link.png"; ?>" style="width: 24px; height: 24px">
+                                                <div class="hstack align-items-center gap-4">
+                                                    <img src="<?= get_template_directory_uri() . "/assets/images/link.png"; ?>" style="width: 24px; height: 24px">
 
-                                                <div class="fs-6 fw-semibold">
-                                                    <?= $link["label"]; ?>
+                                                    <div class="fs-6 fw-semibold">
+                                                        <?= $link["label"]; ?>
+                                                    </div>
                                                 </div>
 
                                                 <img src="<?= get_template_directory_uri() . "/assets/images/btn-arrow-black.png"; ?>" style="width: 24px; height: 24px">

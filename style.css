@@ -924,7 +924,8 @@ body {
     transition: all 250ms ease-in-out;
 }
 
-.external_links_container:has(.external_links_toggler:hover) {
+.external_links_container:has(.external_links_toggler:hover),
+.external_links_container.group_item:hover {
     background-color: #bdab7350;
 }
 

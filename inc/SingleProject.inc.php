@@ -20,7 +20,8 @@ class SingleProject
     //Project Details tab
     public $area_description;
     public $projects_sexy_numbers; //repeater
-    public $project_external_link; //post object
+
+    public $project_external_link_group;
 
     //Featured Projects
     public $auto_featured_project_selector; // true\false
@@ -45,7 +46,7 @@ class SingleProject
         //Project Details tab
         $this->area_description = get_field("area_description", $this->pid);
         $this->projects_sexy_numbers = get_field("projects_sexy_numbers", $this->pid); //repeater
-        $this->project_external_link = get_field("project_external_link", $this->pid); //post object
+        $this->project_external_link_group = get_field('project_external_link_group', $this->pid);
 
         //Featured Projects
         $this->auto_featured_project_selector = get_field("auto_featured_project_selector", $this->pid); // true\false
@@ -231,7 +232,7 @@ class SingleProject
         <!-- Left Column: Text Content -->
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 about_text order-2 order-md-1 my-4 my-md-0">
         
-        <h6 class="ps-0 ps-md-5 display-4 fs-2 fw-bold">מידע חיצוני נוסף</h6>
+        
                 ' . $this->External_Links() . '
         </div>
 
@@ -277,51 +278,54 @@ class SingleProject
 
     private  function External_Links()
     {
-        $external = $this->project_external_link;
+        $link_group = $this->project_external_link_group ?? null;
+        $image = $link_group['image'] ?? null;
+        $link = $link_group['link'] ?? null;
 
+        ob_start(); ?>
 
+        <?php if ($link) : ?>
+            <h6 class="ps-0 ps-md-5 display-4 my-4 fs-2 fw-bold">מידע חיצוני נוסף</h6>
+            
+            <a
+                class="hstack pro_desc align-items-center justify-content-between ms-md-5 ms-0
+                border rounded-4 py-2 px-3 external_links_container group_item text-reset text-decoration-none"
+                href="<?= $link['url'] ?? '#'; ?>"
+                target="<?= $link['target'] ?? ''; ?>"
+            >
+                <div class="hstack gap-2 align-items-center">
+                    <?php if ($image) : ?>
+                        <img 
+                            class="external_link_image"
+                            src="<?= $image['url'] ?? null; ?>"
+                            alt="<?= $image['alt']; ?>"
+                            title="<?= $image['title']; ?>"
+                        />
+                    <?php endif; ?>
 
-        $html = '<div class="row row-gap-4 ms-0 ms-md-4 ">';
-        if ($external && is_array($external) && !empty($external)) {
-            foreach ($external as $idx => $e) {
-                $html .= '<div class="col-md-8">
-                        <div class="vstack justify-content-between align-items-center border rounded-4 py-2 px-3 external_links_container">
-                            <div class="hstack align-items-center justify-content-between external_links_toggler collapsed" data-bs-toggle="collapse" data-bs-target="#external_collapse_' . $idx . '">
-                                <div class="hstack gap-2 align-items-center">
-                                    <img src="' . get_field("image", $e) . '" alt="" class="external_link_image">
-    
-                                    <div class="fs-6 fw-semibold">' . get_field("title", $e) . '
-                                    </div>
-                                </div>
-    
-                                <div class="justify-self-end">
-                                    <img class="external_link_icon" src="' . get_template_directory_uri() . '/assets/images/down-arrow.png" style="width: 24px; height: 24px">
-                                </div>
-                            </div>
-    
-                            <div class="collapse w-100" id="external_collapse_' . $idx . '">
-                                <div class="vstack my-2 gap-3">';
-                foreach (get_field("links", $e) as $link) {
-                    if (isset($link["link"])) :
-                        $html .= '<a class="text-reset text-decoration-none external_link_container" href="' . $link["link"] . '">
-                                                <div class="hstack py-3 gap-4 align-items-center justify-content-between">
-                                                    <img src="' . get_template_directory_uri() . '/assets/images/link.png" style="width: 24px; height: 24px">
-    
-                                                    <div class="fs-6 fw-semibold">' . $link["label"] . '
-                                                    </div>
-    
-                                                    <img src="' . get_template_directory_uri() . '/assets/images/btn-arrow-black.png" style="width: 24px; height: 24px">
-                                                </div>
-                                            </a>';
-                    endif;
-                }
-                $html .= '</div>
-                            </div>
+                    <?php if (isset($link['title']) && !empty($link['title'])) : ?>
+                        <div class="fs-6 fw-semibold">
+                            <?= $link['title']; ?>
                         </div>
-                    </div>';
-            }
-        }
-        $html .= '</div>';
+                    <?php endif; ?>
+                </div>
+
+                <div class="justify-self-end">
+                    <img 
+                        class="external_link_icon"
+                        src="<?= get_template_directory_uri() . "/assets/images/down-arrow.png"; ?>"
+                        style="
+                            width: 24px;
+                            height: 24px;
+                            transform: rotate(90deg);
+                        "
+                    />
+                </div>
+            </a>
+        <?php endif; ?>
+        
+        <?php
+        $html = ob_get_clean();
 
         return $html;
     }
