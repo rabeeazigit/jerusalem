@@ -61,7 +61,7 @@ function populate_cf7_property_type($tag)
         return $tag;
     }
 
-    $labels = ["סוג הפרויקט"];
+    $labels = ["סוג הפרויקט *"];
     $values = [""];
     $property_type_selector = get_field("property_type_selector", "options");
 
@@ -88,7 +88,7 @@ function populate_cf7_subject($tag)
         return $tag;
     }
 
-    $labels = ["נושא הפנייה"];
+    $labels = ["נושא הפנייה *"];
     $values = [""];
     $subject_selector = get_field("subject_selector", "options");
 
