@@ -314,7 +314,7 @@ class SingleProject
                 <div class="hstack gap-2 align-items-center">
                     <?php if ($image) : ?>
                         <img 
-                            class="external_link_image"
+                            class="external_link_image bg-white"
                             src="<?= $image['url'] ?? null; ?>"
                             alt="<?= $image['alt']; ?>"
                             title="<?= $image['title']; ?>"
