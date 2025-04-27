@@ -250,6 +250,8 @@ function import_projects_from_csv($file_path)
                     update_field('project_lowyer', $data['lawyer_name'] ?? '', $post_id);
                     update_field('area_description', $data['area_description'] ?? '', $post_id);
                     update_field('technon_link', $data['technon_link'] ?? '', $post_id);
+                    update_field('project_lan', $data['project_lng'] ?? '', $post_id);
+                    update_field('project_lat', $data['project_lat'] ?? '', $post_id);
 
                     $imported++;
                 } catch (Throwable $rowError) {
