@@ -14142,7 +14142,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_existing_unit',
-                        'label' => 'Existing Unit',
+                        'label' => 'יח"ד קיים',
                         'name' => 'existing_unit',
                         'aria-label' => '',
                         'type' => 'text', // <-- changed from 'number' to 'text'
@@ -14158,7 +14158,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_proposed_unit',
-                        'label' => 'Proposed Unit',
+                        'label' => 'יח"ד מוצע',
                         'name' => 'proposed_unit',
                         'aria-label' => '',
                         'type' => 'text', // <-- changed from 'number' to 'text'
@@ -14174,7 +14174,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_process_unit',
-                        'label' => 'Process Unit',
+                        'label' => 'יח"ד בביצוע',
                         'name' => 'process_unit',
                         'aria-label' => '',
                         'type' => 'text', // <-- changed from 'number' to 'text'
