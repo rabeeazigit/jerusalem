@@ -14145,7 +14145,7 @@ class SQLinkSCF
                         'label' => 'Existing Unit',
                         'name' => 'existing_unit',
                         'aria-label' => '',
-                        'type' => 'number',
+                        'type' => 'text', // <-- changed from 'number' to 'text'
                         'instructions' => '',
                         'required' => 0,
                         'wrapper' => array(
@@ -14161,7 +14161,7 @@ class SQLinkSCF
                         'label' => 'Proposed Unit',
                         'name' => 'proposed_unit',
                         'aria-label' => '',
-                        'type' => 'number',
+                        'type' => 'text', // <-- changed from 'number' to 'text'
                         'instructions' => '',
                         'required' => 0,
                         'wrapper' => array(
@@ -14177,7 +14177,7 @@ class SQLinkSCF
                         'label' => 'Process Unit',
                         'name' => 'process_unit',
                         'aria-label' => '',
-                        'type' => 'number',
+                        'type' => 'text', // <-- changed from 'number' to 'text'
                         'instructions' => '',
                         'required' => 0,
                         'wrapper' => array(
@@ -14188,6 +14188,7 @@ class SQLinkSCF
                         'default_value' => '',
                         'placeholder' => '',
                     ),
+                    
                     array(
                         'key' => 'field_67f3a956b38cf',
                         'label' => 'קישור לפרוייקט באתר מינהל תכנון',
