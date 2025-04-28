@@ -252,6 +252,7 @@ function import_projects_from_csv($file_path)
                     update_field('technon_link', $data['technon_link'] ?? '', $post_id);
                     update_field('project_lan', $data['project_lng'] ?? '', $post_id);
                     update_field('project_lat', $data['project_lat'] ?? '', $post_id);
+                    // add running numbers to import from csv
 
                     $imported++;
                 } catch (Throwable $rowError) {

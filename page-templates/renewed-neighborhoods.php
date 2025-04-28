@@ -135,7 +135,7 @@ $header_description = get_field("header_description") ?? null;
         </div>
 
         <div class="udc_search_container">
-            <form class="row row-gap- gx-3" id="neighborhoods_search">
+            <form class="row row-gap-3 gx-3" id="neighborhoods_search">
                 <div class="col-md-3 col-6">
                     <?php if ($neightborhoods && is_array($neightborhoods) && !empty($neightborhoods)) : ?>
                         <select id="neighborhood_select" name="neighborhood" class="form-select rounded-pill">
@@ -191,7 +191,7 @@ $projects_numbers = get_field("projects_numbers") ?? null;
                 $number = $e["number"] ?? null;
                 ?>
                 <?php if (wp_is_mobile()) : ?>
-                    <div class="col-4">
+                    <div class="col-md-4 col-6">
                         <div class="vstack align-items-center justify-content-center">
                             <div class="fs-2 fw-bold">
                                 <?= $number; ?>
