@@ -1452,3 +1452,15 @@ textarea {
     background-color: #174a75;
     color: #fff;
 }
+
+@media screen and (width <= 768px) {
+    .d-flex > .information_banner_card {
+        justify-content: center !important;
+    }
+
+    .information_banner {
+        height: 342px;
+        background-position: top;
+        background-size: contain;
+    }
+}
