@@ -137,10 +137,10 @@ $information_banner_link = $information_options["information_banner_link"] ?? nu
             <div class="row mt-5 row-gap-4">
                 <?php foreach ($information_numberical_data as $e) : ?>
                     <div class="col-6">
-                        <div class="vstack align-items-center gap-1">
+                        <div class="vstack align-items-center gap-1 mainTopicWrapper" data-count="<?= $e["number"]; ?>">
                             <?php if (isset($e["number"])) : ?>
-                                <div class="display-1 fw-medium">
-                                    <?= $e["number"]; ?>
+                                <div class="display-1 fw-medium mainTopicNumber">
+                                    0
                                 </div>
                             <?php endif; ?>
 
