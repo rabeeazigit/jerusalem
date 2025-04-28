@@ -55,8 +55,8 @@ class SingleProject
         // If no projects are selected
         // Get the latest 4 projects from the same neighborhood
         if (
-            (!is_array($this->fetured_projects)) 
-            || 
+            (!is_array($this->fetured_projects))
+            ||
             (empty($this->fetured_projects) && isset($this->project_neighborhood) && isset($this->project_neighborhood->ID))
         ) {
             $this->fetured_projects = get_posts([
@@ -93,12 +93,12 @@ class SingleProject
         if (!$this->project_status || empty($this->project_status)) {
             return "";
         }
-        
+
         $Status = [
             "name" => $this->project_status->name,
             "color" => get_field("project_status_color", "project-status_" . $this->project_status->term_id)
         ];
-        
+
         return $Status;
     }
 
@@ -110,29 +110,29 @@ class SingleProject
         $title = $this->project_neighborhood ?? null;
 
         $html = "<ul class='nbrhd ps-0 ps-md-5'>";
-        
+
         if ($title && $title->post_title && !empty($title->post_title)) {
             $html .= "<li>שם שכונה: {$title->post_title}</li>";
         }
-        
+
         if ($this->tabaa_number && !empty($this->tabaa_number)) {
             $html .= '<li>מספר תוכנית: ' . $this->tabaa_number . '</li>';
         }
-        
+
         if ($this->project_entrepreneur && !empty($this->project_entrepreneur)) {
             $html .= '<li>שם היזם: ' . $this->project_entrepreneur . '</li>';
         }
-        
+
         if ($this->project_lowyer && !empty($this->project_lowyer)) {
             $html .= "<li> עו\"ד בעלי הדירות: {$this->project_lowyer}</li>";
         }
-        
+
         $html .= "</ul>";
-        
+
         $status_color = $Status['color'] ?? null;
         $status_name = $Status['name'] ?? null;
-        
-        
+
+
         if ($status_color && $status_name) {
             $html .= "<div class='sts_title ms-0 ms-md-5'>
                 סטטוס
@@ -157,14 +157,14 @@ class SingleProject
         if (!empty($Gallery_RAW)) {
             foreach ($Gallery_RAW as $key => $gal) {
                 $gallery_source = $gal['gallery_source'];
-    
+
                 switch ($gallery_source) {
                     case 'video':
                         $Gallery[$key]['source'] = 'video';
                         $Gallery[$key]['video_src'] = $gal['youtube_video'];
                         $Gallery[$key]['video_title'] = $gal['pg_video_title'];
                         break;
-    
+
                     case 'image':
                         $Gallery[$key]['source'] = 'image';
                         $Gallery[$key]['image_src'] = $gal['gallery_image'];
@@ -211,7 +211,7 @@ class SingleProject
         $area_description = get_field("area_description", $this->pid);
         $html = "<h3 class='ps-0 ps-md-5 mt-3'>תיאור המתחם</h3>";
         $html .= "<div class='pro_desc ps-0 ps-md-5'><p>{$area_description}</p></div>";
-     
+
         return $area_description && !empty($area_description) ? $html : "";
     }
 
@@ -266,25 +266,76 @@ class SingleProject
     }
 
 
+    // private function RunningNumbers()
+    // {
+    //     $sexy_numbers = $this->projects_sexy_numbers;
+    //     $html = "";
+    //     $html .= "<div class='row py-5 py-md-0'>";
+    //     if ($sexy_numbers && is_array($sexy_numbers) && !empty($sexy_numbers)) {
+    //         foreach ($sexy_numbers as $sn) {
+    //             $html .= "
+    //             <div class='col-12 col-md-4 mainTopicWrapper' data-count='{$sn['the_sexy_number']}'>
+    //                 <span class='s_number fs-1 rubik mainTopicNumber' >
+    //                     0
+    //                 </span>
+
+    //                 <span class='s_title'>
+    //                     {$sn['project_text_sexy_number']}
+    //                 </span>
+    //             </div>";
+    //         }
+    //     }
+    //     $html .= "</div>";
+    //     return $html;
+    // }
     private function RunningNumbers()
     {
-        $sexy_numbers = $this->projects_sexy_numbers;
+        $existing_unit = get_field('existing_unit', $this->ID);
+        $proposed_unit = get_field('proposed_unit', $this->ID);
+        $process_unit = get_field('process_unit', $this->ID);
+
         $html = "";
         $html .= "<div class='row py-5 py-md-0'>";
-        if ($sexy_numbers && is_array($sexy_numbers) && !empty($sexy_numbers)) {
-            foreach ($sexy_numbers as $sn) {
-                $html .= "
-                <div class='col-12 col-md-4 mainTopicWrapper' data-count='{$sn['the_sexy_number']}'>
-                    <span class='s_number fs-1 rubik mainTopicNumber' >
+
+        // Existing Unit
+        if (!empty($existing_unit)) {
+            $html .= "
+                <div class='col-12 col-md-4 mainTopicWrapper' data-count='{$existing_unit}'>
+                    <span class='s_number fs-1 rubik mainTopicNumber'>
                         0
                     </span>
-                    
                     <span class='s_title'>
-                        {$sn['project_text_sexy_number']}
+                        יח\"ד קיים
                     </span>
                 </div>";
-            }
         }
+
+        // Proposed Unit
+        if (!empty($proposed_unit)) {
+            $html .= "
+                <div class='col-12 col-md-4 mainTopicWrapper' data-count='{$proposed_unit}'>
+                    <span class='s_number fs-1 rubik mainTopicNumber'>
+                        0
+                    </span>
+                    <span class='s_title'>
+                        יח\"ד מוצע
+                    </span>
+                </div>";
+        }
+
+        // Process Unit
+        if (!empty($process_unit)) {
+            $html .= "
+                <div class='col-12 col-md-4 mainTopicWrapper' data-count='{$process_unit}'>
+                    <span class='s_number fs-1 rubik mainTopicNumber'>
+                        0
+                    </span>
+                    <span class='s_title'>
+                        יח\"ד בביצוע
+                    </span>
+                </div>";
+        }
+
         $html .= "</div>";
         return $html;
     }
@@ -304,21 +355,19 @@ class SingleProject
             <h6 class="ps-0 ps-md-5 display-4 my-4 fs-2 fw-bold">
                 מידע חיצוני נוסף
             </h6>
-            
+
             <a
                 class="hstack pro_desc align-items-center justify-content-between ms-md-5 ms-0
                 border rounded-4 py-2 px-3 external_links_container group_item text-reset text-decoration-none"
                 href="<?= $link['url'] ?? '#'; ?>"
-                target="<?= $link['target'] ?? ''; ?>"
-            >
+                target="<?= $link['target'] ?? ''; ?>">
                 <div class="hstack gap-2 align-items-center">
                     <?php if ($image) : ?>
-                        <img 
+                        <img
                             class="external_link_image bg-white"
                             src="<?= $image['url'] ?? null; ?>"
                             alt="<?= $image['alt']; ?>"
-                            title="<?= $image['title']; ?>"
-                        />
+                            title="<?= $image['title']; ?>" />
                     <?php endif; ?>
 
                     <?php if (isset($link['title']) && !empty($link['title'])) : ?>
@@ -329,33 +378,32 @@ class SingleProject
                 </div>
 
                 <div class="justify-self-end">
-                    <img 
+                    <img
                         class="external_link_icon"
                         src="<?= get_template_directory_uri() . "/assets/images/down-arrow.png"; ?>"
                         style="
                             width: 24px;
                             height: 24px;
                             transform: rotate(90deg);
-                        "
-                    />
+                        " />
                 </div>
             </a>
         <?php endif; ?>
-        
-        <?php
+
+<?php
         $html = ob_get_clean();
 
         return $html;
     }
 
     public function GetProjects_Random() {}
-    
+
     public function GetProjectsToDisplay()
     {
         if (count($this->fetured_projects) <= 0) {
             return;
         }
-        
+
         echo '<div class="container-fluid py-4"><div class="row row-gap-5">';
         if ($this->fetured_projects && is_array($this->fetured_projects)) {
             foreach ($this->fetured_projects as $key => $fet) {
