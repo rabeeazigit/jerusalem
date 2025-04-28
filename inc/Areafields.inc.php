@@ -120,6 +120,7 @@ class Areafields
                 'fields' => 'ids', // Fetch only post IDs
             ]),
         ]);
+        
         return $categories;
     }
 

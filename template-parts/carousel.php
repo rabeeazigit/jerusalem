@@ -29,13 +29,15 @@ $dark_mode = $args["dark_mode"] ?? false;
     <?php endif; ?>
 
     <div class="vstack">
-        <div class="carousel-controls my-3 px-5">
-            <div class="hstack gap-4 justify-content-end">
-                <div class="carousel_play"></div>
-                <div class="carousel_prev"></div>
-                <div class="carousel_next"></div>
+        <?php if (count($carousel_items) > 2) : ?>
+            <div class="carousel-controls my-3 px-5">
+                <div class="hstack gap-4 justify-content-end">
+                    <div class="carousel_play"></div>
+                    <div class="carousel_prev"></div>
+                    <div class="carousel_next"></div>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
 
         <div class="carousel_wrapper py-5">
             <?php foreach ($carousel_items as $e) : ?>
