@@ -414,7 +414,7 @@ class SingleProject
                     "project_neighborhood" => get_field("project_neighborhood", $e) ?? null,
                     "project_status" => get_field("project_status", $e) ?? null,
                     "project_card_image" => get_field("project_card_image", $e) ?? null,
-                    "project_name" => $e->post_title ?? null,
+                    "project_name" => $fet->post_title ?? null,
                     "project_link" => get_permalink($e) ?? null,
                 ]);
                 echo '</div>';
