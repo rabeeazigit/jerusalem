@@ -243,6 +243,44 @@ function import_projects_from_csv($file_path)
                     if (!$post_id || is_wp_error($post_id)) {
                         throw new Exception("נכשל ניסיון ההוספה/עדכון של הפוסט: $title. נתוני שורה: " . implode(", ", $row));
                     }
+                    if (!empty($data['neighborhood'])) {
+                        // Search for existing neighborhood post
+                        $neighborhood_post = get_page_by_title($data['neighborhood'], OBJECT, 'neighborhood');
+
+                        if (!$neighborhood_post) {
+                            // Neighborhood doesn't exist — create it
+                            $neighborhood_id = wp_insert_post([
+                                'post_title' => $data['neighborhood'],
+                                'post_type' => 'neighborhood',
+                                'post_status' => 'publish',
+                            ]);
+                        } else {
+                            $neighborhood_id = $neighborhood_post->ID;
+                        }
+
+                        if (!is_wp_error($neighborhood_id)) {
+                            update_field('project_neighborhood', $neighborhood_id, $post_id);
+                        }
+                    }
+                    if (!empty($data['project_status'])) {
+                        // Check if term exists
+                        $term = term_exists($data['project_status'], 'project-status');
+
+                        if (!$term) {
+                            // Term does not exist, create it
+                            $new_term = wp_insert_term($data['project_status'], 'project-status');
+                            if (!is_wp_error($new_term)) {
+                                $term_id = $new_term['term_id'];
+                            }
+                        } else {
+                            $term_id = is_array($term) ? $term['term_id'] : $term;
+                        }
+
+                        if (!empty($term_id)) {
+                            // Assign the term to the post
+                            wp_set_object_terms($post_id, intval($term_id), 'project-status', false);
+                        }
+                    }
 
                     update_field('project_address', $data['address'] ?? '', $post_id);
                     update_field('tabaa_number', $data['tabaa_number'] ?? '', $post_id);
