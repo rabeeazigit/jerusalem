@@ -307,7 +307,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
                         טען עוד
                         
                         <span>
-                            (<span id="more-faq-count"><?= count($controller->faq_items) - 7; ?></span>)
+                            (<span id="more-faq-count"><?= count($controller->faq_items) - 6; ?></span>)
                         </span>
                     </button>
                 <?php endif; ?>

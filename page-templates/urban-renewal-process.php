@@ -159,7 +159,11 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                             <?php foreach ($proccesses as $index => $process) : ?>
                                                                 <div class="vstack">
                                                                     <!-- Collapse Anchor -->
-                                                                    <div class="hstack align-items-center justify-content-between p-3 stage_side_wrapper collapsed" data-bs-toggle="collapse" data-bs-target="#stage_col_<?= $process->ID; ?>">
+                                                                    <div 
+                                                                        class="hstack align-items-center justify-content-between p-3 stage_side_wrapper collapsed"
+                                                                        data-bs-toggle="collapse"
+                                                                        data-bs-target="#stage_col_<?= $process->ID; ?>"
+                                                                    >
                                                                         <div class="hstack fs-5 gap-3">
                                                                             <div class="fs-6 fw-semibold">
                                                                                 <?= $process->post_title; ?>
@@ -297,6 +301,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                 <?php foreach ($renewal_stages as $stage_index => $stage) : ?>
                                                     <?php
                                                     $stage_unique_id = 0;
+                                                    $extra_unique_id = wp_unique_id("stage_");
                                                     $stage_title = get_field("stage_title", $stage) ?? null;
                                                     $stages = get_field("stages", $stage) ?? null;
                                                     ?>
@@ -306,11 +311,11 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                             <div
                                                                 class="hstack align-items-center justify-content-between collapsed stage_accordion"
                                                                 data-bs-toggle="collapse"
-                                                                data-bs-target="#stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
+                                                                data-bs-target="#<?= $extra_unique_id; ?>_stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
                                                                 data-id="<?= $stage->ID; ?>"
                                                                 data-parent="<?= $item->ID; ?>"
                                                                 data-collapse-parent="item_<?= $uc_ind.$index; ?>"
-                                                                data-stage-collapse="stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
+                                                                data-stage-collapse="<?= $extra_unique_id; ?>_stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
                                                             >
                                                                 <div class="hstack gap-2 align-items-center">
                                                                     <div class="stage_circle"></div>
@@ -323,7 +328,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                                 <img src="<?= get_template_directory_uri() . "/assets/images/down-arrow.png"; ?>" class="stage_arrow">
                                                             </div>
 
-                                                            <div class="collapse stage_collapable py-2 py-md-4" id="stage_<?= $stage_index . "_" . $stage_unique_id++; ?>">
+                                                            <div class="collapse stage_collapable py-2 py-md-4" id="<?= $extra_unique_id; ?>_stage_<?= $stage_index . "_" . $stage_unique_id++; ?>">
                                                                 <hr>
 
                                                                 <?php foreach (get_field("stages", $stage) as $e) : ?>
@@ -402,7 +407,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                         טען עוד
                         
                         <span>
-                            (<span id="more-faq-count"><?= count($controller->faq_items) - 7; ?></span>)
+                            (<span id="more-faq-count"><?= count($controller->faq_items) - 6; ?></span>)
                         </span>
                     </button>
                 <?php endif; ?>
