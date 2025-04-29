@@ -36,7 +36,7 @@ if ($allProjs && is_array($allProjs) && !empty($allProjs)) {
 ?>
 
 <script>
-    window.mapPoints = JSON.parse('<?= json_encode($allDataForMap, true); ?>');
+    window.mapPoints = <?= json_encode($allDataForMap); ?>;
 </script>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
