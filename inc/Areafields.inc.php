@@ -233,7 +233,7 @@ class Areafields
     private function GetAccordionContent($pid)
     {
         $LayOut = [];
-        $content = get_field('main_area_fields', $pid); //GROUP ACF
+        $content = get_field('arie_fields_connection', $pid); //GROUP ACF
     
         if (isset($content[0])) {
             $LayOut['area_title'] = $content[0]['area_title'] ?? '';
