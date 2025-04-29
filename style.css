@@ -620,6 +620,10 @@ body {
     height: 24px;
 }
 
+.project_status_wrapper {
+    margin: 5px;
+}
+
 .project_status_wrapper,
 .event_status_wrapper {
     background-color: #fcfbf9f2;

@@ -1,4 +1,6 @@
 $(() => {
+    let page = 1;
+    
     // handles the filtering logic
     $("#neighborhoods_search")
         .on("input", function (event) {
@@ -48,11 +50,10 @@ $(() => {
     // Handles the load more functionallity
     $("#loadMoreProjects").on("click", function () {
         const limit = $(this).attr("data-limit");
-        const page = $(this).attr("data-page");
 
         const data = {
             limit,
-            page,
+            page : ++page,
             nonce: ajaxObject.nonce,
             action: "load_projects",
         };
@@ -72,12 +73,7 @@ $(() => {
                 $("#projects-container").append(projects);
                 $("#loadMoreProjects span").html(`(${remaining})`);
 
-                if (remaining > 0) {
-                    $("#loadMoreProjects").attr(
-                        "data-page",
-                        parseInt(page) + 1
-                    );
-                } else {
+                if (remaining <= 0) {
                     $("#loadMoreProjects").fadeOut();
                 }
             },

@@ -237,7 +237,6 @@ $projects = get_posts([
 ]);
 ?>
 <section class="container-fluid px-3 px-md-5" id="projects-container-after-reset">
-
     <?php if ($projects && is_array($projects) && !empty($projects)) : ?>
         <div class="row row-gap-3 my-5" id="projects-container">
             <?php if ($projects && is_array($projects) && !empty($projects)) : ?>
