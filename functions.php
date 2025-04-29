@@ -279,6 +279,7 @@ function import_projects_from_csv($file_path)
                         if (!empty($term_id)) {
                             // Assign the term to the post
                             wp_set_object_terms($post_id, intval($term_id), 'project-status', false);
+                            update_field('project_status', intval($term_id), $post_id);
                         }
                     }
 
