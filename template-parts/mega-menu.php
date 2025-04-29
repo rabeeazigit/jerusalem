@@ -15,7 +15,7 @@ $menu_links = $args["menu_links"] ?? null;
     </button>
 
     <div class="dropdown-menu main_menu_dropdown z-1">
-        <div class="row p-4">
+        <div class="row p-4 w-100">
             <div class="col-md-9">
                 <?php if ($menu_cards) : ?>
                     <div class="row">

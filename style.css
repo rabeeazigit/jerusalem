@@ -254,6 +254,12 @@ body {
     top: 15px !important;
     left: -239px !important;
     z-index: 99999;
+
+    @media screen and (width <= 1500px) {
+        & {
+            width: 77vw;
+        }
+    }
 }
 
 .navbar_menu_arrow {
