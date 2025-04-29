@@ -110,6 +110,14 @@ class Areafields
 
     public function FetchAreaFiedlsCategories()
     {
+        $cats = get_field('arie_fields_connection', $this->pid);
+        
+        $result = array_map(function ($e) {
+            return $e->ID;
+        }, $cats);
+
+        return $result;
+        
         $categories = get_terms([
             'taxonomy' => 'category', // Default WordPress category taxonomy
             'hide_empty' => false,      // Show all categories, even if they have no posts
@@ -144,20 +152,13 @@ class Areafields
 
     private function GET_AreaFieldsTermsPosts($term_id)
     {
-
-        $posts_raw = [];
+        // $data = get_field('', $term_id);
         $args = array(
             'post_type' => 'area-fields',
             'orderby' => 'date',
             'order' => 'DESC',
             'posts_per_page' => -1,
-            'tax_query' => array(
-                array(
-                    'taxonomy' => 'category',
-                    'field' => 'term_id',
-                    'terms' => $term_id,
-                ),
-            ),
+            'ID' => $term_id
         );
 
         $posts = get_posts($args);
@@ -233,8 +234,8 @@ class Areafields
     private function GetAccordionContent($pid)
     {
         $LayOut = [];
-        $content = get_field('arie_fields_connection', $pid); //GROUP ACF
-    
+        $content = get_field('main_area_fields', $pid); //GROUP ACF
+        
         if (isset($content[0])) {
             $LayOut['area_title'] = $content[0]['area_title'] ?? '';
             $LayOut['area_content'] = $content[0]['area_content'] ?? '';
@@ -277,14 +278,17 @@ class Areafields
                 $active_class = '';
             }
 
-            $term_id = $cat->term_id;
+            $term_id = $cat;
 
+            $post = get_post($term_id);
+            $term_name = $post->post_title;
+            
             $html .= ' <li class="nav-item" 
                             role="presentation">
                             <button class=" small-button area_field_tab_btn activeFieldLink rounded-pill ' . $active_class . '  m-2" id="pills-' . $term_id . '-tab" 
                             data-bs-toggle="pill" data-bs-target="#pills-' . $term_id . '" 
                             type="button" role="tab" aria-controls="pills-' . $term_id . '" 
-                            aria-selected="true" data-term-id="' . $term_id . '">' . $cat->name . '</button>
+                            aria-selected="true" data-term-id="' . $term_id . '">' . $term_name . '</button>
                         </li>';
 
             $terms[$term_id] = $this->GET_AreaFieldsTermsPosts($term_id);
