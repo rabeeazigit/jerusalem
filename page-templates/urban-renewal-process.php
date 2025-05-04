@@ -56,7 +56,7 @@ $urban_category = $_GET["urban_category"] ?? null;
 
                             <?php if (wp_is_mobile()) : ?>
                                 <div class="hstack flex-wrap pb-3 px-2 gap-3">
-                                    <?php if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_renewal_terms)) : ?>
+                                    <?php if (false && $urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_renewal_terms)) : ?>
                                         <a href="#urban_renewal_process_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
                                             תהליך התחדשות עירונית
                                         </a>
@@ -76,7 +76,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                 </div>
                             <?php else : ?>
                                 <div class="hstack pb-3 gap-4">
-                                    <?php if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_renewal_terms)) : ?>
+                                    <?php if (false && $urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_renewal_terms)) : ?>
                                         <a href="#urban_renewal_process_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
                                             תהליך התחדשות עירונית
                                         </a>

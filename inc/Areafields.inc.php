@@ -6,7 +6,7 @@ class Areafields
     private $hero_image;
     private $hero_section;
     private $main_area_fields;
-    private $arie_fields_connection;
+    private $arie_fields_connection; //take this
     private $community_field_title;
     private $community_field_content;
     private $community_field_title_accotdion;
@@ -22,17 +22,12 @@ class Areafields
         $this->arie_fields_connection = get_field('arie_fields_connection', $this->pid);
         $this->community_field_title_accotdion = get_field('community_field_title_accotdion', $this->pid);
 
-        wp_enqueue_script(
-            "area-fields-js",
-            get_template_directory_uri() . "/assets/js/area-fields.js",
-            [],
-            filemtime(get_template_directory() . "/assets/js/area-fields.js")
-        );
+
     }
 
     public function LeftSideCats()
     {
-        return $this->hero_section['bk_sec_about'] ?? null;
+        return $this->hero_section['bk_sec_about'];
     }
 
 
@@ -110,14 +105,6 @@ class Areafields
 
     public function FetchAreaFiedlsCategories()
     {
-        $cats = get_field('arie_fields_connection', $this->pid);
-        
-        $result = array_map(function ($e) {
-            return $e->ID;
-        }, $cats);
-
-        return $result;
-        
         $categories = get_terms([
             'taxonomy' => 'category', // Default WordPress category taxonomy
             'hide_empty' => false,      // Show all categories, even if they have no posts
@@ -128,7 +115,6 @@ class Areafields
                 'fields' => 'ids', // Fetch only post IDs
             ]),
         ]);
-        
         return $categories;
     }
 
@@ -152,25 +138,104 @@ class Areafields
 
     private function GET_AreaFieldsTermsPosts($term_id)
     {
-        // $data = get_field('', $term_id);
+
+        $posts_raw = [];
         $args = array(
             'post_type' => 'area-fields',
             'orderby' => 'date',
             'order' => 'DESC',
-            'posts_per_page' => -1,
-            'ID' => $term_id
+            'posts_per_page' => -1, // Fetch all posts
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'category', // Replace with your actual taxonomy name
+                    'field' => 'term_id',
+                    'terms' => $term_id,
+                ),
+            ),
         );
 
         $posts = get_posts($args);
         return $posts;
     }
 
+
+
+    // private function BootsrapAccordion($terms)
+    // {
+    //     //$terms Needs to be an array....
+
+    //     $html = '<div class="accordion" id="accordionPanelsfields">';
+
+
+    //     foreach ($terms as $post) {
+
+    //         $GroupContent = $this->GetAccordionContent($post->ID);
+
+
+    //         //area_sticky_image
+    //         $sticky =  $GroupContent['area_sticky_image']  == 1 ? 'class="img-fluid position-sticky" style="top: 20px;" ' : 'style="width:100%;"';
+    //         $sec1Args = array(
+    //             'all_fields'=>$GroupContent['all_fields'] ,
+    //             'area_title' => $GroupContent['area_title'] ,
+    //             'area_content' => $GroupContent['area_content'] ,
+    //             'area_image' => $GroupContent['area_image'] ,
+    //             'area_more_btn' => $GroupContent['area_more_btn'] ?? '' ,
+    //             'sticky' => $sticky);
+
+    //         $sec2Args = array($GroupContent['area_table'], $GroupContent['table_title']);
+    //         $sec3Args = $GroupContent['downloads'] ;
+    //         $pid = $GroupContent['pid'];
+    //         $sec_videos_Args = $GroupContent['videos'] ;
+
+
+
+
+    //         $html .= ' 
+    //             <div class="accordion-item">
+    //                 <h2 class="accordion-header">
+    //                 <button class="accordion-button" 
+    //                             type="button" 
+    //                             data-bs-toggle="collapse" 
+    //                             data-bs-target="#panelsStayOpen-collapse'.$post->ID.'" 
+    //                             aria-expanded="true" 
+    //                             aria-controls="panelsStayOpen-collapse'.$post->ID.'" >
+    //                     '.$post->post_title.'
+    //                 </button>
+    //                 </h2>
+    //                 <div id="panelsStayOpen-collapse'.$post->ID.'"  class="accordion-collapse collapse" data-bs-parent="#accordionPanelsfields">
+    //              <div class="accordion-body">';
+
+    //              ob_start();
+
+    //         get_template_part("template-parts/area-fields/acc-section1", null, $sec1Args);
+    //         get_template_part("template-parts/area-fields/acc-section2", null, $sec2Args);
+    //         get_template_part("template-parts/area-fields/acc-section3", null, $sec3Args);
+
+
+
+    //      include(get_template_directory(). "/template-parts/area-fields/acc-section_video.php");
+    //         $html .= ob_get_clean();
+
+    //         $html .= '</div></div></div>';
+
+    //     }
+
+
+
+    //     $html .= '</div>' ; //Closer Accordion
+
+    //     return $html;
+    // }
+
+
     private function BootsrapAccordion($terms)
     {
+        //$terms Needs to be an array....
+    
         $html = '<div class="" id="accordionPanelsfields">';
     
         foreach ($terms as $post) {
-    
+            
             $GroupContent = $this->GetAccordionContent($post->ID);
     
             //area_sticky_image
@@ -235,35 +300,29 @@ class Areafields
     {
         $LayOut = [];
         $content = get_field('main_area_fields', $pid); //GROUP ACF
-        
-        if (isset($content[0])) {
-            $LayOut['area_title'] = $content[0]['area_title'] ?? '';
-            $LayOut['area_content'] = $content[0]['area_content'] ?? '';
-            $LayOut['all_fields'] = $content[0]['all_fields'] ?? [];
-            $LayOut['all_fields_title'] = $content[0]['all_fields_title'] ?? '';
-            $LayOut['area_image'] = $content[0]['area_image']['url'] ?? '';
-            $LayOut['area_sticky_image'] = $content[0]['area_sticky_image'] ?? '';
-            $LayOut['area_more_btn'] = $content[0]['area_more_btn'] ?? '';
-        }
-    
-        if (isset($content[1])) {
-            $LayOut['area_table'] = $content[1]['area_table'] ?? [];
-            $LayOut['table_title'] = $content[1]['table_title'] ?? '';
-        }
-    
-        if (isset($content[2]['area_files_download'])) {
-            $LayOut['downloads'] = $content[2]['area_files_download'];
-        }
-    
-        if (isset($content[3]['area_videos'])) {
-            $LayOut['videos'] = $content[3]['area_videos'];
-        }
-    
+
+        $LayOut['area_title'] = $content[0]['area_title'];
+        $LayOut['area_content'] = $content[0]['area_content'];
+        $LayOut['all_fields'] = $content[0]['all_fields'];
+        $LayOut['all_fields_title'] = $content[0]['all_fields_title'];
+        $LayOut['area_image'] = $content[0]['area_image']['url'];
+        $LayOut['area_sticky_image'] = $content[0]['area_sticky_image'];
+        $LayOut['area_more_btn'] = $content[0]['area_more_btn'];
+        //================================================================
+        $LayOut['area_table'] = $content[1]['area_table'];
+        $LayOut['table_title'] = $content[1]['table_title'];
+        //================================================================
+
+        $LayOut['downloads'] = $content[2]['area_files_download'];
+        $LayOut['videos'] = $content[3]['area_videos'];
         $LayOut['pid'] = wp_unique_id('slider_');
-    
+
         return $LayOut;
     }
-    
+
+
+
+
     public function GetPillsCategories()
     {
         $cats = $this->FetchAreaFiedlsCategories();
@@ -271,24 +330,31 @@ class Areafields
         $terms = [];
         $cnt = 0;
         foreach ($cats as $cat) {
+            $to_be_hidden = false;
 
+            if (
+                !in_array(
+                    $cat->name,
+                    array_map(fn ($e) => $e->post_title, $this->arie_fields_connection)
+                )
+            ) {
+                $to_be_hidden = true;
+            }
+            
             if ($cnt == 0) {
                 $active_class = 'active';
             } else {
                 $active_class = '';
             }
 
-            $term_id = $cat;
+            $term_id = $cat->term_id;
 
-            $post = get_post($term_id);
-            $term_name = $post->post_title;
-            
-            $html .= ' <li class="nav-item" 
+            $html .= ' <li class="nav-item ' . ($to_be_hidden ? 'to_be_hidden' : '') . '"
                             role="presentation">
-                            <button class=" small-button area_field_tab_btn activeFieldLink rounded-pill ' . $active_class . '  m-2" id="pills-' . $term_id . '-tab" 
+                            <button class=" small-button activeFieldLink rounded-pill ' . $active_class . '  m-2" id="pills-' . $term_id . '-tab" 
                             data-bs-toggle="pill" data-bs-target="#pills-' . $term_id . '" 
                             type="button" role="tab" aria-controls="pills-' . $term_id . '" 
-                            aria-selected="true" data-term-id="' . $term_id . '">' . $term_name . '</button>
+                            aria-selected="true">' . $cat->name . '</button>
                         </li>';
 
             $terms[$term_id] = $this->GET_AreaFieldsTermsPosts($term_id);
@@ -308,6 +374,19 @@ class Areafields
         $cnt = 0;
         $active_class = '';
         foreach ($terms as $key => $terminis) {
+
+            // $to_be_hidden = false;
+
+            // if (
+            //     !in_array(
+            //         $key,
+            //         array_map(fn ($e) => $e->post_title, $this->arie_fields_connection)
+            //     )
+            // ) {
+            //     $to_be_hidden = true;
+            // }
+            
+            $randomNumber = mt_rand(5221, 1000000);
 
             if ($cnt == 0) {
                 $active_class = 'show active';

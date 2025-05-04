@@ -367,9 +367,17 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
         <?php if ($controller->file_categories_to_show && is_array($controller->file_categories_to_show) && !empty($controller->file_categories_to_show)) : ?>
             <?php if (!wp_is_mobile()) : ?>
                 <div class="hstack align-items-center justify-content-start gap-3" role="tablist">
+                    <button 
+                        class="btn btn-sq-secondary rounded-pill px-4 df_tab_btn active show"
+                        data-bs-toggle="tab"
+                        data-bs-target="#file_tab_all"
+                    >
+                        הכל
+                    </button>
+                    
                     <?php foreach ($controller->file_categories_to_show as $idx => $file_category) : ?>
                         <button 
-                            class="btn btn-sq-secondary rounded-pill px-4 df_tab_btn <?= $idx == 0 ? "active show" : ""; ?>"
+                            class="btn btn-sq-secondary rounded-pill px-4 df_tab_btn "
                             data-bs-toggle="tab"
                             data-bs-target="#file_tab_<?= $file_category->term_id; ?>"
                             data-term-id="<?= $file_category->term_id; ?>"
@@ -397,8 +405,12 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
                     </div>
 
                     <div class="hstack gap-4 overflow-auto py-3 my-3">
-                        <?php foreach ($controller->file_categories_to_show as $idx => $file_category) : ?>
-                            <button style="white-space: nowrap" class="btn btn-sq-secondary rounded-pill px-4 <?= $idx == 0 ? "active show" : ""; ?>" data-bs-toggle="tab" data-bs-target="#file_tab_<?= $file_category->term_id; ?>" style="width: fit-content">
+                        <button style="white-space: nowrap" class="btn btn-sq-secondary rounded-pill px-4 active show" data-bs-toggle="tab" data-bs-target="#file_tab_all" style="width: fit-content">
+                            הכל
+                        </button>
+                        
+                        <?php foreach ($controller->file_categories_to_show as $file_category) : ?>
+                            <button style="white-space: nowrap" class="btn btn-sq-secondary rounded-pill px-4" data-bs-toggle="tab" data-bs-target="#file_tab_<?= $file_category->term_id; ?>" style="width: fit-content">
                                 <?= $file_category->name; ?>
                             </button>
                         <?php endforeach; ?>
@@ -408,10 +420,43 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
         <?php endif; ?>
 
         <div class="tab-content">
+            <div class="tab-pane fade active show" role="tabpanel" id="file_tab_all">
+                <?php $files = $controller->get_files_by_category(); ?>
+                <div class="row row-gap-4 my-5">
+                    <?php foreach ($files as $e) : ?>
+                        <?php
+                        $file_link = "";
+                        if (get_field("is_external_file", $e)) {
+                            $file_link = get_field("file_url", $e);
+                        } else {
+                            $file_link = get_field("file", $e);
+                        }
+                        ?>
+                        <div class="col-md-3">
+                            <a data-search="<?= (get_field("short_description", $e) ?? "") . "," . (get_field("display_name", $e)); ?>" download target="_blank" href="<?= $file_link; ?>" class="text-decoration-none text-reset hstack gap-2 align-items-center downloadable_file_item rounded-4 p-3">
+                                <img src="<?= get_template_directory_uri() . "/assets/images/doc.png"; ?>" style="width: 32px; height: 32px; align-self: flex-start">
+
+                                <div class="vstack gap-2">
+                                    <div class="fs-5 fw-bold">
+                                        <?= get_field("display_name", $e); ?>
+                                    </div>
+
+                                    <div class="fs-6">
+                                        <?= truncate_sentence(get_field("short_description", $e) ?? "", 80); ?>
+                                    </div>
+                                </div>
+
+                                <img src="<?= get_template_directory_uri() . "/assets/images/download.png"; ?>" style="width: 32px; height: 32px; align-self: flex-end">
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            
             <?php foreach ($controller->file_categories_to_show as $idx => $file_category) : ?>
                 <?php $files = $controller->get_files_by_category($file_category); ?>
 
-                <div class="tab-pane fade <?= $idx == 0 ? "active show" : ""; ?>" role="tabpanel" id="file_tab_<?= $file_category->term_id; ?>">
+                <div class="tab-pane fade" role="tabpanel" id="file_tab_<?= $file_category->term_id; ?>">
                     <div class="row row-gap-4 my-5">
                         <?php foreach ($files as $e) : ?>
                             <?php

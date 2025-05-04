@@ -290,9 +290,9 @@ class SingleProject
     // }
     private function RunningNumbers()
     {
-        $existing_unit = get_field('existing_unit', $this->ID);
-        $proposed_unit = get_field('proposed_unit', $this->ID);
-        $process_unit = get_field('process_unit', $this->ID);
+        $existing_unit = get_field('existing_unit', $this->pid);
+        $proposed_unit = get_field('proposed_unit', $this->pid);
+        $process_unit = get_field('process_unit', $this->pid);
 
         $html = "";
         $html .= "<div class='row py-5 py-md-0'>";

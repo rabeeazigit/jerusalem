@@ -103,17 +103,23 @@ class InformationTemplate {
         ]);
     }
 
-    public function get_files_by_category($category) {
-        return get_posts([
-            "post_type" => "downloadable-file",
-            "posts_per_page" => -1,
-            "tax_query" => [
+    public function get_files_by_category($category = null) {
+        $tax_query = [];
+        
+        if ($category !== null) {
+            $tax_query = [
                 [
                     "taxonomy" => "downloadable-files-category",
                     "field"    => "term_id",
                     "terms"    => $category,
                 ]
-            ]
+            ];
+        }
+        
+        return get_posts([
+            "post_type" => "downloadable-file",
+            "posts_per_page" => -1,
+            "tax_query" => $tax_query
         ]);
     }
 }
