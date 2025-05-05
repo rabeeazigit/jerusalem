@@ -23,7 +23,7 @@ get_header();
         $main_title = get_field("main_title") ?? null;
         $sub_title = get_field("sub_title") ?? null;
         ?>
-        <div class="vstack pt-4 px-md-5 px-3">
+        <div class="vstack pt-2 px-md-5 px-3">
             <?php if (function_exists("yoast_breadcrumb")) : ?>
                 <div class="sq_breadcrumbs py-3 fs-5">
                     <?php yoast_breadcrumb(); ?>

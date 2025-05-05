@@ -39,7 +39,7 @@ $dark_mode = $args["dark_mode"] ?? false;
             </div>
         <?php endif; ?>
 
-        <div class="carousel_wrapper py-5">
+        <div class="carousel_wrapper py-3">
             <?php foreach ($carousel_items as $e) : ?>
                 <?php
                 $media_type = $e["media_type"] ?? null;

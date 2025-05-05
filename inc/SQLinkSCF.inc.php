@@ -9909,7 +9909,7 @@ class SQLinkSCF
                 'fields' => array(
                     array(
                         'key' => 'field_67a88d2c31957',
-                        'label' => 'Category',
+                        'label' => 'קטגוריות',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -9927,7 +9927,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67a9cc64d1d09',
-                        'label' => 'Process Stage',
+                        'label' => 'תהליך לשלב',
                         'name' => 'process_stage',
                         'aria-label' => '',
                         'type' => 'taxonomy',
@@ -9956,7 +9956,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67a88d3731958',
-                        'label' => 'Process Category',
+                        'label' => 'קטגורית תהליך',
                         'name' => 'process_category',
                         'aria-label' => '',
                         'type' => 'taxonomy',
@@ -9985,7 +9985,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67a8645ce978d',
-                        'label' => 'Card Information',
+                        'label' => 'כרטיסית לתצוגה חיצונית',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -10003,7 +10003,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67a863bce978c',
-                        'label' => 'Card Display Name',
+                        'label' => 'כותרת לתצוגה חיצונית',
                         'name' => 'card_display_name',
                         'aria-label' => '',
                         'type' => 'text',
@@ -10024,7 +10024,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67a8646de978e',
-                        'label' => 'Card Subtitle',
+                        'label' => 'תת כותרת חיצונית',
                         'name' => 'card_subtitle',
                         'aria-label' => '',
                         'type' => 'text',
@@ -10045,7 +10045,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67a86487e978f',
-                        'label' => 'Card Image',
+                        'label' => 'תמונה לתצוגה חיצונית',
                         'name' => 'card_image',
                         'aria-label' => '',
                         'type' => 'image',
@@ -10073,7 +10073,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67aa1684f018b',
-                        'label' => 'Page Information',
+                        'label' => 'מידע לדף פנימי',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -10091,7 +10091,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67aa1693f018c',
-                        'label' => 'Displayed Title',
+                        'label' => 'כותרת מוצגת',
                         'name' => 'displayed_title',
                         'aria-label' => '',
                         'type' => 'text',
@@ -10112,7 +10112,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67aa1699f018d',
-                        'label' => 'Paragraph',
+                        'label' => 'פסקה',
                         'name' => 'paragraph',
                         'aria-label' => '',
                         'type' => 'textarea',
@@ -10134,7 +10134,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67aa16aaf018e',
-                        'label' => 'Displayed Image',
+                        'label' => 'תמונה מוצגת',
                         'name' => 'displayed_image',
                         'aria-label' => '',
                         'type' => 'image',
@@ -10162,7 +10162,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67b3644732cd3',
-                        'label' => 'Stages',
+                        'label' => 'הגדרות שלבים',
                         'name' => '',
                         'aria-label' => '',
                         'type' => 'tab',
@@ -10180,7 +10180,7 @@ class SQLinkSCF
                     ),
                     array(
                         'key' => 'field_67b3644d32cd4',
-                        'label' => 'Stages',
+                        'label' => 'שלבים שייכים',
                         'name' => 'renewal_stages',
                         'aria-label' => '',
                         'type' => 'relationship',
@@ -14258,23 +14258,6 @@ class SQLinkSCF
                                 'mime_types' => '',
                                 'allow_in_bindings' => 0,
                                 'preview_size' => 'thumbnail',
-                            ),
-                            array(
-                                'key' => 'field_6808e1b7a9f2e',
-                                'label' => 'קישור',
-                                'name' => 'link',
-                                'aria-label' => '',
-                                'type' => 'link',
-                                'instructions' => '',
-                                'required' => 0,
-                                'conditional_logic' => 0,
-                                'wrapper' => array(
-                                    'width' => '',
-                                    'class' => '',
-                                    'id' => '',
-                                ),
-                                'return_format' => 'array',
-                                'allow_in_bindings' => 0,
                             ),
                         ),
                     ),

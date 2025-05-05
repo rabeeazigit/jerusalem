@@ -132,7 +132,15 @@ $urban_category = $_GET["urban_category"] ?? null;
                         <hr>
 
                         <!-- Stages -->
-                        <div class="tab-content">
+                        <div 
+                            class="tab-content"
+                            style="
+                                max-height: 50vh;
+                                padding: 0 10px;
+                                overflow-y: auto;
+                                overflow-x: hidden;
+                            "
+                        >
                             <?php $side_stage_count = 0; ?>
                             <?php foreach ($urban_renewal_terms as $i => $category) : ?>
                                 <?php $urban_renewal_grouped_items = $controller->get_urban_renewal_processes_grouped_by_stages($category); ?>
@@ -244,7 +252,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                             
                             <div class="urban_category_accordion_wrapper py-3 py-md-5 <?= $uc_ind > 0 ? "uc_hidden" : ""; ?>" data-process-category="<?= $urban_category->name; ?>" style="<?= $uc_ind > 0 ? "display:none" : ""; ?>">
                                 <?php foreach ($urban_renewal_items as $index => $item) : ?>
-                                    <div class="vstack vitemWrapper">
+                                    <div class="vstack vitemWrapper" id="item_<?= $uc_ind; ?>_<?= $index; ?>">
                                         <div class="row">
                                             <div class="col-md-7">
                                                 <div class="vstack gap-3">

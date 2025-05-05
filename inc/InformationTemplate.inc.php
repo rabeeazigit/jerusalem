@@ -103,10 +103,10 @@ class InformationTemplate {
         ]);
     }
 
-    public function get_files_by_category($category = null) {
-        $tax_query = [];
-        
-        if ($category !== null) {
+    public function get_files_by_category($category) {
+        // If more than one category is sent
+        // filter using them
+        if (is_array($category)) {
             $tax_query = [
                 [
                     "taxonomy" => "downloadable-files-category",
@@ -114,12 +114,33 @@ class InformationTemplate {
                     "terms"    => $category,
                 ]
             ];
+
+            return get_posts([
+                "post_type" => "downloadable-file",
+                "posts_per_page" => -1,
+                "tax_query" => $tax_query
+            ]);
         }
+        
+        // Query with single category sent
+        $tax_query = [
+            [
+                "taxonomy" => "downloadable-files-category",
+                "field"    => "term_id",
+                "terms"    => $category,
+            ]
+        ];
         
         return get_posts([
             "post_type" => "downloadable-file",
             "posts_per_page" => -1,
             "tax_query" => $tax_query
         ]);
+    }
+
+    public function get_selected_categories_ids() {
+        return array_map(function ($e) {
+            return $e->term_id;
+        }, $this->file_categories_to_show);
     }
 }

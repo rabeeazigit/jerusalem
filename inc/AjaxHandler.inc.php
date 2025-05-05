@@ -30,19 +30,22 @@ class AjaxHandler
     {
         check_ajax_referer("load_projects_nonce", "nonce");
 
-        $limit = isset($_POST["limit"]) ? intval($_POST["limit"]) : 16;
-        $page  = isset($_POST["page"]) ? intval($_POST["page"]) : 1;
+        $limit = isset($_POST["limit"]) ? $_POST["limit"] : 16;
+        $page  = isset($_POST["page"]) ? $_POST["page"] : 1;
 
         $args = [
             "post_type" => "project",
             "posts_per_page" => $limit,
             "paged" => $page,
             "post_status" => "publish",
+            "order" => "DESC",
+            "orderby" => "date"
         ];
 
-        $projects = get_posts($args);
+        $loaded_projects = get_posts($args);
+
         ob_start(); ?>
-        <?php foreach ($projects as $e) : ?>
+        <?php foreach ($loaded_projects as $e) : ?>
             <div class="col-md-3">
                 <?php get_template_part("template-parts/project-card", null, [
                     "project_address" => get_field("project_address", $e) ?? null,

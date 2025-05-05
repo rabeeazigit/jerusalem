@@ -54,7 +54,7 @@ $menu_links = $args["menu_links"] ?? null;
                 <div class="vstack gap-2">
                     <?php foreach ($menu_links as $e) : ?>
                         <a href="<?= $e["link"]; ?>" class="dropdown-item vstack gap-1 mega_menu_side_link">
-                            <div class="hstack justify-content-between align-items-end">
+                            <div class="hstack justify-content-between align-items-center">
                                 <div class="fs-6 fw-bold rubik">
                                     <?= $e["label"]; ?>
                                 </div>

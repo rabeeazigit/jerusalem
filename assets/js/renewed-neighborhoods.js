@@ -1,5 +1,5 @@
 $(() => {
-    let page = 1;
+    let page = 2;
     
     // handles the filtering logic
     $("#neighborhoods_search")
@@ -53,10 +53,12 @@ $(() => {
 
         const data = {
             limit,
-            page : ++page,
+            page : page,
             nonce: ajaxObject.nonce,
             action: "load_projects",
         };
+
+        page++;
 
         $.ajax({
             url: ajaxObject.ajaxUrl,

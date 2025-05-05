@@ -1341,6 +1341,8 @@ textarea {
 .mega_menu_side_link {
     border-radius: 8px;
     transition: all 250ms ease-in-out;
+
+    width: fit-content;
 }
 
 .mega_menu_side_link:hover,

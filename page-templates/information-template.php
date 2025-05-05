@@ -152,10 +152,10 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
                     <?php $category_index = 0; ?>
                     <div class="tab-content">
                         <?php foreach ($urban_renewal_items as $category => $items) : ?>
-                            <div class="tab-pane fade" role="tabpanel" id="tab_<?= $category_index++; ?>">
+                            <div class="tab-pane fade" role="tabpanel" id="tab_<?= $category_index; ?>">
                                 <div class="vstack gap-4">
                                     <?php foreach ($items as $item_index => $item) : ?>
-                                        <a href="<?= $stages_page ?>" class="text-reset text-decoration-none hstack align-items-start justify-content-between border rounded-4 p-3 resident_accordion" data-image="<?= get_field("card_image", $item); ?>">
+                                        <a href="<?= $stages_page ?>#item_<?= $category_index; ?>_<?= $item_index; ?>" class="text-reset text-decoration-none hstack align-items-start justify-content-between border rounded-4 p-3 resident_accordion" data-image="<?= get_field("card_image", $item); ?>">
                                             <div class="hstack gap-3 align-items-center justify-content-start">
                                                 <div class="fs-1 text-white opacity-75">
                                                     <?= $item_index + 1 < 10 ? "0" . ($item_index + 1) : $item_index + 1 ?>
@@ -177,7 +177,7 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
                                     <?php endforeach; ?>
                                 </div>
                             </div>
-                        <?php endforeach; ?>
+                        <?php $category_index++; endforeach; ?>
                     </div>
                 <?php endif; ?>
             </div>
@@ -421,7 +421,11 @@ if ($urban_renewal_terms && is_array($urban_renewal_terms) && !empty($urban_rene
 
         <div class="tab-content">
             <div class="tab-pane fade active show" role="tabpanel" id="file_tab_all">
-                <?php $files = $controller->get_files_by_category(); ?>
+                <?php 
+                // Query all the downloadable files with the categories selected
+                $files = $controller->get_files_by_category($controller->get_selected_categories_ids()); 
+                ?>
+
                 <div class="row row-gap-4 my-5">
                     <?php foreach ($files as $e) : ?>
                         <?php

@@ -232,8 +232,10 @@ $remaining_projects = max(0, $total_projects - $projects_limit);
 $projects = get_posts([
     "post_type" => "project",
     "posts_per_page" => $projects_limit,
-    "paged" => $projects_page++,
-    "post_status" => "publish"
+    "paged" => 1,
+    "post_status" => "publish",
+    "order" => "DESC",
+    "orderby" => "date"
 ]);
 ?>
 <section class="container-fluid px-3 px-md-5" id="projects-container-after-reset">
@@ -267,7 +269,7 @@ $projects = get_posts([
 
     <?php if ($remaining_projects > 0) : ?>
         <div class="hstack justify-content-center align-items-center">
-            <button class="btn btn-sm btn-sq-tertiary rounded-pill" data-remaining="<?= $remaining_projects; ?>" data-limit="<?= $projects_limit; ?>" data-page="<?= $projects_page; ?>" id="loadMoreProjects">
+            <button class="btn btn-sm btn-sq-tertiary rounded-pill" data-remaining="<?= $remaining_projects; ?>" data-limit="<?= $projects_limit; ?>" id="loadMoreProjects">
                 טען עוד
                 <span>(<?= $remaining_projects; ?>)</span>
             </button>

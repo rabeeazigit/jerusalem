@@ -102,7 +102,12 @@ $right_category_id = $_GET["right_category_id"] ?? null;
     <main class="container-fluid px-md-5 py-5 px-3" id="main_rr_section">
         <div class="hstack gap-3 flex-wrap align-items-center mb-5" role="tablist">
             <?php foreach ($rights_categories as $index => $right) : ?>
-                <button class="btn btn-sq-secondary rounded-pill px-4 <?= $index == 0 ? "active" : ""; ?>" data-bs-toggle="tab" data-bs-target="#<?= $right->term_id; ?>">
+                <button 
+                    class="btn btn-sq-secondary rounded-pill rights_trigger_btn px-4 <?= $index == 0 ? "active" : ""; ?>"
+                    data-bs-toggle="tab"
+                    data-bs-target="#<?= $right->term_id; ?>"
+                    data-term-id="<?= $right->term_id; ?>"
+                >
                     <?= $right->name; ?>
                 </button>
             <?php endforeach; ?>

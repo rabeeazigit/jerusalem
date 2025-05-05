@@ -347,7 +347,11 @@ class SingleProject
     {
         $link_group = $this->project_external_link_group ?? null;
         $image = $link_group['image'] ?? null;
-        $link = $link_group['link'] ?? null;
+        $link = [
+            'url' => get_field('technon_link', $this->pid) ?? null,
+            'target' => '_blank',
+            'title' => 'לאתר מינהל התכנון'
+        ];
 
         ob_start(); ?>
 
@@ -362,12 +366,20 @@ class SingleProject
                 href="<?= $link['url'] ?? '#'; ?>"
                 target="<?= $link['target'] ?? ''; ?>">
                 <div class="hstack gap-2 align-items-center">
-                    <?php if ($image) : ?>
+                    <?php if ($image && is_array($image)) : ?>
                         <img
                             class="external_link_image bg-white"
                             src="<?= $image['url'] ?? null; ?>"
                             alt="<?= $image['alt']; ?>"
-                            title="<?= $image['title']; ?>" />
+                            title="<?= $image['title']; ?>" 
+                        />
+                    <?php else : ?>
+                        <img 
+                            class="external_link_image bg-white"
+                            src="<?= get_template_directory_uri() . '/assets/images/technon_default.png'; ?>"
+                            alt="מינהל התכנון"
+                            title="מינהל התכנון"
+                        />
                     <?php endif; ?>
 
                     <?php if (isset($link['title']) && !empty($link['title'])) : ?>
