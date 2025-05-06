@@ -165,6 +165,15 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                     <div class="col">
                                                         <div class="vstack py-2 gap-2">
                                                             <?php foreach ($proccesses as $index => $process) : ?>
+                                                                <pre>
+                                                                    <?php //print_r($proccesses);;?>
+
+                                                                </pre>
+                                                                <hr>
+                                                                <pre>
+                                                                    <?php print_r($process);;?>
+                                                                    
+                                                                </pre>
                                                                 <div class="vstack">
                                                                     <!-- Collapse Anchor -->
                                                                     <div 
