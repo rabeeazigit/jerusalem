@@ -1,5 +1,5 @@
 $(() => {
-    let page = 2;
+    let page = 1;
     
     // handles the filtering logic
     $("#neighborhoods_search")
@@ -49,16 +49,11 @@ $(() => {
 
     // Handles the load more functionallity
     $("#loadMoreProjects").on("click", function () {
-        const limit = $(this).attr("data-limit");
-
         const data = {
-            limit,
-            page : page,
+            page : ++page,
             nonce: ajaxObject.nonce,
             action: "load_projects",
         };
-
-        page++;
 
         $.ajax({
             url: ajaxObject.ajaxUrl,
@@ -66,9 +61,11 @@ $(() => {
             data,
             dataType: "json",
             beforeSend: function () {
-                $(this).prop("disabled", true);
+                $("#loadMoreProjects").prop("disabled", true);
             },
             success: function (response) {
+                console.log(response);
+                
                 const projects = response.projects ?? [];
                 const remaining = response.remaining ?? 0;
 
@@ -83,7 +80,7 @@ $(() => {
                 console.error(error);
             },
             complete: function () {
-                $(this).prop("disabled", false);
+                $("#loadMoreProjects").prop("disabled", false);
             },
         });
     });

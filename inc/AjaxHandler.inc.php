@@ -30,20 +30,21 @@ class AjaxHandler
     {
         check_ajax_referer("load_projects_nonce", "nonce");
 
-        $limit = isset($_POST["limit"]) ? $_POST["limit"] : 16;
         $page  = isset($_POST["page"]) ? $_POST["page"] : 1;
 
         $args = [
             "post_type" => "project",
-            "posts_per_page" => $limit,
+            "posts_per_page" => 16,
             "paged" => $page,
             "post_status" => "publish",
-            "order" => "DESC",
-            "orderby" => "date"
         ];
         
         $projects_query = new WP_Query($args);
+        $found_posts = $projects_query->found_posts;
+        $post_count = $projects_query->post_count * $page;
         $loaded_projects = $projects_query->posts;
+        $max_pages = $projects_query->max_num_pages;
+        $remaining_projects = max(0, $found_posts - $post_count);
 
         wp_reset_postdata();
 
@@ -51,22 +52,21 @@ class AjaxHandler
         <?php foreach ($loaded_projects as $e) : ?>
             <div class="col-md-3">
                 <?php get_template_part("template-parts/project-card", null, [
-                    "project_address" => get_field("project_address", $e) ?? null,
-                    "project_neighborhood" => get_field("project_neighborhood", $e) ?? null,
-                    "project_status" => get_field("project_status", $e) ?? null,
-                    "project_card_image" => get_field("project_card_image", $e) ?? null,
+                    "project_address" => get_field("project_address", $e->ID) ?? null,
+                    "project_neighborhood" => get_field("project_neighborhood", $e->ID) ?? null,
+                    "project_status" => get_field("project_status", $e->ID) ?? null,
+                    "project_card_image" => get_field("project_card_image", $e->ID) ?? null,
                     "project_name" => $e->post_title ?? null,
-                    "project_link" => get_permalink($e) ?? null,
+                    "project_link" => get_permalink($e->ID) ?? null,
                 ]) ?>
             </div>
         <?php endforeach; ?>
     <?php
         $project_html = ob_get_clean();
-        $total_projects = wp_count_posts("project")->publish;
 
         wp_send_json([
             "projects" => $project_html,
-            "remaining" => max(0, $total_projects - (($page + 1) * $limit))
+            "remaining" => $page >= $max_pages ? 0 : $remaining_projects
         ]);
     }
 

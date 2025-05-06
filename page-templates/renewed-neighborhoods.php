@@ -222,27 +222,24 @@ $projects_numbers = get_field("projects_numbers") ?? null;
     <?php endif; ?>
 </section>
 
-<!-- Projects Grid -->
 <?php
 // Getting the initial projects to display
-$total_projects = wp_count_posts("project")->publish;
-$projects_limit = 16;
-$projects_page = 1;
-$remaining_projects = max(0, $total_projects - $projects_limit);
 $args = [
     "post_type" => "project",
-    "posts_per_page" => $projects_limit,
-    "paged" => $projects_page,
+    "posts_per_page" => 16,
+    "paged" => 1,
     "post_status" => "publish",
-    "order" => "DESC",
-    "orderby" => "date"
 ];
 
 $projects_query = new WP_Query($args);
+$found_posts = $projects_query->found_posts;
+$post_count = $projects_query->post_count;
 $projects = $projects_query->posts;
+$remaining_projects = max(0, $found_posts - $post_count);
 
 wp_reset_postdata();
 ?>
+
 <section class="container-fluid px-3 px-md-5" id="projects-container-after-reset">
     <?php if ($projects && is_array($projects) && !empty($projects)) : ?>
         <div class="row row-gap-5 my-5" id="projects-container">
@@ -274,7 +271,10 @@ wp_reset_postdata();
 
     <?php if ($remaining_projects > 0) : ?>
         <div class="hstack justify-content-center align-items-center">
-            <button class="btn btn-sm btn-sq-tertiary rounded-pill" data-remaining="<?= $remaining_projects; ?>" data-limit="<?= $projects_limit; ?>" id="loadMoreProjects">
+            <button
+                class="btn btn-sm btn-sq-tertiary rounded-pill"
+                id="loadMoreProjects"
+            >
                 טען עוד
                 <span>(<?= $remaining_projects; ?>)</span>
             </button>
