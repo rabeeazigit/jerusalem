@@ -229,14 +229,19 @@ $total_projects = wp_count_posts("project")->publish;
 $projects_limit = 16;
 $projects_page = 1;
 $remaining_projects = max(0, $total_projects - $projects_limit);
-$projects = get_posts([
+$args = [
     "post_type" => "project",
     "posts_per_page" => $projects_limit,
-    "paged" => 1,
+    "paged" => $projects_page,
     "post_status" => "publish",
     "order" => "DESC",
     "orderby" => "date"
-]);
+];
+
+$projects_query = new WP_Query($args);
+$projects = $projects_query->posts;
+
+wp_reset_postdata();
 ?>
 <section class="container-fluid px-3 px-md-5" id="projects-container-after-reset">
     <?php if ($projects && is_array($projects) && !empty($projects)) : ?>

@@ -41,8 +41,11 @@ class AjaxHandler
             "order" => "DESC",
             "orderby" => "date"
         ];
+        
+        $projects_query = new WP_Query($args);
+        $loaded_projects = $projects_query->posts;
 
-        $loaded_projects = get_posts($args);
+        wp_reset_postdata();
 
         ob_start(); ?>
         <?php foreach ($loaded_projects as $e) : ?>
