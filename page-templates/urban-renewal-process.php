@@ -135,7 +135,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                         <div 
                             class="tab-content"
                             style="
-                                max-height: 50vh;
+                                max-height: 85vh;
                                 padding: 0 10px;
                                 overflow-y: auto;
                                 overflow-x: hidden;
