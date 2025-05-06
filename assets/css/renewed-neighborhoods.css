@@ -10,9 +10,10 @@
 }
 
 .project_map_placeholder {
-    height: 540px;
+    height: 100%;
     object-fit: fill;
     object-position: center;
+    min-height: 60vh;
 
     @media screen and (width <= 768px) {
         object-fit: cover;
