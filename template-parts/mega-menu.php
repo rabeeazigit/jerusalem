@@ -53,7 +53,7 @@ $menu_links = $args["menu_links"] ?? null;
             <div class="col-md-3">
                 <div class="vstack gap-2">
                     <?php foreach ($menu_links as $e) : ?>
-                        <a href="<?= $e["link"]; ?>" class="dropdown-item vstack gap-1 mega_menu_side_link">
+                        <a href="<?= $e["link"]; ?>" class="dropdown-item vstack gap-1 mega_menu_side_link w-100">
                             <div class="hstack justify-content-between align-items-center">
                                 <div class="fs-6 fw-bold rubik">
                                     <?= $e["label"]; ?>
@@ -63,7 +63,7 @@ $menu_links = $args["menu_links"] ?? null;
                             </div>
 
                             <?php if ($e["sub_label"]) : ?>
-                                <div class="fs-6">
+                                <div class="fs-6" style="word-break: break-word; white-space: normal;">
                                     <?= $e["sub_label"]; ?>
                                 </div>
                             <?php endif; ?>
