@@ -62,13 +62,13 @@ $urban_category = $_GET["urban_category"] ?? null;
                                         </a>
                                     <?php endif; ?>
 
-                                    <?php if ($controller->faq_items && is_array($controller->faq_items) && !empty($controller->faq_items)) :?>
+                                    <?php if ($controller->faq_items && is_array($controller->faq_items) && !empty($controller->faq_items)) : ?>
                                         <a href="#faq_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
                                             שאלות נפוצות
                                         </a>
                                     <?php endif; ?>
 
-                                    <?php if ($controller->external_links_items && is_array($controller->external_links_items) && !empty($controller->external_links_items)) :?>
+                                    <?php if ($controller->external_links_items && is_array($controller->external_links_items) && !empty($controller->external_links_items)) : ?>
                                         <a href="#external_links_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
                                             קישורים חיצוניים
                                         </a>
@@ -82,13 +82,13 @@ $urban_category = $_GET["urban_category"] ?? null;
                                         </a>
                                     <?php endif; ?>
 
-                                    <?php if ($controller->faq_items && is_array($controller->faq_items) && !empty($controller->faq_items)) :?>
+                                    <?php if ($controller->faq_items && is_array($controller->faq_items) && !empty($controller->faq_items)) : ?>
                                         <a href="#faq_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
                                             שאלות נפוצות
                                         </a>
                                     <?php endif; ?>
 
-                                    <?php if ($controller->external_links_items && is_array($controller->external_links_items) && !empty($controller->external_links_items)) :?>
+                                    <?php if ($controller->external_links_items && is_array($controller->external_links_items) && !empty($controller->external_links_items)) : ?>
                                         <a href="#external_links_section" class="btn text-white text-decoration-none btn-sq-ghost rounded-pill hot-fix-ghost-btn">
                                             קישורים חיצוניים
                                         </a>
@@ -121,8 +121,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                         data-uc-category="<?= $category->name; ?>"
                                         data-bs-toggle="tab"
                                         data-bs-target="#tab_<?= $i; ?>"
-                                        data-uc-category-id="<?= $category->term_id; ?>"
-                                    >
+                                        data-uc-category-id="<?= $category->term_id; ?>">
                                         <?= $category->name; ?>
                                     </button>
                                 <?php endforeach; ?>
@@ -132,15 +131,14 @@ $urban_category = $_GET["urban_category"] ?? null;
                         <hr>
 
                         <!-- Stages -->
-                        <div 
+                        <div
                             class="tab-content"
                             style="
                                 max-height: 85vh;
                                 padding: 0 10px;
                                 overflow-y: auto;
                                 overflow-x: hidden;
-                            "
-                        >
+                            ">
                             <?php $side_stage_count = 0; ?>
                             <?php foreach ($urban_renewal_terms as $i => $category) : ?>
                                 <?php $urban_renewal_grouped_items = $controller->get_urban_renewal_processes_grouped_by_stages($category); ?>
@@ -166,21 +164,21 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                         <div class="vstack py-2 gap-2">
                                                             <?php foreach ($proccesses as $index => $process) : ?>
                                                                 <pre>
-                                                                    <?php //print_r($proccesses);;?>
+                                                                    <?php //print_r($proccesses);;
+                                                                    ?>
 
                                                                 </pre>
                                                                 <hr>
                                                                 <pre>
-                                                                    <?php print_r($process);;?>
+                                                                    <?php print_r($process);; ?>
                                                                     
                                                                 </pre>
                                                                 <div class="vstack">
                                                                     <!-- Collapse Anchor -->
-                                                                    <div 
+                                                                    <div
                                                                         class="hstack align-items-center justify-content-between p-3 stage_side_wrapper collapsed"
                                                                         data-bs-toggle="collapse"
-                                                                        data-bs-target="#stage_col_<?= $process->ID; ?>"
-                                                                    >
+                                                                        data-bs-target="#stage_col_<?= $process->ID; ?>">
                                                                         <div class="hstack fs-5 gap-3">
                                                                             <div class="fs-6 fw-semibold">
                                                                                 <?= $process->post_title; ?>
@@ -202,11 +200,10 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                                                     <div class="vstack p-3">
                                                                                         <?php foreach ($side_process_stages as $e) : ?>
                                                                                             <?php if (get_field("stage_title", $e)) : ?>
-                                                                                                <div 
-                                                                                                    class="fs-6 px-2 rounded-4 renewal_stage_submenu py-4" 
-                                                                                                    data-parent-target="<?= $process->ID; ?>" 
-                                                                                                    data-target="<?= $e->ID; ?>"
-                                                                                                >
+                                                                                                <div
+                                                                                                    class="fs-6 px-2 rounded-4 renewal_stage_submenu py-4"
+                                                                                                    data-parent-target="<?= $process->ID; ?>"
+                                                                                                    data-target="<?= $e->ID; ?>">
                                                                                                     <?= get_field("stage_title", $e); ?>
                                                                                                 </div>
                                                                                             <?php endif; ?>
@@ -256,9 +253,9 @@ $urban_category = $_GET["urban_category"] ?? null;
                         <?php foreach ($urban_renewal_terms as $uc_ind => $urban_category) : ?>
                             <?php
                             $always_unique = rand(0, 1000) . "_" . time();
-                            $urban_renewal_items = $controller->get_urban_renewal_processes($urban_category); 
-                            ?>      
-                            
+                            $urban_renewal_items = $controller->get_urban_renewal_processes($urban_category);
+                            ?>
+
                             <div class="urban_category_accordion_wrapper py-3 py-md-5 <?= $uc_ind > 0 ? "uc_hidden" : ""; ?>" data-process-category="<?= $urban_category->name; ?>" style="<?= $uc_ind > 0 ? "display:none" : ""; ?>">
                                 <?php foreach ($urban_renewal_items as $index => $item) : ?>
                                     <div class="vstack vitemWrapper" id="item_<?= $uc_ind; ?>_<?= $index; ?>">
@@ -270,7 +267,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                             שלב <?= $index + 1; ?>
                                                         </div>
 
-                                                        <button class="btn p-1 stage_btn rounded-circle collapsed" style="background-color: lightgray" data-bs-toggle="collapse" data-bs-target="#item_<?= $uc_ind.$index; ?>">
+                                                        <button class="btn p-1 stage_btn rounded-circle collapsed" style="background-color: lightgray" data-bs-toggle="collapse" data-bs-target="#item_<?= $uc_ind . $index; ?>">
                                                             <img class="object-fit-cover" style="width: 24px; height: 24px" src="<?= get_template_directory_uri() . "/assets/images/arrow-down.png"; ?>">
                                                         </button>
                                                     </div>
@@ -296,7 +293,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                             </div>
                                         </div>
 
-                                        <div id="item_<?= $uc_ind.$index; ?>" class="collapse stages_collapse_wrapper">
+                                        <div id="item_<?= $uc_ind . $index; ?>" class="collapse stages_collapse_wrapper">
                                             <?php
                                             $stages_title = get_field("stages_title", $item) ?? null;
                                             $renewal_stages = get_field("renewal_stages", $item) ?? null;
@@ -322,6 +319,9 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                     $stage_title = get_field("stage_title", $stage) ?? null;
                                                     $stages = get_field("stages", $stage) ?? null;
                                                     ?>
+                                                    <pre>
+                                                    <?php print_R($renewal_stages); ?>
+                                                    </pre>
 
                                                     <?php if ($stage_title) : ?>
                                                         <div class="stage_accordion_wrapper py-4 px-4 mb-4">
@@ -331,9 +331,8 @@ $urban_category = $_GET["urban_category"] ?? null;
                                                                 data-bs-target="#<?= $extra_unique_id; ?>_stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
                                                                 data-id="<?= $stage->ID; ?>"
                                                                 data-parent="<?= $item->ID; ?>"
-                                                                data-collapse-parent="item_<?= $uc_ind.$index; ?>"
-                                                                data-stage-collapse="<?= $extra_unique_id; ?>_stage_<?= $stage_index . "_" . $stage_unique_id; ?>"
-                                                            >
+                                                                data-collapse-parent="item_<?= $uc_ind . $index; ?>"
+                                                                data-stage-collapse="<?= $extra_unique_id; ?>_stage_<?= $stage_index . "_" . $stage_unique_id; ?>">
                                                                 <div class="hstack gap-2 align-items-center">
                                                                     <div class="stage_circle"></div>
 
@@ -360,7 +359,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                                         <hr class="mt-3 mt-md-5" style="border-width: 4px">
                                     </div>
 
-                                
+
                                 <?php endforeach; ?>
                             </div>
                         <?php endforeach; ?>
@@ -395,11 +394,10 @@ $urban_category = $_GET["urban_category"] ?? null;
 
                         <div <?= $hidden; ?> class="faq-wrapper">
                             <div class="vstack rounded-4 faq_toggler_wrapper">
-                                <div 
+                                <div
                                     class="hstack align-items-center py-4 px-3 justify-content-between faq_toggler collapsed"
                                     data-bs-toggle="collapse"
-                                    data-bs-target="#collapse_<?= $idx; ?>"
-                                >
+                                    data-bs-target="#collapse_<?= $idx; ?>">
                                     <div class="col">
                                         <?php if (get_field("question", $faq)): ?>
                                             <div class="fs-5 fw-semibold">
@@ -422,7 +420,7 @@ $urban_category = $_GET["urban_category"] ?? null;
                 <?php if (count($controller->faq_items) > 6) : ?>
                     <button class="btn btn-sm btn-sq-tertiary rounded-pill mt-4" id="load-more-faq">
                         טען עוד
-                        
+
                         <span>
                             (<span id="more-faq-count"><?= count($controller->faq_items) - 6; ?></span>)
                         </span>
