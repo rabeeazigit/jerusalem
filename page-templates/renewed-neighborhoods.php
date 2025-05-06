@@ -245,7 +245,7 @@ wp_reset_postdata();
 ?>
 <section class="container-fluid px-3 px-md-5" id="projects-container-after-reset">
     <?php if ($projects && is_array($projects) && !empty($projects)) : ?>
-        <div class="row row-gap-3 my-5" id="projects-container">
+        <div class="row row-gap-5 my-5" id="projects-container">
             <?php if ($projects && is_array($projects) && !empty($projects)) : ?>
                 <?php foreach ($projects as $e) : ?>
                     <div class="col-xl-3 col-md-4">
