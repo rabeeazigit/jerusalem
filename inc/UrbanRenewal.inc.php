@@ -63,6 +63,7 @@ class UrbanRenewal
 
     public function get_urban_renewal_processes_grouped_by_stages($category)
     {
+
         $result = [];
 
         $stages = get_terms([
