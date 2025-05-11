@@ -58,14 +58,14 @@ get_header();
             "posts_per_page" => $limit,
             "paged" => $page++,
             "meta_key" => "article_date", 
-            "orderby" => "meta_value_num", 
+            "orderby" => "date", 
             "order" => "DESC",
-            "meta_query" => [
-                [
-                    "key" => "article_date", 
-                    "compare" => "EXISTS", 
-                ],
-            ],
+            // "meta_query" => [
+            //     [
+            //         "key" => "article_date", 
+            //         "compare" => "EXISTS", 
+            //     ],
+            // ],
         ];
         
         $articles_query = new WP_Query($args);

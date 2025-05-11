@@ -37,6 +37,8 @@ class AjaxHandler
             "posts_per_page" => 16,
             "paged" => $page,
             "post_status" => "publish",
+            "orderby" => "modified",
+            "order" => "DESC", // Most recently modified first
         ];
         
         $projects_query = new WP_Query($args);
@@ -150,14 +152,14 @@ class AjaxHandler
             "posts_per_page" => $limit,
             "paged" => $page,
             "meta_key" => "article_date", 
-            "orderby" => "meta_value_num", 
+            "orderby" => "date", 
             "order" => "DESC",
-            "meta_query" => [
-                [
-                    "key" => "article_date", 
-                    "compare" => "EXISTS", 
-                ],
-            ],
+            // "meta_query" => [
+            //     [
+            //         "key" => "article_date", 
+            //         "compare" => "EXISTS", 
+            //     ],
+            // ],
         ];
         
         $articles_query = new WP_Query($args);

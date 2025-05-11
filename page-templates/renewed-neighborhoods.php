@@ -229,6 +229,8 @@ $args = [
     "posts_per_page" => 16,
     "paged" => 1,
     "post_status" => "publish",
+    "orderby" => "modified",
+    "order" => "DESC"
 ];
 
 $projects_query = new WP_Query($args);

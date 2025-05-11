@@ -56,7 +56,7 @@ $(() => {
         };
 
         $.ajax({
-            url: ajaxObject.ajaxUrl,
+            url: ajaxObject.ajaxUrl+'?myUnique=' + Math.floor(Math.random() * 1000000),
             method: "POST",
             data,
             dataType: "json",
